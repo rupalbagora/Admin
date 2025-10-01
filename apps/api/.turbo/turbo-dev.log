@@ -1,0 +1,13 @@
+
+> api@1.0.0 dev
+> ts-node --swc src/index.ts
+
+Server running on http://localhost:5001
+MongoDB Connected: localhost
+🟢 Superadmin already exists
+[0mPOST /api/auth/login [32m200[0m 819.725 ms - 838[0m
+[0mGET /api/users/get/users [36m304[0m 15.485 ms - -[0m
+[0mPOST /api/auth [32m200[0m 34.102 ms - 690[0m
+[0mPOST /api/auth [32m200[0m 40.454 ms - 690[0m
+[0mPOST /api/auth [32m200[0m 41.556 ms - 690[0m
+[0mPOST /api/auth [32m200[0m 38.576 ms - 690[0m
