@@ -61,6 +61,11 @@ const menuItems = [
       },
     ],
   },
+   {
+    name: "Youtube",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/youtube",
+  },
 ];
 
 export default function AdminLayout() {
