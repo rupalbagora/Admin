@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Home, User, Settings, Users,  X, CreditCard } from "lucide-react";
+import { Home, User, Settings, Users,  X, CreditCard, Upload } from "lucide-react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../commonComp/SideBarr/SideBarr";
 import Header from "../commonComp/Header/Header";
 import RouteTracker from "../commonComp/RouteTracker/RouteTracker";
 import { useAppDispatch } from "../redux/hooks";
 import { search } from "../redux/Slice/activeStatus/activeStatusSlice";
-
 const navItems = [
   {
     label: "Home",
@@ -60,6 +59,10 @@ const menuItems = [
         badge: 3,
       },
     ],
+  },
+  {
+    name: "Upload Certificate",
+    icon: <Upload className="w-5 h-5" />, 
   },
 ];
 
