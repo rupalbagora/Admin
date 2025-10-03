@@ -39,6 +39,9 @@ const SubscriptionManagement = lazy(
 const YoutubeLinks = lazy(
   () => import("../src/subadminComponents/youtube/YoutubeLinksForm"));
 
+const UploadCertificate = lazy(() => import("./subadminComponents/uploads/UploadCertificate")) 
+
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -152,6 +155,15 @@ export const router = createBrowserRouter([
           <Suspense fallback={Loader}>
             {" "}
             <ManageUsers />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/admin/Upload-Certificate",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadCertificate />
           </Suspense>
         ),
       },

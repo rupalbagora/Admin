@@ -14,7 +14,6 @@ export type Gender ='male'|'female'|'other'| 'prefer-not-to-say'
 export type ThemePreference ='light'|'dark'|'system'
   
 
-
 // Interfaces
 export interface IDeviceInfo {
   deviceType: string;
