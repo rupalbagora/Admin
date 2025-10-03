@@ -37,8 +37,7 @@ const SubscriptionManagement = lazy(
 
 // SUB-ADMIN
 const YoutubeLinks = lazy(
-  () => import("./subadminComponents/youtubelinks/YoutubeLinks")
-);
+  () => import("../src/subadminComponents/youtube/YoutubeLinksForm"));
 
 export const router = createBrowserRouter([
   {
