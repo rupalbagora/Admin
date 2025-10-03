@@ -68,7 +68,7 @@ const menuItems = [
    {
     name: "Youtube",
     icon: <Home className="w-5 h-5" />,
-    path: "/admin/youtubelinks",
+    path: "/admin/youtube",
   },
   {
     name: "Our Packages",

@@ -5,5 +5,5 @@ export interface Certificate {
   name: string;         
   title: string;        
   fileUrl: string;      
-  uploadedAt: Date;     
+  uploadedAt: Date; 
 }

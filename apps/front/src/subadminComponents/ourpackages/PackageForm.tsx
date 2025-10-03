@@ -1,7 +1,7 @@
 // components/Packages/PackageForm.tsx
 import React from "react";
 import { Form, Input, Button } from "antd";
-import { Package } from "../../redux/types/subadmintypes/package.types";
+import { type Package } from "../../redux/types/subadmintypes/Package.types";
 
 interface PackageFormProps {
   onAddPackage: (pkg: Package) => void;

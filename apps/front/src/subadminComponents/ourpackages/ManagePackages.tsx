@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Card, Table, Button, Input, Modal, Space } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import PackageForm from "./PackageForm";
-import { Package } from "../../redux/types/subadmintypes/package.types";
+import { type Package } from "../../redux/types/subadmintypes/Package.types";
 
 const { Search } = Input;
 

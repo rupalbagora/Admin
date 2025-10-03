@@ -19,6 +19,6 @@
     "turbo": "^2.5.4"
   },
   "dependencies": {
-   
+    "antd": "^5.27.4"
   }
 }

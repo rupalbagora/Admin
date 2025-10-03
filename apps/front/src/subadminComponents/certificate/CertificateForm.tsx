@@ -1,8 +1,7 @@
-// components/Certificates/CertificateForm.tsx
 import React from "react";
 import { Form, Input, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import type { Certificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
+import { type Certificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
 
 interface CertificateFormProps {
   onAddCertificate: (cert: Certificate) => void;
@@ -21,7 +20,7 @@ const CertificateForm: React.FC<CertificateFormProps> = ({ onAddCertificate }) =
       title: values.title,
       name: values.name,
       fileUrl: URL.createObjectURL(fileObj),
-      uploadedAt: new Date().toISOString(),
+      uploadedAt: new Date(), // <-- fix here
     };
 
     onAddCertificate(newCertificate);
