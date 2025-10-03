@@ -5,12 +5,10 @@
 Server running on http://localhost:5001
 MongoDB Connected: localhost
 🟢 Superadmin already exists
-[0mPOST /api/auth [32m200[0m 57.523 ms - 712[0m
-[0mPOST /api/auth [32m200[0m 40.030 ms - 712[0m
-[0mGET /api/users/get/users [36m304[0m 39.163 ms - -[0m
-[0mPOST /api/auth [32m200[0m 82.639 ms - 712[0m
-[0mPOST /api/auth [32m200[0m 232.818 ms - 712[0m
-[0mPOST /api/auth [32m200[0m 105.684 ms - 712[0m
-[0mPOST /api/auth [32m200[0m 115.261 ms - 712[0m
-[0mPOST /api/auth [32m200[0m 50.596 ms - 712[0m
-[0mPOST /api/auth [32m200[0m 56.228 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 63.269 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 39.779 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 20.861 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 25.651 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 52.487 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 49.937 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 57.876 ms - 712[0m
