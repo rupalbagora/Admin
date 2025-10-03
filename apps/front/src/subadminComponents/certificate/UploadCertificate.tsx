@@ -3,7 +3,6 @@ import { Card, Table, Button, Input, Upload, Modal, Form } from "antd";
 import { UploadOutlined, PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import type { ColumnsType } from "antd/es/table";
 import { Certificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
-
 const UploadCertificate: React.FC = () => {
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [searchText, setSearchText] = useState("");

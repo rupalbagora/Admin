@@ -40,7 +40,7 @@ const YoutubeLinks = lazy(
   () => import("./subadminComponents/youtubelinks/YoutubeLinks")
 );
 
-const UploadCertificate = lazy(() => import("./subadminComponents/uploads/UploadCertificate")) 
+const UploadCertificate = lazy(() => import("./subadminComponents/certificate/UploadCertificate")) 
 
 
 export const router = createBrowserRouter([
