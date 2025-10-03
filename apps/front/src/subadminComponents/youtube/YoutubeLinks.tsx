@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Form, Input, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { YoutubeVideo } from "../../redux/types/subadmintypes/youtubelinks.types";
+import { type YoutubeVideo } from "../../redux/types/subadmintypes/youtubelinks.types";
 
 interface YoutubeLinksProps {
   visible: boolean;

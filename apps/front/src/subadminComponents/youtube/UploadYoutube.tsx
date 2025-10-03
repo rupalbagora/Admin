@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Table, Input, Button, Modal } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import YoutubeLinks from "./YoutubeLinks";
-import { YoutubeVideo } from "../../redux/types/subadmintypes/youtubelinks.types";
+import {type YoutubeVideo } from "../../redux/types/subadmintypes/youtubelinks.types";
 
 const UploadYoutube: React.FC = () => {
   const [videos, setVideos] = useState<YoutubeVideo[]>([]);
