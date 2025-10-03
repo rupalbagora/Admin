@@ -5,27 +5,9 @@
 Server running on http://localhost:5001
 MongoDB Connected: localhost
 🟢 Superadmin already exists
-[0mPOST /api/auth [32m200[0m 119.257 ms - 716[0m
-[0mPOST /api/auth [32m200[0m 86.798 ms - 716[0m
-[0mPOST /api/auth [32m200[0m 169.575 ms - 716[0m
-[0mPOST /api/auth [32m200[0m 158.782 ms - 716[0m
-[0mPOST /api/auth [32m200[0m 35.589 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 37.687 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 39.451 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 53.199 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 30.371 ms - 716[0m
-[0mPOST /api/auth [32m200[0m 21.129 ms - 716[0m
-[0mPOST /api/auth [32m200[0m 29.845 ms - 716[0m
-[0mPOST /api/auth [32m200[0m 29.734 ms - 716[0m
-[0mPOST /api/auth [32m200[0m 18.069 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 17.746 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 26.892 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 26.393 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 28.430 ms - 716[0m
-[0mPOST /api/auth [32m200[0m 29.758 ms - 716[0m
-[0mGET /api/users/get/users [36m304[0m 18.271 ms - -[0m
-[0mPOST /api/auth [32m200[0m 61.161 ms - 716[0m
-[0mPOST /api/auth [32m200[0m 102.848 ms - 716[0m
-[0mPOST /api/auth [32m200[0m 109.085 ms - 716[0m
-[0mPOST /api/auth [32m200[0m 112.801 ms - 716[0m
-[0mPOST /api/auth [32m200[0m 125.603 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 123.968 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 108.171 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 153.865 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 235.705 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 220.547 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 397.987 ms - 716[0m

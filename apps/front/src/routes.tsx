@@ -36,10 +36,9 @@ const SubscriptionManagement = lazy(
 );
 
 // SUB-ADMIN
-const YoutubeLinks = lazy(
-  () => import("../src/subadminComponents/youtube/YoutubeLinksForm"));
+const UploadYoutube = lazy (()=> import("../src/subadminComponents/youtube/UploadYoutube"));
 
-const UploadCertificate = lazy(() => import("./subadminComponents/uploads/UploadCertificate")) 
+const UploadCertificate = lazy(() => import("./subadminComponents/certificate/UploadCertificate")) 
 
 
 export const router = createBrowserRouter([
@@ -167,12 +166,12 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      {
-        path: "youtubelinks",
+       {
+        path: "/admin/youtube",
         element: (
           <Suspense fallback={Loader}>
             {" "}
-            <YoutubeLinks />
+            <UploadYoutube />
           </Suspense>
         ),
       },

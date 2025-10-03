@@ -1,15 +1,15 @@
 import React from "react";
 import { Modal, Form, Input, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { YoutubeVideo } from "../../redux/types/subadmintypes/youtubelinks.types";
+import { Certificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
 
-interface YoutubeLinksProps {
+interface CertificateModalProps {
   visible: boolean;
   onCancel: () => void;
-  onSubmit: (video: YoutubeVideo) => void;
+  onSubmit: (cert: Certificate) => void;
 }
 
-const YoutubeLinks: React.FC<YoutubeLinksProps> = ({ visible, onCancel, onSubmit }) => {
+const CertificateModal: React.FC<CertificateModalProps> = ({ visible, onCancel, onSubmit }) => {
   const [form] = Form.useForm();
 
   const handleFinish = (values: any) => {
@@ -17,24 +17,25 @@ const YoutubeLinks: React.FC<YoutubeLinksProps> = ({ visible, onCancel, onSubmit
 
     const fileObj = values.file[0].originFileObj as File;
 
-    const newVideo: YoutubeVideo = {
+    const newCertificate: Certificate = {
       id: Date.now().toString(),
       title: values.title,
-      videoUrl: URL.createObjectURL(fileObj), // local preview URL
+      name: values.name,
+      fileUrl: URL.createObjectURL(fileObj),
       uploadedAt: new Date(),
     };
 
-    onSubmit(newVideo);
+    onSubmit(newCertificate);
     form.resetFields();
   };
 
   return (
     <Modal
-      title="Upload Video"
+      title="Upload Certificate"
       open={visible}
       onCancel={onCancel}
       onOk={() => form.submit()}
-      destroyOnClose
+      destroyOnHidden
     >
       <Form form={form} layout="vertical" onFinish={handleFinish}>
         <Form.Item
@@ -42,18 +43,26 @@ const YoutubeLinks: React.FC<YoutubeLinksProps> = ({ visible, onCancel, onSubmit
           name="title"
           rules={[{ required: true, message: "Please enter a title" }]}
         >
-          <Input placeholder="Enter video title" />
+          <Input placeholder="Enter certificate title" />
         </Form.Item>
 
         <Form.Item
-          label="Upload Video"
+          label="Certificate Name"
+          name="name"
+          rules={[{ required: true, message: "Please enter certificate name" }]}
+        >
+          <Input placeholder="Enter certificate name" />
+        </Form.Item>
+
+        <Form.Item
+          label="Upload File"
           name="file"
           valuePropName="fileList"
           getValueFromEvent={(e: any) => e.fileList}
-          rules={[{ required: true, message: "Please upload a video file" }]}
+          rules={[{ required: true, message: "Please upload a file" }]}
         >
-          <Upload beforeUpload={() => false} maxCount={1} accept="video/*">
-            <Button icon={<UploadOutlined />}>Click to Upload Video</Button>
+          <Upload beforeUpload={() => false} maxCount={1}>
+            <Button icon={<UploadOutlined />}>Click to Upload</Button>
           </Upload>
         </Form.Item>
       </Form>
@@ -61,4 +70,4 @@ const YoutubeLinks: React.FC<YoutubeLinksProps> = ({ visible, onCancel, onSubmit
   );
 };
 
-export default YoutubeLinks;
+export default CertificateModal;
