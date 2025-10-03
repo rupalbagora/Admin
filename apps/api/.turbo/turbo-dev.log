@@ -5,6 +5,7 @@
 Server running on http://localhost:5001
 MongoDB Connected: localhost
 🟢 Superadmin already exists
+<<<<<<< HEAD
 [0mPOST /api/auth [33m401[0m 48.631 ms - 33[0m
 [0mPOST /api/auth [33m401[0m 23.322 ms - 33[0m
 [0mPOST /api/auth [33m401[0m 17.785 ms - 33[0m
@@ -173,3 +174,56 @@ MongoDB Connected: localhost
 [0mPOST /api/auth [32m200[0m 32.631 ms - 712[0m
 [0mPOST /api/auth [32m200[0m 32.762 ms - 712[0m
 [0mPOST /api/auth [32m200[0m 202.485 ms - 712[0m
+=======
+[0mPOST /api/auth [32m200[0m 208.105 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 205.350 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 41.689 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 51.550 ms - 716[0m
+[0mGET /api/users/get/users [36m304[0m 24.187 ms - -[0m
+[0mPOST /api/auth [32m200[0m 26.415 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 27.611 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 42.856 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 45.540 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 35.566 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 35.535 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 32.059 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 36.070 ms - 716[0m
+[0mGET /api/users/get/users [36m304[0m 15.611 ms - -[0m
+[0mPOST /api/auth [32m200[0m 31.487 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 39.940 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 28.723 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 27.366 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 107.417 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 108.673 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 199.056 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 181.934 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 167.933 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 171.075 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 232.637 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 197.456 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 172.311 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 184.097 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 192.191 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 192.052 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 249.380 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 250.017 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 54.886 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 87.247 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 160.881 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 193.867 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 103.678 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 115.544 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 105.739 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 106.570 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 312.838 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 479.274 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 432.386 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 454.618 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 168.704 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 213.538 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 191.087 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 97.400 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 27.516 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 27.368 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 18.670 ms - 716[0m
+>>>>>>> e295bba5efdf96c6fb12b59da31ef1758df6b26f
