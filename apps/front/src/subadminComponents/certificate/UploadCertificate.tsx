@@ -1,43 +1,33 @@
 import React, { useState } from "react";
-import { Card, Table, Button, Input, Upload, Modal, Form } from "antd";
-import { UploadOutlined, PlusOutlined, DeleteOutlined } from "@ant-design/icons";
-import type { ColumnsType } from "antd/es/table";
+import { Card, Table, Input, Button, Modal } from "antd";
+import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Certificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
+import CertificateModal from "./CertificateModal";
+
 const UploadCertificate: React.FC = () => {
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [searchText, setSearchText] = useState("");
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [form] = Form.useForm();
+  const [modalVisible, setModalVisible] = useState(false);
 
-  // Add certificate
-  const handleAddCertificate = (values: any) => {
-    if (!values.file || !values.file.length) return;
-
-    const fileObj = values.file[0].originFileObj as File;
-
-    const newCertificate: Certificate = {
-      id: Date.now().toString(),
-      name: values.name,
-      title: values.title,
-      fileUrl: URL.createObjectURL(fileObj),
-      uploadedAt: new Date(),
-    };
-
-    setCertificates([...certificates, newCertificate]);
-    setIsModalVisible(false);
-    form.resetFields();
+  const handleAddCertificate = (cert: Certificate) => {
+    setCertificates([...certificates, cert]);
+    setModalVisible(false);
   };
 
-  // Delete certificate
   const handleDelete = (id: string) => {
     Modal.confirm({
-      title: "Are you sure you want to delete this certificate?",
+      title: "Delete this certificate?",
       onOk: () => setCertificates(certificates.filter((c) => c.id !== id)),
     });
   };
 
-  // Table columns
-  const columns: ColumnsType<Certificate> = [
+  const filteredCertificates = certificates.filter(
+    (c) =>
+      c.name.toLowerCase().includes(searchText.toLowerCase()) ||
+      c.title.toLowerCase().includes(searchText.toLowerCase())
+  );
+
+  const columns = [
     { title: "Title", dataIndex: "title", key: "title" },
     { title: "Certificate Name", dataIndex: "name", key: "name" },
     {
@@ -49,10 +39,10 @@ const UploadCertificate: React.FC = () => {
     {
       title: "Actions",
       key: "actions",
-      render: (_, record) => (
+      render: (_: any, record: Certificate) => (
         <div className="flex gap-2">
           <a href={record.fileUrl} target="_blank" rel="noopener noreferrer">
-            <Button type="default">View</Button>
+            <Button>View</Button>
           </a>
           <Button danger icon={<DeleteOutlined />} onClick={() => handleDelete(record.id)}>
             Delete
@@ -62,40 +52,24 @@ const UploadCertificate: React.FC = () => {
     },
   ];
 
-  // Filtered certificates based on search text
-  const filteredCertificates = certificates.filter(
-    (cert) =>
-      cert.name.toLowerCase().includes(searchText.toLowerCase()) ||
-      cert.title.toLowerCase().includes(searchText.toLowerCase())
-  );
-
   return (
     <div className="p-6">
       <Card
         title="Certificate Management"
         extra={
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            className="bg-gray-700"
-            onClick={() => setIsModalVisible(true)}
-          >
+          <Button icon={<PlusOutlined />} type="primary" onClick={() => setModalVisible(true)}>
             Add Certificate
           </Button>
         }
       >
-        {/* Search */}
-        <div className="mb-4 flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
-          <Input.Search
-            placeholder="Search certificates..."
-            className="w-full md:w-1/2"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            allowClear
-          />
-        </div>
+        <Input.Search
+          placeholder="Search certificates..."
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          allowClear
+          className="mb-4 w-full md:w-1/2"
+        />
 
-        {/* Table */}
         <Table
           columns={columns}
           dataSource={filteredCertificates}
@@ -104,44 +78,11 @@ const UploadCertificate: React.FC = () => {
         />
       </Card>
 
-      {/* Upload Modal */}
-      <Modal
-        title="Upload Certificate"
-        open={isModalVisible}
-        destroyOnHidden
-        onCancel={() => setIsModalVisible(false)}
-        onOk={() => form.submit()}
-      >
-        <Form form={form} layout="vertical" onFinish={handleAddCertificate}>
-          <Form.Item
-            label="Title"
-            name="title"
-            rules={[{ required: true, message: "Please enter a title" }]}
-          >
-            <Input placeholder="Enter certificate title" />
-          </Form.Item>
-
-          <Form.Item
-            label="Certificate Name"
-            name="name"
-            rules={[{ required: true, message: "Please enter certificate name" }]}
-          >
-            <Input placeholder="Enter certificate name" />
-          </Form.Item>
-
-          <Form.Item
-            label="Upload File"
-            name="file"
-            valuePropName="fileList"
-            getValueFromEvent={(e: any) => e.fileList} // important!
-            rules={[{ required: true, message: "Please upload a file" }]}
-          >
-            <Upload beforeUpload={() => false} maxCount={1}>
-              <Button icon={<UploadOutlined />}>Click to Upload</Button>
-            </Upload>
-          </Form.Item>
-        </Form>
-      </Modal>
+      <CertificateModal
+        visible={modalVisible}
+        onCancel={() => setModalVisible(false)}
+        onSubmit={handleAddCertificate}
+      />
     </div>
   );
 };
