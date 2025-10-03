@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { RoleBasedLayout } from "./layoutes/RoleBasedLayout";
-import UploadCertificate from "./subadminComponents/uploads/UploadCertificate";
 // import SubscriptionManagement from "./commonComp/SubscriptionManagement/SubscriptionManagement";
 
 // Lazy load layouts and pages
@@ -35,6 +34,14 @@ const UserDeshboard = lazy(
 const SubscriptionManagement = lazy(
   () => import("./commonComp/SubscriptionManagement/SubscriptionManagement")
 );
+
+// SUB-ADMIN
+const YoutubeLinks = lazy(
+  () => import("./subadminComponents/youtubelinks/YoutubeLinks")
+);
+
+const UploadCertificate = lazy(() => import("./subadminComponents/uploads/UploadCertificate")) 
+
 
 export const router = createBrowserRouter([
   {
@@ -153,11 +160,20 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "Upload-Certificate",
+        path: "/admin/Upload-Certificate",
         element: (
           <Suspense fallback={Loader}>
             {" "}
             <UploadCertificate />
+          </Suspense>
+        ),
+      },
+      {
+        path: "youtubelinks",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <YoutubeLinks />
           </Suspense>
         ),
       },
