@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { RoleBasedLayout } from "./layoutes/RoleBasedLayout";
+import UploadCertificate from "./subadminComponents/uploads/UploadCertificate";
 // import SubscriptionManagement from "./commonComp/SubscriptionManagement/SubscriptionManagement";
 
 // Lazy load layouts and pages
@@ -148,6 +149,15 @@ export const router = createBrowserRouter([
           <Suspense fallback={Loader}>
             {" "}
             <ManageUsers />
+          </Suspense>
+        ),
+      },
+      {
+        path: "Upload-Certificate",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadCertificate />
           </Suspense>
         ),
       },

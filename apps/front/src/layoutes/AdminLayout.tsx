@@ -62,7 +62,13 @@ const menuItems = [
   },
   {
     name: "Upload Certificate",
-    icon: <Upload className="w-5 h-5" />, 
+    icon: <Upload className="w-5 h-5" />,
+    path: "/admin/Upload-Certificate",
+  }, 
+   {
+    name: "Youtube",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/youtube",
   },
 ];
 
