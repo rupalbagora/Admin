@@ -35,6 +35,11 @@ const SubscriptionManagement = lazy(
   () => import("./commonComp/SubscriptionManagement/SubscriptionManagement")
 );
 
+// SUB-ADMIN
+const YoutubeLinks = lazy(
+  () => import("./subadminComponents/youtubelinks/YoutubeLinks")
+);
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -148,6 +153,15 @@ export const router = createBrowserRouter([
           <Suspense fallback={Loader}>
             {" "}
             <ManageUsers />
+          </Suspense>
+        ),
+      },
+      {
+        path: "youtubelinks",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <YoutubeLinks />
           </Suspense>
         ),
       },

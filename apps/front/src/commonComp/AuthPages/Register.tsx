@@ -16,6 +16,7 @@ const RegisterPage: React.FC = () => {
     password: '',
     phone: ''
   });
+  
 
   const {
     validateEmail,

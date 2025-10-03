@@ -5,37 +5,10 @@
 Server running on http://localhost:5001
 MongoDB Connected: localhost
 🟢 Superadmin already exists
-[0mPOST /api/auth [32m200[0m 96.949 ms - 713[0m
-[0mPOST /api/auth [32m200[0m 87.471 ms - 713[0m
-[0mPOST /api/auth [32m200[0m 37.233 ms - 713[0m
-[0mPOST /api/auth [32m200[0m 37.964 ms - 713[0m
-[0mPOST /api/auth [33m401[0m 1.155 ms - 41[0m
-[0mPOST /api/auth [33m401[0m 1.281 ms - 41[0m
-[0mPOST /api/auth [33m401[0m 1.013 ms - 41[0m
-[0mPOST /api/auth [33m401[0m 0.904 ms - 41[0m
-[0mPOST /api/auth [33m401[0m 1.815 ms - 41[0m
-[0mPOST /api/auth [33m401[0m 1.246 ms - 41[0m
-[0mPOST /api/auth/login [32m200[0m 880.712 ms - 917[0m
-[0mPOST /api/auth [33m401[0m 1.017 ms - 41[0m
-[0mPOST /api/auth [33m401[0m 1.319 ms - 41[0m
-[0mPOST /api/auth [33m401[0m 0.891 ms - 41[0m
-[0mPOST /api/auth [33m401[0m 1.169 ms - 41[0m
-[0mPOST /api/auth [33m401[0m 0.725 ms - 41[0m
-[0mPOST /api/auth [33m401[0m 0.863 ms - 41[0m
-[0mPOST /api/auth/login [32m200[0m 751.277 ms - 838[0m
-[0mGET /api/users/get/users [36m304[0m 23.932 ms - -[0m
-[0mPUT /api/users/68dd09dc574d18ae20ddfadf [32m200[0m 100.121 ms - 669[0m
-[0mPOST /api/auth [32m200[0m 71.487 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 94.475 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 134.490 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 176.635 ms - 690[0m
-[0mGET /api/users/get/users [32m200[0m 14.291 ms - 637[0m
-[0mPOST /api/auth [32m200[0m 33.430 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 32.565 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 37.189 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 37.655 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 33.598 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 33.805 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 26.247 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 26.508 ms - 690[0m
-[0mPOST /api/auth [33m401[0m 0.722 ms - 41[0m
+[0mPOST /api/auth [32m200[0m 173.709 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 216.675 ms - 716[0m
+[0mGET /api/users/get/users [32m200[0m 35.341 ms - 2[0m
+[0mPOST /api/auth [32m200[0m 45.759 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 45.230 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 38.928 ms - 716[0m
+[0mPOST /api/auth [32m200[0m 40.293 ms - 716[0m
