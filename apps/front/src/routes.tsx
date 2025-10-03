@@ -41,6 +41,8 @@ const YoutubeLinks = lazy(
 
 const UploadCertificate = lazy(() => import("./subadminComponents/certificate/UploadCertificate")) 
 
+const Packages = lazy (() => import("./subadminComponents/ourpackages/PackageForm"));  
+
 
 export const router = createBrowserRouter([
   {
@@ -159,7 +161,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/admin/Upload-Certificate",
+        path: "Upload-Certificate",
         element: (
           <Suspense fallback={Loader}>
             {" "}
@@ -173,6 +175,15 @@ export const router = createBrowserRouter([
           <Suspense fallback={Loader}>
             {" "}
             <YoutubeLinks />
+          </Suspense>
+        ),
+      },
+      {
+        path: "Packages",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <Packages />
           </Suspense>
         ),
       },

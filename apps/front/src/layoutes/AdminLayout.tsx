@@ -70,6 +70,11 @@ const menuItems = [
     icon: <Home className="w-5 h-5" />,
     path: "/admin/youtubelinks",
   },
+  {
+    name: "Our Packages",
+    icon: <Upload className="w-5 h-5" />,
+    path: "/admin/Packages",
+  }, 
 ];
 
 export default function AdminLayout() {

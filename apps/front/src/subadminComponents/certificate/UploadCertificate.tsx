@@ -1,32 +1,42 @@
+// components/Certificates/UploadCertificate.tsx
 import React, { useState } from "react";
-import { Card, Table, Input, Button, Modal } from "antd";
+import { Card, Table, Button, Input, Modal, Space } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Certificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
-import CertificateModal from "./CertificateModal";
+import type { Certificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
+import CertificateForm from "./CertificateForm";
+
+const { Search } = Input;
 
 const UploadCertificate: React.FC = () => {
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [searchText, setSearchText] = useState("");
-  const [modalVisible, setModalVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Add new certificate
   const handleAddCertificate = (cert: Certificate) => {
-    setCertificates([...certificates, cert]);
-    setModalVisible(false);
+    setCertificates((prev) => [...prev, cert]);
+    setIsModalOpen(false);
   };
 
+  // Delete certificate
   const handleDelete = (id: string) => {
     Modal.confirm({
-      title: "Delete this certificate?",
-      onOk: () => setCertificates(certificates.filter((c) => c.id !== id)),
+      title: "Delete Certificate?",
+      content: "Are you sure you want to delete this certificate?",
+      okText: "Yes",
+      cancelText: "No",
+      onOk: () => setCertificates((prev) => prev.filter((c) => c.id !== id)),
     });
   };
 
+  // Filter certificates based on search input
   const filteredCertificates = certificates.filter(
-    (c) =>
-      c.name.toLowerCase().includes(searchText.toLowerCase()) ||
-      c.title.toLowerCase().includes(searchText.toLowerCase())
+    (cert) =>
+      cert.title.toLowerCase().includes(searchText.toLowerCase()) ||
+      cert.name.toLowerCase().includes(searchText.toLowerCase())
   );
 
+  // Table columns
   const columns = [
     { title: "Title", dataIndex: "title", key: "title" },
     { title: "Certificate Name", dataIndex: "name", key: "name" },
@@ -34,20 +44,24 @@ const UploadCertificate: React.FC = () => {
       title: "Uploaded At",
       dataIndex: "uploadedAt",
       key: "uploadedAt",
-      render: (date: Date) => new Date(date).toLocaleString(),
+      render: (date: string) => new Date(date).toLocaleString(),
     },
     {
       title: "Actions",
       key: "actions",
       render: (_: any, record: Certificate) => (
-        <div className="flex gap-2">
+        <Space>
           <a href={record.fileUrl} target="_blank" rel="noopener noreferrer">
             <Button>View</Button>
           </a>
-          <Button danger icon={<DeleteOutlined />} onClick={() => handleDelete(record.id)}>
+          <Button
+            danger
+            icon={<DeleteOutlined />}
+            onClick={() => handleDelete(record.id)}
+          >
             Delete
           </Button>
-        </div>
+        </Space>
       ),
     },
   ];
@@ -57,32 +71,49 @@ const UploadCertificate: React.FC = () => {
       <Card
         title="Certificate Management"
         extra={
-          <Button icon={<PlusOutlined />} type="primary" onClick={() => setModalVisible(true)}>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => setIsModalOpen(true)}
+            className="bg-gray-700"
+          >
             Add Certificate
           </Button>
         }
       >
-        <Input.Search
-          placeholder="Search certificates..."
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          allowClear
-          className="mb-4 w-full md:w-1/2"
-        />
+        {/* Search */}
+        <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <Search
+            placeholder="Search certificates..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            allowClear
+            size="large"
+            className="w-full md:w-1/2 bg-[#2523232c]"
+          />
+        </div>
 
+        {/* Table */}
         <Table
           columns={columns}
           dataSource={filteredCertificates}
           rowKey="id"
           locale={{ emptyText: "No certificates uploaded" }}
+          pagination={{ pageSize: 10 }}
         />
       </Card>
 
-      <CertificateModal
-        visible={modalVisible}
-        onCancel={() => setModalVisible(false)}
-        onSubmit={handleAddCertificate}
-      />
+      {/* Upload Certificate Modal */}
+      <Modal
+        title="Upload Certificate"
+        open={isModalOpen}
+        footer={null}
+        onCancel={() => setIsModalOpen(false)}
+        destroyOnClose
+        width={700}
+      >
+        <CertificateForm onAddCertificate={handleAddCertificate} />
+      </Modal>
     </div>
   );
 };
