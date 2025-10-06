@@ -60,6 +60,23 @@ const menuItems = [
       },
     ],
   },
+    {
+    name: "Products",
+    icon: <User className="w-5 h-5" />,
+    subItems: [
+      {
+        name: "All Categories",
+        icon: <User className="w-4 h-4" />,
+        path: "/admin/AllCategories",
+      },
+      {
+        name: "Product details",
+        icon: <User className="w-4 h-4" />,
+        path: "/admin/ProductDetails",
+      
+      },
+    ],
+  },
   {
     name: "Upload Certificate",
     icon: <Upload className="w-5 h-5" />,
