@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { Home, User, Settings, Users,  X, CreditCard } from "lucide-react";
+import { Home, User, Settings, Users,  X, CreditCard, Upload } from "lucide-react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../commonComp/SideBarr/SideBarr";
 import Header from "../commonComp/Header/Header";
 import RouteTracker from "../commonComp/RouteTracker/RouteTracker";
 import { useAppDispatch } from "../redux/hooks";
 import { search } from "../redux/Slice/activeStatus/activeStatusSlice";
-
 const navItems = [
   {
     label: "Home",
@@ -61,17 +60,38 @@ const menuItems = [
       },
     ],
   },
-  {
-    name: "Packages",
+    {
+    name: "Products",
     icon: <User className="w-5 h-5" />,
     subItems: [
       {
-        name: "All Packages",
+        name: "All Categories",
         icon: <User className="w-4 h-4" />,
-        path: "/sub-admin/packages",
+        path: "/admin/AllCategories",
+      },
+      {
+        name: "Product details",
+        icon: <User className="w-4 h-4" />,
+        path: "/admin/ProductDetails",
+      
       },
     ],
   },
+  {
+    name: "Upload Certificate",
+    icon: <Upload className="w-5 h-5" />,
+    path: "/admin/Upload-Certificate",
+  }, 
+   {
+    name: "Youtube",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/youtube",
+  },
+  {
+    name: "Our Packages",
+    icon: <Upload className="w-5 h-5" />,
+    path: "/admin/Packages",
+  }, 
 ];
 
 export default function AdminLayout() {

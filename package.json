@@ -19,6 +19,10 @@
     "turbo": "^2.5.4"
   },
   "dependencies": {
+<<<<<<< HEAD
     "mongoose": "^8.19.0"
+=======
+    "antd": "^5.27.4"
+>>>>>>> 428defd45ead281cf782d43b371d43d1ab5934ae
   }
 }

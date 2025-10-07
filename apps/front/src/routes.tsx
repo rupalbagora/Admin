@@ -35,6 +35,17 @@ const SubscriptionManagement = lazy(
   () => import("./commonComp/SubscriptionManagement/SubscriptionManagement")
 );
 
+// SUB-ADMIN
+const UploadCategories = lazy (()=> import("../src/subadminComponents/products/AllCategories/UploadCategories"));
+const UploadProduct = lazy (()=> import("../src/subadminComponents/products/ProductsDetails/UploadProduct"));
+
+const UploadYoutube = lazy (()=> import("../src/subadminComponents/youtube/UploadYoutube"));
+
+const UploadCertificate = lazy(() => import("./subadminComponents/certificate/UploadCertificate")) 
+
+const ManagePackages = lazy (() => import("./subadminComponents/ourpackages/ManagePackages"));  
+
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -148,6 +159,51 @@ export const router = createBrowserRouter([
           <Suspense fallback={Loader}>
             {" "}
             <ManageUsers />
+          </Suspense>
+        ),
+      },
+      {
+        path: "Upload-Certificate",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadCertificate />
+          </Suspense>
+        ),
+      },
+      {
+        path: "AllCategories",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadCategories />
+          </Suspense>
+        ),
+      },
+       {
+        path: "ProductDetails",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadProduct />
+          </Suspense>
+        ),
+      },
+       {
+        path: "youtube",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadYoutube />
+          </Suspense>
+        ),
+      },
+      {
+        path: "Packages",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <ManagePackages />
           </Suspense>
         ),
       },
