@@ -61,6 +61,17 @@ const menuItems = [
       },
     ],
   },
+  {
+    name: "Packages",
+    icon: <User className="w-5 h-5" />,
+    subItems: [
+      {
+        name: "All Packages",
+        icon: <User className="w-4 h-4" />,
+        path: "/sub-admin/packages",
+      },
+    ],
+  },
 ];
 
 export default function AdminLayout() {

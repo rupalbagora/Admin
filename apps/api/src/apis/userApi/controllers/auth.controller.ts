@@ -34,6 +34,8 @@ export const register = async (req: Request, res: Response) => {
     await user.save();
 
     const token = user.generateAuthToken();
+    console.log(token)
+    console.log("JWT_SECRET in protect:", process.env.JWT_SECRET);
 
     res.status(201).json({
       user: formatUserResponse(user),

@@ -14,6 +14,7 @@ export const protect = async (
   next: NextFunction
 ) => {
   const authHeader = req.headers.authorization;
+console.log("Auth Header received:", req.headers.authorization);
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     res.status(401).json({ error: "Not authorized, token missing" });
@@ -26,7 +27,9 @@ export const protect = async (
       token,
       process.env.JWT_SECRET as string
     ) as JwtPayload;
+    console.log(decoded)
     let user = await User.findById(decoded.id);
+    console.log(user)
     if (!user) {
       res.status(401).json({ error: "User no longer exists" });
       return;

@@ -19,6 +19,6 @@
     "turbo": "^2.5.4"
   },
   "dependencies": {
-   
+    "mongoose": "^8.19.0"
   }
 }

@@ -8,10 +8,16 @@ import subscriptionPlansRoutes from "./apis/paymentApi/routes/subscriptionPlan.r
 
 import subscriptionRoutes from './apis/paymentApi/routes/subscription.routes';
 app.use('/api/subscriptions', subscriptionRoutes);
-
+ import youtubeRoutes from "./apis/youtubeApi/routes/youtube.routes"
+ import certificateRoutes from "./apis/certificateApi/routes/certificate.routes"
+import packagesRoutes from "./apis/packagesApi/routes/packages.routes";
+import productPackageRoutes from "./apis/productPackageApi/routes/productPackage.routes"
 app.use('/api/auth', authRoutes);
 app.use('/api/users',usersRoutes );
-
+app.use("/api/youtube", youtubeRoutes);
+app.use("/api/certificates", certificateRoutes);
+app.use("/api/packages", packagesRoutes);
+app.use("/api/product-packages", productPackageRoutes);
 
 // app.use("/api/subscription",subscriptionRoute)
 // app.use("/api/payments",paymentRoutes)
