@@ -5,16 +5,16 @@ import ProductForm from "./ProductForm";
 
 export interface Product {
   id: string;
-  title: string;
-  categoryName: string;
+  productName: string;
   price: number;
-  discount: number;
   rating: number;
+  views: number;
+  description: string;
   image: string;
   uploadedAt: Date;
 }
 
-const UploadProducts: React.FC = () => {
+const UploadProduct: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [searchText, setSearchText] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
@@ -33,24 +33,30 @@ const UploadProducts: React.FC = () => {
 
   const filteredProducts = products.filter(
     (p) =>
-      p.title.toLowerCase().includes(searchText.toLowerCase()) ||
-      p.categoryName.toLowerCase().includes(searchText.toLowerCase())
+      p.productName.toLowerCase().includes(searchText.toLowerCase()) ||
+      p.description.toLowerCase().includes(searchText.toLowerCase())
   );
 
   const columns = [
-    { title: "Title", dataIndex: "title", key: "title" },
-    { title: "Category", dataIndex: "categoryName", key: "categoryName" },
+    { title: "Product Name", dataIndex: "productName", key: "productName" },
     {
       title: "Image",
       dataIndex: "image",
       key: "image",
       render: (url: string) => (
-        <img src={url} alt="product" width={80} height={60} style={{ borderRadius: 6 }} />
+        <img
+          src={url}
+          alt="product"
+          width={80}
+          height={60}
+          style={{ borderRadius: 6 }}
+        />
       ),
     },
     { title: "Price", dataIndex: "price", key: "price" },
-    { title: "Discount (%)", dataIndex: "discount", key: "discount" },
     { title: "Rating", dataIndex: "rating", key: "rating" },
+    { title: "Views", dataIndex: "views", key: "views" },
+    { title: "Description", dataIndex: "description", key: "description" },
     {
       title: "Uploaded At",
       dataIndex: "uploadedAt",
@@ -87,7 +93,7 @@ const UploadProducts: React.FC = () => {
         }
       >
         <Input.Search
-          placeholder="Search products..."
+          placeholder="Search product by name or description..."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           allowClear
@@ -111,4 +117,4 @@ const UploadProducts: React.FC = () => {
   );
 };
 
-export default UploadProducts;
+export default UploadProduct;

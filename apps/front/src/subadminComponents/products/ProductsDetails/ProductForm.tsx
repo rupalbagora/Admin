@@ -1,7 +1,7 @@
 import React from "react";
 import { Modal, Form, Input, InputNumber, Upload, Button } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { Product } from "./UploadProducts";
+import type{ Product } from "./UploadProduct";
 
 interface ProductFormProps {
   visible: boolean;
@@ -14,18 +14,21 @@ const ProductForm: React.FC<ProductFormProps> = ({ visible, onCancel, onSubmit }
 
   const handleFinish = (values: any) => {
     const fileObj = values.image?.[0]?.originFileObj as File;
+
     const newProduct: Product = {
       id: Date.now().toString(),
-      title: values.title,
-      categoryName: values.categoryName,
+      productName: values.productName,
       price: values.price,
-      discount: values.discount,
       rating: values.rating,
+      views: values.views,
+      description: values.description,
       image: fileObj ? URL.createObjectURL(fileObj) : "",
       uploadedAt: new Date(),
     };
+
     onSubmit(newProduct);
     form.resetFields();
+    onCancel(); // close modal after save
   };
 
   return (
@@ -38,19 +41,11 @@ const ProductForm: React.FC<ProductFormProps> = ({ visible, onCancel, onSubmit }
     >
       <Form form={form} layout="vertical" onFinish={handleFinish}>
         <Form.Item
-          label="Title"
-          name="title"
-          rules={[{ required: true, message: "Please enter a title" }]}
+          label="Product Name"
+          name="productName"
+          rules={[{ required: true, message: "Please enter product name" }]}
         >
-          <Input placeholder="Enter product title" />
-        </Form.Item>
-
-        <Form.Item
-          label="Category Name"
-          name="categoryName"
-          rules={[{ required: true, message: "Please enter category name" }]}
-        >
-          <Input placeholder="Enter category name" />
+          <Input placeholder="Enter product name" />
         </Form.Item>
 
         <Form.Item
@@ -61,12 +56,34 @@ const ProductForm: React.FC<ProductFormProps> = ({ visible, onCancel, onSubmit }
           <InputNumber min={0} style={{ width: "100%" }} placeholder="Enter price" />
         </Form.Item>
 
-        <Form.Item label="Discount (%)" name="discount">
-          <InputNumber min={0} max={100} style={{ width: "100%" }} placeholder="Enter discount %" />
+        <Form.Item
+          label="Rating (0–5)"
+          name="rating"
+          rules={[{ required: true, message: "Please enter rating" }]}
+        >
+          <InputNumber
+            min={0}
+            max={5}
+            step={0.1}
+            style={{ width: "100%" }}
+            placeholder="Enter rating"
+          />
         </Form.Item>
 
-        <Form.Item label="Rating" name="rating">
-          <InputNumber min={0} max={5} step={0.1} style={{ width: "100%" }} placeholder="Enter rating (0-5)" />
+        <Form.Item
+          label="Views"
+          name="views"
+          rules={[{ required: true, message: "Please enter number of views" }]}
+        >
+          <InputNumber min={0} style={{ width: "100%" }} placeholder="Enter views" />
+        </Form.Item>
+
+        <Form.Item
+          label="Description"
+          name="description"
+          rules={[{ required: true, message: "Please enter description" }]}
+        >
+          <Input.TextArea rows={3} placeholder="Enter product description" />
         </Form.Item>
 
         <Form.Item

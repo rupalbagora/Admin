@@ -1,266 +1,165 @@
-// components/UserForm.tsx
-import React from "react";
-import {
-  Form,
-  Input,
-  Select,
-  Button,
-  DatePicker,
-  Switch,
-  message,
-  Upload,
-  Avatar,
-} from "antd";
+import React, { useState } from "react";
+import { Form, Input, Select, Upload, Button, Card, DatePicker } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import type {
-  IUser,
-  // UserRole, SubscriptionType, SubscriptionStatus, Gender
-} from "../../redux/types/usera.types";
-import moment from "moment";
-import { useAppSelector } from "../../redux/hooks";
+
 const { Option } = Select;
-const { TextArea } = Input;
 
-interface UserFormProps {
-  initialValues?: Partial<IUser>;
-  onSubmit: (values: Partial<IUser>) => void;
-  isEditMode: boolean;
-  loading: boolean;
-}
+const CreateAdminForm = () => {
+  const [isCustom, setIsCustom] = useState(false);
 
-const UserForm: React.FC<UserFormProps> = ({
-  initialValues,
-  onSubmit,
-  isEditMode,
-  loading,
-}) => {
-  const [form] = Form.useForm();
-  const [avatarUrl, setAvatarUrl] = React.useState(initialValues?.avatar || "");
-  const { user } = useAppSelector((state) => state.auth);
-  // Set form initial values
-  React.useEffect(() => {
-    if (initialValues) {
-      form.setFieldsValue({
-        ...initialValues,
-        // Convert date strings to moment objects if needed
-        dateOfBirth: initialValues.dateOfBirth
-          ? moment(initialValues.dateOfBirth)
-          : null,
-      });
-      setAvatarUrl(initialValues.avatar || "");
-    }
-  }, [initialValues, form]);
-
-  const handleSubmit = async (values: any) => {
-    try {
-      // Convert moment date to ISO string if present
-      if (values.dateOfBirth) {
-        values.dateOfBirth = values.dateOfBirth.toISOString();
-      }
-
-      // Include avatar URL if it exists
-      if (avatarUrl) {
-        values.avatar = avatarUrl;
-      }
-
-      await onSubmit(values);
-    } catch (error) {
-      message.error("Failed to submit form");
-    }
+  const handleSubscriptionChange = (value: string) => {
+    setIsCustom(value === "custom");
   };
 
-  const handleAvatarUpload = (info: any) => {
-    if (info.file.status === "done") {
-      // In a real app, you would upload the file to your server here
-      // and set the avatar URL to the response
-      setAvatarUrl(URL.createObjectURL(info.file.originFileObj));
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
+  const handleFinish = (values: any) => {
+    console.log("Form values:", values);
   };
+
   return (
-    <Form
-  form={form}
-  layout="vertical"
-  onFinish={handleSubmit}
-  initialValues={{
-    role: "user",
-    isActive: true,
-    isVerified: false,
-    subscriptionType: "free",
-    subscriptionStatus: "pending",
-    preferences: {
-      theme: "light",
-      language: "en",
-      notifications: {
-        email: true,
-        push: false,
-        sms: false,
-      },
-    },
-    ...initialValues,
-    dateOfBirth: initialValues?.dateOfBirth
-      ? moment(initialValues.dateOfBirth)
-      : null,
-  }}
->
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Left Column */}
-        <div>
-          {/* Avatar Upload */}
-          <Form.Item label="Avatar">
-            <div className="flex items-center space-x-4">
-              <Avatar src={avatarUrl as string} size={64} className="mb-2">
-                {initialValues?.firstName?.[0]}
-                {initialValues?.lastName?.[0]}
-              </Avatar>
-              <Upload
-                name="avatar"
-                showUploadList={false}
-                beforeUpload={() => false} // Prevent automatic upload
-                onChange={handleAvatarUpload}
-              >
-                <Button icon={<UploadOutlined />}>Upload</Button>
-              </Upload>
-            </div>
-          </Form.Item>
-
-          {/* Basic Information */}
+    <div className="min-h-screen bg-gray-100 p-8 flex justify-center items-start">
+      <Card
+        title={
+          <div className="flex items-center gap-3">
+            <img
+              src="/src/assets/logo.png" // 👈 your admin image
+              alt="Admin"
+               style={{ width: "70px", height: "70px" }}
+              className="w-10 h-10 rounded-md object-cover"
+            />
+            {/* <h2 className="text-xl font-semibold text-gray-800">Create Admin</h2> */}
+          </div>
+        }
+        className="w-full max-w-5xl mx-auto shadow-lg rounded-2xl bg-white"
+        bordered={false}
+      >
+        <Form
+          layout="vertical"
+          onFinish={handleFinish}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          {/* Name */}
           <Form.Item
-            label="First Name"
-            name="firstName"
-            rules={[{ required: true, message: "Please input first name!" }]}
+            label="Name"
+            name="name"
+            rules={[{ required: true, message: "Please enter name" }]}
           >
-            <Input />
+            <Input placeholder="Enter name" size="large" />
           </Form.Item>
 
-          <Form.Item
-            label="Last Name"
-            name="lastName"
-            rules={[{ required: true, message: "Please input last name!" }]}
-          >
-            <Input />
-          </Form.Item>
-
+          {/* Email */}
           <Form.Item
             label="Email"
             name="email"
             rules={[
-              { required: true, message: "Please input email!" },
-              { type: "email", message: "Please enter a valid email!" },
+              { required: true, message: "Please enter email" },
+              { type: "email", message: "Please enter a valid email" },
             ]}
           >
-            <Input type="email" />
+            <Input placeholder="example@email.com" size="large" />
           </Form.Item>
 
-          <Form.Item label="Phone" name="phone">
-            <Input />
+          {/* Password */}
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+              { required: true, message: "Please enter password" },
+              { min: 8, message: "Password must be at least 8 characters" },
+            ]}
+          >
+            <Input.Password placeholder="Enter password" size="large" />
           </Form.Item>
 
-          {!isEditMode && (
+          {/* Phone */}
+          <Form.Item
+            label="Phone"
+            name="phone"
+            rules={[{ required: true, message: "Please enter phone number" }]}
+          >
+            <Input placeholder="Enter phone number" size="large" />
+          </Form.Item>
+
+          {/* Address */}
+          <Form.Item
+            label="Address"
+            name="address"
+            rules={[{ required: true, message: "Please enter address" }]}
+          >
+            <Input placeholder="Enter address" size="large" />
+          </Form.Item>
+
+          {/* Status */}
+          <Form.Item
+            label="Status"
+            name="status"
+            rules={[{ required: true, message: "Please select status" }]}
+          >
+            <Select placeholder="-- Select --" size="large">
+              <Option value="active">Active</Option>
+              <Option value="inactive">Inactive</Option>
+            </Select>
+          </Form.Item>
+
+          {/* Subscription Period */}
+          <Form.Item
+            label="Subscription Period"
+            name="subscriptionPeriod"
+            rules={[{ required: true, message: "Please select subscription" }]}
+          >
+            <Select onChange={handleSubscriptionChange} size="large">
+              <Option value="biannual">Bi-Annual</Option>
+              <Option value="halfyearly">Half-Yearly</Option>
+              <Option value="yearly">Yearly</Option>
+              <Option value="custom">Custom</Option>
+            </Select>
+          </Form.Item>
+
+          {/* Custom DatePicker (only for custom option) */}
+          {isCustom && (
             <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                { required: true, message: "Please input password!" },
-                { min: 8, message: "Password must be at least 8 characters!" },
-              ]}
+              label="Custom Expiry Date"
+              name="customDate"
+              rules={[{ required: true, message: "Please select custom date" }]}
             >
-              <Input.Password />
+              <DatePicker
+                className="w-full"
+                size="large"
+                placeholder="Select custom date"
+              />
             </Form.Item>
           )}
 
-          <Form.Item label="Date of Birth" name="dateOfBirth">
-            <DatePicker className="w-full" />
-          </Form.Item>
-
-          <Form.Item label="Gender" name="gender">
-            <Select>
-              <Option value="male">Male</Option>
-              <Option value="female">Female</Option>
-              <Option value="other">Other</Option>
-              <Option value="prefer-not-to-say">Prefer not to say</Option>
-            </Select>
-          </Form.Item>
-        </div>
-
-        {/* Right Column */}
-        <div>
-          {/* Account Settings */}
-          <Form.Item label="Role" name="role" rules={[{ required: true }]}>
-            <Select>
-              {/* <Option value="superadmin">Super Admin</Option> */}
-              {user?.role === "superadmin" && (
-                <Option value="admin">Admin</Option>
-              )}
-              {/* <Option value="user">User</Option> */}
-              <Option value="staff">Staff</Option>
-              <Option value="user">Student</Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item label="Subscription Type" name="subscriptionType">
-            <Select>
-              <Option value="free">Free</Option>
-              <Option value="basic">Basic</Option>
-              <Option value="premium">Premium</Option>
-              <Option value="enterprise">Enterprise</Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item label="Subscription Status" name="subscriptionStatus">
-            <Select>
-              <Option value="active">Active</Option>
-              <Option value="pending">Pending</Option>
-              <Option value="expired">Expired</Option>
-              <Option value="cancelled">Cancelled</Option>
-            </Select>
-          </Form.Item>
-
+          {/* Upload Image */}
           <Form.Item
-            label="Account Status"
-            name="isActive"
-            valuePropName="checked"
+            label="Image"
+            name="image"
+            valuePropName="fileList"
+            getValueFromEvent={(e: any) => e.fileList}
+            className="md:col-span-2"
           >
-            <Switch checkedChildren="Active" unCheckedChildren="Inactive" />
+            <Upload beforeUpload={() => false} listType="picture-card" maxCount={1}>
+              <div>
+                <UploadOutlined />
+                <div className="mt-2 text-gray-600">Upload Image</div>
+              </div>
+            </Upload>
           </Form.Item>
 
-          <Form.Item
-            label="Verified Account"
-            name="isVerified"
-            valuePropName="checked"
-          >
-            <Switch checkedChildren="Verified" unCheckedChildren="Unverified" />
-          </Form.Item>
-
-          {/* Preferences */}
-          <Form.Item label="Theme Preference" name={["preferences", "theme"]}>
-            <Select>
-              <Option value="light">Light</Option>
-              <Option value="dark">Dark</Option>
-              <Option value="system">System</Option>
-            </Select>
-          </Form.Item>
-
-          <Form.Item label="Language" name={["preferences", "language"]}>
-            <Input />
-          </Form.Item>
-
-          <Form.Item label="Bio" name="bio">
-            <TextArea rows={3} />
-          </Form.Item>
-        </div>
-      </div>
-
-      <div className="mt-6 flex justify-end space-x-4">
-        <Button type="primary" htmlType="submit" loading={loading}>
-          {isEditMode ? "Update User" : "Create User"}
-        </Button>
-      </div>
-    </Form>
+          {/* Submit Button */}
+          <div className="md:col-span-2 flex justify-end mt-4">
+            <Button
+              type="primary"
+              htmlType="submit"
+              size="large"
+              className="px-10 py-2 rounded-lg shadow-sm bg-blue-600 hover:bg-blue-700"
+            >
+              Create
+            </Button>
+          </div>
+        </Form>
+      </Card>
+    </div>
   );
 };
 
-export default UserForm;
+export default CreateAdminForm;

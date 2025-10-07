@@ -114,7 +114,8 @@ const dispatch = useAppDispatch();
     <div className="h-[100vh] w-screen overflow-hidden flex flex-col bg-gray-50">
       <RouteTracker/>
       <Header
-        logo={<span>logo.....</span>}
+      logo={<img src="/src/assets/logo.png" alt="Logo" style={{ height: "40px" }} />}
+
         navItems={navItems}
         // user={{
         //   name: "John Doe",
@@ -135,7 +136,7 @@ const dispatch = useAppDispatch();
         >
           <Sidebar
             menuItems={menuItems}
-            logo={<span>logo...</span>}
+            // logo={<span>logo...</span>}
             version="v2.1.0"
             activeItemClassName="bg-indigo-600 text-white"
             collapsed={!sidebarOpen}
@@ -152,7 +153,7 @@ const dispatch = useAppDispatch();
             ></div>
             <div className="relative flex flex-col w-64 h-full bg-gray-800">
               <div className="flex items-center justify-between p-4 border-b border-gray-700">
-                <span>logo...</span>
+                {/* <span>logo...</span> */}
                 <button
                   onClick={toggleMobileSidebar}
                   className="p-1 rounded-md text-gray-400 hover:text-white"

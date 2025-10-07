@@ -1,42 +1,13 @@
-import {  useState } from "react";
-import { Home, User, Settings, Users, X ,CreditCard} from "lucide-react";
+import { useState } from "react";
+import { Home,User, Settings, X } from "lucide-react"; // removed User, Users, CreditCard
 import { Outlet } from "react-router-dom";
 import Sidebar from "../commonComp/SideBarr/SideBarr";
 import Header from "../commonComp/Header/Header";
 import RouteTracker from "../commonComp/RouteTracker/RouteTracker";
-import { useAppDispatch } from "../redux/hooks";
-import { search } from "../redux/Slice/activeStatus/activeStatusSlice";
+// import { useAppDispatch } from "../redux/hooks";
+// import { search } from "../redux/Slice/activeStatus/activeStatusSlice";
 
-const navItems = [
-  {
-    label: "Home",
-    href: "/",
-    icon: <Home size={16} />,
-  },
-  {
-    label: "Products",
-    href: "/products",
-    subItems: [
-      { label: "All Products", href: "/products" },
-      { label: "Categories", href: "/categories" },
-    ],
-  },
-  {
-    label: "Users",
-    href: "/super-admin/users",
-    icon: <Users size={16} />,
-  },
-  {
-    label: "Settings",
-    href: "/super-admin/settings",
-    icon: <Settings size={16} />,
-  },
-  {
-    label: "Subscription Plan",
-    href: "/super-admin/Subscription-plan",
-    icon: <CreditCard	 size={16} />,
-  },
-];
+
 
 const menuItems = [
   {
@@ -75,25 +46,19 @@ export default function Layout() {
     setMobileSidebarOpen(!mobileSidebarOpen);
   };
 
-  const dispatch = useAppDispatch();
-  const onSearch = (query:string) => {
-    dispatch(search(query))
-  };
+  // const dispatch = useAppDispatch();
+  // const onSearch = (query:string) => {
+  //   dispatch(search(query))
+  // };
 
   return (
     <div className="h-[100vh] w-screen overflow-hidden flex flex-col bg-gray-50">
       <RouteTracker />
       <Header
-        logo={<span>logo.....</span>}
-        navItems={navItems}
-        // user={{
-        //   name: "John Doe",
-        //   email: "john@example.com",
-        //   avatar: "/path/to/avatar.jpg",
-        // }}
-        onSearch={onSearch}
-        onNotificationClick={() => console.log("Notifications clicked")}
-        onMobileMenuToggle={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+       
+        // onSearch={onSearch}
+        // onNotificationClick={() => console.log("Notifications clicked")}
+        // onMobileMenuToggle={() => setMobileSidebarOpen(!mobileSidebarOpen)}
       />
 
       <div className="flex flex-1 overflow-hidden">
