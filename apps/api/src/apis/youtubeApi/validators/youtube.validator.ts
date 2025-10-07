@@ -1,12 +1,15 @@
-// src/apis/youtubeApi/validators/youtube.validator.ts
 import { body } from "express-validator";
 
 export const createYoutubeValidator = [
-  body("youtubeLinks")
-    .isArray({ min: 1 })
-    .withMessage("youtubeLinks must be an array with at least one link"),
-  body("youtubeLinks.*")
+  body("title").isString().notEmpty().withMessage("Title is required"),
+
+  body("videoUrl")
+    .optional()
     .isURL()
-    .withMessage("Each youtube link must be a valid URL"),
-  body("date").optional().isISO8601().withMessage("Date must be valid"),
+    .withMessage("videoUrl must be a valid URL"),
+
+  body("uploadedAt")
+    .optional()
+    .isISO8601()
+    .withMessage("uploadedAt must be a valid date"),
 ];

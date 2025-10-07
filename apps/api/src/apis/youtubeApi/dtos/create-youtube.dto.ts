@@ -1,5 +1,5 @@
-// src/apis/youtubeApi/dtos/create-youtube.dto.ts
 export interface CreateYoutubeDto {
-  youtubeLinks: string[];
-  date?: Date;
+  title: string;
+  videoUrl: string;
+  uploadedAt?: Date; // optional, default is current date
 }

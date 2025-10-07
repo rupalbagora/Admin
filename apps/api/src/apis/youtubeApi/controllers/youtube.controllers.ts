@@ -1,101 +1,148 @@
-// src/apis/youtubeApi/controllers/youtube.controller.ts
+// src/apis/youtubeApi/controllers/youtube.controllers.ts
 import { Request, Response } from "express";
 import YoutubeService from "../services/youtube.services";
-import { validationResult } from "express-validator";
-import { CreateYoutubeDto } from "../dtos/create-youtube.dto";
-
-export const uploadYoutubeLinks = async (req: Request, res: Response) => {
+import fs from "fs";
+import path from "path";
+/**
+ * Create a new YouTube video entry
+ * Supports both video file uploads and YouTube URLs
+ */
+export const createYoutubeVideo = async (req: Request, res: Response) => {
   try {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ success: false, errors: errors.array() });
-    }
-
-    const { youtubeLinks, date }: CreateYoutubeDto = req.body;
     const addedBy = (req as any).user._id;
 
-    const links = await YoutubeService.create(youtubeLinks, addedBy, date);
-    res
-      .status(201)
-      .json({
-        success: true,
-        message: "Links uploaded successfully!",
-        data: links,
-      });
+    const { title, videoUrl } = req.body;
+    const videoPath = req.file
+      ? `/uploads/videos/${req.file.filename}`
+      : undefined;
+
+    if (!videoUrl && !req.file) {
+      return res
+        .status(400)
+        .json({
+          success: false,
+          error: "You must provide a video file or a YouTube URL.",
+        });
+    }
+
+    const newVideo = await YoutubeService.create({
+      title,
+      videoUrl: videoUrl || undefined,
+      videoPath,
+      addedBy,
+    });
+
+    res.status(201).json({ success: true, data: newVideo });
   } catch (error) {
     res.status(500).json({ success: false, error: (error as Error).message });
   }
 };
 
-export const updateYoutubeLinksById = async (req: Request, res: Response) => {
+/**
+ * Get all YouTube videos
+ */
+export const getAllYoutubeVideos = async (_req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const { youtubeLinks, date }: CreateYoutubeDto = req.body;
+    const videos = await YoutubeService.getAll();
+    res.status(200).json({ success: true, data: videos });
+  } catch (error) {
+    res.status(500).json({ success: false, error: (error as Error).message });
+  }
+};
 
-    const updated = await YoutubeService.updateById(id, youtubeLinks, date);
-    if (!updated)
+/**
+ * Get a single video by ID
+ */
+export const getYoutubeVideoById = async (req: Request, res: Response) => {
+  try {
+    const video = await YoutubeService.getById(req.params.id);
+    if (!video) {
       return res
         .status(404)
-        .json({ success: false, message: "Link not found" });
+        .json({ success: false, message: "Video not found" });
+    }
+    res.status(200).json({ success: true, data: video });
+  } catch (error) {
+    res.status(500).json({ success: false, error: (error as Error).message });
+  }
+};
 
+/**
+ * Get videos by a specific date
+ */
+export const getYoutubeVideosByDate = async (req: Request, res: Response) => {
+  try {
+    const videos = await YoutubeService.getByDate(req.params.date);
+    res.status(200).json({ success: true, data: videos });
+  } catch (error) {
+    res.status(500).json({ success: false, error: (error as Error).message });
+  }
+};
+
+/**
+ * Update an existing video
+ * Allows updating title, YouTube URL, or replacing the uploaded video file
+ */
+export const updateYoutubeVideo = async (req: Request, res: Response) => {
+  console.log("heyyyyllo")
+  try {
+    console.log("heyyyyyyyyyy");
+    const { title, videoUrl } = req.body;
+    console.log("title", title);
+    const videoPath = req.file
+      ? `/uploads/videos/${req.file.filename}`
+      : undefined;
+    // ✅ Ensure at least one source is provided
+    if (!videoUrl && !videoPath) {
+      return res.status(400).json({
+        success: false,
+        error: "You must provide a video file or a YouTube URL.",
+      });
+    }
+    const updated = await YoutubeService.updateById(req.params.id, {
+      title,
+      videoUrl: videoUrl || undefined,
+      ...(videoPath && { videoPath }), // only include if a new file was uploaded
+    });
+
+    if (!updated) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Video not found" });
+    }
+
+    res.status(200).json({ success: true, data: updated });
+  } catch (error) {
+    res.status(500).json({ success: false, error: (error as Error).message });
+  }
+};
+
+/**
+ * Delete a video by ID
+ */
+export const deleteYoutubeVideo = async (req: Request, res: Response) => {
+  try {
+    const deleted = await YoutubeService.deleteById(req.params.id);
+    if (!deleted) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Video not found" });
+    }
+    // ✅ ADD THIS BLOCK
+    if (deleted.videoPath) {
+      const filePath = path.join(__dirname, "../../../../", deleted.videoPath);
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.error("❌ Error deleting file:", err.message);
+        } else {
+          console.log(`🗑️ Deleted file: ${filePath}`);
+        }
+      });
+    }
+    // ✅ END OF NEW BLOCK
     res
       .status(200)
-      .json({
-        success: true,
-        message: "Links updated successfully!",
-        data: updated,
-      });
-  } catch (error) {
-    res.status(500).json({ success: false, error: (error as Error).message });
-  }
-};
-
-export const getYoutubeLinkById = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const link = await YoutubeService.getById(id);
-    if (!link)
-      return res
-        .status(404)
-        .json({ success: false, message: "Link not found" });
-
-    res.status(200).json({ success: true, data: link });
-  } catch (error) {
-    res.status(500).json({ success: false, error: (error as Error).message });
-  }
-};
-
-export const getAllYoutubeLinks = async (_req: Request, res: Response) => {
-  try {
-    const links = await YoutubeService.getAll();
-    res.status(200).json({ success: true, data: links });
-  } catch (error) {
-    res.status(500).json({ success: false, error: (error as Error).message });
-  }
-};
-
-export const getYoutubeLinkByDate = async (req: Request, res: Response) => {
-  try {
-    const { date } = req.params;
-    const links = await YoutubeService.getByDate(date);
-    res.status(200).json({ success: true, data: links });
-  } catch (error) {
-    res.status(500).json({ success: false, error: (error as Error).message });
-  }
-};
-
-export const deleteYoutubeLinkById = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const deleted = await YoutubeService.deleteById(id);
-    if (!deleted)
-      return res
-        .status(404)
-        .json({ success: false, message: "Link not found" });
-
-    res
-      .status(200)
-      .json({ success: true, message: "Link deleted successfully!" });
+      .json({ success: true, message: "Video deleted successfully" });
   } catch (error) {
     res.status(500).json({ success: false, error: (error as Error).message });
   }

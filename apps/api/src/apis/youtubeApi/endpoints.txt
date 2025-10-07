@@ -1,0 +1,107 @@
+1. get login by any admin using : POST http://localhost:5000/api/users/login
+
+body : {
+  "email": "admin@example.com",
+  "password": "Admin@123"
+}
+
+2. Copy the token from the response.
+
+--------
+
+Create a Video (Upload File or URL)
+
+1. Upload a Video File
+
+Method: POST
+
+URL: http://localhost:5000/api/youtube
+
+Headers:
+Authorization: Bearer <token>
+
+Body → form-data:
+
+title → Summer Skincare Routine
+
+video → (choose a .mp4 file)
+
+Send Request.
+
+-----
+2. Add a YouTube URL
+Method: POST
+
+URL: http://localhost:5000/api/youtube
+
+Headers:
+Authorization: Bearer <token>
+
+Body → raw → JSON:
+
+{
+  "title": "Winter Skincare Tips",
+  "videoUrl": "https://www.youtube.com/watch?v=abcd1234"
+}
+----------
+
+3. Get All Videos
+
+Method: GET
+
+URL: http://localhost:5000/api/youtube
+
+Headers:
+Authorization: Bearer <token>
+
+-----------
+
+4. Get Video by ID
+
+Method: GET
+
+URL: http://localhost:5000/api/youtube/<VIDEO_ID>
+
+(No token required if route is public)
+
+
+-------
+
+Update a Video
+
+You can update metadata or replace the video file.
+
+Change Title Only
+
+Method: PATCH
+
+URL: http://localhost:5000/api/youtube/<VIDEO_ID>
+
+Headers: Authorization: Bearer <token>
+
+Body → raw → JSON:
+
+{
+  "title": "Updated Skincare Routine"
+}
+
+
+Replace Video File
+
+Method: PATCH
+
+Body → form-data:
+
+title → New Summer Skincare
+
+video → (select a new file)
+
+-----
+
+Delete a Video
+
+Method: DELETE
+
+URL: http://localhost:5000/api/youtube/<VIDEO_ID>
+
+Headers: Authorization: Bearer <token>

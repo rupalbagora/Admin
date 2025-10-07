@@ -1,9 +1,11 @@
-import mongoose from "mongoose";
-import { Types, Document } from "mongoose";
-export interface IYoutubeLink extends Document {
-  youtubeLinks: string[];
-  date: Date;
-  addedBy: Types.ObjectId; // admin who created it
+import { Document, Types } from "mongoose";
+
+export interface IYoutubeVideo extends Document {
+  title: string;
+  videoUrl?: string; // Optional if we upload file
+  videoPath?: string; // Path to uploaded file
+  uploadedAt: Date;
+  addedBy: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }

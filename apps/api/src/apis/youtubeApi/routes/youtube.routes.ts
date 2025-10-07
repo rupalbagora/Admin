@@ -1,45 +1,50 @@
-// src/apis/youtubeApi/routes/youtube.routes.ts
 import express from "express";
 import {
-  uploadYoutubeLinks,
-  updateYoutubeLinksById,
-  getYoutubeLinkById,
-  getYoutubeLinkByDate,
-  deleteYoutubeLinkById,
-  getAllYoutubeLinks,
+  createYoutubeVideo,
+  getAllYoutubeVideos,
+  getYoutubeVideoById,
+  getYoutubeVideosByDate,
+  updateYoutubeVideo,
+  deleteYoutubeVideo,
 } from "../controllers/youtube.controllers";
-import { createYoutubeValidator } from "../validators/youtube.validator";
+
 import { protect } from "../../userApi/middlewares/auth.middleware";
 import { authorizeRole } from "../../userApi/middlewares/authorizeRole";
+import upload from "../../mediaApi/services/multerConfig";
 
 const router = express.Router();
 
 router.post(
-  "/upload-youtube-links",
+  "/",
   protect,
   authorizeRole("admin", "superadmin"),
-  createYoutubeValidator,
-  uploadYoutubeLinks
+  upload.single("video"), // 🟢 added for file upload
+  createYoutubeVideo
 );
-router.patch(
-  "/update-youtube-links-by-id/:id",
-  protect,
-  authorizeRole("admin", "superadmin"),
-  updateYoutubeLinksById
-);
-router.get("/get-youtube-links-by-id/:id", getYoutubeLinkById);
-router.get("/get-youtube-links-by-date/:date", getYoutubeLinkByDate);
-router.delete(
-  "/delete-youtube-links-by-id/:id",
-  protect,
-  authorizeRole("admin", "superadmin"),
-  deleteYoutubeLinkById
-);
+
 router.get(
-  "/get-all-youtube-links",
+  "/",
   protect,
   authorizeRole("admin", "superadmin"),
-  getAllYoutubeLinks
+  getAllYoutubeVideos
+);
+router.get("/:id", getYoutubeVideoById);
+router.get("/date/:date", getYoutubeVideosByDate);
+
+router.patch(
+  "/:id",(req, res, next) => {
+  console.log(">>> Route matched");
+  next();},
+  protect,
+  authorizeRole("admin", "superadmin"),
+  upload.single("video"),
+  updateYoutubeVideo
+);
+router.delete(
+  "/:id",
+  protect,
+  authorizeRole("admin", "superadmin"),
+  deleteYoutubeVideo
 );
 
 export default router;
