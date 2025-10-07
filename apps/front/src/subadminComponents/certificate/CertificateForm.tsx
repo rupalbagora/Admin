@@ -18,9 +18,8 @@ const CertificateForm: React.FC<CertificateFormProps> = ({ onAddCertificate }) =
     const newCertificate: Certificate = {
       id: Date.now().toString(),
       title: values.title,
-      name: values.name,
       fileUrl: URL.createObjectURL(fileObj),
-      uploadedAt: new Date(), // <-- fix here
+      uploadedAt: new Date(),
     };
 
     onAddCertificate(newCertificate);
@@ -35,14 +34,6 @@ const CertificateForm: React.FC<CertificateFormProps> = ({ onAddCertificate }) =
         rules={[{ required: true, message: "Please enter a title" }]}
       >
         <Input placeholder="Enter certificate title" />
-      </Form.Item>
-
-      <Form.Item
-        label="Certificate Name"
-        name="name"
-        rules={[{ required: true, message: "Please enter certificate name" }]}
-      >
-        <Input placeholder="Enter certificate name" />
       </Form.Item>
 
       <Form.Item
