@@ -5,4 +5,5 @@ export interface ICertificate extends Document {
   addedBy: Types.ObjectId; // admin who uploaded
   createdAt: Date;
   updatedAt: Date;
+  
 }

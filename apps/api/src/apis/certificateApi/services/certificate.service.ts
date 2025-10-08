@@ -20,7 +20,6 @@ class CertificateService {
       .populate("addedBy", "name email")
       .sort({ createdAt: -1 }); // optional: newest first
   }
-
   async deleteById(id: string): Promise<ICertificate | null> {
     return Certificate.findByIdAndDelete(id);
   }

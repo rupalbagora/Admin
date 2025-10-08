@@ -43,7 +43,7 @@ export const getAllCertificates = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: (error as Error).message,
+      error: (error as Error).message ,
     });
   }
 };

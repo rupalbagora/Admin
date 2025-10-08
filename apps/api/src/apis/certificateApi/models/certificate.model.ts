@@ -6,7 +6,7 @@ const certificateSchema = new Schema<ICertificate>(
     imageUrl: { type: String, required: true }, // Multer saves the file, we save path
     addedBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
-  { timestamps: true }
+  { timestamps: true}
 );
 
 export default model<ICertificate>("Certificate", certificateSchema);

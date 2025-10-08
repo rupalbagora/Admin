@@ -11,7 +11,7 @@ import {
 const router = express.Router();
 
 // Admin uploads a certificate image
-router.post(
+ router.post(
   "/upload",
   protect,
   authorizeRole("admin", "superadmin"),
