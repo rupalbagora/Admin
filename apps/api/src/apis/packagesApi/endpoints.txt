@@ -1,0 +1,106 @@
+
+🟢 Step 1 : Log in to get a token
+
+Since your routes are protected by protect middleware, you need a JWT token for authentication.
+
+In Postman, create a POST request to your login endpoint, e.g.:
+
+POST http://localhost:5000/api/users/login
+
+
+Send your login JSON body:
+
+{
+  "email": "admin@example.com",
+  "password": "yourpassword"
+}
+
+
+You should get a response with a token (e.g. eyJhbGciOiJIUzI1Ni...).
+
+👉 Copy that token — we’ll use it for all the other requests.
+
+-----------
+
+🟢 Step 2: Create a Package
+
+In Postman:
+
+Method: POST
+
+URL:
+
+http://localhost:5000/api/packages
+
+
+Go to the Headers tab → add:
+
+Authorization: Bearer <your_token_here>
+
+
+Body → raw → JSON:
+
+{
+  "title": "Premium Haircut",
+  "price": 50,
+  "services": ["Haircut", "Shampoo"],
+  "about": "Top-notch haircut service",
+  "discount": "10%",
+  "serviceList": ["Scalp Massage", "Hot Towel"],
+  "category": "male"
+}
+
+
+Send the request.
+✅ Expected response: 201 Created
+
+{
+  "success": true,
+  "data": {
+    "_id": "65123abc...",
+    "title": "Premium Haircut",
+    ...
+    "addedBy": "650ffxyz..."  // your user ID
+  }
+}
+
+--------
+
+🟢 Step 3: Get All Packages
+GET http://localhost:5000/api/packages
+
+
+Add the same Authorization: Bearer <token> header.
+
+✅ Expected: an array of packages that belong to the logged-in user.
+
+👉 You can also test filtering by category:
+
+GET http://localhost:5000/api/packages?category=male
+
+--------
+
+🟢 Step 4: Get a Single Package by ID
+GET http://localhost:5000/api/packages/<PACKAGE_ID>
+
+
+Include the token header.
+
+Replace <PACKAGE_ID> with the _id returned in step 3.
+
+------
+
+🟢 Step 5: Delete a Package
+DELETE http://localhost:5000/api/packages/<PACKAGE_ID>
+
+
+Requires Authorization: Bearer <token> header.
+
+User must have admin or superadmin role.
+
+✅ Expected:
+
+{
+  "success": true,
+  "message": "Package deleted successfully"
+}

@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import validator from 'validator';
 import jwt ,{ SignOptions } from 'jsonwebtoken';
 import crypto from 'crypto';
+import { nanoid } from "nanoid";
 import {
   IUser,
   UserRole,
@@ -24,18 +25,24 @@ const userSchema: Schema<IUser> = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  firstName: {
+  name: {
     type: String,
-    required: [true, 'First name is required'],
+    required: [true, 'name is required'],
     trim: true,
-    maxlength: [50, 'First name cannot exceed 50 characters']
+    maxlength: [50, 'name cannot exceed 50 characters']
   },
-  lastName: {
-    type: String,
-    required: [true, 'Last name is required'],
-    trim: true,
-    maxlength: [50, 'Last name cannot exceed 50 characters']
-  },
+  // firstName: {
+  //   type: String,
+  //   required: [true, 'First name is required'],
+  //   trim: true,
+  //   maxlength: [50, 'First name cannot exceed 50 characters']
+  // },
+  // lastName: {
+  //   type: String,
+  //   required: [true, 'Last name is required'],
+  //   trim: true,
+  //   maxlength: [50, 'Last name cannot exceed 50 characters']
+  // },
   email: {
     type: String,
     required: [true, 'Email is required'],
@@ -71,6 +78,14 @@ const userSchema: Schema<IUser> = new Schema({
     enum: Object.values(UserRole),
     default: UserRole.USER
   },
+  uniqueCode: {
+    type: String,
+    unique: true,
+    immutable: true,          // cannot be changed after creation
+    default: function () {
+      // generate only if this is an admin
+      return this.role === UserRole.ADMIN ? nanoid(10) : undefined;
+    }},
   permissions: {
     type: [String],
     default: []
@@ -167,7 +182,8 @@ const userSchema: Schema<IUser> = new Schema({
     ipAddress: String,
     lastAccess: Date
   }]
-}, {
+},
+ {
   timestamps: true,
   toJSON: { virtuals: true },
   toObject: { virtuals: true }
@@ -195,9 +211,9 @@ userSchema.pre<IUser>('save', function(next) {
 });
 
 // Virtuals
-userSchema.virtual('fullName').get(function(this: IUser) {
-  return `${this.firstName} ${this.lastName}`;
-});
+// userSchema.virtual('fullName').get(function(this: IUser) {
+//   return `${this.firstName} ${this.lastName}`;
+// });
 
 userSchema.virtual('isSubscriptionActive').get(function(this: IUser) {
   if (!this.subscriptionEndDate) return false;
@@ -249,6 +265,13 @@ userSchema.methods.createPasswordResetToken = function(
   
   return resetToken;
 };
+
+userSchema.pre<IUser>("save", function (next) {
+  if (this.isNew && this.role === UserRole.ADMIN && !this.uniqueCode) {
+    this.uniqueCode = nanoid(10);
+  }
+  next();
+});
 
 const User: Model<IUser> = model<IUser>('User', userSchema);
 

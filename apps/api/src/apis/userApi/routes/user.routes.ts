@@ -3,6 +3,8 @@ import express from "express";
 import * as UserController from "../controllers/user.controller";
 import { protect } from "../middlewares/auth.middleware";
 import { validate } from "../middlewares/validate";
+import upload from "../../mediaApi/services/multerConfig";
+
 import {
   createUserSchema,
   updateUserSchema,
@@ -14,7 +16,8 @@ const router = express.Router();
 router.post(
   "/",
   protect,
-  authorizeRole("superadmin","admin"),
+  authorizeRole("superadmin", "admin"),
+  upload.single("avatar"),
   validate(createUserSchema),
   UserController.createUser
 );

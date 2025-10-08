@@ -77,10 +77,12 @@ export interface IPreferences {
 }
 
 export interface IUser extends Document {
-  refLink?:string|null;
-  admin?:Types.ObjectId;
-  firstName: string;
-  lastName: string;
+  _id: Types.ObjectId;
+  refLink?: string | null;
+  admin?: Types.ObjectId;
+  name:string;
+  // firstName: string;
+  // lastName: string;
   email: string;
   phone?: string;
   password: string;
@@ -98,7 +100,7 @@ export interface IUser extends Document {
   subscriptionStatus: SubscriptionStatus;
   paymentMethod?: PaymentMethod;
   billingInfo?: IBillingInfo;
-  avatar?: Types.ObjectId|IUploadedFile;
+  avatar?: Types.ObjectId | IUploadedFile;
   bio?: string;
   dateOfBirth?: Date;
   gender?: Gender;
@@ -109,6 +111,7 @@ export interface IUser extends Document {
   devices: IDeviceInfo[];
   createdAt: Date;
   updatedAt: Date;
+  uniqueCode?: string;
 
   // Virtuals
   fullName: string;

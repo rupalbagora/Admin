@@ -28,7 +28,7 @@ console.log("Auth Header received:", req.headers.authorization);
       process.env.JWT_SECRET as string
     ) as JwtPayload;
     console.log(decoded)
-    let user = await User.findById(decoded.id);
+    let user = await User.findById(decoded.id); 
     console.log(user)
     if (!user) {
       res.status(401).json({ error: "User no longer exists" });

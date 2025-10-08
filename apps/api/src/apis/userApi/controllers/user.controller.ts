@@ -5,18 +5,65 @@ import { IUser } from "../types/user.types";
 import { Types } from "mongoose";
 import User from "../models/User.model";
 
+// export const createUser = async (req: Request, res: Response) => {
+//   try {
+//     const userDto: CreateUserDto = req.body;
+//     const newUser: IUser = await UserService.createUser({...userDto,admin:req.user?._id});
+//     res.status(201).json({ message: "User created", user: newUser });
+//   } catch (error: any) {
+//     if (error.name === "ValidationError") {
+//       res.status(400).json({
+//         message: "Validation failed",
+//         errors: error.errors, // This contains detailed field errors
+//       });
+//       return;
+//     }
+//     console.error("Registration error:", error);
+//     res.status(500).json({
+//       message: "Registration failed",
+//       error: process.env.NODE_ENV === "development" ? error.message : undefined,
+//     });
+//   }
+// };
 export const createUser = async (req: Request, res: Response) => {
+  console.log("Heyyyyy")
   try {
-    const userDto: CreateUserDto = req.body;
-    const newUser: IUser = await UserService.createUser({...userDto,admin:req.user?._id});
+    const { name, address, status, subscriptionPeriod, customDate, ...rest } =
+      req.body;
+console.log(req.body)
+    // const [firstName, ...lastNameParts] = name.trim().split(" ");
+    // const lastName = lastNameParts.join(" ") || "";
+
+    let subscriptionType = subscriptionPeriod;
+    let subscriptionEndDate = undefined;
+    if (subscriptionPeriod === "custom" && customDate) {
+      subscriptionType = "custom";
+      subscriptionEndDate = new Date(customDate);
+    }
+
+    const userDto: CreateUserDto = {
+      ...rest,
+      name, 
+      // firstName,
+      // lastName,
+      isActive: status === "active",
+      subscriptionType,
+      subscriptionEndDate,
+      address,
+    };
+
+    const newUser: IUser = await UserService.createUser({
+      ...userDto,
+      admin: req.user?._id,
+    });
+
     res.status(201).json({ message: "User created", user: newUser });
   } catch (error: any) {
     if (error.name === "ValidationError") {
-      res.status(400).json({
+      return res.status(400).json({
         message: "Validation failed",
-        errors: error.errors, // This contains detailed field errors
+        errors: error.errors,
       });
-      return;
     }
     console.error("Registration error:", error);
     res.status(500).json({

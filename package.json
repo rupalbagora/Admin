@@ -19,7 +19,8 @@
     "turbo": "^2.5.4"
   },
   "dependencies": {
+    "antd": "^5.27.4",
     "mongoose": "^8.19.0",
-    "antd": "^5.27.4"
+    "nanoid": "^5.1.6"
   }
 }
