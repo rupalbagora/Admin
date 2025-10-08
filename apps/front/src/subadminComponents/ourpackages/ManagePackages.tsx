@@ -4,7 +4,6 @@ import { Card, Table, Button, Input, Modal, Space } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import PackageForm from "./PackageForm";
 import { type Package } from "../../redux/types/subadmintypes/Package.types";
-
 const { Search } = Input;
 
 const ManagePackages: React.FC = () => {
@@ -12,13 +11,13 @@ const ManagePackages: React.FC = () => {
   const [searchText, setSearchText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Add package
+  // === Add package ===
   const handleAddPackage = (pkg: Package) => {
     setPackages((prev) => [...prev, pkg]);
     setIsModalOpen(false);
   };
-
-  // Delete package
+  
+  // === Delete package ===
   const handleDelete = (id: string) => {
     Modal.confirm({
       title: "Delete Package?",
@@ -28,19 +27,30 @@ const ManagePackages: React.FC = () => {
       onOk: () => setPackages((prev) => prev.filter((p) => p.id !== id)),
     });
   };
-
-  // Filter packages based on search
+  
+  // === Filter packages ===
   const filteredPackages = packages.filter(
     (pkg) =>
       pkg.name.toLowerCase().includes(searchText.toLowerCase()) ||
       pkg.description.toLowerCase().includes(searchText.toLowerCase())
   );
 
-  // Table columns
+  // === Table columns ===
   const columns = [
     { title: "Package Name", dataIndex: "name", key: "name" },
     { title: "Description", dataIndex: "description", key: "description" },
-    { title: "Services", dataIndex: "services", key: "services" },
+    {
+      title: "Services",
+      dataIndex: "services",
+      key: "services",
+      render: (services: string[]) => (
+        <ul className="list-disc pl-4">
+          {services.map((service, index) => (
+            <li key={index}>{service}</li>
+          ))}
+        </ul>
+      ),
+    },
     { title: "Price", dataIndex: "price", key: "price" },
     {
       title: "Actions",
@@ -74,7 +84,7 @@ const ManagePackages: React.FC = () => {
           </Button>
         }
       >
-        {/* Search Input */}
+        {/* === Search Input === */}
         <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <Search
             placeholder="Search packages..."
@@ -83,10 +93,10 @@ const ManagePackages: React.FC = () => {
             allowClear
             size="large"
             className="w-full md:w-1/2 bg-[#2523232c]"
-          />
+          /> 
         </div>
 
-        {/* Table */}
+        {/* === Table === */}
         <Table
           columns={columns}
           dataSource={filteredPackages}
@@ -96,7 +106,7 @@ const ManagePackages: React.FC = () => {
         />
       </Card>
 
-      {/* Add Package Modal */}
+      {/* === Add Package Modal === */}
       <Modal
         title="Add Package"
         open={isModalOpen}

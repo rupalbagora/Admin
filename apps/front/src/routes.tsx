@@ -36,6 +36,9 @@ const SubscriptionManagement = lazy(
 );
 
 // SUB-ADMIN
+const UploadCategories = lazy (()=> import("../src/subadminComponents/products/AllCategories/UploadCategories"));
+const UploadProduct = lazy (()=> import("../src/subadminComponents/products/ProductsDetails/UploadProduct"));
+
 const UploadYoutube = lazy (()=> import("../src/subadminComponents/youtube/UploadYoutube"));
 
 const UploadCertificate = lazy(() => import("./subadminComponents/certificate/UploadCertificate")) 
@@ -165,6 +168,24 @@ export const router = createBrowserRouter([
           <Suspense fallback={Loader}>
             {" "}
             <UploadCertificate />
+          </Suspense>
+        ),
+      },
+      {
+        path: "AllCategories",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadCategories />
+          </Suspense>
+        ),
+      },
+       {
+        path: "ProductDetails",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadProduct />
           </Suspense>
         ),
       },
