@@ -1,41 +1,41 @@
-// src/apis/youtubeApi/services/youtube.service.ts
-import YoutubeLink from "../models/youtube.models";
+import YoutubeVideo from "../models/youtube.models";
+import { IYoutubeVideo } from "../types/youtube.types";
 
 class YoutubeService {
-  async create(youtubeLinks: string[], addedBy: string, date?: Date) {
-    return YoutubeLink.create({
-      youtubeLinks,
-      addedBy,
-      date: date ?? new Date(),
-    });
+  async create(data: Partial<IYoutubeVideo>): Promise<IYoutubeVideo> {
+    const video = new YoutubeVideo(data);
+    return video.save();
   }
 
-  async updateById(id: string, youtubeLinks: string[], date?: Date) {
-    return YoutubeLink.findByIdAndUpdate(
-      id,
-      { youtubeLinks, date: date ?? new Date() },
-      { new: true }
-    );
+  async getAll(): Promise<IYoutubeVideo[]> {
+    return YoutubeVideo.find().sort({ createdAt: -1 });
   }
 
-  async getById(id: string) {
-    return YoutubeLink.findById(id);
+  async getById(id: string): Promise<IYoutubeVideo | null> {
+    return YoutubeVideo.findById(id);
   }
 
-  async getAll() {
-    return YoutubeLink.find().sort({ _id: -1 });
+  async getByDate(date: string): Promise<IYoutubeVideo[]> {
+    const startOfDay = new Date(date);
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const endOfDay = new Date(date);
+    endOfDay.setHours(23, 59, 59, 999);
+
+    return YoutubeVideo.find({
+      uploadedAt: { $gte: startOfDay, $lte: endOfDay },
+    }).sort({ createdAt: -1 });
   }
 
-  async getByDate(date: string) {
-    const startOn = new Date(date).setHours(0, 0, 0, 0);
-    const endOn = new Date(date).setHours(23, 59, 59, 999);
-    return YoutubeLink.find({ date: { $gte: startOn, $lte: endOn } }).sort({
-      _id: -1,
-    });
+  async updateById(
+    id: string,
+    data: Partial<IYoutubeVideo>
+  ): Promise<IYoutubeVideo | null> {
+    return YoutubeVideo.findByIdAndUpdate(id, data, { new: true });
   }
 
-  async deleteById(id: string) {
-    return YoutubeLink.findByIdAndDelete(id);
+  async deleteById(id: string): Promise<IYoutubeVideo | null> {
+    return YoutubeVideo.findByIdAndDelete(id);
   }
 }
 
