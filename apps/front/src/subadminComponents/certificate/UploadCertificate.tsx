@@ -1,4 +1,3 @@
-// components/Certificates/UploadCertificate.tsx
 import React, { useState } from "react";
 import { Card, Table, Button, Input, Modal, Space } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -29,17 +28,14 @@ const UploadCertificate: React.FC = () => {
     });
   };
 
-  // Filter certificates based on search input
-  const filteredCertificates = certificates.filter(
-    (cert) =>
-      cert.title.toLowerCase().includes(searchText.toLowerCase()) ||
-      cert.name.toLowerCase().includes(searchText.toLowerCase())
+  // Filter certificates based on search input (only title now)
+  const filteredCertificates = certificates.filter((cert) =>
+    cert.title.toLowerCase().includes(searchText.toLowerCase())
   );
 
-  // Table columns
+  // Table columns (removed certificate name)
   const columns = [
     { title: "Title", dataIndex: "title", key: "title" },
-    { title: "Certificate Name", dataIndex: "name", key: "name" },
     {
       title: "Uploaded At",
       dataIndex: "uploadedAt",
