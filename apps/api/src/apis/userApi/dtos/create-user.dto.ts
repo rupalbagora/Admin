@@ -19,26 +19,17 @@ import {
 //   gender?: Gender;
 // }
 
-// export class CreateUserDto {
-//   admin?: Types.ObjectId;
-//   name!:string;
-//   // firstName!: string;
-//   // lastName!: string;
-//   email!: string;
-//   phone?: string;
-//   password!: string;
-//   role?: UserRole;
-//   subscriptionType?: SubscriptionType;
-//   subscriptionEndDate?: Date; // <-- for custom expiry date
-//   isActive?: boolean; // <-- for status toggle
-//   address?: string; // <-- optional address
-// }
 export class CreateUserDto {
-  name: string;
-  email: string;
-  password: string;
+  admin?: Types.ObjectId;
+  name!:string;
+  // firstName!: string;
+  // lastName!: string;
+  email!: string;
   phone?: string;
-  role?: string;
-  subscriptionType?: "free" | "biannual" | "halfyearly" | "yearly" | "custom";
-  customDate?: Date;
+  password!: string;
+  role?: UserRole;
+  subscriptionType?: SubscriptionType;
+  subscriptionEndDate?: Date; // <-- for custom expiry date
+  isActive?: boolean; // <-- for status toggle
+  address?: string; // <-- optional address
 }
