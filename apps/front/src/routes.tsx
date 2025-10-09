@@ -44,7 +44,7 @@ const UploadYoutube = lazy (()=> import("../src/subadminComponents/youtube/Uploa
 const UploadCertificate = lazy(() => import("./subadminComponents/certificate/UploadCertificate")) 
 
 const ManagePackages = lazy (() => import("./subadminComponents/ourpackages/ManagePackages"));  
-
+const ManageProductPackages = lazy(()=> import("./subadminComponents/productpackages/ManageProductPackages"));
 
 export const router = createBrowserRouter([
   {
@@ -204,6 +204,15 @@ export const router = createBrowserRouter([
           <Suspense fallback={Loader}>
             {" "}
             <ManagePackages />
+          </Suspense>
+        ),
+      },
+      {
+        path: "ProductPackages",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <ManageProductPackages />
           </Suspense>
         ),
       },

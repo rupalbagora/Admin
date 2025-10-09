@@ -10,13 +10,13 @@ const ManagePackages: React.FC = () => {
   const [packages, setPackages] = useState<Package[]>([]);
   const [searchText, setSearchText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  
   // === Add package ===
   const handleAddPackage = (pkg: Package) => {
     setPackages((prev) => [...prev, pkg]);
     setIsModalOpen(false);
   };
-  
+
   // === Delete package ===
   const handleDelete = (id: string) => {
     Modal.confirm({
@@ -34,7 +34,6 @@ const ManagePackages: React.FC = () => {
       pkg.name.toLowerCase().includes(searchText.toLowerCase()) ||
       pkg.description.toLowerCase().includes(searchText.toLowerCase())
   );
-
   // === Table columns ===
   const columns = [
     { title: "Package Name", dataIndex: "name", key: "name" },
@@ -95,7 +94,7 @@ const ManagePackages: React.FC = () => {
             className="w-full md:w-1/2 bg-[#2523232c]"
           /> 
         </div>
-
+        
         {/* === Table === */}
         <Table
           columns={columns}
