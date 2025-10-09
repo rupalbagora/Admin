@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import API from "../../../api/axios"; 
 import type { IYoutubeVideo, YoutubeState } from "../../types/subadmintypes/youtubelinks.types";
 
-// Fetch all videos
+// Fetch all video
 export const fetchYoutubeVideos = createAsyncThunk<
   IYoutubeVideo[],
   void,

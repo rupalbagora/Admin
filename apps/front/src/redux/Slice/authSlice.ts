@@ -45,6 +45,7 @@ export const login = createAsyncThunk<
   LoginPayload,
   { rejectValue: string }
 >("auth/login", async (credentials, { rejectWithValue }) => {
+
   try {
     const res = await API.post<AuthResponse>("/auth/login", credentials);
     localStorage.setItem("token", res.data.token);
@@ -52,6 +53,7 @@ export const login = createAsyncThunk<
     return res.data;
   } catch (err: any) {
     return rejectWithValue(err.response?.data?.message || "Login failed");
+
   }
 });
 
@@ -64,6 +66,7 @@ export const register = createAsyncThunk<AuthResponse, RegisterPayload>(
   }
 );
 interface IRegisterReff {
+
   data: RegisterPayload;
   reff: string;
 }
@@ -117,7 +120,7 @@ export const getUserProfile = createAsyncThunk<
 
 
 export const updateUserProfile = createAsyncThunk<
-  IUser, // Returned data type
+  IUser, // Returne data type
   UpdateUserPayload, // Argument type — the fields to update
   { rejectValue: string }
 >("user/updateUserProfile", async (payload, { rejectWithValue }) => {
@@ -214,7 +217,9 @@ const authSlice = createSlice({
         state.error = action.payload || "Failed to load profile";
       });
   },
+
 });
 
 export const { logout } = authSlice.actions;
+
 export default authSlice.reducer;
