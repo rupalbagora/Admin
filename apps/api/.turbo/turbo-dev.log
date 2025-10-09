@@ -1,0 +1,69 @@
+
+> api@1.0.0 dev
+> ts-node --swc src/index.ts
+
+Server running on http://localhost:5001
+MongoDB Connected: localhost
+🟢 Superadmin already exists
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTk4ODkzNiwiZXhwIjoxNzYwNTkzNzM2fQ.0oU0GsVr5wRaALdsRZ24lAu-EgpLW6sl04Pe1molrMU
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1759988936,
+  exp: 1760593736
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTk4ODkzNiwiZXhwIjoxNzYwNTkzNzM2fQ.0oU0GsVr5wRaALdsRZ24lAu-EgpLW6sl04Pe1molrMU
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1759988936,
+  exp: 1760593736
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/auth [32m200[0m 118.548 ms - 712[0m
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
