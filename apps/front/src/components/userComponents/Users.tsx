@@ -117,12 +117,12 @@ const ManageUsers: React.FC = () => {
         </div>
       ),
     },
-    {
-      title: "Password",
-      dataIndex: "password",
-      key: "password",
-      render: (password: string) => password || "-",
-    },
+    // {
+    //   title: "Password",
+    //   dataIndex: "password",
+    //   key: "password",
+    //   render: (password: string) => password || "-",
+    // },
     {
       title: "Status",
       dataIndex: "isActive",

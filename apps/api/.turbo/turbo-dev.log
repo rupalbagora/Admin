@@ -5,45 +5,19 @@
 Server running on http://localhost:5001
 MongoDB Connected: localhost
 🟢 Superadmin already exists
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTM5YWI4YzJiODg1YzE4MDFkYTFkNyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzU5OTAxMjg2LCJleHAiOjE3NjA1MDYwODZ9.2yGFv7du2uSX2zkRBWsOpNA4fr440jsvff-ZlZP_qMI
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTNhMWQ2OGYzNWY0NTE3Yjg5MjVjNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTkzMjgxOCwiZXhwIjoxNzYwNTM3NjE4fQ.e5MJcvI1u11VdpHpEuJR2TXGx0s1DWiG0ja4izTZhrk
 {
-  id: '68e39ab8c2b885c1801da1d7',
-  role: 'superadmin',
-  iat: 1759901286,
-  exp: 1760506086
+  id: '68e3a1d68f35f4517b8925c4',
+  role: 'admin',
+  iat: 1759932818,
+  exp: 1760537618
 }
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTM5YWI4YzJiODg1YzE4MDFkYTFkNyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzU5OTAxMjg2LCJleHAiOjE3NjA1MDYwODZ9.2yGFv7du2uSX2zkRBWsOpNA4fr440jsvff-ZlZP_qMI
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTNhMWQ2OGYzNWY0NTE3Yjg5MjVjNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTkzMjgxOCwiZXhwIjoxNzYwNTM3NjE4fQ.e5MJcvI1u11VdpHpEuJR2TXGx0s1DWiG0ja4izTZhrk
 {
-  id: '68e39ab8c2b885c1801da1d7',
-  role: 'superadmin',
-  iat: 1759901286,
-  exp: 1760506086
-}
-{
-  preferences: {
-    notifications: { email: true, push: true, sms: false },
-    theme: 'light',
-    language: 'en'
-  },
-  _id: new ObjectId('68e39ab8c2b885c1801da1d7'),
-  refLink: null,
-  firstName: 'Super',
-  lastName: 'Admin',
-  email: 'admin@example.com',
-  role: 'superadmin',
-  permissions: [],
-  isVerified: true,
-  isActive: true,
-  subscriptionType: 'free',
-  subscriptionStatus: 'pending',
-  loginCount: 0,
-  devices: [],
-  createdAt: 2025-10-06T10:32:24.145Z,
-  updatedAt: 2025-10-06T10:32:24.145Z,
-  __v: 0,
-  fullName: 'Super Admin',
-  isSubscriptionActive: false,
-  id: '68e39ab8c2b885c1801da1d7'
+  id: '68e3a1d68f35f4517b8925c4',
+  role: 'admin',
+  iat: 1759932818,
+  exp: 1760537618
 }
 {
   preferences: {
@@ -51,41 +25,28 @@ Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZT
     theme: 'light',
     language: 'en'
   },
-  _id: new ObjectId('68e39ab8c2b885c1801da1d7'),
+  _id: new ObjectId('68e3a1d68f35f4517b8925c4'),
   refLink: null,
-  firstName: 'Super',
-  lastName: 'Admin',
-  email: 'admin@example.com',
-  role: 'superadmin',
+  admin: new ObjectId('68e39ab8c2b885c1801da1d7'),
+  firstName: 'subadmin',
+  lastName: 'hjg',
+  email: 'subadmin@example.com',
+  phone: '1234569887',
+  role: 'admin',
   permissions: [],
-  isVerified: true,
+  isVerified: false,
   isActive: true,
   subscriptionType: 'free',
   subscriptionStatus: 'pending',
+  dateOfBirth: 2025-10-29T18:30:00.000Z,
   loginCount: 0,
   devices: [],
-  createdAt: 2025-10-06T10:32:24.145Z,
-  updatedAt: 2025-10-06T10:32:24.145Z,
+  createdAt: 2025-10-06T11:02:46.501Z,
+  updatedAt: 2025-10-07T11:26:40.608Z,
   __v: 0,
-  fullName: 'Super Admin',
+  fullName: 'subadmin hjg',
   isSubscriptionActive: false,
-  id: '68e39ab8c2b885c1801da1d7'
-}
-[0mPOST /api/auth [32m200[0m 58.434 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 62.374 ms - 690[0m
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTM5YWI4YzJiODg1YzE4MDFkYTFkNyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzU5OTAxNTUzLCJleHAiOjE3NjA1MDYzNTN9.Ztdvooy1HdFBgkRtzAZRUuh1zAXu69lYvq-hL6VVIjo
-{
-  id: '68e39ab8c2b885c1801da1d7',
-  role: 'superadmin',
-  iat: 1759901553,
-  exp: 1760506353
-}
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTM5YWI4YzJiODg1YzE4MDFkYTFkNyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzU5OTAxNTUzLCJleHAiOjE3NjA1MDYzNTN9.Ztdvooy1HdFBgkRtzAZRUuh1zAXu69lYvq-hL6VVIjo
-{
-  id: '68e39ab8c2b885c1801da1d7',
-  role: 'superadmin',
-  iat: 1759901553,
-  exp: 1760506353
+  id: '68e3a1d68f35f4517b8925c4'
 }
 {
   preferences: {
@@ -93,25 +54,37 @@ Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZT
     theme: 'light',
     language: 'en'
   },
-  _id: new ObjectId('68e39ab8c2b885c1801da1d7'),
+  _id: new ObjectId('68e3a1d68f35f4517b8925c4'),
   refLink: null,
-  firstName: 'Super',
-  lastName: 'Admin',
-  email: 'admin@example.com',
-  role: 'superadmin',
+  admin: new ObjectId('68e39ab8c2b885c1801da1d7'),
+  firstName: 'subadmin',
+  lastName: 'hjg',
+  email: 'subadmin@example.com',
+  phone: '1234569887',
+  role: 'admin',
   permissions: [],
-  isVerified: true,
+  isVerified: false,
   isActive: true,
   subscriptionType: 'free',
   subscriptionStatus: 'pending',
+  dateOfBirth: 2025-10-29T18:30:00.000Z,
   loginCount: 0,
   devices: [],
-  createdAt: 2025-10-06T10:32:24.145Z,
-  updatedAt: 2025-10-06T10:32:24.145Z,
+  createdAt: 2025-10-06T11:02:46.501Z,
+  updatedAt: 2025-10-07T11:26:40.608Z,
   __v: 0,
-  fullName: 'Super Admin',
+  fullName: 'subadmin hjg',
   isSubscriptionActive: false,
-  id: '68e39ab8c2b885c1801da1d7'
+  id: '68e3a1d68f35f4517b8925c4'
+}
+[0mPOST /api/auth [32m200[0m 47.939 ms - 726[0m
+[0mPOST /api/auth [32m200[0m 42.093 ms - 726[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTNhMWQ2OGYzNWY0NTE3Yjg5MjVjNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTk4NjM0MiwiZXhwIjoxNzYwNTkxMTQyfQ.eY0YQap0uxdhfbjEQLf8jWs21zZB9QVF2gDiyzq21fM
+{
+  id: '68e3a1d68f35f4517b8925c4',
+  role: 'admin',
+  iat: 1759986342,
+  exp: 1760591142
 }
 {
   preferences: {
@@ -119,41 +92,36 @@ Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZT
     theme: 'light',
     language: 'en'
   },
-  _id: new ObjectId('68e39ab8c2b885c1801da1d7'),
+  _id: new ObjectId('68e3a1d68f35f4517b8925c4'),
   refLink: null,
-  firstName: 'Super',
-  lastName: 'Admin',
-  email: 'admin@example.com',
-  role: 'superadmin',
+  admin: new ObjectId('68e39ab8c2b885c1801da1d7'),
+  firstName: 'subadmin',
+  lastName: 'hjg',
+  email: 'subadmin@example.com',
+  phone: '1234569887',
+  role: 'admin',
   permissions: [],
-  isVerified: true,
+  isVerified: false,
   isActive: true,
   subscriptionType: 'free',
   subscriptionStatus: 'pending',
+  dateOfBirth: 2025-10-29T18:30:00.000Z,
   loginCount: 0,
   devices: [],
-  createdAt: 2025-10-06T10:32:24.145Z,
-  updatedAt: 2025-10-06T10:32:24.145Z,
+  createdAt: 2025-10-06T11:02:46.501Z,
+  updatedAt: 2025-10-07T11:26:40.608Z,
   __v: 0,
-  fullName: 'Super Admin',
+  fullName: 'subadmin hjg',
   isSubscriptionActive: false,
-  id: '68e39ab8c2b885c1801da1d7'
+  id: '68e3a1d68f35f4517b8925c4'
 }
-[0mPOST /api/auth [32m200[0m 32.801 ms - 690[0m
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTM5YWI4YzJiODg1YzE4MDFkYTFkNyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzU5OTAxNTUzLCJleHAiOjE3NjA1MDYzNTN9.Ztdvooy1HdFBgkRtzAZRUuh1zAXu69lYvq-hL6VVIjo
+[0mGET /api/youtube [36m304[0m 35.566 ms - -[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTNhMWQ2OGYzNWY0NTE3Yjg5MjVjNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTk4NjM0MiwiZXhwIjoxNzYwNTkxMTQyfQ.eY0YQap0uxdhfbjEQLf8jWs21zZB9QVF2gDiyzq21fM
 {
-  id: '68e39ab8c2b885c1801da1d7',
-  role: 'superadmin',
-  iat: 1759901553,
-  exp: 1760506353
-}
-[0mPOST /api/auth [32m200[0m 54.050 ms - 690[0m
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTM5YWI4YzJiODg1YzE4MDFkYTFkNyIsInJvbGUiOiJzdXBlcmFkbWluIiwiaWF0IjoxNzU5OTAxNTUzLCJleHAiOjE3NjA1MDYzNTN9.Ztdvooy1HdFBgkRtzAZRUuh1zAXu69lYvq-hL6VVIjo
-{
-  id: '68e39ab8c2b885c1801da1d7',
-  role: 'superadmin',
-  iat: 1759901553,
-  exp: 1760506353
+  id: '68e3a1d68f35f4517b8925c4',
+  role: 'admin',
+  iat: 1759986342,
+  exp: 1760591142
 }
 {
   preferences: {
@@ -161,25 +129,36 @@ Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZT
     theme: 'light',
     language: 'en'
   },
-  _id: new ObjectId('68e39ab8c2b885c1801da1d7'),
+  _id: new ObjectId('68e3a1d68f35f4517b8925c4'),
   refLink: null,
-  firstName: 'Super',
-  lastName: 'Admin',
-  email: 'admin@example.com',
-  role: 'superadmin',
+  admin: new ObjectId('68e39ab8c2b885c1801da1d7'),
+  firstName: 'subadmin',
+  lastName: 'hjg',
+  email: 'subadmin@example.com',
+  phone: '1234569887',
+  role: 'admin',
   permissions: [],
-  isVerified: true,
+  isVerified: false,
   isActive: true,
   subscriptionType: 'free',
   subscriptionStatus: 'pending',
+  dateOfBirth: 2025-10-29T18:30:00.000Z,
   loginCount: 0,
   devices: [],
-  createdAt: 2025-10-06T10:32:24.145Z,
-  updatedAt: 2025-10-06T10:32:24.145Z,
+  createdAt: 2025-10-06T11:02:46.501Z,
+  updatedAt: 2025-10-07T11:26:40.608Z,
   __v: 0,
-  fullName: 'Super Admin',
+  fullName: 'subadmin hjg',
   isSubscriptionActive: false,
-  id: '68e39ab8c2b885c1801da1d7'
+  id: '68e3a1d68f35f4517b8925c4'
+}
+[0mGET /api/youtube [36m304[0m 28.957 ms - -[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTNhMWQ2OGYzNWY0NTE3Yjg5MjVjNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTk4NjM0MiwiZXhwIjoxNzYwNTkxMTQyfQ.eY0YQap0uxdhfbjEQLf8jWs21zZB9QVF2gDiyzq21fM
+{
+  id: '68e3a1d68f35f4517b8925c4',
+  role: 'admin',
+  iat: 1759986342,
+  exp: 1760591142
 }
 {
   preferences: {
@@ -187,32 +166,61 @@ Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZT
     theme: 'light',
     language: 'en'
   },
-  _id: new ObjectId('68e39ab8c2b885c1801da1d7'),
+  _id: new ObjectId('68e3a1d68f35f4517b8925c4'),
   refLink: null,
-  firstName: 'Super',
-  lastName: 'Admin',
-  email: 'admin@example.com',
-  role: 'superadmin',
+  admin: new ObjectId('68e39ab8c2b885c1801da1d7'),
+  firstName: 'subadmin',
+  lastName: 'hjg',
+  email: 'subadmin@example.com',
+  phone: '1234569887',
+  role: 'admin',
   permissions: [],
-  isVerified: true,
+  isVerified: false,
   isActive: true,
   subscriptionType: 'free',
   subscriptionStatus: 'pending',
+  dateOfBirth: 2025-10-29T18:30:00.000Z,
   loginCount: 0,
   devices: [],
-  createdAt: 2025-10-06T10:32:24.145Z,
-  updatedAt: 2025-10-06T10:32:24.145Z,
+  createdAt: 2025-10-06T11:02:46.501Z,
+  updatedAt: 2025-10-07T11:26:40.608Z,
   __v: 0,
-  fullName: 'Super Admin',
+  fullName: 'subadmin hjg',
   isSubscriptionActive: false,
-  id: '68e39ab8c2b885c1801da1d7'
+  id: '68e3a1d68f35f4517b8925c4'
 }
-[0mPOST /api/auth [32m200[0m 62.691 ms - 690[0m
-[0mPOST /api/auth [32m200[0m 42.199 ms - 690[0m
-Auth Header received: undefined
-[0mPOST /api/auth [33m401[0m 2.570 ms - 41[0m
-Auth Header received: undefined
-[0mPOST /api/auth [33m401[0m 2.578 ms - 41[0m
-Auth Header received: undefined
-[0mPOST /api/auth [33m401[0m 11.970 ms - 41[0m
-Auth Header received: undefined
+[0mPOST /api/youtube [32m201[0m 273.239 ms - 300[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZTNhMWQ2OGYzNWY0NTE3Yjg5MjVjNCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1OTk4NjM0MiwiZXhwIjoxNzYwNTkxMTQyfQ.eY0YQap0uxdhfbjEQLf8jWs21zZB9QVF2gDiyzq21fM
+{
+  id: '68e3a1d68f35f4517b8925c4',
+  role: 'admin',
+  iat: 1759986342,
+  exp: 1760591142
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'en'
+  },
+  _id: new ObjectId('68e3a1d68f35f4517b8925c4'),
+  refLink: null,
+  admin: new ObjectId('68e39ab8c2b885c1801da1d7'),
+  firstName: 'subadmin',
+  lastName: 'hjg',
+  email: 'subadmin@example.com',
+  phone: '1234569887',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'pending',
+  dateOfBirth: 2025-10-29T18:30:00.000Z,
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-06T11:02:46.501Z,
+  updatedAt: 2025-10-07T11:26:40.608Z,
+  __v: 0,
+  fullName: 'subadmin hjg',
+  isSubscriptionActive: false,
