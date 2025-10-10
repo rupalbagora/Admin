@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import CertificateService from "../services/certificate.service";
+import certificateModel from "../models/certificate.model";
+import { message } from "antd";
 
 export const uploadCertificate = async (req: Request, res: Response) => {
   try {
@@ -65,3 +67,22 @@ export const deleteCertificate = async (req: Request, res: Response) => {
     res.status(500).json({ success: false, error: (error as Error).message });
   }
 };
+
+export const updateCertificate = async(req: Request, res: Response) =>{
+  try {
+     const{id} = req.params;
+     const certificate = await certificateModel.findById(id);
+     if(!certificate)return res.status(404).json({message:"Certificate not found"});
+     //update title
+     if(req.body.title) certificate.title = req.body.title;
+
+     //update file if uploded
+     if(req.file){
+       certificate.imageUrl=`/uploads/certificates/${req.file.filename}`;
+     }
+     await certificate.save();
+     res.status(200).json({data:certificate});
+    } catch(err:any){
+      res.status(500).json({message:err.message});
+    }
+  };

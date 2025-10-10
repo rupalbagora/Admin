@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Card, Table, Button, Input, Modal, Space, message } from "antd";
-import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
+import { PlusOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import CertificateForm from "./CertificateForm";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchCertificates, deleteCertificate } from "../../redux/Slice/Uploadcertificate/certificateSlice";
+import {
+  fetchCertificates,
+  deleteCertificate,
+} from "../../redux/Slice/Uploadcertificate/certificateSlice";
+import { ICertificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
 
 const { Search } = Input;
 
 const ManageCertificates: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { items: certificates, loading } = useAppSelector((state) => state.certificates);
+  const { items: certificates, loading } = useAppSelector(
+    (state) => state.certificates
+  );
 
   const [searchText, setSearchText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingCertificate, setEditingCertificate] = useState<ICertificate | null>(null);
 
   useEffect(() => {
     dispatch(fetchCertificates());
@@ -35,6 +42,11 @@ const ManageCertificates: React.FC = () => {
     });
   };
 
+  const handleEdit = (cert: ICertificate) => {
+    setEditingCertificate(cert);
+    setIsModalOpen(true);
+  };
+
   const filteredCertificates = certificates.filter((cert) =>
     cert.title.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -49,15 +61,21 @@ const ManageCertificates: React.FC = () => {
     {
       title: "Actions",
       key: "actions",
-      render: (_: any, record: any) => (
+      render: (_: any, record: ICertificate) => (
         <Space>
           <a href={record.imageUrl} target="_blank" rel="noopener noreferrer">
             <Button>View</Button>
           </a>
           <Button
+            icon={<EditOutlined />}
+            onClick={() => handleEdit(record)}
+          >
+            Edit
+          </Button>
+          <Button
             danger
             icon={<DeleteOutlined />}
-            onClick={() => handleDelete(record._id)}
+            onClick={() => handleDelete(record._id!)}
           >
             Delete
           </Button>
@@ -74,7 +92,7 @@ const ManageCertificates: React.FC = () => {
           <Button
             type="primary"
             icon={<PlusOutlined />}
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => { setEditingCertificate(null); setIsModalOpen(true); }}
           >
             Add Certificate
           </Button>
@@ -102,13 +120,16 @@ const ManageCertificates: React.FC = () => {
       </Card>
 
       <Modal
-        title="Add Certificate"
+        title={editingCertificate ? "Edit Certificate" : "Add Certificate"}
         open={isModalOpen}
         footer={null}
-        onCancel={() => setIsModalOpen(false)}
+        onCancel={() => { setIsModalOpen(false); setEditingCertificate(null); }}
         destroyOnHidden
       >
-        <CertificateForm onSubmit={() => setIsModalOpen(false)} />
+        <CertificateForm
+          editingCertificate={editingCertificate}
+          onSubmit={() => { setIsModalOpen(false); setEditingCertificate(null); dispatch(fetchCertificates()); }}
+        />
       </Modal>
     </div>
   );
