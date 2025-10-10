@@ -6,6 +6,7 @@ import Header from "../commonComp/Header/Header";
 import RouteTracker from "../commonComp/RouteTracker/RouteTracker";
 import { useAppDispatch } from "../redux/hooks";
 import { search } from "../redux/Slice/activeStatus/activeStatusSlice";
+import type SubMenu from "antd/es/menu/SubMenu";
 const navItems = [
   {
     label: "Home",
@@ -60,23 +61,75 @@ const menuItems = [
       },
     ],
   },
+{
+  name: "Gender",
+  icon: <User className="w-5 h-5" />,
+  subItems: [
     {
-    name: "Products",
-    icon: <User className="w-5 h-5" />,
-    subItems: [
-      {
-        name: "All Categories",
-        icon: <User className="w-4 h-4" />,
-        path: "/admin/AllCategories",
-      },
-      {
-        name: "Product details",
-        icon: <User className="w-4 h-4" />,
-        path: "/admin/ProductDetails",
-      
-      },
-    ],
-  },
+      name: "Male",
+      icon: <User className="w-5 h-5" />,
+      subItems: [
+        {
+          name: "Special Offers",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/SpecialOffers",
+        },
+        {
+          name: "Our Service",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/OurService",
+        },
+        {
+          name: "Product",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/Product",
+        },
+        {
+          name: "Our Package",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/OurPackage",
+        },
+        {
+          name: "Product Package",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/ProductPackage",
+        },
+      ],
+    },
+    {
+      name: "Female",
+      icon: <User className="w-4 h-4" />,
+      subItems: [
+        {
+          name: "Special Offers",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/SpecialOffers",
+        },
+        {
+          name: "Our Service",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/OurService",
+        },
+        {
+          name: "Product",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/Product",
+        },
+        {
+          name: "Our Package",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/OurPackage",
+        },
+        {
+          name: "Product Package",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/ProductPackage",
+        },
+      ],
+    },
+  ],
+},
+
   {
     name: "Upload Certificate",
     icon: <Upload className="w-5 h-5" />,

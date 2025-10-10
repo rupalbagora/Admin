@@ -60,8 +60,10 @@ export const deleteYoutubeVideo = createAsyncThunk<
   string,
   { rejectValue: string }
 >("youtube/delete", async (id, { rejectWithValue }) => {
+  console.log("hellloooo",id)
   try {
     await API.delete(`/youtube/${id}`);
+    console.log(id)
     return id;
   } catch (err: any) {
     return rejectWithValue(
