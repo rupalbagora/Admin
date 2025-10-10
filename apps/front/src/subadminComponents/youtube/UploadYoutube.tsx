@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Card, Table, Input, Button, Modal, message } from "antd";
-import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Card, Table, Input, Button, Modal, message, Space } from "antd";
+import { PlusOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import YoutubeLinks from "./YoutubeLinks";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { fetchYoutubeVideos, deleteYoutubeVideo } from "../../redux/Slice/Youtube/youtube.slice";
+import {
+  fetchYoutubeVideos,
+  deleteYoutubeVideo,
+} from "../../redux/Slice/Youtube/youtube.slice";
 
 const UploadYoutube: React.FC = () => {
   const dispatch = useAppDispatch();
   const { videos, loading } = useAppSelector((state) => state.youtube);
   const [searchText, setSearchText] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [editingVideo, setEditingVideo] = useState<any>(null); // store the selected video for update
+
+  const SERVER_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     dispatch(fetchYoutubeVideos());
@@ -29,6 +35,17 @@ const UploadYoutube: React.FC = () => {
     });
   };
 
+  // Handle edit
+  const handleEdit = (video: any) => {
+    setEditingVideo(video);
+    setModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setModalVisible(false);
+    setEditingVideo(null);
+  };
+
   const filteredVideos = videos.filter((v) =>
     v.title.toLowerCase().includes(searchText.toLowerCase())
   );
@@ -37,17 +54,24 @@ const UploadYoutube: React.FC = () => {
     { title: "Title", dataIndex: "title", key: "title" },
     {
       title: "Video",
-      dataIndex: "videoUrl",
-      key: "videoUrl",
-      render: (url: string) =>
-        url ? (
-          <video width="200" controls>
-            <source src={url} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        ) : (
-          "No video file"
-        ),
+      key: "video",
+      render: (_: any, record: any) => {
+        if (record.videoPath) {
+          return (
+            <video width="200" controls style={{ pointerEvents: "none" }}>
+              <source src={`${SERVER_URL}${record.videoPath}`} type="video/mp4" />
+            </video>
+          );
+        } else if (record.videoUrl) {
+          return (
+            <a href={record.videoUrl} target="_blank" rel="noopener noreferrer">
+              YouTube Link
+            </a>
+          );
+        } else {
+          return "No video";
+        }
+      },
     },
     {
       title: "Uploaded At",
@@ -59,9 +83,22 @@ const UploadYoutube: React.FC = () => {
       title: "Actions",
       key: "actions",
       render: (_: any, record: any) => (
-        <Button danger icon={<DeleteOutlined />} onClick={() => handleDelete(record._id)}>
-          Delete
-        </Button>
+        <Space>
+          <Button
+            icon={<EditOutlined />}
+            type="default"
+            onClick={() => handleEdit(record)}
+          >
+            Edit
+          </Button>
+          <Button
+            danger
+            icon={<DeleteOutlined />}
+            onClick={() => handleDelete(record._id)}
+          >
+            Delete
+          </Button>
+        </Space>
       ),
     },
   ];
@@ -71,7 +108,11 @@ const UploadYoutube: React.FC = () => {
       <Card
         title="Video Management"
         extra={
-          <Button icon={<PlusOutlined />} type="primary" onClick={() => setModalVisible(true)}>
+          <Button
+            icon={<PlusOutlined />}
+            type="primary"
+            onClick={() => setModalVisible(true)}
+          >
             Add Video
           </Button>
         }
@@ -90,16 +131,19 @@ const UploadYoutube: React.FC = () => {
           rowKey={(record) => record._id}
           loading={loading}
           locale={{ emptyText: "No videos uploaded yet" }}
+          tableLayout="fixed"
+          style={{ overflowX: "auto" }}
         />
       </Card>
 
       <YoutubeLinks
         visible={modalVisible}
-        onCancel={() => setModalVisible(false)}
+        onCancel={handleModalClose}
         onSubmit={() => {
-          setModalVisible(false);
+          handleModalClose();
           dispatch(fetchYoutubeVideos());
         }}
+        editingVideo={editingVideo} // 👈 pass for editing
       />
     </div>
   );

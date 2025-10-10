@@ -2,41 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Card, Table, Button, Input, Modal, Space, message } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import CertificateForm from "./CertificateForm";
-import axios from "axios";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchCertificates, deleteCertificate } from "../../redux/Slice/Uploadcertificate/certificateSlice";
 
 const { Search } = Input;
 
-const UploadCertificate: React.FC = () => {
-  const [certificates, setCertificates] = useState<any[]>([]);
+const ManageCertificates: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { items: certificates, loading } = useAppSelector((state) => state.certificates);
+
   const [searchText, setSearchText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const token = localStorage.getItem("token");
-
-  // Fetch certificates from backend
-  const fetchCertificates = async () => {
-    if (!token) return;
-    try {
-      const res = await axios.get("http://localhost:5001/api/certificates", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setCertificates(res.data.data);
-    } catch (err: any) {
-      message.error(err.response?.data?.message || "Failed to fetch certificates");
-    }
-  };
-
   useEffect(() => {
-    fetchCertificates();
-  }, []);
+    dispatch(fetchCertificates());
+  }, [dispatch]);
 
-  const handleAddCertificate = (cert: any) => {
-    setCertificates((prev) => [cert, ...prev]);
-    setIsModalOpen(false);
-  };
-
-  const handleDelete = async (id: string) => {
-    if (!token) return;
+  const handleDelete = (id: string) => {
     Modal.confirm({
       title: "Delete Certificate?",
       content: "Are you sure you want to delete this certificate?",
@@ -44,13 +26,10 @@ const UploadCertificate: React.FC = () => {
       cancelText: "No",
       onOk: async () => {
         try {
-          await axios.delete(`http://localhost:5001/api/certificates/${id}`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-          setCertificates((prev) => prev.filter((c) => c._id !== id));
+          await dispatch(deleteCertificate(id)).unwrap();
           message.success("Certificate deleted successfully");
         } catch (err: any) {
-          message.error(err.response?.data?.message || "Delete failed");
+          message.error(err?.message || "Delete failed");
         }
       },
     });
@@ -75,7 +54,11 @@ const UploadCertificate: React.FC = () => {
           <a href={record.imageUrl} target="_blank" rel="noopener noreferrer">
             <Button>View</Button>
           </a>
-          <Button danger icon={<DeleteOutlined />} onClick={() => handleDelete(record._id)}>
+          <Button
+            danger
+            icon={<DeleteOutlined />}
+            onClick={() => handleDelete(record._id)}
+          >
             Delete
           </Button>
         </Space>
@@ -88,7 +71,11 @@ const UploadCertificate: React.FC = () => {
       <Card
         title="Manage Certificates"
         extra={
-          <Button type="primary" icon={<PlusOutlined />} onClick={() => setIsModalOpen(true)}>
+          <Button
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => setIsModalOpen(true)}
+          >
             Add Certificate
           </Button>
         }
@@ -108,6 +95,7 @@ const UploadCertificate: React.FC = () => {
           columns={columns}
           dataSource={filteredCertificates}
           rowKey="_id"
+          loading={loading}
           locale={{ emptyText: "No certificates added" }}
           pagination={{ pageSize: 10 }}
         />
@@ -120,10 +108,10 @@ const UploadCertificate: React.FC = () => {
         onCancel={() => setIsModalOpen(false)}
         destroyOnHidden
       >
-        <CertificateForm onAddCertificate={handleAddCertificate} />
+        <CertificateForm onSubmit={() => setIsModalOpen(false)} />
       </Modal>
     </div>
   );
 };
 
-export default UploadCertificate;
+export default ManageCertificates;

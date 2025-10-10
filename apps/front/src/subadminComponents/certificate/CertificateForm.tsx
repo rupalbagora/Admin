@@ -1,24 +1,20 @@
 import React from "react";
 import { Form, Input, Upload, Button, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import axios from "axios";
+import { useAppDispatch } from "../../redux/hooks";
+import { uploadCertificate } from "../../redux/Slice/Uploadcertificate/certificateSlice";
 
 interface CertificateFormProps {
-  onAddCertificate: (cert: any) => void; // callback to update parent state
+  onSubmit?: () => void; // optional callback after upload
 }
 
-const CertificateForm: React.FC<CertificateFormProps> = ({ onAddCertificate }) => {
+const CertificateForm: React.FC<CertificateFormProps> = ({ onSubmit }) => {
   const [form] = Form.useForm();
+  const dispatch = useAppDispatch();
 
   const handleFinish = async (values: any) => {
     if (!values.file || values.file.length === 0) {
       message.error("Please upload a file");
-      return;
-    }
-
-    const token = localStorage.getItem("token"); // ya jahan token store ho
-    if (!token) {
-      message.error("You are not logged in!");
       return;
     }
 
@@ -27,21 +23,12 @@ const CertificateForm: React.FC<CertificateFormProps> = ({ onAddCertificate }) =
     formData.append("certificateImage", values.file[0].originFileObj);
 
     try {
-      const res = await axios.post(
-        "http://localhost:5001/api/certificates/upload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`, // token bhej rahe hai
-          },
-        }
-      );
-      onAddCertificate(res.data.data);
+      await dispatch(uploadCertificate(formData)).unwrap();
       message.success("Certificate uploaded successfully!");
       form.resetFields();
+      onSubmit?.();
     } catch (err: any) {
-      message.error(err.response?.data?.message || "Upload failed");
+      message.error(err?.message || "Upload failed");
     }
   };
 

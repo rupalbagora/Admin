@@ -5,95 +5,33 @@
 Server running on http://localhost:5001
 MongoDB Connected: localhost
 🟢 Superadmin already exists
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Mzc4MywiZXhwIjoxNzYwNjk4NTgzfQ.-IjbY0xUnnfG2iV89oO4f3h_EZ45zukg-kDSDlvPFRk
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDY3OCwiZXhwIjoxNzYwNjk5NDc4fQ.V8UKTKXeqbLJ3oaipMuOqFoH04_NzbS1WaV8LZgqRvk
 {
   id: '68df5a08b4901544647fd65e',
   role: 'admin',
-  iat: 1760093783,
-  exp: 1760698583
+  iat: 1760094678,
+  exp: 1760699478
 }
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Mzc4MywiZXhwIjoxNzYwNjk4NTgzfQ.-IjbY0xUnnfG2iV89oO4f3h_EZ45zukg-kDSDlvPFRk
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDY3OCwiZXhwIjoxNzYwNjk5NDc4fQ.V8UKTKXeqbLJ3oaipMuOqFoH04_NzbS1WaV8LZgqRvk
 {
   id: '68df5a08b4901544647fd65e',
   role: 'admin',
-  iat: 1760093783,
-  exp: 1760698583
+  iat: 1760094678,
+  exp: 1760699478
 }
-{
-  preferences: {
-    notifications: { email: true, push: true, sms: false },
-    theme: 'light',
-    language: 'eng'
-  },
-  _id: new ObjectId('68df5a08b4901544647fd65e'),
-  refLink: null,
-  admin: new ObjectId('689c212196260a6a27bb8e30'),
-  firstName: 'admin',
-  lastName: 'new',
-  email: 'ad@gmail.com',
-  phone: '1234567899',
-  role: 'admin',
-  permissions: [],
-  isVerified: false,
-  isActive: true,
-  subscriptionType: 'free',
-  subscriptionStatus: 'active',
-  dateOfBirth: 2025-10-13T18:30:00.000Z,
-  gender: 'male',
-  loginCount: 0,
-  devices: [],
-  createdAt: 2025-10-03T05:07:20.254Z,
-  updatedAt: 2025-10-03T05:07:20.254Z,
-  __v: 0,
-  fullName: 'admin new',
-  isSubscriptionActive: false,
-  id: '68df5a08b4901544647fd65e'
-}
-[0mPOST /api/auth [32m200[0m 282.890 ms - 712[0m
-{
-  preferences: {
-    notifications: { email: true, push: true, sms: false },
-    theme: 'light',
-    language: 'eng'
-  },
-  _id: new ObjectId('68df5a08b4901544647fd65e'),
-  refLink: null,
-  admin: new ObjectId('689c212196260a6a27bb8e30'),
-  firstName: 'admin',
-  lastName: 'new',
-  email: 'ad@gmail.com',
-  phone: '1234567899',
-  role: 'admin',
-  permissions: [],
-  isVerified: false,
-  isActive: true,
-  subscriptionType: 'free',
-  subscriptionStatus: 'active',
-  dateOfBirth: 2025-10-13T18:30:00.000Z,
-  gender: 'male',
-  loginCount: 0,
-  devices: [],
-  createdAt: 2025-10-03T05:07:20.254Z,
-  updatedAt: 2025-10-03T05:07:20.254Z,
-  __v: 0,
-  fullName: 'admin new',
-  isSubscriptionActive: false,
-  id: '68df5a08b4901544647fd65e'
-}
-[0mPOST /api/auth [32m200[0m 252.854 ms - 712[0m
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDI3NiwiZXhwIjoxNzYwNjk5MDc2fQ.n083OeRsZ_rNnNnniXm_k83-zK_mvHLmuQsBMapk1mc
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDY3OCwiZXhwIjoxNzYwNjk5NDc4fQ.V8UKTKXeqbLJ3oaipMuOqFoH04_NzbS1WaV8LZgqRvk
 {
   id: '68df5a08b4901544647fd65e',
   role: 'admin',
-  iat: 1760094276,
-  exp: 1760699076
+  iat: 1760094678,
+  exp: 1760699478
 }
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDI3NiwiZXhwIjoxNzYwNjk5MDc2fQ.n083OeRsZ_rNnNnniXm_k83-zK_mvHLmuQsBMapk1mc
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDY3OCwiZXhwIjoxNzYwNjk5NDc4fQ.V8UKTKXeqbLJ3oaipMuOqFoH04_NzbS1WaV8LZgqRvk
 {
   id: '68df5a08b4901544647fd65e',
   role: 'admin',
-  iat: 1760094276,
-  exp: 1760699076
+  iat: 1760094678,
+  exp: 1760699478
 }
 {
   preferences: {
@@ -155,21 +93,83 @@ Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZG
   isSubscriptionActive: false,
   id: '68df5a08b4901544647fd65e'
 }
-[0mPOST /api/auth [32m200[0m 55.911 ms - 712[0m
-[0mPOST /api/auth [32m200[0m 63.816 ms - 712[0m
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDI3NiwiZXhwIjoxNzYwNjk5MDc2fQ.n083OeRsZ_rNnNnniXm_k83-zK_mvHLmuQsBMapk1mc
 {
-  id: '68df5a08b4901544647fd65e',
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
   role: 'admin',
-  iat: 1760094276,
-  exp: 1760699076
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
 }
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDI3NiwiZXhwIjoxNzYwNjk5MDc2fQ.n083OeRsZ_rNnNnniXm_k83-zK_mvHLmuQsBMapk1mc
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/auth [32m200[0m 224.574 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 294.932 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 220.040 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 194.537 ms - 712[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NTcwMCwiZXhwIjoxNzYwNzAwNTAwfQ.xbyqWtdWGVL2hNFCoxA_I3CwBlQ2NclVqT66S6Ev1-I
 {
   id: '68df5a08b4901544647fd65e',
   role: 'admin',
-  iat: 1760094276,
-  exp: 1760699076
+  iat: 1760095700,
+  exp: 1760700500
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NTcwMCwiZXhwIjoxNzYwNzAwNTAwfQ.xbyqWtdWGVL2hNFCoxA_I3CwBlQ2NclVqT66S6Ev1-I
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760095700,
+  exp: 1760700500
 }
 {
   preferences: {
@@ -231,22 +231,97 @@ Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZG
   isSubscriptionActive: false,
   id: '68df5a08b4901544647fd65e'
 }
-[0mPOST /api/auth [32m200[0m 54.707 ms - 712[0m
-[0mPOST /api/auth [32m200[0m 72.590 ms - 712[0m
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDI3NiwiZXhwIjoxNzYwNjk5MDc2fQ.n083OeRsZ_rNnNnniXm_k83-zK_mvHLmuQsBMapk1mc
+[0mPOST /api/auth [32m200[0m 45.147 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 57.600 ms - 712[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NTcwMCwiZXhwIjoxNzYwNzAwNTAwfQ.xbyqWtdWGVL2hNFCoxA_I3CwBlQ2NclVqT66S6Ev1-I
 {
   id: '68df5a08b4901544647fd65e',
   role: 'admin',
-  iat: 1760094276,
-  exp: 1760699076
+  iat: 1760095700,
+  exp: 1760700500
 }
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDI3NiwiZXhwIjoxNzYwNjk5MDc2fQ.n083OeRsZ_rNnNnniXm_k83-zK_mvHLmuQsBMapk1mc
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NTcwMCwiZXhwIjoxNzYwNzAwNTAwfQ.xbyqWtdWGVL2hNFCoxA_I3CwBlQ2NclVqT66S6Ev1-I
 {
   id: '68df5a08b4901544647fd65e',
   role: 'admin',
-  iat: 1760094276,
-  exp: 1760699076
+  iat: 1760095700,
+  exp: 1760700500
 }
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NTcwMCwiZXhwIjoxNzYwNzAwNTAwfQ.xbyqWtdWGVL2hNFCoxA_I3CwBlQ2NclVqT66S6Ev1-I
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760095700,
+  exp: 1760700500
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NTcwMCwiZXhwIjoxNzYwNzAwNTAwfQ.xbyqWtdWGVL2hNFCoxA_I3CwBlQ2NclVqT66S6Ev1-I
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760095700,
+  exp: 1760700500
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/auth [32m200[0m 105.557 ms - 712[0m
 {
   preferences: {
     notifications: { email: true, push: true, sms: false },
@@ -307,14 +382,15 @@ Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZG
   isSubscriptionActive: false,
   id: '68df5a08b4901544647fd65e'
 }
-[0mPOST /api/auth [32m200[0m 69.011 ms - 712[0m
-[0mPOST /api/auth [32m200[0m 109.546 ms - 712[0m
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDI3OSwiZXhwIjoxNzYwNjk5MDc5fQ.X0FzlQjNcRUagdzFTzweEJV7_QO2twfWu0zylI6KPTs
+[0mPOST /api/auth [32m200[0m 150.439 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 160.521 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 175.701 ms - 712[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Njk1NCwiZXhwIjoxNzYwNzAxNzU0fQ.iRUXoMjK7DA42lxUg70n1VY81wRHXBI_Gf37jUd2-fk
 {
   id: '68df5a08b4901544647fd65e',
   role: 'admin',
-  iat: 1760094279,
-  exp: 1760699079
+  iat: 1760096954,
+  exp: 1760701754
 }
 {
   preferences: {
@@ -347,13 +423,13 @@ Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZG
   id: '68df5a08b4901544647fd65e'
 }
 Logged-in user: new ObjectId('68df5a08b4901544647fd65e')
-[0mGET /api/certificates [36m304[0m 108.487 ms - -[0m
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDI3OSwiZXhwIjoxNzYwNjk5MDc5fQ.X0FzlQjNcRUagdzFTzweEJV7_QO2twfWu0zylI6KPTs
+[0mGET /api/certificates [36m304[0m 106.345 ms - -[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Njk1NCwiZXhwIjoxNzYwNzAxNzU0fQ.iRUXoMjK7DA42lxUg70n1VY81wRHXBI_Gf37jUd2-fk
 {
   id: '68df5a08b4901544647fd65e',
   role: 'admin',
-  iat: 1760094279,
-  exp: 1760699079
+  iat: 1760096954,
+  exp: 1760701754
 }
 {
   preferences: {
@@ -386,13 +462,13 @@ Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZG
   id: '68df5a08b4901544647fd65e'
 }
 Logged-in user: new ObjectId('68df5a08b4901544647fd65e')
-[0mGET /api/certificates [36m304[0m 18.639 ms - -[0m
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDI3OSwiZXhwIjoxNzYwNjk5MDc5fQ.X0FzlQjNcRUagdzFTzweEJV7_QO2twfWu0zylI6KPTs
+[0mGET /api/certificates [36m304[0m 16.582 ms - -[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Njk1NCwiZXhwIjoxNzYwNzAxNzU0fQ.iRUXoMjK7DA42lxUg70n1VY81wRHXBI_Gf37jUd2-fk
 {
   id: '68df5a08b4901544647fd65e',
   role: 'admin',
-  iat: 1760094279,
-  exp: 1760699079
+  iat: 1760096954,
+  exp: 1760701754
 }
 {
   preferences: {
@@ -424,13 +500,13 @@ Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZG
   isSubscriptionActive: false,
   id: '68df5a08b4901544647fd65e'
 }
-[0mGET /api/youtube [36m304[0m 28.871 ms - -[0m
-Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NDI3OSwiZXhwIjoxNzYwNjk5MDc5fQ.X0FzlQjNcRUagdzFTzweEJV7_QO2twfWu0zylI6KPTs
+[0mPOST /api/certificates/upload [32m201[0m 139.243 ms - 357[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Njk1NCwiZXhwIjoxNzYwNzAxNzU0fQ.iRUXoMjK7DA42lxUg70n1VY81wRHXBI_Gf37jUd2-fk
 {
   id: '68df5a08b4901544647fd65e',
   role: 'admin',
-  iat: 1760094279,
-  exp: 1760699079
+  iat: 1760096954,
+  exp: 1760701754
 }
 {
   preferences: {
@@ -456,3 +532,1250 @@ Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZG
   loginCount: 0,
   devices: [],
   createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mGET /api/youtube [36m304[0m 15.606 ms - -[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Njk1NCwiZXhwIjoxNzYwNzAxNzU0fQ.iRUXoMjK7DA42lxUg70n1VY81wRHXBI_Gf37jUd2-fk
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760096954,
+  exp: 1760701754
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mGET /api/youtube [36m304[0m 27.988 ms - -[0m
+[0mGET /uploads/videos/video-1760094517960-900939470.mp4 [36m304[0m 11.411 ms - -[0m
+[0mGET /uploads/videos/video-1760014133969-769967971.png [33m404[0m 11.833 ms - 187[0m
+[0mGET /uploads/videos/video-1760081425014-160292438.mp4 [36m304[0m 13.364 ms - -[0m
+[0mGET /uploads/videos/video-1760011820148-424486555.mp4 [36m304[0m 8.800 ms - -[0m
+[0mGET /uploads/videos/video-1760006303238-826259136.mp4 [36m304[0m 10.047 ms - -[0m
+[0mGET /uploads/videos/video-1759994573312-580337232.mp4 [36m304[0m 9.684 ms - -[0m
+[0mGET /uploads/videos/video-1759991223216-363616971.mp4 [36m304[0m 2.461 ms - -[0m
+[0mGET /uploads/videos/video-1759994573312-580337232.mp4 [36m304[0m 6.317 ms - -[0m
+[0mGET /uploads/videos/video-1760006303238-826259136.mp4 [36m304[0m 2.565 ms - -[0m
+[0mGET /uploads/videos/video-1760094517960-900939470.mp4 [36m304[0m 3.618 ms - -[0m
+[0mGET /uploads/videos/video-1760011820148-424486555.mp4 [36m304[0m 4.347 ms - -[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Njk1NCwiZXhwIjoxNzYwNzAxNzU0fQ.iRUXoMjK7DA42lxUg70n1VY81wRHXBI_Gf37jUd2-fk
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760096954,
+  exp: 1760701754
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Njk1NCwiZXhwIjoxNzYwNzAxNzU0fQ.iRUXoMjK7DA42lxUg70n1VY81wRHXBI_Gf37jUd2-fk
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760096954,
+  exp: 1760701754
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Njk1NCwiZXhwIjoxNzYwNzAxNzU0fQ.iRUXoMjK7DA42lxUg70n1VY81wRHXBI_Gf37jUd2-fk
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760096954,
+  exp: 1760701754
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Njk1NCwiZXhwIjoxNzYwNzAxNzU0fQ.iRUXoMjK7DA42lxUg70n1VY81wRHXBI_Gf37jUd2-fk
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760096954,
+  exp: 1760701754
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/auth [32m200[0m 383.923 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 270.928 ms - 712[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Njk1NCwiZXhwIjoxNzYwNzAxNzU0fQ.iRUXoMjK7DA42lxUg70n1VY81wRHXBI_Gf37jUd2-fk
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760096954,
+  exp: 1760701754
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Njk1NCwiZXhwIjoxNzYwNzAxNzU0fQ.iRUXoMjK7DA42lxUg70n1VY81wRHXBI_Gf37jUd2-fk
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760096954,
+  exp: 1760701754
+}
+[0mPOST /api/auth [32m200[0m 284.330 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 273.989 ms - 712[0m
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/auth [32m200[0m 64.188 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 64.653 ms - 712[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NzcyNCwiZXhwIjoxNzYwNzAyNTI0fQ.DLJ3Du-E1Zw52usX9Qo60HyozxNrYcWdGWooSIDnmzQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097724,
+  exp: 1760702524
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NzcyNCwiZXhwIjoxNzYwNzAyNTI0fQ.DLJ3Du-E1Zw52usX9Qo60HyozxNrYcWdGWooSIDnmzQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097724,
+  exp: 1760702524
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/auth [32m200[0m 30.553 ms - 712[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NzcyNCwiZXhwIjoxNzYwNzAyNTI0fQ.DLJ3Du-E1Zw52usX9Qo60HyozxNrYcWdGWooSIDnmzQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097724,
+  exp: 1760702524
+}
+[0mPOST /api/auth [32m200[0m 36.967 ms - 712[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5NzcyNCwiZXhwIjoxNzYwNzAyNTI0fQ.DLJ3Du-E1Zw52usX9Qo60HyozxNrYcWdGWooSIDnmzQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097724,
+  exp: 1760702524
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/auth [32m200[0m 38.497 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 33.354 ms - 712[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4MCwiZXhwIjoxNzYwNzAyNTgwfQ.jigqJHnV0IkpkBmPfsD6NepHNxrXI_yEPUe5zIa0pjQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097780,
+  exp: 1760702580
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4MCwiZXhwIjoxNzYwNzAyNTgwfQ.jigqJHnV0IkpkBmPfsD6NepHNxrXI_yEPUe5zIa0pjQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097780,
+  exp: 1760702580
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/auth [32m200[0m 20.992 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 24.119 ms - 712[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4MSwiZXhwIjoxNzYwNzAyNTgxfQ.FyMc_j2UtZND6REApuIsT3eG0ODa6j7h2hMLMkBHVA4
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097781,
+  exp: 1760702581
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4MSwiZXhwIjoxNzYwNzAyNTgxfQ.FyMc_j2UtZND6REApuIsT3eG0ODa6j7h2hMLMkBHVA4
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097781,
+  exp: 1760702581
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4MSwiZXhwIjoxNzYwNzAyNTgxfQ.FyMc_j2UtZND6REApuIsT3eG0ODa6j7h2hMLMkBHVA4
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097781,
+  exp: 1760702581
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4MSwiZXhwIjoxNzYwNzAyNTgxfQ.FyMc_j2UtZND6REApuIsT3eG0ODa6j7h2hMLMkBHVA4
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097781,
+  exp: 1760702581
+}
+[0mPOST /api/auth [32m200[0m 53.737 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 54.086 ms - 712[0m
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/auth [32m200[0m 61.717 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 84.617 ms - 712[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NCwiZXhwIjoxNzYwNzAyNTg0fQ.eRxk6P2fL-vf1-8EKMAhBaQkKuO6HPZEIm44NnhDrzs
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097784,
+  exp: 1760702584
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+Logged-in user: new ObjectId('68df5a08b4901544647fd65e')
+[0mGET /api/certificates [32m200[0m 110.245 ms - 2526[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NCwiZXhwIjoxNzYwNzAyNTg0fQ.eRxk6P2fL-vf1-8EKMAhBaQkKuO6HPZEIm44NnhDrzs
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097784,
+  exp: 1760702584
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+Logged-in user: new ObjectId('68df5a08b4901544647fd65e')
+[0mGET /api/certificates [36m304[0m 22.386 ms - -[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NCwiZXhwIjoxNzYwNzAyNTg0fQ.eRxk6P2fL-vf1-8EKMAhBaQkKuO6HPZEIm44NnhDrzs
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097784,
+  exp: 1760702584
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/certificates/upload [32m201[0m 78.519 ms - 358[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NCwiZXhwIjoxNzYwNzAyNTg0fQ.eRxk6P2fL-vf1-8EKMAhBaQkKuO6HPZEIm44NnhDrzs
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097784,
+  exp: 1760702584
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NCwiZXhwIjoxNzYwNzAyNTg0fQ.eRxk6P2fL-vf1-8EKMAhBaQkKuO6HPZEIm44NnhDrzs
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097784,
+  exp: 1760702584
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NCwiZXhwIjoxNzYwNzAyNTg0fQ.eRxk6P2fL-vf1-8EKMAhBaQkKuO6HPZEIm44NnhDrzs
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097784,
+  exp: 1760702584
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/auth [32m200[0m 47.111 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 59.273 ms - 712[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzc4NCwiZXhwIjoxNzYwNzAyNTg0fQ.eRxk6P2fL-vf1-8EKMAhBaQkKuO6HPZEIm44NnhDrzs
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097784,
+  exp: 1760702584
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/auth [32m200[0m 76.484 ms - 712[0m
+[0mPOST /api/auth [32m200[0m 34.701 ms - 712[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzg1MCwiZXhwIjoxNzYwNzAyNjUwfQ.wsQ42F_JAinmcOJMsT_WjfrtWEyGCMpTh-dUDqkYKvQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097850,
+  exp: 1760702650
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+Logged-in user: new ObjectId('68df5a08b4901544647fd65e')
+[0mGET /api/certificates [32m200[0m 12.563 ms - 26[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzg1MCwiZXhwIjoxNzYwNzAyNjUwfQ.wsQ42F_JAinmcOJMsT_WjfrtWEyGCMpTh-dUDqkYKvQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097850,
+  exp: 1760702650
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+Logged-in user: new ObjectId('68df5a08b4901544647fd65e')
+[0mGET /api/certificates [36m304[0m 16.733 ms - -[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzg1MCwiZXhwIjoxNzYwNzAyNjUwfQ.wsQ42F_JAinmcOJMsT_WjfrtWEyGCMpTh-dUDqkYKvQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097850,
+  exp: 1760702650
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/certificates/upload [32m201[0m 123.615 ms - 357[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzg1MCwiZXhwIjoxNzYwNzAyNjUwfQ.wsQ42F_JAinmcOJMsT_WjfrtWEyGCMpTh-dUDqkYKvQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097850,
+  exp: 1760702650
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mPOST /api/certificates/upload [32m201[0m 13.733 ms - 361[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzg1MCwiZXhwIjoxNzYwNzAyNjUwfQ.wsQ42F_JAinmcOJMsT_WjfrtWEyGCMpTh-dUDqkYKvQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097850,
+  exp: 1760702650
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mGET /api/youtube [36m304[0m 19.132 ms - -[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzg1MCwiZXhwIjoxNzYwNzAyNjUwfQ.wsQ42F_JAinmcOJMsT_WjfrtWEyGCMpTh-dUDqkYKvQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097850,
+  exp: 1760702650
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+[0mGET /api/youtube [36m304[0m 19.299 ms - -[0m
+[0mGET /uploads/videos/video-1760094517960-900939470.mp4 [36m304[0m 8.317 ms - -[0m
+[0mGET /uploads/videos/video-1760014133969-769967971.png [33m404[0m 31.797 ms - 187[0m
+[0mGET /uploads/videos/video-1760081425014-160292438.mp4 [36m304[0m 32.099 ms - -[0m
+[0mGET /uploads/videos/video-1760011820148-424486555.mp4 [36m304[0m 8.736 ms - -[0m
+[0mGET /uploads/videos/video-1760006303238-826259136.mp4 [36m304[0m 9.182 ms - -[0m
+[0mGET /uploads/videos/video-1759994573312-580337232.mp4 [36m304[0m 2.915 ms - -[0m
+[0mGET /uploads/videos/video-1759991223216-363616971.mp4 [36m304[0m 4.736 ms - -[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzg1MCwiZXhwIjoxNzYwNzAyNjUwfQ.wsQ42F_JAinmcOJMsT_WjfrtWEyGCMpTh-dUDqkYKvQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097850,
+  exp: 1760702650
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+Logged-in user: new ObjectId('68df5a08b4901544647fd65e')
+[0mGET /api/certificates [32m200[0m 297.413 ms - 855[0m
+Auth Header received: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZGY1YTA4YjQ5MDE1NDQ2NDdmZDY1ZSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc2MDA5Nzg1MCwiZXhwIjoxNzYwNzAyNjUwfQ.wsQ42F_JAinmcOJMsT_WjfrtWEyGCMpTh-dUDqkYKvQ
+{
+  id: '68df5a08b4901544647fd65e',
+  role: 'admin',
+  iat: 1760097850,
+  exp: 1760702650
+}
+{
+  preferences: {
+    notifications: { email: true, push: true, sms: false },
+    theme: 'light',
+    language: 'eng'
+  },
+  _id: new ObjectId('68df5a08b4901544647fd65e'),
+  refLink: null,
+  admin: new ObjectId('689c212196260a6a27bb8e30'),
+  firstName: 'admin',
+  lastName: 'new',
+  email: 'ad@gmail.com',
+  phone: '1234567899',
+  role: 'admin',
+  permissions: [],
+  isVerified: false,
+  isActive: true,
+  subscriptionType: 'free',
+  subscriptionStatus: 'active',
+  dateOfBirth: 2025-10-13T18:30:00.000Z,
+  gender: 'male',
+  loginCount: 0,
+  devices: [],
+  createdAt: 2025-10-03T05:07:20.254Z,
+  updatedAt: 2025-10-03T05:07:20.254Z,
+  __v: 0,
+  fullName: 'admin new',
+  isSubscriptionActive: false,
+  id: '68df5a08b4901544647fd65e'
+}
+Logged-in user: new ObjectId('68df5a08b4901544647fd65e')
+[0mGET /api/certificates [36m304[0m 17.313 ms - -[0m
