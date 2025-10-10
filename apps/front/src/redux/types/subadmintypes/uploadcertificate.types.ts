@@ -1,6 +1,8 @@
-export interface Certificate {
-  id: string;
+export interface ICertificate {
+  _id?: string;
   title: string;
-  fileUrl: string;
-  uploadedAt: Date;
+  imageUrl: string;
+  addedBy?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

@@ -1,0 +1,84 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import API from "../../../api/axios"; 
+import { ICertificate } from "../../types/subadmintypes/uploadcertificate.types";
+
+// Fetch all certificates
+export const fetchCertificates = createAsyncThunk<
+  ICertificate[],
+  void,
+  { rejectValue: string }
+>("certificates/fetchAll", async (_, { rejectWithValue }) => {
+  try {
+    const res = await API.get("/certificates");
+    return res.data.data as ICertificate[];
+  } catch (err: any) {
+    return rejectWithValue(err.response?.data?.message || "Error fetching certificates");
+  }
+});
+
+// Upload certificate
+export const uploadCertificate = createAsyncThunk<
+  ICertificate,
+  FormData,
+  { rejectValue: string }
+>("certificates/upload", async (formData, { rejectWithValue }) => {
+  try {
+    const res = await API.post("/certificates/upload", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return res.data.data as ICertificate;
+  } catch (err: any) {
+    return rejectWithValue(err.response?.data?.message || "Error uploading certificate");
+  }
+});
+
+// Delete certificate
+export const deleteCertificate = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>("certificates/delete", async (id, { rejectWithValue }) => {
+  try {
+    await API.delete(`/certificates/${id}`);
+    return id;
+  } catch (err: any) {
+    return rejectWithValue(err.response?.data?.message || "Error deleting certificate");
+  }
+});
+
+interface CertificateState {
+  items: ICertificate[];
+  loading: boolean;
+  error: string | null;
+}
+
+const initialState: CertificateState = {
+  items: [],
+  loading: false,
+  error: null,
+};
+
+const certificateSlice = createSlice({
+  name: "certificates",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      // Fetch
+      .addCase(fetchCertificates.pending, (state) => { state.loading = true; state.error = null; })
+      .addCase(fetchCertificates.fulfilled, (state, action) => { state.loading = false; state.items = action.payload; })
+      .addCase(fetchCertificates.rejected, (state, action) => { state.loading = false; state.error = action.payload ?? "Failed to fetch certificates"; })
+
+      // Upload
+      .addCase(uploadCertificate.pending, (state) => { state.loading = true; state.error = null; })
+      .addCase(uploadCertificate.fulfilled, (state, action) => { state.loading = false; state.items.unshift(action.payload); })
+      .addCase(uploadCertificate.rejected, (state, action) => { state.loading = false; state.error = action.payload ?? "Failed to upload certificate"; })
+
+      // Delete
+      .addCase(deleteCertificate.pending, (state) => { state.loading = true; state.error = null; })
+      .addCase(deleteCertificate.fulfilled, (state, action) => { state.loading = false; state.items = state.items.filter((item) => item._id !== action.payload); })
+      .addCase(deleteCertificate.rejected, (state, action) => { state.loading = false; state.error = action.payload ?? "Failed to delete certificate"; });
+  },
+});
+
+export default certificateSlice.reducer;

@@ -1,3 +1,4 @@
+// routes/certificate.routes.ts
 import express from "express";
 import { upload } from "../../mediaApi/services/multerConfig";
 import { protect } from "../../userApi/middlewares/auth.middleware";
@@ -10,19 +11,14 @@ import {
 
 const router = express.Router();
 
-// Admin uploads a certificate image
- router.post(
+router.post(
   "/upload",
   protect,
   authorizeRole("admin", "superadmin"),
-  upload.single("certificateImage"), // field name in Postman
+  upload.single("certificateImage"),
   uploadCertificate
 );
-
-// Public: View all certificates
-router.get("/",protect, getAllCertificates);
-
-// Admin deletes a certificate
+router.get("/", protect, getAllCertificates);
 router.delete(
   "/:id",
   protect,

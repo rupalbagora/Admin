@@ -82,7 +82,18 @@ const menuItems = [
         {
           name: "Product",
           icon: <User className="w-4 h-4" />,
-          path: "/admin/Product",
+          SubProduct:[
+            {
+            name: "ProductsDetails",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/ProductsDetails",
+            },
+            {
+              name: "Categories",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/ProductsCategories",
+            },
+          ],
         },
         {
           name: "Our Package",
@@ -92,10 +103,7 @@ const menuItems = [
         {
           name: "Product Package",
           icon: <User className="w-4 h-4" />,
-         subpackage:[
-
-          
-         ]
+         path: "/admin/ProductPackage",
         },
       ],
     },
@@ -116,17 +124,28 @@ const menuItems = [
         {
           name: "Product",
           icon: <User className="w-4 h-4" />,
-          path: "/admin/Product",
+          SubProduct:[
+            {
+            name: "ProductsDetails",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/ProductsDetails",
+            },
+            {
+              name: "Categories",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/ProductsCategories",
+            },
+          ],
         },
         {
           name: "Our Package",
           icon: <User className="w-4 h-4" />,
-          path: "/admin/OurPackage",
+          path: "/admin/ourpackages",
         },
         {
           name: "Product Package",
           icon: <User className="w-4 h-4" />,
-          path: "/admin/ProductPackage",
+         path: "/admin/ProductPackage",
         },
       ],
     },
@@ -143,7 +162,6 @@ const menuItems = [
     icon: <Home className="w-5 h-5" />,
     path: "/admin/youtube",
   },
-
 ];
 
 export default function AdminLayout() {
