@@ -8,34 +8,34 @@ import { useAppDispatch } from "../redux/hooks";
 import { search } from "../redux/Slice/activeStatus/activeStatusSlice";
 import type SubMenu from "antd/es/menu/SubMenu";
 const navItems = [
-  {
-    label: "Home",
-    href: "/",
-    icon: <Home size={16} />,
-  },
-  {
-    label: "Products",
-    href: "/admin/products",
-    subItems: [
-      { label: "All Products", href: "/products" },
-      { label: "Categories", href: "/categories" },
-    ],
-  },
-  {
-    label: "Users",
-    href: "/admin/users",
-    icon: <Users size={16} />,
-  },
-  {
-    label: "Settings",
-    href: "/admin/settings",
-    icon: <Settings size={16} />,
-  },
-  {
-    label: "Subscription Plan",
-    href: "/admin/Subscription-plan",
-    icon: <CreditCard	 size={16} />,
-  },
+  // {
+  //   label: "Home",
+  //   href: "/",
+  //   icon: <Home size={16} />,
+  // },
+  // {
+  //   label: "Products",
+  //   href: "/admin/products",
+  //   subItems: [
+  //     { label: "All Products", href: "/products" },
+  //     { label: "Categories", href: "/categories" },
+  //   ],
+  // },
+  // {
+  //   label: "Users",
+  //   href: "/admin/users",
+  //   icon: <Users size={16} />,
+  // },
+  // {
+  //   label: "Settings",
+  //   href: "/admin/settings",
+  //   icon: <Settings size={16} />,
+  // },
+  // {
+  //   label: "Subscription Plan",
+  //   href: "/admin/Subscription-plan",
+  //   icon: <CreditCard	 size={16} />,
+  // },
 ];
  
 const menuItems = [
@@ -87,12 +87,15 @@ const menuItems = [
         {
           name: "Our Package",
           icon: <User className="w-4 h-4" />,
-          path: "/admin/OurPackage",
+          path: "/admin/ourpackages",
         },
         {
           name: "Product Package",
           icon: <User className="w-4 h-4" />,
-          path: "/admin/ProductPackage",
+         subpackage:[
+
+          
+         ]
         },
       ],
     },
@@ -140,11 +143,7 @@ const menuItems = [
     icon: <Home className="w-5 h-5" />,
     path: "/admin/youtube",
   },
-  {
-    name: "Our Packages",
-    icon: <Upload className="w-5 h-5" />,
-    path: "/admin/Packages",
-  }, 
+
 ];
 
 export default function AdminLayout() {

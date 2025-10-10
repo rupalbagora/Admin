@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  ChevronDown, ChevronRight, Menu, X } from 'lucide-react';
+import { ChevronDown, ChevronRight, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 // Type definitions
@@ -37,7 +37,6 @@ const Sidebar: React.FC<SidebarProps> = ({
   activeSubItemClassName = 'text-blue-400 font-medium',
   collapsed = false,
   onToggle,
-//   isMobile = false
 }) => {
   const { pathname } = useLocation();
   const [expandedMenus, setExpandedMenus] = useState<Record<string, boolean>>({});
@@ -45,114 +44,90 @@ const Sidebar: React.FC<SidebarProps> = ({
   const toggleMenu = (name: string) => {
     setExpandedMenus(prev => ({
       ...prev,
-      [name]: !prev[name]
+      [name]: !prev[name],
     }));
   };
 
   const isActive = (path?: string) => path && pathname.startsWith(path);
 
+  // Recursive function to render nested menus
+  const renderMenuItems = (items: MenuItem[], level = 0) => {
+    return items.map(item => (
+      <li key={item.name}>
+        {item.path && !item.subItems ? (
+          <Link
+            to={item.disabled ? '#' : item.path}
+            className={`${itemClassName} ${isActive(item.path) ? activeItemClassName : ''} ${
+              item.disabled ? 'opacity-50 cursor-not-allowed' : ''
+            }`}
+            title={collapsed ? item.name : undefined}
+            style={{ paddingLeft: `${level * 16 + 12}px` }}
+          >
+            <span className={`${collapsed ? 'mx-auto' : 'mr-3'}`}>{item.icon}</span>
+            {!collapsed && <span className="font-medium">{item.name}</span>}
+            {!collapsed && item.badge && (
+              <span className="ml-auto bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                {item.badge}
+              </span>
+            )}
+          </Link>
+        ) : (
+          <div>
+            <button
+              onClick={() => !item.disabled && toggleMenu(item.name)}
+              disabled={item.disabled}
+              className={`${itemClassName} w-full text-left flex ${
+                collapsed ? 'flex-col items-center' : 'justify-between'
+              } ${item.disabled ? 'opacity-50 cursor-not-allowed' : ''} ${
+                expandedMenus[item.name] ? 'bg-gray-800 text-white' : ''
+              }`}
+              title={collapsed ? item.name : undefined}
+              style={{ paddingLeft: `${level * 16 + 12}px` }}
+            >
+              <div className={`flex ${collapsed ? 'flex-col items-center' : ''}`}>
+                <span className={`${collapsed ? 'mx-auto' : 'mr-3'}`}>{item.icon}</span>
+                {!collapsed && <span className="font-medium">{item.name}</span>}
+              </div>
+              {!collapsed && item.subItems && (
+                expandedMenus[item.name] ? (
+                  <ChevronDown className="w-4 h-4" />
+                ) : (
+                  <ChevronRight className="w-4 h-4" />
+                )
+              )}
+              {!collapsed && item.badge && (
+                <span className="ml-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+                  {item.badge}
+                </span>
+              )}
+            </button>
+
+            {!collapsed && item.subItems && expandedMenus[item.name] && (
+              <ul className="mt-1 space-y-1">
+                {renderMenuItems(item.subItems, level + 1)}
+              </ul>
+            )}
+          </div>
+        )}
+      </li>
+    ));
+  };
+
   return (
     <div className={`${className} ${collapsed ? 'w-20' : 'w-64'}`}>
-      <div className={`p-4 border-b border-gray-800 flex ${collapsed?"justify-center":"justify-between"}  items-center`}>
+      <div className={`p-4 border-b border-gray-800 flex ${collapsed ? 'justify-center' : 'justify-between'} items-center`}>
         {!collapsed && logo}
         {onToggle && (
-          <button 
-            onClick={onToggle}
-            className="text-gray-400 hover:text-white focus:outline-none"
-          >
-            
+          <button onClick={onToggle} className="text-gray-400 hover:text-white focus:outline-none">
             {collapsed ? <Menu size={20} /> : <X size={20} />}
           </button>
         )}
       </div>
-      
+
       <nav className="flex-1 overflow-y-auto p-2">
-        <ul className="space-y-1">
-          {menuItems.map((item) => (
-            <li key={item.name}>
-              {item.path ? (
-                <Link
-                  to={item.disabled ? '#' : item.path}
-                  className={`${itemClassName} ${isActive(item.path) ? activeItemClassName : ''} ${
-                    item.disabled ? 'opacity-50 cursor-not-allowed' : ''
-                  }`}
-                  title={collapsed ? item.name : undefined}
-                >
-                  <span className={`${collapsed ? 'mx-auto' : 'mr-3'}`}>
-                    {item.icon}
-                  </span>
-                  {!collapsed && (
-                    <>
-                      <span className="font-medium">{item.name}</span>
-                      {item.badge && (
-                        <span className="ml-auto bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
-                          {item.badge}
-                        </span>
-                      )}
-                    </>
-                  )}
-                </Link>
-              ) : (
-                <div>
-                  <button
-                    onClick={() => !item.disabled && toggleMenu(item.name)}
-                    disabled={item.disabled}
-                    className={`${itemClassName} w-full text-left flex ${collapsed ? 'flex-col items-center' : 'justify-between'} ${
-                      item.disabled ? 'opacity-50 cursor-not-allowed' : ''
-                    } ${expandedMenus[item.name] ? 'bg-gray-800 text-white' : ''}`}
-                    title={collapsed ? item.name : undefined}
-                  >
-                    <div className={`flex ${collapsed ? 'flex-col items-center' : ''}`}>
-                      <span className={`${collapsed ? 'mx-auto' : 'mr-3'}`}>
-                        {item.icon}
-                      </span>
-                      {!collapsed && (
-                        <span className="font-medium">{item.name}</span>
-                      )}
-                    </div>
-                    {!collapsed && item.subItems && (
-                      expandedMenus[item.name] ? (
-                        <ChevronDown className="w-4 h-4" />
-                      ) : (
-                        <ChevronRight className="w-4 h-4" />
-                      )
-                    )}
-                    {!collapsed && item.badge && (
-                      <span className="ml-2 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
-                        {item.badge}
-                      </span>
-                    )}
-                  </button>
-                  
-                  {!collapsed && item.subItems && expandedMenus[item.name] && (
-                    <ul className="ml-8 mt-1 space-y-1">
-                      {item.subItems.map((subItem) => (
-                        <li key={subItem.name}>
-                          <Link
-                            to={subItem.disabled ? '#' : subItem.path || '#'}
-                            className={`${subItemClassName} ${
-                              isActive(subItem.path) ? activeSubItemClassName : ''
-                            } ${subItem.disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
-                          >
-                            <span className="mr-2">{subItem.icon}</span>
-                            {subItem.name}
-                            {subItem.badge && (
-                              <span className="ml-auto bg-gray-700 text-white text-xs px-2 py-0.5 rounded-full">
-                                {subItem.badge}
-                              </span>
-                            )}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              )}
-            </li>
-          ))}
-        </ul>
+        <ul className="space-y-1">{renderMenuItems(menuItems)}</ul>
       </nav>
-      
+
       {!collapsed && version && (
         <div className="p-4 border-t border-gray-800">
           <div className="text-sm text-gray-400">{version}</div>
