@@ -1,29 +1,36 @@
-import React, { useState } from "react";
-import { Card, Table, Input, Button, Modal } from "antd";
+import React, { useEffect, useState } from "react";
+import { Card, Table, Input, Button, Modal, message } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import YoutubeLinks from "./YoutubeLinks";
-import {type YoutubeVideo } from "../../redux/types/subadmintypes/youtubelinks.types";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { fetchYoutubeVideos, deleteYoutubeVideo } from "../../redux/Slice/Youtube/youtube.slice";
 
 const UploadYoutube: React.FC = () => {
-  const [videos, setVideos] = useState<YoutubeVideo[]>([]);
+  const dispatch = useAppDispatch();
+  const { videos, loading } = useAppSelector((state) => state.youtube);
   const [searchText, setSearchText] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
 
-  const handleAddVideo = (video: YoutubeVideo) => {
-    setVideos([...videos, video]);
-    setModalVisible(false);
-  };
+  useEffect(() => {
+    dispatch(fetchYoutubeVideos());
+  }, [dispatch]);
 
   const handleDelete = (id: string) => {
     Modal.confirm({
-      title: "Delete this video?",
-      onOk: () => setVideos(videos.filter((v) => v.id !== id)),
+      title: "Are you sure you want to delete this video?",
+      onOk: async () => {
+        try {
+          await dispatch(deleteYoutubeVideo(id)).unwrap();
+          message.success("Video deleted successfully");
+        } catch (err: any) {
+          message.error(err?.message || "Failed to delete video");
+        }
+      },
     });
   };
 
-  const filteredVideos = videos.filter(
-    (v) =>
-      v.title.toLowerCase().includes(searchText.toLowerCase())
+  const filteredVideos = videos.filter((v) =>
+    v.title.toLowerCase().includes(searchText.toLowerCase())
   );
 
   const columns = [
@@ -32,28 +39,29 @@ const UploadYoutube: React.FC = () => {
       title: "Video",
       dataIndex: "videoUrl",
       key: "videoUrl",
-      render: (url: string) => (
-        <video width="200" controls>
-          <source src={url} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      ),
+      render: (url: string) =>
+        url ? (
+          <video width="200" controls>
+            <source src={url} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          "No video file"
+        ),
     },
     {
       title: "Uploaded At",
       dataIndex: "uploadedAt",
       key: "uploadedAt",
-      render: (date: Date) => new Date(date).toLocaleString(),
+      render: (date: string) => new Date(date).toLocaleString(),
     },
     {
       title: "Actions",
       key: "actions",
-      render: (_: any, record: YoutubeVideo) => (
-        <div style={{ display: "flex", gap: 8 }}>
-          <Button danger icon={<DeleteOutlined />} onClick={() => handleDelete(record.id)}>
-            Delete
-          </Button>
-        </div>
+      render: (_: any, record: any) => (
+        <Button danger icon={<DeleteOutlined />} onClick={() => handleDelete(record._id)}>
+          Delete
+        </Button>
       ),
     },
   ];
@@ -79,15 +87,19 @@ const UploadYoutube: React.FC = () => {
         <Table
           columns={columns}
           dataSource={filteredVideos}
-          rowKey="id"
-          locale={{ emptyText: "No videos uploaded" }}
+          rowKey={(record) => record._id}
+          loading={loading}
+          locale={{ emptyText: "No videos uploaded yet" }}
         />
       </Card>
 
       <YoutubeLinks
         visible={modalVisible}
         onCancel={() => setModalVisible(false)}
-        onSubmit={handleAddVideo}
+        onSubmit={() => {
+          setModalVisible(false);
+          dispatch(fetchYoutubeVideos());
+        }}
       />
     </div>
   );

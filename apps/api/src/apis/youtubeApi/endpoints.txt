@@ -1,22 +1,19 @@
-1. get login by any admin using : POST http://localhost:5000/api/users/login
+1. get login by any admin using : POST http://localhost:5000/api/auth/login
 
 body : {
   "email": "admin@example.com",
   "password": "Admin@123"
 }
-
 2. Copy the token from the response.
 
 --------
-
 Create a Video (Upload File or URL)
 
 1. Upload a Video File
 
 Method: POST
 
-URL: http://localhost:5000/api/youtube
-
+URL: http://localhost:5000/api/youtube  
 Headers:
 Authorization: Bearer <token>
 

@@ -1,60 +1,81 @@
-import React, { useState } from "react";
-import { Card, Table, Button, Input, Modal, Space } from "antd";
+import React, { useEffect, useState } from "react";
+import { Card, Table, Button, Input, Modal, Space, message } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
-import type { Certificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
 import CertificateForm from "./CertificateForm";
+import axios from "axios";
 
 const { Search } = Input;
 
 const UploadCertificate: React.FC = () => {
-  const [certificates, setCertificates] = useState<Certificate[]>([]);
+  const [certificates, setCertificates] = useState<any[]>([]);
   const [searchText, setSearchText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Add new certificate
-  const handleAddCertificate = (cert: Certificate) => {
-    setCertificates((prev) => [...prev, cert]);
+  const token = localStorage.getItem("token");
+
+  // Fetch certificates from backend
+  const fetchCertificates = async () => {
+    if (!token) return;
+    try {
+      const res = await axios.get("http://localhost:5001/api/certificates", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setCertificates(res.data.data);
+    } catch (err: any) {
+      message.error(err.response?.data?.message || "Failed to fetch certificates");
+    }
+  };
+
+  useEffect(() => {
+    fetchCertificates();
+  }, []);
+
+  const handleAddCertificate = (cert: any) => {
+    setCertificates((prev) => [cert, ...prev]);
     setIsModalOpen(false);
   };
 
-  // Delete certificate
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
+    if (!token) return;
     Modal.confirm({
       title: "Delete Certificate?",
       content: "Are you sure you want to delete this certificate?",
       okText: "Yes",
       cancelText: "No",
-      onOk: () => setCertificates((prev) => prev.filter((c) => c.id !== id)),
+      onOk: async () => {
+        try {
+          await axios.delete(`http://localhost:5001/api/certificates/${id}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          setCertificates((prev) => prev.filter((c) => c._id !== id));
+          message.success("Certificate deleted successfully");
+        } catch (err: any) {
+          message.error(err.response?.data?.message || "Delete failed");
+        }
+      },
     });
   };
 
-  // Filter certificates based on search input (only title now)
   const filteredCertificates = certificates.filter((cert) =>
     cert.title.toLowerCase().includes(searchText.toLowerCase())
   );
 
-  // Table columns (removed certificate name)
   const columns = [
     { title: "Title", dataIndex: "title", key: "title" },
     {
       title: "Uploaded At",
-      dataIndex: "uploadedAt",
-      key: "uploadedAt",
+      dataIndex: "createdAt",
       render: (date: string) => new Date(date).toLocaleString(),
     },
     {
       title: "Actions",
       key: "actions",
-      render: (_: any, record: Certificate) => (
+      render: (_: any, record: any) => (
         <Space>
-          <a href={record.fileUrl} target="_blank" rel="noopener noreferrer">
+          <a href={record.imageUrl} target="_blank" rel="noopener noreferrer">
             <Button>View</Button>
           </a>
-          <Button
-            danger
-            icon={<DeleteOutlined />}
-            onClick={() => handleDelete(record.id)}
-          >
+          <Button danger icon={<DeleteOutlined />} onClick={() => handleDelete(record._id)}>
             Delete
           </Button>
         </Space>
@@ -65,19 +86,13 @@ const UploadCertificate: React.FC = () => {
   return (
     <div className="p-6">
       <Card
-        title="Certificate Management"
+        title="Manage Certificates"
         extra={
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={() => setIsModalOpen(true)}
-            className="bg-gray-700"
-          >
+          <Button type="primary" icon={<PlusOutlined />} onClick={() => setIsModalOpen(true)}>
             Add Certificate
           </Button>
         }
       >
-        {/* Search */}
         <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <Search
             placeholder="Search certificates..."
@@ -85,28 +100,25 @@ const UploadCertificate: React.FC = () => {
             onChange={(e) => setSearchText(e.target.value)}
             allowClear
             size="large"
-            className="w-full md:w-1/2 bg-[#2523232c]"
+            className="w-full md:w-1/2"
           />
         </div>
 
-        {/* Table */}
         <Table
           columns={columns}
           dataSource={filteredCertificates}
-          rowKey="id"
-          locale={{ emptyText: "No certificates uploaded" }}
+          rowKey="_id"
+          locale={{ emptyText: "No certificates added" }}
           pagination={{ pageSize: 10 }}
         />
       </Card>
 
-      {/* Upload Certificate Modal */}
       <Modal
-        title="Upload Certificate"
+        title="Add Certificate"
         open={isModalOpen}
         footer={null}
         onCancel={() => setIsModalOpen(false)}
-        destroyOnClose
-        width={700}
+        destroyOnHidden
       >
         <CertificateForm onAddCertificate={handleAddCertificate} />
       </Modal>
