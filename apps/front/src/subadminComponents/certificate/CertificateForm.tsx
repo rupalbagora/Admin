@@ -2,21 +2,15 @@ import React, { useEffect } from "react";
 import { Form, Input, Upload, Button, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useAppDispatch } from "../../redux/hooks";
-import {
-  uploadCertificate,
-  updateCertificate,
-} from "../../redux/Slice/Uploadcertificate/certificateSlice";
+import { uploadCertificate, updateCertificate } from "../../redux/Slice/Uploadcertificate/certificateSlice";
 import { ICertificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
 
 interface CertificateFormProps {
-  onSubmit?: () => void; // optional callback after upload/update
-  editingCertificate?: ICertificate | null; // null for add
+  editingCertificate?: ICertificate | null;
+  onSubmit?: () => void;
 }
 
-const CertificateForm: React.FC<CertificateFormProps> = ({
-  onSubmit,
-  editingCertificate,
-}) => {
+const CertificateForm: React.FC<CertificateFormProps> = ({ editingCertificate, onSubmit }) => {
   const [form] = Form.useForm();
   const dispatch = useAppDispatch();
 
@@ -37,9 +31,7 @@ const CertificateForm: React.FC<CertificateFormProps> = ({
 
     try {
       if (editingCertificate) {
-        await dispatch(
-          updateCertificate({ id: editingCertificate._id!, formData })
-        ).unwrap();
+        await dispatch(updateCertificate({ id: editingCertificate._id!, formData })).unwrap();
         message.success("Certificate updated successfully!");
       } else {
         await dispatch(uploadCertificate(formData)).unwrap();
@@ -48,6 +40,7 @@ const CertificateForm: React.FC<CertificateFormProps> = ({
       form.resetFields();
       onSubmit?.();
     } catch (err: any) {
+      console.error("Form submit error:", err);
       message.error(err?.message || "Operation failed");
     }
   };

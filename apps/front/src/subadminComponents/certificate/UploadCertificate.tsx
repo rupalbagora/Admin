@@ -3,19 +3,14 @@ import { Card, Table, Button, Input, Modal, Space, message } from "antd";
 import { PlusOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import CertificateForm from "./CertificateForm";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import {
-  fetchCertificates,
-  deleteCertificate,
-} from "../../redux/Slice/Uploadcertificate/certificateSlice";
+import { fetchCertificates, deleteCertificate } from "../../redux/Slice/Uploadcertificate/certificateSlice";
 import { ICertificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
 
 const { Search } = Input;
 
 const ManageCertificates: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { items: certificates, loading } = useAppSelector(
-    (state) => state.certificates
-  );
+  const { items: certificates, loading } = useAppSelector(state => state.certificates);
 
   const [searchText, setSearchText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,6 +21,8 @@ const ManageCertificates: React.FC = () => {
   }, [dispatch]);
 
   const handleDelete = (id: string) => {
+    if (!id) return message.error("Certificate ID missing");
+
     Modal.confirm({
       title: "Delete Certificate?",
       content: "Are you sure you want to delete this certificate?",
@@ -33,10 +30,12 @@ const ManageCertificates: React.FC = () => {
       cancelText: "No",
       onOk: async () => {
         try {
-          await dispatch(deleteCertificate(id)).unwrap();
+          const result = await dispatch(deleteCertificate(id)).unwrap();
+          console.log("Deleted ID:", result);
           message.success("Certificate deleted successfully");
         } catch (err: any) {
-          message.error(err?.message || "Delete failed");
+          console.error("Delete error:", err);
+          message.error(err ?? "Delete failed");
         }
       },
     });
@@ -47,38 +46,21 @@ const ManageCertificates: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const filteredCertificates = certificates.filter((cert) =>
+  const filteredCertificates = certificates.filter(cert =>
     cert.title.toLowerCase().includes(searchText.toLowerCase())
   );
 
   const columns = [
     { title: "Title", dataIndex: "title", key: "title" },
-    {
-      title: "Uploaded At",
-      dataIndex: "createdAt",
-      render: (date: string) => new Date(date).toLocaleString(),
-    },
+    { title: "Uploaded At", dataIndex: "createdAt", render: (date: string) => new Date(date).toLocaleString() },
     {
       title: "Actions",
       key: "actions",
       render: (_: any, record: ICertificate) => (
         <Space>
-          <a href={record.imageUrl} target="_blank" rel="noopener noreferrer">
-            <Button>View</Button>
-          </a>
-          <Button
-            icon={<EditOutlined />}
-            onClick={() => handleEdit(record)}
-          >
-            Edit
-          </Button>
-          <Button
-            danger
-            icon={<DeleteOutlined />}
-            onClick={() => handleDelete(record._id!)}
-          >
-            Delete
-          </Button>
+          <a href={record.imageUrl} target="_blank" rel="noopener noreferrer"><Button>View</Button></a>
+          <Button icon={<EditOutlined />} onClick={() => handleEdit(record)}>Edit</Button>
+          <Button danger icon={<DeleteOutlined />} onClick={() => handleDelete(record._id!)}>Delete</Button>
         </Space>
       ),
     },
@@ -86,50 +68,15 @@ const ManageCertificates: React.FC = () => {
 
   return (
     <div className="p-6">
-      <Card
-        title="Manage Certificates"
-        extra={
-          <Button
-            type="primary"
-            icon={<PlusOutlined />}
-            onClick={() => { setEditingCertificate(null); setIsModalOpen(true); }}
-          >
-            Add Certificate
-          </Button>
-        }
-      >
+      <Card title="Manage Certificates" extra={<Button type="primary" icon={<PlusOutlined />} onClick={() => { setEditingCertificate(null); setIsModalOpen(true); }}>Add Certificate</Button>}>
         <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <Search
-            placeholder="Search certificates..."
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            allowClear
-            size="large"
-            className="w-full md:w-1/2"
-          />
+          <Search placeholder="Search certificates..." value={searchText} onChange={(e) => setSearchText(e.target.value)} allowClear size="large" className="w-full md:w-1/2" />
         </div>
-
-        <Table
-          columns={columns}
-          dataSource={filteredCertificates}
-          rowKey="_id"
-          loading={loading}
-          locale={{ emptyText: "No certificates added" }}
-          pagination={{ pageSize: 10 }}
-        />
+        <Table columns={columns} dataSource={filteredCertificates} rowKey="_id" loading={loading} pagination={{ pageSize: 10 }} />
       </Card>
 
-      <Modal
-        title={editingCertificate ? "Edit Certificate" : "Add Certificate"}
-        open={isModalOpen}
-        footer={null}
-        onCancel={() => { setIsModalOpen(false); setEditingCertificate(null); }}
-        destroyOnHidden
-      >
-        <CertificateForm
-          editingCertificate={editingCertificate}
-          onSubmit={() => { setIsModalOpen(false); setEditingCertificate(null); dispatch(fetchCertificates()); }}
-        />
+      <Modal title={editingCertificate ? "Edit Certificate" : "Add Certificate"} open={isModalOpen} footer={null} onCancel={() => { setIsModalOpen(false); setEditingCertificate(null); }} destroyOnClose>
+        <CertificateForm editingCertificate={editingCertificate} onSubmit={() => { setIsModalOpen(false); setEditingCertificate(null); dispatch(fetchCertificates()); }} />
       </Modal>
     </div>
   );

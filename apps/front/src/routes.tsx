@@ -181,7 +181,7 @@ export const router = createBrowserRouter([
         ),
       },
        {
-        path: "ProductDetails",
+        path: "ProductPackage",
         element: (
           <Suspense fallback={Loader}>
             {" "}
@@ -199,7 +199,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "Packages",
+        path: "ourpackages",
         element: (
           <Suspense fallback={Loader}>
             {" "}
