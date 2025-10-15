@@ -1,14 +1,24 @@
 import User from "../models/User.model";
 import type { IUser } from "../types/user.types";
-import { CreateUserDto } from "../dtos/create-user.dto";
 import { UserRole } from "../types/user.types";
 import { Types } from "mongoose";
 
 class UserService {
-  async createUser(createUserDto: CreateUserDto): Promise<IUser> {
+  async createUser(createUserDto: {
+    firstName: string;
+    email: string;
+    password: string;
+    phone: string;
+    address: string;
+    isActive: boolean;
+    subscriptionPeriod: string;
+    expireDate?: Date;
+    avatar?: string;
+    admin?: Types.ObjectId;
+  }): Promise<IUser> {
     const user = new User({
       ...createUserDto,
-      role: createUserDto.role || UserRole.USER,
+      role: UserRole.USER, // default role
     });
 
     await user.save();
@@ -51,16 +61,17 @@ class UserService {
 
   async getAllUsers(): Promise<IUser[] | null> {
     return User.find({
-      role: { $nin: ["superadmin"] }, // exclude admins
+      role: { $nin: ["superadmin"] }, // exclude superadmins
     });
   }
+
   async getAllUsersForAdmin(id: Types.ObjectId): Promise<IUser[] | null> {
     if (!Types.ObjectId.isValid(id)) {
       throw new Error("Invalid ObjectId");
     }
     return User.find({
       admin: id,
-      role: { $nin: ["superadmin"] }, // exclude admins
+      role: { $nin: ["superadmin"] }, // exclude superadmins
     });
   }
 }

@@ -1,7 +1,7 @@
 import mongoose, { model, Schema, Model, Types } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import validator from 'validator';
-import jwt ,{ SignOptions } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import {
   IUser,
@@ -16,9 +16,9 @@ import { jwtConfig } from '../../../config/jwt';
 
 const userSchema: Schema<IUser> = new Schema({
   // Basic Information
-  refLink:{
-    type:String,
-    default:null
+  refLink: {
+    type: String,
+    default: null
   },
   admin: {
     type: mongoose.Schema.Types.ObjectId,
@@ -29,12 +29,6 @@ const userSchema: Schema<IUser> = new Schema({
     required: [true, 'First name is required'],
     trim: true,
     maxlength: [50, 'First name cannot exceed 50 characters']
-  },
-  lastName: {
-    type: String,
-    required: [true, 'Last name is required'],
-    trim: true,
-    maxlength: [50, 'Last name cannot exceed 50 characters']
   },
   email: {
     type: String,
@@ -53,7 +47,11 @@ const userSchema: Schema<IUser> = new Schema({
       message: (props: { value: string }) => `${props.value} is not a valid phone number!`
     }
   },
-  
+  // address: {
+  //   type: String,
+  //   required: [true, 'Address is required']
+  // },
+
   // Authentication
   password: {
     type: String,
@@ -64,7 +62,7 @@ const userSchema: Schema<IUser> = new Schema({
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date,
-  
+
   // Roles and Permissions
   role: {
     type: String,
@@ -83,7 +81,7 @@ const userSchema: Schema<IUser> = new Schema({
     type: Boolean,
     default: true
   },
-  
+
   // Subscription Information
   subscription: {
     type: Schema.Types.ObjectId,
@@ -101,6 +99,12 @@ const userSchema: Schema<IUser> = new Schema({
     enum: Object.values(SubscriptionStatus),
     default: SubscriptionStatus.PENDING
   },
+  subscriptionPeriod: {
+    type: String,
+    enum: ['biannual', 'halfyearly', 'yearly', 'custom'],
+    default: 'biannual'
+  },
+  expireDate: Date,
   paymentMethod: {
     type: String,
     enum: Object.values(PaymentMethod)
@@ -112,11 +116,11 @@ const userSchema: Schema<IUser> = new Schema({
     country: String,
     postalCode: String
   },
-  
+
   // Profile Information
   avatar: {
-    type:Types.ObjectId,
-    ref:"UploadedFile"
+    type: Types.ObjectId,
+    ref: "UploadedFile"
   },
   bio: {
     type: String,
@@ -127,7 +131,7 @@ const userSchema: Schema<IUser> = new Schema({
     type: String,
     enum: Object.values(Gender)
   },
-  
+
   // Social Media
   socialMedia: {
     facebook: String,
@@ -135,7 +139,7 @@ const userSchema: Schema<IUser> = new Schema({
     linkedin: String,
     instagram: String
   },
-  
+
   // Preferences
   preferences: {
     theme: {
@@ -153,7 +157,7 @@ const userSchema: Schema<IUser> = new Schema({
       sms: { type: Boolean, default: false }
     }
   },
-  
+
   // Statistics
   loginCount: {
     type: Number,
@@ -174,7 +178,6 @@ const userSchema: Schema<IUser> = new Schema({
 });
 
 // Indexes
-// userSchema.index({ email: 1 }, { unique: true });
 userSchema.index({ role: 1 });
 userSchema.index({ subscriptionStatus: 1 });
 userSchema.index({ 'subscriptionEndDate': 1 });
@@ -182,26 +185,20 @@ userSchema.index({ 'subscriptionEndDate': 1 });
 // Middleware
 userSchema.pre<IUser>('save', async function(next) {
   if (!this.isModified('password')) return next();
-  
   this.password = await bcrypt.hash(this.password, 12);
   next();
 });
 
 userSchema.pre<IUser>('save', function(next) {
   if (!this.isModified('password') || this.isNew) return next();
-  
   this.passwordChangedAt = new Date(Date.now() - 1000);
   next();
 });
 
 // Virtuals
-userSchema.virtual('fullName').get(function(this: IUser) {
-  return `${this.firstName} ${this.lastName}`;
-});
-
 userSchema.virtual('isSubscriptionActive').get(function(this: IUser) {
   if (!this.subscriptionEndDate) return false;
-  return this.subscriptionStatus === SubscriptionStatus.ACTIVE && 
+  return this.subscriptionStatus === SubscriptionStatus.ACTIVE &&
          this.subscriptionEndDate > new Date();
 });
 
@@ -213,16 +210,10 @@ userSchema.methods.comparePassword = async function(
   return await bcrypt.compare(candidatePassword, this.password);
 };
 
-
-
 userSchema.methods.generateAuthToken = function (this: IUser): string {
   const payload = { id: this._id, role: this.role };
-
   return jwt.sign(payload, jwtConfig.secret, { expiresIn: jwtConfig.expiresIn });
 };
-
-
-
 
 userSchema.methods.changedPasswordAfter = function(
   this: IUser,
@@ -239,14 +230,11 @@ userSchema.methods.createPasswordResetToken = function(
   this: IUser
 ): string {
   const resetToken = crypto.randomBytes(32).toString('hex');
-  
   this.passwordResetToken = crypto
     .createHash('sha256')
     .update(resetToken)
     .digest('hex');
-  
-  this.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
-  
+  this.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000);
   return resetToken;
 };
 

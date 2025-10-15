@@ -3,7 +3,7 @@ import PackageService from "../services/packages.services";
 
 export const createPackage = async (req: Request, res: Response) => {
   try {
-    const addedBy = (req as any).user._id; // ✅ Logged-in user ID
+    const addedBy = (req as any).user._id; //Logged-in user ID
 
     const newPackage = await PackageService.create({
       ...req.body,
@@ -19,7 +19,7 @@ export const createPackage = async (req: Request, res: Response) => {
 export const getPackages = async (req: Request, res: Response) => {
   try {
     const { category } = req.query;
-    const userId = (req as any).user._id; // ✅ Logged-in user ID
+    const userId = (req as any).user._id; // Logged-in user ID
  
     const packages = await PackageService.getAll(userId, category as string);
 

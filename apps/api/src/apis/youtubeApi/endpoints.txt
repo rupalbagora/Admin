@@ -1,4 +1,4 @@
-1. get login by any admin using : POST http://localhost:5000/api/auth/login
+1. get login by any admin using : POST http://localhost:5001/api/auth/login
 
 body : {
   "email": "admin@example.com",
@@ -13,7 +13,7 @@ Create a Video (Upload File or URL)
 
 Method: POST
 
-URL: http://localhost:5000/api/youtube  
+URL: http://localhost:5001/api/youtube  
 Headers:
 Authorization: Bearer <token>
 
@@ -29,7 +29,7 @@ Send Request.
 2. Add a YouTube URL
 Method: POST
 
-URL: http://localhost:5000/api/youtube
+URL: http://localhost:5001/api/youtube
 
 Headers:
 Authorization: Bearer <token>
@@ -46,7 +46,7 @@ Body → raw → JSON:
 
 Method: GET
 
-URL: http://localhost:5000/api/youtube
+URL: http://localhost:5001/api/youtube
 
 Headers:
 Authorization: Bearer <token>
@@ -57,7 +57,7 @@ Authorization: Bearer <token>
 
 Method: GET
 
-URL: http://localhost:5000/api/youtube/<VIDEO_ID>
+URL: http://localhost:5001/api/youtube/<VIDEO_ID>
 
 (No token required if route is public)
 
@@ -72,7 +72,7 @@ Change Title Only
 
 Method: PATCH
 
-URL: http://localhost:5000/api/youtube/<VIDEO_ID>
+URL: http://localhost:5001/api/youtube/<VIDEO_ID>
 
 Headers: Authorization: Bearer <token>
 
@@ -99,6 +99,6 @@ Delete a Video
 
 Method: DELETE
 
-URL: http://localhost:5000/api/youtube/<VIDEO_ID>
+URL: http://localhost:5001/api/youtube/<VIDEO_ID>
 
 Headers: Authorization: Bearer <token>
