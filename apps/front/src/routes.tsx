@@ -171,21 +171,22 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      {
-        path: "AllCategories",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UploadCategories />
-          </Suspense>
-        ),
-      },
+     
        {
-        path: "ProductPackage",
+        path: "ProductsDetails",
         element: (
           <Suspense fallback={Loader}>
             {" "}
             <UploadProduct />
+          </Suspense>
+        ),
+      },
+      {
+        path: "ProductsCategories",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadCategories />
           </Suspense>
         ),
       },
@@ -208,7 +209,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "ProductPackages",
+        path: "ProductPackage",
         element: (
           <Suspense fallback={Loader}>
             {" "}
