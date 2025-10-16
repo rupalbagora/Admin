@@ -77,7 +77,7 @@ const menuItems = [
         {
           name: "Our Service",
           icon: <User className="w-4 h-4" />,
-          path: "/admin/OurService",
+          path: "/admin/Ourservice",
         },
         {
           name: "Product",
@@ -119,7 +119,7 @@ const menuItems = [
         {
           name: "Our Service",
           icon: <User className="w-4 h-4" />,
-          path: "/admin/OurService",
+          path: "/admin/Ourservice",
         },
         {
           name: "Product",

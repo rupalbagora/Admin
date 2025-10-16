@@ -1,4 +1,4 @@
-import type {Type} from "mongoose"
+import type {Types} from "mongoose"
 // dtos/create-user.dto.ts
 import { 
   UserRole, 
@@ -7,7 +7,7 @@ import {
 } from '../types/user.types';
 
 export class CreateUserDto {
-  admin?: Type.ObjectId; // Optional, will be set by the controller
+  admin?: Types.ObjectId; // Optional, will be set by the controller
   firstName!: string;
   lastName!: string;
   email!: string;

@@ -45,31 +45,31 @@ const storage = multer.diskStorage({
 });
 
 // File filter
-const fileFilter = (
-  _req: Express.Request,
-  file: Express.Multer.File,
-  cb: multer.FileFilterCallback
-) => {
-  const allowedTypes = [
-    ".png",
-    ".jpg",
-    ".jpeg",
-    ".pdf",
-    ".mp4",
-    ".mov",
-    ".avi",
-    ".mkv",
-  ];
-  const ext = path.extname(file.originalname).toLowerCase();
+// const fileFilter = (
+//   _req: Express.Request,
+//   file: Express.Multer.File,
+//   cb: multer.FileFilterCallback
+// ) => {
+//   const allowedTypes = [
+//     ".png",
+//     ".jpg",
+//     ".jpeg",
+//     ".pdf",
+//     ".mp4",
+//     ".mov",
+//     ".avi",
+//     ".mkv",
+//   ];
+//   const ext = path.extname(file.originalname).toLowerCase();
 
-  if (allowedTypes.includes(ext)) {
-    cb(null, true);
-  } else {
-    cb(new Error("❌ Only images, PDFs, and videos are allowed!"));
-  }
-};
+//   if (allowedTypes.includes(ext)) {
+//     cb(null, true);
+//   } else {
+//     cb(new Error("❌ Only images, PDFs, and videos are allowed!"));
+//   }
+// };
 
 // Multer instance
-export const upload = multer({ storage, fileFilter });
+export const upload = multer({ storage });
 
 export default upload;

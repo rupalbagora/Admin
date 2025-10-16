@@ -80,7 +80,7 @@ export interface IUser extends Document {
   refLink?:string|null;
   admin?:Types.ObjectId;
   firstName: string;
-  lastName: string;
+  // lastName: string;
   email: string;
   phone?: string;
   password: string;

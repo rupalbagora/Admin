@@ -3,17 +3,35 @@ import API from "../../../api/axios"; // axios instance
 import type{ IUser, UserState } from "../../types/usera.types";
 
 // GET user by ID
+// export const fetchUsers = createAsyncThunk<IUser[]>(
+//   "user/fetchUsers",
+//   async (_, { rejectWithValue, signal }) => {
+//     try {
+//       const res = await API.get("/users/get/users",{signal}); // Replace with your actual backend route
+//       return res.data;
+//     } catch (error: unknown) {
+//       return rejectWithValue(error.response?.data || "Failed to fetch users");
+//     }
+//   }
+// );
+// GET user by ID
 export const fetchUsers = createAsyncThunk<IUser[]>(
   "user/fetchUsers",
   async (_, { rejectWithValue, signal }) => {
     try {
-      const res = await API.get("/users/get/users",{signal}); // Replace with your actual backend route
+      const res = await API.get("/users/get/users", { signal }); // Replace with your actual backend route
       return res.data;
-    } catch (error: any) {
-      return rejectWithValue(error.response?.data || "Failed to fetch users");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        // Axios errors have a "response" property, but TypeScript doesn’t know that
+        const err = error as any;
+        return rejectWithValue(err.response?.data || error.message || "Failed to fetch users");
+      }
+      return rejectWithValue("An unknown error occurred");
     }
   }
 );
+
 // GET user by ID
 export const fetchUserById = createAsyncThunk<IUser, string, { rejectValue: string }>(
   "user/fetchById",
