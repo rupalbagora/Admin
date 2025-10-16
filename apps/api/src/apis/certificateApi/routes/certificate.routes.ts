@@ -26,4 +26,12 @@ router.delete(
   deleteCertificate
 );
 
+// router.put(
+//   "/update/:id",
+//   protect,
+//   authorizeRole("admin,superadmin"),
+//   upload.single("certificateImages"),
+//   updateCertificate
+// )
+
 export default router;

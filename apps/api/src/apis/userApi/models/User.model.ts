@@ -14,7 +14,7 @@ import {
 } from '../types/user.types';
 import { jwtConfig } from '../../../config/jwt';
 
-const userSchema: Schema<IUser> = new Schema({
+const userSchema: Schema<IUser> = new Schema({  
   // Basic Information
   refLink: {
     type: String,

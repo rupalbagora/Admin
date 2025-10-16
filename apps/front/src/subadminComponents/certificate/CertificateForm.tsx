@@ -1,34 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, Input, Upload, Button, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useAppDispatch } from "../../redux/hooks";
-import { uploadCertificate } from "../../redux/Slice/Uploadcertificate/certificateSlice";
+import { uploadCertificate, updateCertificate } from "../../redux/Slice/Uploadcertificate/certificateSlice";
+import { ICertificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
 
 interface CertificateFormProps {
-  onSubmit?: () => void; // optional callback after upload
+  editingCertificate?: ICertificate | null;
+  onSubmit?: () => void;
 }
 
-const CertificateForm: React.FC<CertificateFormProps> = ({ onSubmit }) => {
+const CertificateForm: React.FC<CertificateFormProps> = ({ editingCertificate, onSubmit }) => {
   const [form] = Form.useForm();
   const dispatch = useAppDispatch();
 
-  const handleFinish = async (values: any) => {
-    if (!values.file || values.file.length === 0) {
-      message.error("Please upload a file");
-      return;
+  useEffect(() => {
+    if (editingCertificate) {
+      form.setFieldsValue({ title: editingCertificate.title });
+    } else {
+      form.resetFields();
     }
+  }, [editingCertificate, form]);
 
+  const handleFinish = async (values: any) => {
     const formData = new FormData();
     formData.append("title", values.title);
-    formData.append("certificateImage", values.file[0].originFileObj);
+    if (values.file?.[0]?.originFileObj) {
+      formData.append("certificateImage", values.file[0].originFileObj);
+    }
 
     try {
-      await dispatch(uploadCertificate(formData)).unwrap();
-      message.success("Certificate uploaded successfully!");
+      if (editingCertificate) {
+        await dispatch(updateCertificate({ id: editingCertificate._id!, formData })).unwrap();
+        message.success("Certificate updated successfully!");
+      } else {
+        await dispatch(uploadCertificate(formData)).unwrap();
+        message.success("Certificate uploaded successfully!");
+      }
       form.resetFields();
       onSubmit?.();
     } catch (err: any) {
-      message.error(err?.message || "Upload failed");
+      console.error("Form submit error:", err);
+      message.error(err?.message || "Operation failed");
     }
   };
 
@@ -47,7 +60,6 @@ const CertificateForm: React.FC<CertificateFormProps> = ({ onSubmit }) => {
         name="file"
         valuePropName="fileList"
         getValueFromEvent={(e: any) => e?.fileList || []}
-        rules={[{ required: true, message: "Please upload a file" }]}
       >
         <Upload beforeUpload={() => false} maxCount={1}>
           <Button icon={<UploadOutlined />}>Click to Upload</Button>
@@ -56,7 +68,7 @@ const CertificateForm: React.FC<CertificateFormProps> = ({ onSubmit }) => {
 
       <Form.Item>
         <Button type="primary" htmlType="submit">
-          Upload Certificate
+          {editingCertificate ? "Update Certificate" : "Upload Certificate"}
         </Button>
       </Form.Item>
     </Form>
