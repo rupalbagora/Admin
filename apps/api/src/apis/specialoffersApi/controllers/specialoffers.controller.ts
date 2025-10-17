@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import SpecialOfferService from "../services/specialoffer.service";
-import { CreateSpecialOfferDto } from "../dtos/specialoffer.dto";
+import SpecialOfferService from "../services/specialoffers.services";
+import { CreateSpecialOfferDto } from "../dtos/specialoffers.dtos";
 
 // Create Special Offer
 export const createSpecialOffer = async (req: Request, res: Response) => {
@@ -32,15 +32,13 @@ export const createSpecialOffer = async (req: Request, res: Response) => {
       data: newOffer,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ success: false, error: (error as Error).message });
   }
 };
 
 // Get All Special Offers
 export const getAllSpecialOffers = async (req: Request, res: Response) => {
-  const customReq = req as unknown as { user?: { _id: string } };
-
   try {
     const offers = await SpecialOfferService.getAll();
     res.status(200).json({ success: true, data: offers });
