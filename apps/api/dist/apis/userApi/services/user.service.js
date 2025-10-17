@@ -18,7 +18,7 @@ const mongoose_1 = require("mongoose");
 class UserService {
     createUser(createUserDto) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = new User_model_1.default(Object.assign(Object.assign({}, createUserDto), { role: createUserDto.role || user_types_1.UserRole.USER }));
+            const user = new User_model_1.default(Object.assign(Object.assign({}, createUserDto), { role: user_types_1.UserRole.USER }));
             yield user.save();
             return user;
         });
@@ -56,7 +56,7 @@ class UserService {
     getAllUsers() {
         return __awaiter(this, void 0, void 0, function* () {
             return User_model_1.default.find({
-                role: { $nin: ["superadmin"] }, // exclude admins
+                role: { $nin: ["superadmin"] }, // exclude superadmins
             });
         });
     }
@@ -67,7 +67,7 @@ class UserService {
             }
             return User_model_1.default.find({
                 admin: id,
-                role: { $nin: ["superadmin"] }, // exclude admins
+                role: { $nin: ["superadmin"] }, // exclude superadmins
             });
         });
     }

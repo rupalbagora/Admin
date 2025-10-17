@@ -4,7 +4,7 @@ exports.ThemePreference = exports.Gender = exports.PaymentMethod = exports.Subsc
 var UserRole;
 (function (UserRole) {
     UserRole["SUPERADMIN"] = "superadmin";
-    UserRole["ADMIN"] = "admin";
+    UserRole["ADMIN"] = "sub-admin";
     UserRole["STAFF"] = "staff";
     UserRole["STUDENT"] = "student";
     UserRole["USER"] = "user";

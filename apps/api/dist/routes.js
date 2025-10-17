@@ -7,10 +7,26 @@ const serverconfig_1 = __importDefault(require("./config/serverconfig"));
 const auth_routes_1 = __importDefault(require("./apis/userApi/routes/auth.routes"));
 const user_routes_1 = __importDefault(require("./apis/userApi/routes/user.routes"));
 // configer routes here
+const signup_routes_1 = __importDefault(require("../src/apis/userApi/routes/signup.routes"));
 const subscription_routes_1 = __importDefault(require("./apis/paymentApi/routes/subscription.routes"));
 serverconfig_1.default.use('/api/subscriptions', subscription_routes_1.default);
+const youtube_routes_1 = __importDefault(require("./apis/youtubeApi/routes/youtube.routes"));
+const certificate_routes_1 = __importDefault(require("./apis/certificateApi/routes/certificate.routes"));
+const packages_routes_1 = __importDefault(require("./apis/packagesApi/routes/packages.routes"));
+const productPackage_routes_1 = __importDefault(require("./apis/productPackageApi/routes/productPackage.routes"));
+const ourservice_route_1 = __importDefault(require("./apis/ourserviceApi/routes/ourservice.route"));
+const homeService_routes_1 = __importDefault(require("../src/apis/homeServiceApi/routes/homeService.routes"));
+const aboutSalon_routes_1 = __importDefault(require("./apis/aboutOurSalon/routes/aboutSalon.routes"));
 serverconfig_1.default.use('/api/auth', auth_routes_1.default);
 serverconfig_1.default.use('/api/users', user_routes_1.default);
+serverconfig_1.default.use("/api/signup", signup_routes_1.default);
+serverconfig_1.default.use("/api/youtube", youtube_routes_1.default);
+serverconfig_1.default.use("/api/certificates", certificate_routes_1.default);
+serverconfig_1.default.use("/api/packages", packages_routes_1.default);
+serverconfig_1.default.use("/api/product-packages", productPackage_routes_1.default);
+serverconfig_1.default.use("/api/ourservice", ourservice_route_1.default);
+serverconfig_1.default.use("/api/home-services", homeService_routes_1.default);
+serverconfig_1.default.use("/api/about-salon", aboutSalon_routes_1.default);
 // app.use("/api/subscription",subscriptionRoute)
 // app.use("/api/payments",paymentRoutes)
 // app.use("/api/subscription-plans",subscriptionPlansRoutes)

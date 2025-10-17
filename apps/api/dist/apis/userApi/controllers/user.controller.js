@@ -16,21 +16,31 @@ exports.getAllUser = exports.demoteUser = exports.promoteUser = exports.deleteUs
 const user_service_1 = __importDefault(require("../services/user.service"));
 const User_model_1 = __importDefault(require("../models/User.model"));
 const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
     try {
-        const userDto = req.body;
-        const newUser = yield user_service_1.default.createUser(Object.assign(Object.assign({}, userDto), { admin: (_a = req.user) === null || _a === void 0 ? void 0 : _a._id }));
+        const { firstName, email, password, phone, address, status, subscriptionPeriod, customDate, image } = req.body;
+        console.log("................");
+        const newUser = yield user_service_1.default.createUser({
+            firstName,
+            email,
+            password,
+            phone,
+            address,
+            isActive: status === 'active',
+            subscriptionPeriod,
+            expireDate: subscriptionPeriod === 'custom' && customDate ? customDate : undefined,
+            avatar: image || undefined,
+            // admin: req.user?._id
+        });
         res.status(201).json({ message: "User created", user: newUser });
     }
     catch (error) {
         if (error.name === "ValidationError") {
             res.status(400).json({
                 message: "Validation failed",
-                errors: error.errors, // This contains detailed field errors
+                errors: error.errors,
             });
             return;
         }
-        console.error("Registration error:", error);
         res.status(500).json({
             message: "Registration failed",
             error: process.env.NODE_ENV === "development" ? error.message : undefined,

@@ -22,6 +22,7 @@ const dotenv_1 = require("dotenv");
 // }
 const protect = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const authHeader = req.headers.authorization;
+    console.log("Auth Header received:", req.headers.authorization);
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         res.status(401).json({ error: "Not authorized, token missing" });
         return;
@@ -29,7 +30,9 @@ const protect = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
     const token = authHeader.split(" ")[1];
     try {
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+        console.log(decoded);
         let user = yield User_model_1.default.findById(decoded.id);
+        console.log(user);
         if (!user) {
             res.status(401).json({ error: "User no longer exists" });
             return;

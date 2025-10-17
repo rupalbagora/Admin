@@ -7,7 +7,6 @@ import Signup from "../models/signup.model"; // ✅ Model renamed
 export const signup = async (req: Request, res: Response) => {
   try {
     const { name, email, password, confirmPassword } = req.body;
-
     // 1️⃣ Check all fields
     if (!name || !email || !password || !confirmPassword) {
       return res.status(400).json({ success: true, message: "All fields are required" });

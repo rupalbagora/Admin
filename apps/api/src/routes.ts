@@ -13,6 +13,13 @@ app.use('/api/subscriptions', subscriptionRoutes);
 import packagesRoutes from "./apis/packagesApi/routes/packages.routes";
 import productPackageRoutes from "./apis/productPackageApi/routes/productPackage.routes"
 import ourServiceRoutes from "./apis/ourserviceApi/routes/ourservice.route";
+import homeServiceRoutes from "../src/apis/homeServiceApi/routes/homeService.routes"
+import aboutSalonRoutes from "./apis/aboutOurSalon/routes/aboutSalon.routes"
+
+
+
+
+
 app.use('/api/auth', authRoutes);
 app.use('/api/users',usersRoutes );
 app.use("/api/signup",signupRoutes);
@@ -21,7 +28,8 @@ app.use("/api/certificates", certificateRoutes);
 app.use("/api/packages", packagesRoutes);
 app.use("/api/product-packages", productPackageRoutes);
 app.use("/api/ourservice", ourServiceRoutes);
-
+app.use("/api/home-services", homeServiceRoutes);
+app.use("/api/about-salon",aboutSalonRoutes);
 // app.use("/api/subscription",subscriptionRoute)
 // app.use("/api/payments",paymentRoutes)
 // app.use("/api/subscription-plans",subscriptionPlansRoutes)

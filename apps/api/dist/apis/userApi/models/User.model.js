@@ -68,12 +68,6 @@ const userSchema = new mongoose_1.Schema({
         trim: true,
         maxlength: [50, 'First name cannot exceed 50 characters']
     },
-    lastName: {
-        type: String,
-        required: [true, 'Last name is required'],
-        trim: true,
-        maxlength: [50, 'Last name cannot exceed 50 characters']
-    },
     email: {
         type: String,
         required: [true, 'Email is required'],
@@ -91,6 +85,10 @@ const userSchema = new mongoose_1.Schema({
             message: (props) => `${props.value} is not a valid phone number!`
         }
     },
+    // address: {
+    //   type: String,
+    //   required: [true, 'Address is required']
+    // },
     // Authentication
     password: {
         type: String,
@@ -136,6 +134,12 @@ const userSchema = new mongoose_1.Schema({
         enum: Object.values(user_types_1.SubscriptionStatus),
         default: user_types_1.SubscriptionStatus.PENDING
     },
+    subscriptionPeriod: {
+        type: String,
+        enum: ['biannual', 'halfyearly', 'yearly', 'custom'],
+        default: 'biannual'
+    },
+    expireDate: Date,
     paymentMethod: {
         type: String,
         enum: Object.values(user_types_1.PaymentMethod)
@@ -204,7 +208,6 @@ const userSchema = new mongoose_1.Schema({
     toObject: { virtuals: true }
 });
 // Indexes
-// userSchema.index({ email: 1 }, { unique: true });
 userSchema.index({ role: 1 });
 userSchema.index({ subscriptionStatus: 1 });
 userSchema.index({ 'subscriptionEndDate': 1 });
@@ -224,9 +227,6 @@ userSchema.pre('save', function (next) {
     next();
 });
 // Virtuals
-userSchema.virtual('fullName').get(function () {
-    return `${this.firstName} ${this.lastName}`;
-});
 userSchema.virtual('isSubscriptionActive').get(function () {
     if (!this.subscriptionEndDate)
         return false;
@@ -256,7 +256,7 @@ userSchema.methods.createPasswordResetToken = function () {
         .createHash('sha256')
         .update(resetToken)
         .digest('hex');
-    this.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+    this.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000);
     return resetToken;
 };
 const User = (0, mongoose_1.model)('User', userSchema);

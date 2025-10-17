@@ -72,6 +72,8 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         user.isActive = false;
         yield user.save();
         const token = user.generateAuthToken();
+        console.log(token);
+        console.log("JWT_SECRET in protect:", process.env.JWT_SECRET);
         res.status(201).json({
             user: formatUserResponse(user),
             token,

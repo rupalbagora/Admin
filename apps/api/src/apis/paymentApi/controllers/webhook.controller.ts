@@ -11,7 +11,7 @@ export const handleWebhook = async (req: Request, res: Response) => {
     .createHmac("sha256", webhookSecret)
     .update(JSON.stringify(req.body))
     .digest("hex");
-
+    
   if (expectedSignature !== receivedSignature) {
     res.status(400).json({ error: "Invalid webhook signature" });
     return;

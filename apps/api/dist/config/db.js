@@ -7,7 +7,7 @@ exports.connectDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = require("dotenv");
 (0, dotenv_1.config)();
-const uri = process.env.MONGO_URI || "mongodb://localhost:27017/ams.";
+const uri = process.env.MONGO_URI || "mongodb://localhost:27017/naushad.";
 const connectDB = () => {
     mongoose_1.default
         .connect(uri)
