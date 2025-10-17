@@ -1,15 +1,15 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, Types } from "mongoose";
 
 export interface IAboutSalon extends Document {
   title: string;
   description: string;
-  image: string; // path saved by multer
-  addedBy: Schema.Types.ObjectId;
+  image: string;       // Multer uploaded image path
+  addedBy: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
 
-const aboutSalonSchema = new Schema<IAboutSalon>(
+const AboutSalonSchema = new Schema<IAboutSalon>(
   {
     title: { type: String, required: true },
     description: { type: String, required: true },
@@ -19,4 +19,4 @@ const aboutSalonSchema = new Schema<IAboutSalon>(
   { timestamps: true }
 );
 
-export default model<IAboutSalon>("AboutSalon", aboutSalonSchema);
+export default model<IAboutSalon>("AboutSalon", AboutSalonSchema);

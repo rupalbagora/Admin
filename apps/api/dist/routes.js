@@ -6,10 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const serverconfig_1 = __importDefault(require("./config/serverconfig"));
 const auth_routes_1 = __importDefault(require("./apis/userApi/routes/auth.routes"));
 const user_routes_1 = __importDefault(require("./apis/userApi/routes/user.routes"));
+// import subscriptionRoute from "./apis/paymentApi/routes/subscription.routes"
+// import  paymentRoutes from "./apis/paymentApi/routes/payment.routes"
+// import subscriptionPlansRoutes from "./apis/paymentApi/routes/subscriptionPlan.routes"
 // configer routes here
 const signup_routes_1 = __importDefault(require("../src/apis/userApi/routes/signup.routes"));
-const subscription_routes_1 = __importDefault(require("./apis/paymentApi/routes/subscription.routes"));
-serverconfig_1.default.use('/api/subscriptions', subscription_routes_1.default);
+// import subscriptionRoutes from './apis/paymentApi/routes/subscription.routes';
+// app.use('/api/subscriptions', subscriptionRoutes);
 const youtube_routes_1 = __importDefault(require("./apis/youtubeApi/routes/youtube.routes"));
 const certificate_routes_1 = __importDefault(require("./apis/certificateApi/routes/certificate.routes"));
 const packages_routes_1 = __importDefault(require("./apis/packagesApi/routes/packages.routes"));

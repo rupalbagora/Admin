@@ -14,15 +14,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const aboutSalon_model_1 = __importDefault(require("../models/aboutSalon.model"));
 class AboutSalonService {
-    create(title, description, image, addedBy) {
+    create(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const salon = new aboutSalon_model_1.default({ title, description, image, addedBy });
+            const salon = new aboutSalon_model_1.default(data);
             return salon.save();
         });
     }
-    getByUser(userId) {
+    getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            return aboutSalon_model_1.default.find({ addedBy: userId }).sort({ createdAt: -1 });
+            return aboutSalon_model_1.default.find().sort({ createdAt: -1 });
         });
     }
     getById(id) {
@@ -30,14 +30,14 @@ class AboutSalonService {
             return aboutSalon_model_1.default.findById(id);
         });
     }
+    updateById(id, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return aboutSalon_model_1.default.findByIdAndUpdate(id, data, { new: true });
+        });
+    }
     deleteById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             return aboutSalon_model_1.default.findByIdAndDelete(id);
-        });
-    }
-    update(id, updateData) {
-        return __awaiter(this, void 0, void 0, function* () {
-            return aboutSalon_model_1.default.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
         });
     }
 }

@@ -2,12 +2,12 @@ import app from "./config/serverconfig";
 import authRoutes from "./apis/userApi/routes/auth.routes"
 import usersRoutes from "./apis/userApi/routes/user.routes"
 // import subscriptionRoute from "./apis/paymentApi/routes/subscription.routes"
-import  paymentRoutes from "./apis/paymentApi/routes/payment.routes"
-import subscriptionPlansRoutes from "./apis/paymentApi/routes/subscriptionPlan.routes"
+// import  paymentRoutes from "./apis/paymentApi/routes/payment.routes"
+// import subscriptionPlansRoutes from "./apis/paymentApi/routes/subscriptionPlan.routes"
 // configer routes here
 import signupRoutes from "../src/apis/userApi/routes/signup.routes"
-import subscriptionRoutes from './apis/paymentApi/routes/subscription.routes';
-app.use('/api/subscriptions', subscriptionRoutes);
+// import subscriptionRoutes from './apis/paymentApi/routes/subscription.routes';
+// app.use('/api/subscriptions', subscriptionRoutes);
  import youtubeRoutes from "./apis/youtubeApi/routes/youtube.routes"
  import certificateRoutes from "./apis/certificateApi/routes/certificate.routes"
 import packagesRoutes from "./apis/packagesApi/routes/packages.routes";
@@ -15,8 +15,6 @@ import productPackageRoutes from "./apis/productPackageApi/routes/productPackage
 import ourServiceRoutes from "./apis/ourserviceApi/routes/ourservice.route";
 import homeServiceRoutes from "../src/apis/homeServiceApi/routes/homeService.routes"
 import aboutSalonRoutes from "./apis/aboutOurSalon/routes/aboutSalon.routes"
-
-
 
 
 

@@ -53,24 +53,13 @@ const crypto_1 = __importDefault(require("crypto"));
 const user_types_1 = require("../types/user.types");
 const jwt_1 = require("../../../config/jwt");
 const userSchema = new mongoose_1.Schema({
-    // Basic Information
-    refLink: {
-        type: String,
-        default: null
-    },
-    admin: {
-        type: mongoose_1.default.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    firstName: {
-        type: String,
-        required: [true, 'First name is required'],
-        trim: true,
-        maxlength: [50, 'First name cannot exceed 50 characters']
-    },
+    refLink: { type: String, default: null },
+    admin: { type: mongoose_1.default.Schema.Types.ObjectId, ref: 'User' },
+    firstName: { type: String, required: true, trim: true, maxlength: 50 },
+    lastName: { type: String, required: true, trim: true, maxlength: 50 }, // ✅ Added
     email: {
         type: String,
-        required: [true, 'Email is required'],
+        required: true,
         unique: true,
         lowercase: true,
         validate: [validator_1.default.isEmail, 'Please provide a valid email']
@@ -85,65 +74,21 @@ const userSchema = new mongoose_1.Schema({
             message: (props) => `${props.value} is not a valid phone number!`
         }
     },
-    // address: {
-    //   type: String,
-    //   required: [true, 'Address is required']
-    // },
-    // Authentication
-    password: {
-        type: String,
-        required: [true, 'Password is required'],
-        minlength: [8, 'Password must be at least 8 characters'],
-        select: false
-    },
+    password: { type: String, required: true, minlength: 8, select: false },
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
-    // Roles and Permissions
-    role: {
-        type: String,
-        enum: Object.values(user_types_1.UserRole),
-        default: user_types_1.UserRole.USER
-    },
-    permissions: {
-        type: [String],
-        default: []
-    },
-    isVerified: {
-        type: Boolean,
-        default: false
-    },
-    isActive: {
-        type: Boolean,
-        default: true
-    },
-    // Subscription Information
-    subscription: {
-        type: mongoose_1.Schema.Types.ObjectId,
-        ref: 'Subscription'
-    },
-    subscriptionType: {
-        type: String,
-        enum: Object.values(user_types_1.SubscriptionType),
-        default: user_types_1.SubscriptionType.FREE
-    },
+    role: { type: String, enum: Object.values(user_types_1.UserRole), default: user_types_1.UserRole.USER },
+    permissions: { type: [String], default: [] },
+    isVerified: { type: Boolean, default: false },
+    isActive: { type: Boolean, default: true },
+    subscription: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Subscription' },
+    subscriptionType: { type: String, enum: Object.values(user_types_1.SubscriptionType), default: user_types_1.SubscriptionType.FREE },
+    subscriptionPeriod: { type: String, enum: ['biannual', 'halfyearly', 'yearly', 'custom'], default: 'biannual' }, // ✅ Added
     subscriptionStartDate: Date,
     subscriptionEndDate: Date,
-    subscriptionStatus: {
-        type: String,
-        enum: Object.values(user_types_1.SubscriptionStatus),
-        default: user_types_1.SubscriptionStatus.PENDING
-    },
-    subscriptionPeriod: {
-        type: String,
-        enum: ['biannual', 'halfyearly', 'yearly', 'custom'],
-        default: 'biannual'
-    },
-    expireDate: Date,
-    paymentMethod: {
-        type: String,
-        enum: Object.values(user_types_1.PaymentMethod)
-    },
+    subscriptionStatus: { type: String, enum: Object.values(user_types_1.SubscriptionStatus), default: user_types_1.SubscriptionStatus.PENDING },
+    paymentMethod: { type: String, enum: Object.values(user_types_1.PaymentMethod) },
     billingInfo: {
         address: String,
         city: String,
@@ -151,66 +96,24 @@ const userSchema = new mongoose_1.Schema({
         country: String,
         postalCode: String
     },
-    // Profile Information
-    avatar: {
-        type: mongoose_1.Types.ObjectId,
-        ref: "UploadedFile"
-    },
-    bio: {
-        type: String,
-        maxlength: [500, 'Bio cannot exceed 500 characters']
-    },
+    avatar: { type: mongoose_1.Types.ObjectId, ref: 'UploadedFile' },
+    bio: { type: String, maxlength: 500 },
     dateOfBirth: Date,
-    gender: {
-        type: String,
-        enum: Object.values(user_types_1.Gender)
-    },
-    // Social Media
-    socialMedia: {
-        facebook: String,
-        twitter: String,
-        linkedin: String,
-        instagram: String
-    },
-    // Preferences
+    gender: { type: String, enum: Object.values(user_types_1.Gender) },
+    socialMedia: { facebook: String, twitter: String, linkedin: String, instagram: String },
     preferences: {
-        theme: {
-            type: String,
-            enum: Object.values(user_types_1.ThemePreference),
-            default: user_types_1.ThemePreference.LIGHT
-        },
-        language: {
-            type: String,
-            default: 'en'
-        },
-        notifications: {
-            email: { type: Boolean, default: true },
-            push: { type: Boolean, default: true },
-            sms: { type: Boolean, default: false }
-        }
+        theme: { type: String, enum: Object.values(user_types_1.ThemePreference), default: user_types_1.ThemePreference.LIGHT },
+        language: { type: String, default: 'en' },
+        notifications: { email: { type: Boolean, default: true }, push: { type: Boolean, default: true }, sms: { type: Boolean, default: false } }
     },
-    // Statistics
-    loginCount: {
-        type: Number,
-        default: 0
-    },
+    loginCount: { type: Number, default: 0 },
     lastLogin: Date,
-    devices: [{
-            deviceType: String,
-            os: String,
-            browser: String,
-            ipAddress: String,
-            lastAccess: Date
-        }]
-}, {
-    timestamps: true,
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true }
-});
+    devices: [{ deviceType: String, os: String, browser: String, ipAddress: String, lastAccess: Date }]
+}, { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } });
 // Indexes
 userSchema.index({ role: 1 });
 userSchema.index({ subscriptionStatus: 1 });
-userSchema.index({ 'subscriptionEndDate': 1 });
+userSchema.index({ subscriptionEndDate: 1 });
 // Middleware
 userSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -252,10 +155,7 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
 };
 userSchema.methods.createPasswordResetToken = function () {
     const resetToken = crypto_1.default.randomBytes(32).toString('hex');
-    this.passwordResetToken = crypto_1.default
-        .createHash('sha256')
-        .update(resetToken)
-        .digest('hex');
+    this.passwordResetToken = crypto_1.default.createHash('sha256').update(resetToken).digest('hex');
     this.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000);
     return resetToken;
 };

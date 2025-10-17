@@ -1,11 +1,9 @@
-// types/aboutSalon.types.ts
-import { Types, Document } from "mongoose";
-
-export interface IAboutSalon extends Document {
+export interface IAboutSalon {
+  _id?: string;
   title: string;
   description: string;
   image: string;
-  addedBy: Types.ObjectId;
-  createdAt: Date;
-  updatedAt: Date;
+  addedBy: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

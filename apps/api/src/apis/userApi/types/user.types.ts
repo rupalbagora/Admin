@@ -77,10 +77,10 @@ export interface IPreferences {
 }
 
 export interface IUser extends Document {
-  refLink?:string|null;
-  admin?:Types.ObjectId;
+  refLink?: string | null;
+  admin?: Types.ObjectId;
   firstName: string;
-  // lastName: string;
+  lastName: string; 
   email: string;
   phone?: string;
   password: string;
@@ -93,12 +93,13 @@ export interface IUser extends Document {
   isActive: boolean;
   subscription?: Types.ObjectId;
   subscriptionType: SubscriptionType;
+  subscriptionPeriod?: 'biannual' | 'halfyearly' | 'yearly' | 'custom'; 
   subscriptionStartDate?: Date;
   subscriptionEndDate?: Date;
   subscriptionStatus: SubscriptionStatus;
   paymentMethod?: PaymentMethod;
   billingInfo?: IBillingInfo;
-  avatar?: Types.ObjectId|IUploadedFile;
+  avatar?: Types.ObjectId | IUploadedFile;
   bio?: string;
   dateOfBirth?: Date;
   gender?: Gender;

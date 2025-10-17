@@ -12,28 +12,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateAboutSalon = exports.deleteAboutSalon = exports.getAllAboutSalon = exports.uploadAboutSalon = void 0;
+exports.deleteAboutSalon = exports.updateAboutSalon = exports.getAboutSalonById = exports.getAllAboutSalon = exports.createAboutSalon = void 0;
 const aboutSalon_service_1 = __importDefault(require("../services/aboutSalon.service"));
-const uploadAboutSalon = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const createAboutSalon = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { title, description } = req.body;
         const addedBy = req.user._id;
-        if (!req.file) {
-            return res.status(400).json({ success: false, message: "Salon image is required!" });
-        }
-        const image = req.file.path;
-        const salon = yield aboutSalon_service_1.default.create(title, description, image, addedBy);
-        res.status(201).json({ success: true, data: salon });
+        if (!req.file)
+            return res.status(400).json({ success: false, message: "Image is required!" });
+        const newSalon = yield aboutSalon_service_1.default.create(Object.assign(Object.assign({}, req.body), { addedBy, image: req.file.path }));
+        res.status(201).json({ success: true, data: newSalon });
     }
     catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
 });
-exports.uploadAboutSalon = uploadAboutSalon;
+exports.createAboutSalon = createAboutSalon;
 const getAllAboutSalon = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const userId = req.user._id;
-        const salons = yield aboutSalon_service_1.default.getByUser(userId);
+        const salons = yield aboutSalon_service_1.default.getAll();
         res.status(200).json({ success: true, data: salons });
     }
     catch (error) {
@@ -41,32 +37,26 @@ const getAllAboutSalon = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.getAllAboutSalon = getAllAboutSalon;
-const deleteAboutSalon = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAboutSalonById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { id } = req.params;
-        const deleted = yield aboutSalon_service_1.default.deleteById(id);
-        if (!deleted)
-            return res.status(404).json({ success: false, message: "About Salon not found" });
-        res.status(200).json({ success: true, message: "Deleted successfully" });
+        const salon = yield aboutSalon_service_1.default.getById(req.params.id);
+        if (!salon)
+            return res.status(404).json({ success: false, message: "Salon not found" });
+        res.status(200).json({ success: true, data: salon });
     }
     catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
 });
-exports.deleteAboutSalon = deleteAboutSalon;
+exports.getAboutSalonById = getAboutSalonById;
 const updateAboutSalon = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { id } = req.params;
-        const updateData = {};
-        if (req.body.title)
-            updateData.title = req.body.title;
-        if (req.body.description)
-            updateData.description = req.body.description;
+        const updateData = Object.assign({}, req.body);
         if (req.file)
             updateData.image = req.file.path;
-        const updated = yield aboutSalon_service_1.default.update(id, updateData);
+        const updated = yield aboutSalon_service_1.default.updateById(req.params.id, updateData);
         if (!updated)
-            return res.status(404).json({ success: false, message: "About Salon not found" });
+            return res.status(404).json({ success: false, message: "Salon not found" });
         res.status(200).json({ success: true, data: updated });
     }
     catch (error) {
@@ -74,3 +64,15 @@ const updateAboutSalon = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.updateAboutSalon = updateAboutSalon;
+const deleteAboutSalon = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const deleted = yield aboutSalon_service_1.default.deleteById(req.params.id);
+        if (!deleted)
+            return res.status(404).json({ success: false, message: "Salon not found" });
+        res.status(200).json({ success: true, message: "Salon deleted successfully" });
+    }
+    catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+exports.deleteAboutSalon = deleteAboutSalon;

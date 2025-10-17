@@ -1,26 +1,25 @@
-import AboutSalon from "../models/aboutSalon.model";
-import { IAboutSalon } from "../types/aboutSalon.types";
+import AboutSalon, { IAboutSalon } from "../models/aboutSalon.model";
 
 class AboutSalonService {
-  async create(title: string, description: string, image: string, addedBy: string): Promise<IAboutSalon> {
-    const salon = new AboutSalon({ title, description, image, addedBy });
+  async create(data: Partial<IAboutSalon>): Promise<IAboutSalon> {
+    const salon = new AboutSalon(data);
     return salon.save();
   }
-  
-  async getByUser(userId: string): Promise<IAboutSalon[]> {
-    return AboutSalon.find({ addedBy: userId }).sort({ createdAt: -1 });
+
+  async getAll(): Promise<IAboutSalon[]> {
+    return AboutSalon.find().sort({ createdAt: -1 });
   }
 
   async getById(id: string): Promise<IAboutSalon | null> {
     return AboutSalon.findById(id);
   }
 
-  async deleteById(id: string): Promise<IAboutSalon | null> {
-    return AboutSalon.findByIdAndDelete(id);
+  async updateById(id: string, data: Partial<IAboutSalon>): Promise<IAboutSalon | null> {
+    return AboutSalon.findByIdAndUpdate(id, data, { new: true });
   }
 
-  async update(id: string, updateData: Partial<IAboutSalon>): Promise<IAboutSalon | null> {
-    return AboutSalon.findByIdAndUpdate(id, updateData, { new: true, runValidators: true });
+  async deleteById(id: string): Promise<IAboutSalon | null> {
+    return AboutSalon.findByIdAndDelete(id);
   }
 }
 

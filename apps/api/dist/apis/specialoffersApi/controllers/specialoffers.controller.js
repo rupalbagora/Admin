@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteSpecialOffer = exports.getAllSpecialOffers = exports.createSpecialOffer = void 0;
-const specialoffer_service_1 = __importDefault(require("../services/specialoffer.service"));
+const specialoffers_services_1 = __importDefault(require("../services/specialoffers.services"));
 // Create Special Offer
 const createSpecialOffer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -28,7 +28,7 @@ const createSpecialOffer = (req, res) => __awaiter(void 0, void 0, void 0, funct
             return res.status(400).json({ success: false, message: "Offer image is required!" });
         }
         const imageUrl = customReq.file.path;
-        const newOffer = yield specialoffer_service_1.default.create({
+        const newOffer = yield specialoffers_services_1.default.create({
             tag,
             imageUrl,
             addedBy,
@@ -40,16 +40,15 @@ const createSpecialOffer = (req, res) => __awaiter(void 0, void 0, void 0, funct
         });
     }
     catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({ success: false, error: error.message });
     }
 });
 exports.createSpecialOffer = createSpecialOffer;
 // Get All Special Offers
 const getAllSpecialOffers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const customReq = req;
     try {
-        const offers = yield specialoffer_service_1.default.getAll();
+        const offers = yield specialoffers_services_1.default.getAll();
         res.status(200).json({ success: true, data: offers });
     }
     catch (error) {
@@ -61,7 +60,7 @@ exports.getAllSpecialOffers = getAllSpecialOffers;
 const deleteSpecialOffer = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const deleted = yield specialoffer_service_1.default.deleteById(id);
+        const deleted = yield specialoffers_services_1.default.deleteById(id);
         if (!deleted) {
             return res.status(404).json({ success: false, message: "Special offer not found" });
         }
