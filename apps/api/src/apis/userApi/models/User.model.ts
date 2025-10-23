@@ -19,7 +19,7 @@ const userSchema: Schema<IUser> = new Schema({
   admin: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 
   firstName: { type: String, required: true, trim: true, maxlength: 50 },
-  lastName: { type: String, required: true, trim: true, maxlength: 50 }, // ✅ Added
+  lastName: { type: String, required: true, trim: true, maxlength: 50 }, 
 
   email: {
     type: String,

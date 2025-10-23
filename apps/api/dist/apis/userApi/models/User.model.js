@@ -56,7 +56,7 @@ const userSchema = new mongoose_1.Schema({
     refLink: { type: String, default: null },
     admin: { type: mongoose_1.default.Schema.Types.ObjectId, ref: 'User' },
     firstName: { type: String, required: true, trim: true, maxlength: 50 },
-    lastName: { type: String, required: true, trim: true, maxlength: 50 }, // ✅ Added
+    lastName: { type: String, required: true, trim: true, maxlength: 50 },
     email: {
         type: String,
         required: true,

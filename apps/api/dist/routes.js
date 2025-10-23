@@ -10,7 +10,8 @@ const user_routes_1 = __importDefault(require("./apis/userApi/routes/user.routes
 // import  paymentRoutes from "./apis/paymentApi/routes/payment.routes"
 // import subscriptionPlansRoutes from "./apis/paymentApi/routes/subscriptionPlan.routes"
 // configer routes here
-const signup_routes_1 = __importDefault(require("../src/apis/userApi/routes/signup.routes"));
+// import signupRoutes from "../src/apis/userApi/routes/signup.routes"
+const signup_routes_1 = __importDefault(require("./apis/userApi/routes/signup.routes"));
 // import subscriptionRoutes from './apis/paymentApi/routes/subscription.routes';
 // app.use('/api/subscriptions', subscriptionRoutes);
 const youtube_routes_1 = __importDefault(require("./apis/youtubeApi/routes/youtube.routes"));
@@ -18,7 +19,8 @@ const certificate_routes_1 = __importDefault(require("./apis/certificateApi/rout
 const packages_routes_1 = __importDefault(require("./apis/packagesApi/routes/packages.routes"));
 const productPackage_routes_1 = __importDefault(require("./apis/productPackageApi/routes/productPackage.routes"));
 const ourservice_route_1 = __importDefault(require("./apis/ourserviceApi/routes/ourservice.route"));
-const homeService_routes_1 = __importDefault(require("../src/apis/homeServiceApi/routes/homeService.routes"));
+// import homeServiceRoutes from "../src/apis/homeServiceApi/routes/homeService.routes"
+const homeService_routes_1 = __importDefault(require("./apis/homeServiceApi/routes/homeService.routes"));
 const aboutSalon_routes_1 = __importDefault(require("./apis/aboutOurSalon/routes/aboutSalon.routes"));
 serverconfig_1.default.use('/api/auth', auth_routes_1.default);
 serverconfig_1.default.use('/api/users', user_routes_1.default);
