@@ -16,6 +16,9 @@ import ourServiceRoutes from "./apis/ourserviceApi/routes/ourservice.route";
 // import homeServiceRoutes from "../src/apis/homeServiceApi/routes/homeService.routes"
 import homeServiceRoutes from "./apis/homeServiceApi/routes/homeService.routes"
 import aboutSalonRoutes from "./apis/aboutOurSalon/routes/aboutSalon.routes"
+import aboutUsRoutes from "./apis/documentation/routes/aboutUs.routes"
+import privacyPolicyRoutes from "./apis/documentation/routes/privacyPolicy.routes";
+import termsConditionRoutes from "./apis/documentation/routes/termsCondition.routes";
 
 
 app.use('/api/auth', authRoutes);
@@ -31,5 +34,8 @@ app.use("/api/about-salon",aboutSalonRoutes);
 // app.use("/api/payments",paymentRoutes)
 // app.use("/api/subscription-plans",subscriptionPlansRoutes)
 // subscription-plans
+app.use("/api/about-us",aboutUsRoutes);
+app.use("/api/privacy-policy", privacyPolicyRoutes);
+app.use("/api/terms-and-conditions", termsConditionRoutes); 
 
 export default app;
