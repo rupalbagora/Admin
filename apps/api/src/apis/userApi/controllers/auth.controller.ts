@@ -14,6 +14,20 @@
       try {
         const { ref } = req.query;
         const userData: CreateUserDto = req.body;
+     
+          // If fullName provided, split automatically
+    if (userData.fullName && (!userData.firstName || !userData.lastName)) {
+      const nameParts = userData.fullName.trim().split(" ");
+      userData.firstName = nameParts[0];
+      userData.lastName = nameParts.slice(1).join(" ") || "";
+    }
+
+    // Ensure fullName is always set
+    if (!userData.fullName && userData.firstName && userData.lastName) {
+      userData.fullName = `${userData.firstName} ${userData.lastName}`;
+    }
+
+
 
         // Check existing user
         const existingUser = await User.findOne({ email: userData.email });
@@ -170,6 +184,8 @@
             dateOfBirth: foundUser.dateOfBirth,
             createdAt: foundUser.createdAt,
             updatedAt: foundUser.updatedAt,
+                    address: foundUser.address,
+
           },
         });
       } catch (error) {

@@ -111,6 +111,8 @@ export interface IUser extends Document {
   createdAt: Date;
   updatedAt: Date;
 
+    address?: string;
+
   // Virtuals
   fullName: string;
   isSubscriptionActive: boolean;

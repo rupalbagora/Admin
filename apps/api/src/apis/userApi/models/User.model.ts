@@ -77,6 +77,10 @@ const userSchema: Schema<IUser> = new Schema({
     notifications: { email: { type: Boolean, default: true }, push: { type: Boolean, default: true }, sms: { type: Boolean, default: false } }
   },
 
+
+    fullName: { type: String, required: true, trim: true, maxlength: 100 },
+
+
   loginCount: { type: Number, default: 0 },
   lastLogin: Date,
   devices: [{ deviceType: String, os: String, browser: String, ipAddress: String, lastAccess: Date }]
