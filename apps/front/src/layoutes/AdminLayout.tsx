@@ -6,38 +6,8 @@ import Header from "../commonComp/Header/Header";
 import RouteTracker from "../commonComp/RouteTracker/RouteTracker";
 import { useAppDispatch } from "../redux/hooks";
 import { search } from "../redux/Slice/activeStatus/activeStatusSlice";
-import type SubMenu from "antd/es/menu/SubMenu";
-const navItems = [
-  // {
-  //   label: "Home",
-  //   href: "/",
-  //   icon: <Home size={16} />,
-  // },
-  // {
-  //   label: "Products",
-  //   href: "/admin/products",
-  //   subItems: [
-  //     { label: "All Products", href: "/products" },
-  //     { label: "Categories", href: "/categories" },
-  //   ],
-  // },
-  // {
-  //   label: "Users",
-  //   href: "/admin/users",
-  //   icon: <Users size={16} />,
-  // },
-  // {
-  //   label: "Settings",
-  //   href: "/admin/settings",
-  //   icon: <Settings size={16} />,
-  // },
-  // {
-  //   label: "Subscription Plan",
-  //   href: "/admin/Subscription-plan",
-  //   icon: <CreditCard	 size={16} />,
-  // },
-];
- 
+
+
 const menuItems = [
   {
     name: "Dashboard",
@@ -114,7 +84,7 @@ const menuItems = [
         {
           name: "Special Offers",
           icon: <User className="w-4 h-4" />,
-          path: "/admin/SpecialOffers",
+          path: "/admin/Special-Offers",
         },
         {
           name: "Our Service",
@@ -162,6 +132,31 @@ const menuItems = [
     icon: <Home className="w-5 h-5" />,
     path: "/admin/youtube",
   },
+    {
+    name: "Catalog",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/catalog",
+  },
+  {
+    name: "Refer a friend",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/Refer-Friend",
+  },
+  {
+    name: "About Us",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/About-Us",
+  },
+  {
+    name: "Privacy Policy",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/Privacy-Policy",
+  },
+  {
+    name: "Terms & Conditions",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/Terms-Conditions",
+  },
 ];
 
 export default function AdminLayout() {
@@ -186,12 +181,7 @@ const dispatch = useAppDispatch();
       <Header
       logo={<img src="/src/assets/logo.png" alt="Logo" style={{ height: "40px" }} />}
 
-        navItems={navItems}
-        // user={{
-        //   name: "John Doe",
-        //   email: "john@example.com",
-        //   avatar: "/path/to/avatar.jpg",
-        // }}
+      
         onSearch={onSearch}
         onNotificationClick={() => console.log("Notifications clicked")}
         onMobileMenuToggle={() => setMobileSidebarOpen(!mobileSidebarOpen)}

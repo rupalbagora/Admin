@@ -38,11 +38,15 @@ const SubscriptionManagement = lazy(
 // SUB-ADMIN
 const UploadCategories = lazy (()=> import("../src/subadminComponents/products/AllCategories/UploadCategories"));
 const UploadProduct = lazy (()=> import("../src/subadminComponents/products/ProductsDetails/UploadProduct"));
-
+const UploadSpecialOffers = lazy (()=> import("../src/subadminComponents/specialoffers/UploadSpecialOffers"));
 const UploadYoutube = lazy (()=> import("../src/subadminComponents/youtube/UploadYoutube"));
+const UploadCatalog= lazy (()=> import("./subadminComponents/catalog/UploadCatalog"));
+const UploadReferFriend= lazy (()=> import("./subadminComponents/referfriend/UploadReferFriend"));
+const UploadAboutUs= lazy (()=> import("./subadminComponents/aboutus/UploadAboutUs"));
+const UploadPrivacyPolicy= lazy (()=> import("./subadminComponents/privacypolicy/UploadPrivacyPolicy"));
+const UploadTermsConditions= lazy (()=> import("./subadminComponents/terms&conditions/UploadTermsConditions"));
 const UploadOurservice = lazy (()=> import("../src/subadminComponents/ourservice/UploadOurservice"));
-const UploadCertificate = lazy(() => import("./subadminComponents/certificate/UploadCertificate")) 
-
+const UploadCertificate = lazy(() => import("./subadminComponents/certificate/UploadCertificate"));
 const ManagePackages = lazy (() => import("./subadminComponents/ourpackages/ManagePackages"));  
 const ManageProductPackages = lazy(()=> import("./subadminComponents/productpackages/ManageProductPackages"));
 
@@ -158,7 +162,7 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={Loader}>
             {" "}
-            <ManageUsers />
+            <ManageUsers/>
           </Suspense>
         ),
       },
@@ -199,6 +203,51 @@ export const router = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path: "catalog",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadCatalog />
+          </Suspense>
+        ),
+      },
+        {
+        path: "Refer-Friend",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadReferFriend />
+          </Suspense>
+        ),
+      },
+      {
+        path: "About-Us",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadAboutUs />
+          </Suspense>
+        ),
+      },
+       {
+        path: "Privacy-Policy",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadPrivacyPolicy />
+          </Suspense>
+        ),
+      },
+       {
+        path: "Terms-Conditions",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadTermsConditions />
+          </Suspense>
+        ),
+      },
        {
         path: "Ourservice",
         element: (
@@ -223,6 +272,15 @@ export const router = createBrowserRouter([
           <Suspense fallback={Loader}>
             {" "}
             <ManageProductPackages />
+          </Suspense>
+        ),
+      },
+       {
+        path: "Special-Offers",
+        element: (
+          <Suspense fallback={Loader}>
+            {" "}
+            <UploadSpecialOffers/>
           </Suspense>
         ),
       },
