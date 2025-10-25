@@ -20,7 +20,7 @@ Authorization: Bearer <token>
 Body → form-data:
 
 title → Summer Skincare Routine
-
+  
 video → (choose a .mp4 file)
 
 Send Request.

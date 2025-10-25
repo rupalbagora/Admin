@@ -133,7 +133,7 @@ export const deleteYoutubeVideo = async (req: Request, res: Response) => {
       const filePath = path.join(__dirname, "../../../../", deleted.videoPath);
       fs.unlink(filePath, (err) => {
         if (err) {
-          console.error("❌ Error deleting file:", err.message);
+          console.error(" Error deleting file:", err.message);
         } else {
           console.log(`🗑️ Deleted file: ${filePath}`);
         }

@@ -18,7 +18,7 @@ router.post(
   "/",
   protect,
   authorizeRole("admin", "superadmin"),
-  upload.single("video"), // 🟢 added for file upload
+  upload.single("video"), // added for file upload
   createYoutubeVideo
 );
 
