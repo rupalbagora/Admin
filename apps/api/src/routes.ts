@@ -27,8 +27,6 @@ app.use("/api/product-packages", productPackageRoutes);
 app.use("/api/ourservice", ourServiceRoutes);
 app.use("/api/home-services", homeServiceRoutes);
 app.use("/api/about-salon",aboutSalonRoutes);
-
-
 // app.use("/api/subscription",subscriptionRoute)
 // app.use("/api/payments",paymentRoutes)
 // app.use("/api/subscription-plans",subscriptionPlansRoutes)
