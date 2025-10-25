@@ -7,7 +7,13 @@ import upload from '../../mediaApi/services/multerConfig';
 
 const router = express.Router();
 router.post('/', protect,updateToken );
-router.post('/register', validate(createUserSchema), register);
+router.post(
+  "/register",
+  upload.single("avatar"), // ✅ handle avatar upload
+  validate(createUserSchema),
+  register
+);
+//router.post('/register', validate(createUserSchema), register);
 router.post('/login', validateLogin, login);
 router.put('/profile', protect,upload.single("avatar") , updateProfile);
 router.get('/profile', protect ,getUserProfile);
