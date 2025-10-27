@@ -62,15 +62,12 @@ export const uploadCertificate = async (req: Request, res: Response) => {
     if (!req.file)
       return res.status(400).json({ success: false, message: "Certificate image is required!" });
 
-    // ✅ Build public URL instead of file path
-    //const imageUrl = `${req.protocol}://${req.get("host")}/uploads/images/${req.file.filename}`;
-//        const imageUrl = `${req.protocol}://${req.get("host")}/uploads/images/${req.file.filename}`;
-//const imageUrl = `${req.protocol}://${req.get("host")}/uploads/images/${path.basename(req.file.filename)}`;
-//     const imageUrl = `${req.protocol}://${req.get("host")}/uploads/images/${req.file.filename}`;
-//const imageUrl = `${req.protocol}://${req.get("host")}/uploads/images/${req.file.filename}`;
-    const imageUrl = `${req.protocol}://${req.get("host")}/uploads/images/${req.file.filename}`;
+  const filename = path.basename(req.file.path); // get just the file name
+const imageUrl = `${req.protocol}://${req.get("host")}/uploads/images/${filename}`;
 
-    
+
+   // const imageUrl = `${req.protocol}://${req.get("host")}/uploads/images/${path.basename(req.file.filename)}`;
+
     const certificate = await CertificateService.create(title, imageUrl, addedBy);
 
     res.status(201).json({ success: true, data: certificate });
