@@ -2,9 +2,13 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 
-// Define directories for images and videos
 const imageDir = path.join(__dirname, "../../../../uploads/images");
 const videoDir = path.join(__dirname, "../../../../uploads/videos");
+
+
+//const imageDir = path.join(uploadBaseDir, "images");
+//const videoDir = path.join(uploadBaseDir, "videos");
+
 
 // 🔥 Function to ensure a directory exists or create it
 const ensureDirExists = (dir: string) => {

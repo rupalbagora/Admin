@@ -7,12 +7,14 @@ export const createOrUpdateTerms = async (req: Request, res: Response) => {
     const validated = termsConditionSchema.parse({
       title: req.body.title,
       content: req.body.content,
+      accepted: req.body.accepted === "true" || req.body.accepted === true, // ✅ convert checkbox value
     });
 
     let doc = await TermsCondition.findOne();
     if (doc) {
       doc.title = validated.title;
       doc.content = validated.content;
+      doc.accepted = validated.accepted;
       await doc.save();
       return res.status(200).json({ message: "Terms updated", data: doc });
     }
@@ -27,7 +29,8 @@ export const createOrUpdateTerms = async (req: Request, res: Response) => {
 export const getTerms = async (_req: Request, res: Response) => {
   try {
     const doc = await TermsCondition.findOne();
-    if (!doc) return res.status(404).json({ message: "No Terms & Conditions found" });
+    if (!doc)
+      return res.status(404).json({ message: "No Terms & Conditions found" });
     return res.status(200).json({ data: doc });
   } catch (error: any) {
     return res.status(500).json({ message: error.message });
