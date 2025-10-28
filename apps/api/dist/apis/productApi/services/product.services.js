@@ -12,44 +12,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const specialoffers_models_1 = __importDefault(require("../models/specialoffers.models"));
-class SpecialOfferService {
-    // 🟢 Create Special Offer
+const product_model_1 = __importDefault(require("../models/product.model"));
+class ProductService {
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newOffer = new specialoffers_models_1.default({
-                tag: data.tag,
-                image: data.imageUrl,
-                addedBy: data.addedBy,
-            });
-            return newOffer.save();
+            return yield product_model_1.default.create(data);
         });
     }
-    // 🟠 Get All Offers
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            return specialoffers_models_1.default.find()
-                .populate("addedBy", "name email")
-                .sort({ createdAt: -1 });
+            return yield product_model_1.default.find().sort({ createdAt: -1 });
         });
     }
-    // 🔵 Get Offer by ID
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return specialoffers_models_1.default.findById(id).populate("addedBy", "name email");
+            return yield product_model_1.default.findById(id);
         });
     }
-    // 🟣 Update Offer by ID
     updateById(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
-            return specialoffers_models_1.default.findByIdAndUpdate(id, data, { new: true });
+            return yield product_model_1.default.findByIdAndUpdate(id, data, { new: true });
         });
     }
-    // 🔴 Delete Offer by ID
     deleteById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return specialoffers_models_1.default.findByIdAndDelete(id);
+            return yield product_model_1.default.findByIdAndDelete(id);
         });
     }
 }
-exports.default = new SpecialOfferService();
+exports.default = new ProductService();

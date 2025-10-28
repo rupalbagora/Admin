@@ -56,6 +56,16 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { ref } = req.query;
         const userData = req.body;
+        // If fullName provided, split automatically
+        if (userData.fullName && (!userData.firstName || !userData.lastName)) {
+            const nameParts = userData.fullName.trim().split(" ");
+            userData.firstName = nameParts[0];
+            userData.lastName = nameParts.slice(1).join(" ") || "";
+        }
+        // Ensure fullName is always set
+        if (!userData.fullName && userData.firstName && userData.lastName) {
+            userData.fullName = `${userData.firstName} ${userData.lastName}`;
+        }
         // Check existing user
         const existingUser = yield User_model_1.default.findOne({ email: userData.email });
         if (existingUser) {
@@ -181,6 +191,7 @@ const updateToken = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
                 dateOfBirth: foundUser.dateOfBirth,
                 createdAt: foundUser.createdAt,
                 updatedAt: foundUser.updatedAt,
+                address: foundUser.address,
             },
         });
     }

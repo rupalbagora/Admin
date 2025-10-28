@@ -11,7 +11,9 @@ const auth_middleware_1 = require("../middlewares/auth.middleware");
 const multerConfig_1 = __importDefault(require("../../mediaApi/services/multerConfig"));
 const router = express_1.default.Router();
 router.post('/', auth_middleware_1.protect, auth_controller_1.updateToken);
-router.post('/register', (0, validate_1.validate)(user_validator_1.createUserSchema), auth_controller_1.register);
+router.post("/register", multerConfig_1.default.single("avatar"), // ✅ handle avatar upload
+(0, validate_1.validate)(user_validator_1.createUserSchema), auth_controller_1.register);
+//router.post('/register', validate(createUserSchema), register);
 router.post('/login', validate_1.validateLogin, auth_controller_1.login);
 router.put('/profile', auth_middleware_1.protect, multerConfig_1.default.single("avatar"), auth_controller_1.updateProfile);
 router.get('/profile', auth_middleware_1.protect, auth_controller_1.getUserProfile);

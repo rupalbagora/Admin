@@ -7,9 +7,10 @@ exports.upload = void 0;
 const multer_1 = __importDefault(require("multer"));
 const path_1 = __importDefault(require("path"));
 const fs_1 = __importDefault(require("fs"));
-// Define directories for images and videos
 const imageDir = path_1.default.join(__dirname, "../../../../uploads/images");
 const videoDir = path_1.default.join(__dirname, "../../../../uploads/videos");
+//const imageDir = path.join(uploadBaseDir, "images");
+//const videoDir = path.join(uploadBaseDir, "videos");
 // 🔥 Function to ensure a directory exists or create it
 const ensureDirExists = (dir) => {
     if (!fs_1.default.existsSync(dir)) {

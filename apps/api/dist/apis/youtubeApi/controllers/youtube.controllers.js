@@ -141,7 +141,7 @@ const deleteYoutubeVideo = (req, res) => __awaiter(void 0, void 0, void 0, funct
             const filePath = path_1.default.join(__dirname, "../../../../", deleted.videoPath);
             fs_1.default.unlink(filePath, (err) => {
                 if (err) {
-                    console.error("❌ Error deleting file:", err.message);
+                    console.error(" Error deleting file:", err.message);
                 }
                 else {
                     console.log(`🗑️ Deleted file: ${filePath}`);

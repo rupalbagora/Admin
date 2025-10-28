@@ -12,44 +12,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const specialoffers_models_1 = __importDefault(require("../models/specialoffers.models"));
-class SpecialOfferService {
-    // 🟢 Create Special Offer
+const appointment_model_1 = __importDefault(require("../models/appointment.model"));
+class AppointmentService {
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const newOffer = new specialoffers_models_1.default({
-                tag: data.tag,
-                image: data.imageUrl,
-                addedBy: data.addedBy,
-            });
-            return newOffer.save();
+            const appointment = new appointment_model_1.default(data);
+            return appointment.save();
         });
     }
-    // 🟠 Get All Offers
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            return specialoffers_models_1.default.find()
-                .populate("addedBy", "name email")
-                .sort({ createdAt: -1 });
+            return appointment_model_1.default.find().sort({ createdAt: -1 });
         });
     }
-    // 🔵 Get Offer by ID
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return specialoffers_models_1.default.findById(id).populate("addedBy", "name email");
+            return appointment_model_1.default.findById(id);
         });
     }
-    // 🟣 Update Offer by ID
     updateById(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
-            return specialoffers_models_1.default.findByIdAndUpdate(id, data, { new: true });
+            return appointment_model_1.default.findByIdAndUpdate(id, data, { new: true });
         });
     }
-    // 🔴 Delete Offer by ID
     deleteById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return specialoffers_models_1.default.findByIdAndDelete(id);
+            return appointment_model_1.default.findByIdAndDelete(id);
         });
     }
 }
-exports.default = new SpecialOfferService();
+exports.default = new AppointmentService();
