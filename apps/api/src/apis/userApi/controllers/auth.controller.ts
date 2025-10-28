@@ -42,20 +42,19 @@ export const register = async (req: Request, res: Response) => {
 			return;
 		}
 
-		// Normal registration
-		const user = new User(userData);
-		user.isActive = false;
-		await user.save();
-
-		const token = user.generateAuthToken();
-		console.log(token);
-		console.log("JWT_SECRET in protect:", process.env.JWT_SECRET);
-
 		const otp = await sendOTP(userData.email);
-
 		const storedOTP = await EmailOTP.findOne({ email: userData.email });
 
 		if (Number(otp) === userData.otp && Number(otp) === storedOTP?.otp) {
+			// Normal registration
+			const user = new User(userData);
+			user.isActive = false;
+			await user.save();
+
+			const token = user.generateAuthToken();
+			console.log(token);
+			console.log("JWT_SECRET in protect:", process.env.JWT_SECRET);
+
 			return res.status(201).json({
 				success: true,
 				user: formatUserResponse(user),
