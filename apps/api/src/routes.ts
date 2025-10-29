@@ -13,14 +13,11 @@ import privacyPolicyRoutes from "./apis/documentation/routes/privacyPolicy.route
 import termsConditionRoutes from "./apis/documentation/routes/termsCondition.routes";
 import offerRoutes from "./apis/offerApi/routes/offer.routes";
 import productRoutes from "./apis/productApi/routes/product.routes";
-<<<<<<< HEAD
 import appointmentRoutes from "./apis/appointmentApi/routes/appointment.routes";
 import razorpayRoutes from "./apis/razorpay/routes/razorpay.routes";
-=======
 import appointmentRoutes from "./apis/appointmentApi/routes/appointment.routes"
 import cartRoutes from "./apis/cartApi/routes/cart.routes"
 
->>>>>>> naveen
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
