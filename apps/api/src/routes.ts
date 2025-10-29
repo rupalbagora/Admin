@@ -14,6 +14,7 @@ import packagesRoutes from "./apis/packagesApi/routes/packages.routes";
 import productPackageRoutes from "./apis/productPackageApi/routes/productPackage.routes"
 import ourServiceRoutes from "./apis/ourserviceApi/routes/ourservice.route";
 import specialofferRoutes from "./apis/specialoffersApi/routes/specialoffers.routes";
+import appointmentRoutes from "./apis/bookappointmentApi/routes/appointment.routes";
 app.use('/api/auth', authRoutes);
 app.use('/api/users',usersRoutes );
 app.use("/api/signup",signupRoutes);
@@ -23,7 +24,7 @@ app.use("/api/packages", packagesRoutes);
 app.use("/api/product-packages", productPackageRoutes);
 app.use("/api/ourservice", ourServiceRoutes);
 app.use("/api/specialoffer", specialofferRoutes);
-
+app.use("/api/appointment", appointmentRoutes);
 // app.use("/api/subscription",subscriptionRoute)
 // app.use("/api/payments",paymentRoutes)
 // app.use("/api/subscription-plans",subscriptionPlansRoutes)
