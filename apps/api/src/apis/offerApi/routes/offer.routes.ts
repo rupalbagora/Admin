@@ -17,7 +17,7 @@ router.post(
   "/",
   protect,
   authorizeRole("admin", "superadmin"),
-  upload.single("imageUrl"),
+  upload.single("imageUrl"), // form-data key name
   createOffer
 );
 

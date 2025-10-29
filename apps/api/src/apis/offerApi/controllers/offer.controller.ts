@@ -11,11 +11,12 @@ export const createOffer = async (req: Request, res: Response) => {
   };
 
   try {
-    const { title, discount, date }: CreateOfferDto = req.body;
+    const { title, discount, date, description }: CreateOfferDto = req.body;
     const addedBy = customReq.user?._id;
 
     if (!addedBy)
       return res.status(401).json({ success: false, message: "Unauthorized" });
+
     if (!customReq.file)
       return res
         .status(400)
@@ -27,6 +28,7 @@ export const createOffer = async (req: Request, res: Response) => {
       title,
       discount,
       date,
+      description, 
       imageUrl,
       addedBy,
     });
@@ -77,7 +79,6 @@ export const updateOffer = async (req: Request, res: Response) => {
 
     let imageUrl = existing.imageUrl;
     if (customReq.file) {
-      // delete old file
       const oldFilePath = path.join(
         __dirname,
         "../../../../uploads/images",
@@ -89,7 +90,7 @@ export const updateOffer = async (req: Request, res: Response) => {
     }
 
     const updated = await OfferService.updateById(id, {
-      ...req.body,
+      ...req.body, // ✅ includes description if sent
       imageUrl,
     });
 
@@ -112,7 +113,6 @@ export const deleteOffer = async (req: Request, res: Response) => {
     if (!offer)
       return res.status(404).json({ success: false, message: "Offer not found" });
 
-    // Delete image from uploads
     const imagePath = path.join(
       __dirname,
       "../../../../uploads/images",
