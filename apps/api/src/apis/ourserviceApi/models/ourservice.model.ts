@@ -14,6 +14,7 @@ const ourServiceSchema = new Schema<IOurService>(
         price: { type: Number, required: true },
       },
     ],
+    
     imageUrl: { type: String, required: true },
     addedBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },

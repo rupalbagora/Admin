@@ -4,4 +4,5 @@ export interface CreateProductDto {
   offer?: string;
   rating?: string;
   tag?: string;
+  description?: string; // ✅ added new field
 }

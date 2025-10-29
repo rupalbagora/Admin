@@ -17,8 +17,9 @@ export const createOurService = async (req: Request, res: Response) => {
     if (!customReq.file) {
       return res.status(400).json({ success: false, message: "Service image is required!" });
     }
+       const imageUrl = `${req.protocol}://${req.get("host")}/uploads/images/${customReq.file.filename}`;
 
-    const imageUrl = customReq.file.path;
+    //const imageUrl = customReq.file.path;
 
     const newService = await OurServiceService.create({
       serviceName,
