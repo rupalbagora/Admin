@@ -51,6 +51,8 @@ export const register = async (req: Request, res: Response) => {
 			user.isActive = false;
 			await user.save();
 
+			await EmailOTP.findOneAndDelete({ email: userData.email });
+
 			const token = user.generateAuthToken();
 			console.log(token);
 			console.log("JWT_SECRET in protect:", process.env.JWT_SECRET);
