@@ -42,10 +42,10 @@ export const register = async (req: Request, res: Response) => {
 			return;
 		}
 
-		const otp = await sendOTP(userData.email);
+		// const otp = await sendOTP(userData.email);
 		const storedOTP = await EmailOTP.findOne({ email: userData.email });
 
-		if (Number(otp) === userData.otp && Number(otp) === storedOTP?.otp) {
+		if (Number(userData.otp) === storedOTP?.otp) {
 			// Normal registration
 			const user = new User(userData);
 			user.isActive = false;
