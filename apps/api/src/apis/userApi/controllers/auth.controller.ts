@@ -42,29 +42,29 @@ export const register = async (req: Request, res: Response) => {
 			return;
 		}
 
-		// const otp = await sendOTP(userData.email);
-		const storedOTP = await EmailOTP.findOne({ email: userData.email });
+		// for production enable this
+		// const storedOTP = await EmailOTP.findOne({ email: userData.email });
 
-		if (Number(userData.otp) === storedOTP?.otp) {
-			// Normal registration
-			const user = new User(userData);
-			user.isActive = false;
-			await user.save();
+		// if (Number(userData.otp) === storedOTP?.otp) {
+		// Normal registration
+		const user = new User(userData);
+		user.isActive = false;
+		await user.save();
 
-			await EmailOTP.findOneAndDelete({ email: userData.email });
+		await EmailOTP.findOneAndDelete({ email: userData.email });
 
-			const token = user.generateAuthToken();
-			console.log(token);
-			console.log("JWT_SECRET in protect:", process.env.JWT_SECRET);
+		const token = user.generateAuthToken();
+		console.log(token);
+		console.log("JWT_SECRET in protect:", process.env.JWT_SECRET);
 
-			return res.status(201).json({
-				success: true,
-				user: formatUserResponse(user),
-				token,
-			});
-		} else {
-			return res.status(401).json({ success: false, message: "Invalid OTP" });
-		}
+		return res.status(201).json({
+			success: true,
+			user: formatUserResponse(user),
+			token,
+		});
+		// } else {
+		// 	return res.status(401).json({ success: false, message: "Invalid OTP" });
+		// }
 	} catch (error) {
 		console.error("Registration error:", error);
 		res.status(500).json({
