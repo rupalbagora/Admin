@@ -17,7 +17,6 @@ import appointmentRoutes from "./apis/appointmentApi/routes/appointment.routes";
 import razorpayRoutes from "./apis/razorpay/routes/razorpay.routes";
 import cartRoutes from "./apis/cartApi/routes/cart.routes"
 
-
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/youtube", youtubeRoutes);
