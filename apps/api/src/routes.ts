@@ -15,9 +15,8 @@ import offerRoutes from "./apis/offerApi/routes/offer.routes";
 import productRoutes from "./apis/productApi/routes/product.routes";
 import appointmentRoutes from "./apis/appointmentApi/routes/appointment.routes";
 import razorpayRoutes from "./apis/razorpay/routes/razorpay.routes";
-import appointmentRoutes from "./apis/appointmentApi/routes/appointment.routes"
+//import appointmentRoutes from "./apis/appointmentApi/routes/appointment.routes"
 import cartRoutes from "./apis/cartApi/routes/cart.routes"
-
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
@@ -33,13 +32,10 @@ app.use("/api/privacy-policy", privacyPolicyRoutes);
 app.use("/api/terms-and-conditions", termsConditionRoutes);
 app.use("/api/offers", offerRoutes);
 app.use("/api/products", productRoutes);
-<<<<<<< HEAD
 app.use("/api/appointments", appointmentRoutes);
 // razorpay routes
 app.use("/api/razorpay", razorpayRoutes);
-=======
 app.use("/api/appointments",appointmentRoutes);
 app.use("/api/cart",cartRoutes);
->>>>>>> naveen
 
 export default app;
