@@ -23,7 +23,7 @@ export const register = async (req: Request, res: Response) => {
 			userData.firstName = nameParts[0];
 			userData.lastName = nameParts.slice(1).join(" ") || "";
 		}
-
+		
 		// Ensure fullName is always set
 		if (!userData.fullName && userData.firstName && userData.lastName) {
 			userData.fullName = `${userData.firstName} ${userData.lastName}`;
