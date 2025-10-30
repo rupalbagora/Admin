@@ -8,7 +8,7 @@ export const createProduct = async (req: Request, res: Response) => {
   const customReq = req as unknown as { file?: Express.Multer.File; user?: { _id: string } };
 
   try {
-    const { name, price, offer, rating, tag }: CreateProductDto = req.body;
+    const { name, price, offer, rating, tag, description }: CreateProductDto = req.body;
     const addedBy = customReq.user?._id;
 
     if (!customReq.file)
@@ -22,6 +22,7 @@ export const createProduct = async (req: Request, res: Response) => {
       offer,
       rating,
       tag,
+      description, 
       image,
       
     });

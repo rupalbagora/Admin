@@ -6,7 +6,8 @@ export interface IProduct extends Document {
   offer?: string;
   rating?: string;
   tag?: string;
-  image: string; // single image URL
+  description?: string; // ✅ added new field
+  image: string;
   addedBy?: mongoose.Types.ObjectId;
 }
 
@@ -17,6 +18,7 @@ const productSchema = new Schema<IProduct>(
     offer: { type: String },
     rating: { type: String },
     tag: { type: String },
+    description: { type: String }, // ✅ added new field
     image: { type: String, required: true },
     addedBy: { type: Schema.Types.ObjectId, ref: "User" },
   },
