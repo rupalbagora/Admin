@@ -5,11 +5,12 @@ export const createHomeService = async (req: Request, res: Response) => {
   try {
     const addedBy = (req as any).user._id;
 
-    if (!req.file)
+    if (!req.file) {
       return res.status(400).json({ success: false, message: "Image is required!" });
+    }
 
-    // ✅ Build full image URL
-    const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+    // ✅ FIX: Save correct URL with /uploads/images/
+    const imageUrl = `${req.protocol}://${req.get("host")}/uploads/images/${req.file.filename}`;
 
     const newService = await HomeServiceService.create({
       ...req.body,
@@ -35,9 +36,9 @@ export const getHomeServices = async (req: Request, res: Response) => {
 export const getHomeServiceById = async (req: Request, res: Response) => {
   try {
     const service = await HomeServiceService.getById(req.params.id);
-    if (!service)
+    if (!service) {
       return res.status(404).json({ success: false, message: "Service not found" });
-
+    }
     res.status(200).json({ success: true, data: service });
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
@@ -48,13 +49,15 @@ export const updateHomeService = async (req: Request, res: Response) => {
   try {
     const updateData: any = { ...req.body };
 
+    // ✅ FIX: If a new image is uploaded, build correct URL
     if (req.file) {
-      updateData.image = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+      updateData.image = `${req.protocol}://${req.get("host")}/uploads/images/${req.file.filename}`;
     }
 
     const updated = await HomeServiceService.updateById(req.params.id, updateData);
-    if (!updated)
+    if (!updated) {
       return res.status(404).json({ success: false, message: "Service not found" });
+    }
 
     res.status(200).json({ success: true, data: updated });
   } catch (error: any) {
@@ -65,8 +68,9 @@ export const updateHomeService = async (req: Request, res: Response) => {
 export const deleteHomeService = async (req: Request, res: Response) => {
   try {
     const deleted = await HomeServiceService.deleteById(req.params.id);
-    if (!deleted)
+    if (!deleted) {
       return res.status(404).json({ success: false, message: "Service not found" });
+    }
 
     res.status(200).json({ success: true, message: "Service deleted successfully" });
   } catch (error: any) {

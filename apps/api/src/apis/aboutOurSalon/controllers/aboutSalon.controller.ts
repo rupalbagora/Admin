@@ -7,11 +7,11 @@ export const createAboutSalon = async (req: Request, res: Response) => {
 
     if (!req.file)
       return res.status(400).json({ success: false, message: "Image is required!" });
-
+    const imageUrl = `${req.protocol}://${req.get("host")}/uploads/aboutSalon/${req.file.filename}`;
     const newSalon = await AboutSalonService.create({
       ...req.body,
       addedBy,
-      image: req.file.path,
+      image: imageUrl,
     });
 
     res.status(201).json({ success: true, data: newSalon });
