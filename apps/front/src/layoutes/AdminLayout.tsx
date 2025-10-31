@@ -7,7 +7,6 @@ import RouteTracker from "../commonComp/RouteTracker/RouteTracker";
 import { useAppDispatch } from "../redux/hooks";
 import { search } from "../redux/Slice/activeStatus/activeStatusSlice";
 
-
 const menuItems = [
   {
     name: "Dashboard",

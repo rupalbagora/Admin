@@ -10,20 +10,31 @@ import {
 } from "../controllers/product.controller";
 
 const router = Router();
-
+// ✅ Store files in appropriate folders
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../../../../uploads/images"));
+    const folder =
+      file.fieldname === "icons"
+        ? path.join(__dirname, "../../../../uploads/icons")
+        : path.join(__dirname, "../../../../uploads/images");
+    cb(null, folder);
   },
   filename: (req, file, cb) => {
-    const uniqueName = `${Date.now()}-${file.originalname}`;
-    cb(null, uniqueName);
+    cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
 
 const upload = multer({ storage });
 
-router.post("/upload", upload.single("image"), createProduct);
+// ✅ Multiple uploads
+router.post(
+  "/upload",
+  upload.fields([
+    { name: "image", maxCount: 1 },
+    { name: "icons", maxCount: 5 },
+  ]),
+  createProduct
+);
 router.get("/", getAllProducts);
 router.get("/:id", getProductById);
 router.put("/:id", upload.single("image"), updateProduct);

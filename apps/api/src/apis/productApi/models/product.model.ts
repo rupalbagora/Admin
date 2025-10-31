@@ -6,9 +6,11 @@ export interface IProduct extends Document {
   offer?: string;
   rating?: string;
   tag?: string;
-  description?: string; // ✅ added new field
+  description?: string;
   image: string;
   addedBy?: mongoose.Types.ObjectId;
+  icons?: string[];       
+  reviews?: string[];     
 }
 
 const productSchema = new Schema<IProduct>(
@@ -18,9 +20,11 @@ const productSchema = new Schema<IProduct>(
     offer: { type: String },
     rating: { type: String },
     tag: { type: String },
-    description: { type: String }, // ✅ added new field
+    description: { type: String },
     image: { type: String, required: true },
     addedBy: { type: Schema.Types.ObjectId, ref: "User" },
+    icons: [{ type: String }],   
+    reviews: [{ type: String }], 
   },
   { timestamps: true }
 );
