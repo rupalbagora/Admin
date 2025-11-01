@@ -8,7 +8,6 @@ import {
   updateProduct,
   deleteProduct,
 } from "../controllers/product.controller";
-
 const router = Router();
 // ✅ Store files in appropriate folders
 const storage = multer.diskStorage({

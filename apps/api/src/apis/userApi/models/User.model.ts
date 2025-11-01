@@ -154,9 +154,10 @@ import {
   ThemePreference
 } from '../types/user.types';
 import { jwtConfig } from '../../../config/jwt';
+import { nanoid } from "nanoid";
 
 const userSchema: Schema<IUser> = new Schema({
-  refLink: { type: String, default: null },
+  refLink: { type: String, unique:true, default: null },
   admin: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 
   // ✅ Make firstName & lastName optional (they’ll be auto-filled from fullName)
@@ -283,6 +284,15 @@ userSchema.methods.createPasswordResetToken = function (this: IUser): string {
   this.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000);
   return resetToken;
 };
+
+userSchema.pre<IUser>("save", function(next){
+
+  if(!this.refLink){
+     this.refLink = nanoid(10); 
+  }
+  next();
+});
+
 
 const User: Model<IUser> = model<IUser>('User', userSchema);
 export default User;

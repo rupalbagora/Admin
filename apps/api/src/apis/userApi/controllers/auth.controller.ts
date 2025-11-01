@@ -11,7 +11,8 @@ import { updateUploadedFile } from "../../mediaApi/services/updateUploadedFile";
 import { updateUserSchema } from "../validators/user.validator"; // Your Zod schema
 import { sendOTP } from "../../../config/mailconfig";
 import { EmailOTP } from "../models/UserOTP.model";
-
+import { StringifyOptions } from "querystring";
+import { nanoid } from "nanoid";
 export const register = async (req: Request, res: Response) => {
 	try {
 		const { ref } = req.query;
@@ -53,13 +54,24 @@ export const register = async (req: Request, res: Response) => {
 
 		await EmailOTP.findOneAndDelete({ email: userData.email });
 
+		let refCode : string;
+		do{
+			 refCode = "NAU" + nanoid(7).toUpperCase(); //generates 8 character code 
+		} while (await User.findOne({refLink: refCode}));
+		user.refLink = refCode;
+		await user.save();
+
 		const token = user.generateAuthToken();
 		console.log(token);
 		console.log("JWT_SECRET in protect:", process.env.JWT_SECRET);
 
 		return res.status(201).json({
 			success: true,
-			user: formatUserResponse(user),
+			user:{
+				...formatUserResponse(user),
+				refLink: user.refLink 
+			},
+		   //
 			token,
 		});
 		// } else {
