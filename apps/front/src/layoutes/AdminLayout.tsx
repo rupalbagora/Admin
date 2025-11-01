@@ -13,23 +13,23 @@ const menuItems = [
     icon: <Home className="w-5 h-5" />,
     path: "/",
   },
-  {
-    name: "Users",
-    icon: <User className="w-5 h-5" />,
-    subItems: [
-      {
-        name: "All Users",
-        icon: <User className="w-4 h-4" />,
-        path: "/admin/users",
-      },
-      {
-        name: "Roles",
-        icon: <Settings className="w-4 h-4" />,
-        path: "/admin/roles",
-        badge: 3,
-      },
-    ],
-  },
+  // {
+  //   name: "Users",
+  //   icon: <User className="w-5 h-5" />,
+  //   subItems: [
+  //     {
+  //       name: "All Users",
+  //       icon: <User className="w-4 h-4" />,
+  //       path: "/admin/users",
+  //     },
+  //     {
+  //       name: "Roles",
+  //       icon: <Settings className="w-4 h-4" />,
+  //       path: "/admin/roles",
+  //       badge: 3,
+  //     },
+  //   ],
+  // },
 {
   name: "Gender",
   icon: <User className="w-5 h-5" />,
@@ -131,17 +131,20 @@ const menuItems = [
     icon: <Home className="w-5 h-5" />,
     path: "/admin/youtube",
   },
-    {
-    name: "Catalog",
-    icon: <Home className="w-5 h-5" />,
-    path: "/admin/catalog",
-  },
+  //   {
+  //   name: "Catalog",
+  //   icon: <Home className="w-5 h-5" />,
+  //   path: "/admin/catalog",
+  // },
+  
+  
   {
-    name: "Refer a friend",
-    icon: <Home className="w-5 h-5" />,
-    path: "/admin/Refer-Friend",
-  },
-  {
+      name: "Documents",
+      icon: <User className="w-4 h-4" />,
+      subItems: [
+       
+       
+        {
     name: "About Us",
     icon: <Home className="w-5 h-5" />,
     path: "/admin/About-Us",
@@ -156,6 +159,9 @@ const menuItems = [
     icon: <Home className="w-5 h-5" />,
     path: "/admin/Terms-Conditions",
   },
+      ],
+    },
+
 ];
 
 export default function AdminLayout() {

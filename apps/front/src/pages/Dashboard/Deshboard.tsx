@@ -17,7 +17,7 @@ const DashboardRedirect: React.FC = () => {
       dispatch(updateToken());
     }
   }, [user, dispatch]);
-
+  
   useEffect(() => {
     if (loading) return;
 

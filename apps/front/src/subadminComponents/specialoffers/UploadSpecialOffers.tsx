@@ -7,7 +7,7 @@ const UploadSpecialOffers: React.FC = () => {
   const [offers, setOffers] = useState<SpecialOffer[]>([]);
   const [searchText, setSearchText] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
-
+  
   const handleAddOffer = (offer: SpecialOffer) => {
     setOffers((prev) => [...prev, offer]);
     setModalVisible(false);

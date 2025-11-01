@@ -2,7 +2,7 @@ import { Router } from "express";
 import {
   createAppointment,
   getAppointments,
-  getAppointmentById,
+  getAppointmentById, 
   updateAppointment,
   deleteAppointment,
 } from "../controllers/appointment.controller";

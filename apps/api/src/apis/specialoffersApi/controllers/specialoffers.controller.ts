@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import SpecialOfferService from "../services/specialoffers.services";
 import { CreateSpecialOfferDto } from "../dtos/specialoffers.dtos";
 
-// 1️⃣ Create Special Offer
+
 export const createSpecialOffer = async (req: Request, res: Response) => {
   const customReq = req as unknown as { file?: Express.Multer.File; user?: { _id: string } };
   try {

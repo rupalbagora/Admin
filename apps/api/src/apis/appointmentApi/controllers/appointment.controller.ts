@@ -13,7 +13,6 @@ export const createAppointment = async (req: Request, res: Response) => {
 		res.status(500).json({ success: false, error });
 	}
 };
-
 export const getAppointments = async (req: Request, res: Response) => {
 	try {
 		const data = await appointmentService.getAll();
