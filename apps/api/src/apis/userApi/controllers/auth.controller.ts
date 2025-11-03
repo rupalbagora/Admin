@@ -23,7 +23,7 @@ export const register = async (req: Request, res: Response) => {
 			userData.firstName = nameParts[0];
 			userData.lastName = nameParts.slice(1).join(" ") || "";
 		}
-		
+
 		// Ensure fullName is always set
 		if (!userData.fullName && userData.firstName && userData.lastName) {
 			userData.fullName = `${userData.firstName} ${userData.lastName}`;
@@ -54,8 +54,11 @@ export const register = async (req: Request, res: Response) => {
 		await EmailOTP.findOneAndDelete({ email: userData.email });
 
 		const token = user.generateAuthToken();
-		console.log(token);
-		console.log("JWT_SECRET in protect:", process.env.JWT_SECRET);
+		res.cookie("token", token, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === "production",
+			sameSite: "strict",
+		});
 
 		return res.status(201).json({
 			success: true,
@@ -139,6 +142,11 @@ export const login = async (req: Request, res: Response) => {
 			}
 		}
 		const token = user.generateAuthToken();
+		res.cookie("token", token, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === "production",
+			sameSite: "strict",
+		});
 		res.status(200).json({ user, token });
 	} catch (err: any) {
 		res.status(500).json({ error: err.message });
@@ -376,5 +384,21 @@ export const generateOTP = async (req: Request, res: Response) => {
 		return res
 			.status(500)
 			.json({ success: false, error: (error as Error).message });
+	}
+};
+
+export const userLogout = async (req: Request, res: Response) => {
+	try {
+		return res.cookie("token", "").status(200).json({
+			success: true,
+			message: "User has been logout successfully!",
+			data: null,
+		});
+	} catch (error) {
+		return res.status(500).json({
+			success: false,
+			message: "Something went wrong",
+			error: (error as Error).message,
+		});
 	}
 };

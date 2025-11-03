@@ -3,21 +3,21 @@ import type { IUser } from "./usera.types";
 
 // types/auth.types.ts
 export interface LoginPayload {
-  email: string;
-  password: string;
+	email: string;
+	password: string;
 }
 
 export interface RegisterPayload {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  phone?: string; 
+	firstName: string;
+	lastName: string;
+	email: string;
+	password: string;
+	phone?: string;
 }
 
 export interface AuthResponse {
-  user: IUser;
-  token: string;
+	user: IUser;
+	token: string;
 }
 
 export type UpdateUserPayload = Partial<IUser>;

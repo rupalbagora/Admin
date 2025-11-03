@@ -1,8 +1,16 @@
 import Appointment, { IAppointment } from "../models/appointment.model";
-
+import { nanoid } from "nanoid";
 class AppointmentService {
-	async create(data: Partial<IAppointment>): Promise<IAppointment> {
-		const appointment = new Appointment(data);
+	async create(
+		data: Partial<IAppointment>,
+		userId: string
+	): Promise<IAppointment> {
+		const appointmentCode = `NAU${nanoid(4).toUpperCase()}`;
+		console.log(
+			"🚀 ~ AppointmentService ~ create ~ appointmentCode:",
+			appointmentCode
+		);
+		const appointment = new Appointment({ ...data, userId, appointmentCode });
 		return appointment.save();
 	}
 

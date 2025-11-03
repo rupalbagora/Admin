@@ -8,6 +8,7 @@ import {
 	updateUserInfo,
 	checkUserEmailExists,
 	generateOTP,
+	userLogout,
 } from "../controllers/auth.controller";
 import { validate, validateLogin } from "../middlewares/validate";
 import { createUserSchema } from "../validators/user.validator";
@@ -29,6 +30,7 @@ router.post(
 );
 //router.post('/register', validate(createUserSchema), register);
 router.post("/login", validateLogin, login);
+router.get("/logout", protect, userLogout);
 router.put("/profile", protect, upload.single("avatar"), updateProfile);
 router.get("/profile", protect, getUserProfile);
 router.get("/check-email", checkUserEmailExists);

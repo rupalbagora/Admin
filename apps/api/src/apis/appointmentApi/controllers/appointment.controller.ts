@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import appointmentService from "../services/appointment.services";
-
+import appointmentModel from "../models/appointment.model";
 export const createAppointment = async (req: Request, res: Response) => {
 	try {
-		const data = await appointmentService.create(req.body);
+		const userId = String(req.user._id);
+		const data = await appointmentService.create(req.body, userId);
 		res.status(201).json({
 			success: true,
 			message: "Appointment created successfully",
@@ -65,5 +66,24 @@ export const deleteAppointment = async (req: Request, res: Response) => {
 			.json({ success: true, message: "Appointment deleted successfully" });
 	} catch (error) {
 		res.status(500).json({ success: false, error });
+	}
+};
+
+export const getAppointmentsByUserId = async (req: Request, res: Response) => {
+	try {
+		const { userId } = req.params;
+		const appointments = await appointmentModel.find({ userId });
+		if (appointments.length === 0) {
+			return res
+				.status(204)
+				.json({ success: true, message: "No Appointment Booked Yet!!" });
+		}
+		return res.status(200).json({
+			success: true,
+			message: "Appointments fetched successfully",
+			data: appointments,
+		});
+	} catch (error) {
+		res.status(500).json({ success: false, error: (error as Error).message });
 	}
 };
