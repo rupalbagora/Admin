@@ -1,62 +1,87 @@
-import React, { useState } from "react";
-import { Card, Table, Input, Button, Modal, Tag, Rate } from "antd";
-import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
-import SpecialOfferForm, { SpecialOffer } from "./SpecialOfferForm";
+import React, { useEffect, useState } from "react";
+import { Card, Table, Input, Button, Modal, Tag, Space, Spin } from "antd";
+import { PlusOutlined, DeleteOutlined, EditOutlined, ReloadOutlined } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../redux/store";
+import {
+  fetchOffers,
+  addOffer,
+  updateOffer,
+  deleteOffer,
+} from "../../redux/Slice/specialOffer/offerSlice";
+import SpecialOfferForm, { SpecialOffer } from "./SpecialOffersForm";
 
 const UploadSpecialOffers: React.FC = () => {
-  const [offers, setOffers] = useState<SpecialOffer[]>([]);
-  const [searchText, setSearchText] = useState("");
+  const dispatch = useDispatch<AppDispatch>();
+  const { offers, loading } = useSelector((state: RootState) => state.offers);
+
   const [modalVisible, setModalVisible] = useState(false);
-  
-  const handleAddOffer = (offer: SpecialOffer) => {
-    setOffers((prev) => [...prev, offer]);
+  const [editingOffer, setEditingOffer] = useState<SpecialOffer | null>(null);
+  const [searchText, setSearchText] = useState("");
+
+  // ✅ Fetch all offers on mount
+  useEffect(() => {
+    dispatch(fetchOffers());
+  }, [dispatch]);
+
+  // ✅ Handle Add or Edit
+  const handleAddOrUpdate = async (formData: FormData, id?: string) => {
+    if (id) {
+      await dispatch(updateOffer({ id, formData }));
+    } else {
+      await dispatch(addOffer(formData));
+    }
     setModalVisible(false);
+    setEditingOffer(null);
   };
 
-  const handleDelete = (id: string) => {
-    Modal.confirm({
-      title: "Delete this offer?",
-      onOk: () => setOffers((prev) => prev.filter((o) => o.id !== id)),
-    });
-  };
+  // ✅ Delete Offer
+ const handleDelete = (id: string) => {
+  console.log("🗑️ Delete button clicked:", id);
+  Modal.confirm({
+    title: "Delete this offer?",
+    onOk: async () => {
+      try {
+        const result = await dispatch(deleteOffer(id));
+        console.log("✅ Delete result:", result);
+      } catch (err) {
+        console.error("❌ Delete error:", err);
+      }
+    },
+  });
+};
 
-  const filteredOffers = offers.filter(
-    (o) =>
-      o.title.toLowerCase().includes(searchText.toLowerCase()) ||
-      o.tag.toLowerCase().includes(searchText.toLowerCase())
+
+  // ✅ Filter search results
+  const filteredOffers = offers.filter((o) =>
+    o.title.toLowerCase().includes(searchText.toLowerCase())
   );
 
   const columns = [
     { title: "Title", dataIndex: "title", key: "title" },
     {
-      title: "Price (₹)",
-      dataIndex: "price",
-      key: "price",
-      render: (value: number) => `₹${value}`,
-    },
-    { title: "Tag", dataIndex: "tag", key: "tag", render: (tag: string) => <Tag color="gold">{tag}</Tag> },
-    {
-      title: "Discount (%)",
+      title: "Discount",
       dataIndex: "discount",
       key: "discount",
-      render: (value: number) => `${value}%`,
+      render: (v: number) => `${v}%`,
     },
     {
-      title: "Rating",
-      dataIndex: "rating",
-      key: "rating",
-      render: (rating: number) => <Rate disabled value={rating} />,
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
+      render: (v: string) => <Tag color="blue">{v}</Tag>,
     },
+    { title: "Description", dataIndex: "description", key: "description" },
     {
       title: "Image",
-      dataIndex: "image",
-      key: "image",
-      render: (img: string) =>
-        img ? (
+      dataIndex: "imageUrl",
+      key: "imageUrl",
+      render: (url: string) =>
+        url ? (
           <img
-            src={img}
+            src={url}
             alt="offer"
-            style={{ width: 60, height: 60, borderRadius: 8, objectFit: "cover" }}
+            style={{ width: 60, height: 60, borderRadius: 8 }}
           />
         ) : (
           "-"
@@ -65,14 +90,25 @@ const UploadSpecialOffers: React.FC = () => {
     {
       title: "Actions",
       key: "actions",
-      render: (_: any, record: SpecialOffer) => (
-        <Button
-          danger
-          icon={<DeleteOutlined />}
-          onClick={() => handleDelete(record.id)}
-        >
-          Delete
-        </Button>
+      render: (_: any, record: any) => (
+        <Space>
+          <Button
+            icon={<EditOutlined />}
+            onClick={() => {
+              setEditingOffer(record);
+              setModalVisible(true);
+            }}
+          >
+            Edit
+          </Button>
+          <Button
+            danger
+            icon={<DeleteOutlined />}
+            onClick={() => handleDelete(record._id)}
+          >
+            Delete
+          </Button>
+        </Space>
       ),
     },
   ];
@@ -82,13 +118,24 @@ const UploadSpecialOffers: React.FC = () => {
       <Card
         title="Special Offer Management"
         extra={
-          <Button
-            icon={<PlusOutlined />}
-            type="primary"
-            onClick={() => setModalVisible(true)}
-          >
-            Add Offer
-          </Button>
+          <Space>
+            <Button
+              type="primary"
+              icon={<PlusOutlined />}
+              onClick={() => {
+                setEditingOffer(null);
+                setModalVisible(true);
+              }}
+            >
+              Add Offer
+            </Button>
+            <Button
+              icon={<ReloadOutlined />}
+              onClick={() => dispatch(fetchOffers())}
+            >
+              Refresh
+            </Button>
+          </Space>
         }
       >
         <Input.Search
@@ -99,18 +146,28 @@ const UploadSpecialOffers: React.FC = () => {
           style={{ marginBottom: 16, width: "50%" }}
         />
 
-        <Table
-          columns={columns}
-          dataSource={filteredOffers}
-          rowKey={(record) => record.id.toString()}
-          locale={{ emptyText: "No offers added" }}
-        />
+        {loading ? (
+          <div style={{ textAlign: "center", padding: 50 }}>
+            <Spin size="large" />
+          </div>
+        ) : (
+          <Table
+            columns={columns}
+            dataSource={filteredOffers}
+            rowKey={(r) => r._id}
+            locale={{ emptyText: "No offers found" }}
+          />
+        )}
       </Card>
 
       <SpecialOfferForm
         visible={modalVisible}
-        onCancel={() => setModalVisible(false)}
-        onSubmit={handleAddOffer}
+        onCancel={() => {
+          setModalVisible(false);
+          setEditingOffer(null);
+        }}
+        onSubmit={handleAddOrUpdate}
+        initialData={editingOffer}
       />
     </div>
   );

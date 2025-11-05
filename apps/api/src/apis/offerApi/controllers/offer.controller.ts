@@ -9,7 +9,7 @@ export const createOffer = async (req: Request, res: Response) => {
     file?: Express.Multer.File;
     user?: { _id: string };
   };
-
+  
   try {
     const { title, discount, date, description }: CreateOfferDto = req.body;
     const addedBy = customReq.user?._id;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   Form,
@@ -6,162 +6,135 @@ import {
   InputNumber,
   Button,
   Upload,
+  DatePicker,
   message,
-  Rate,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import dayjs from "dayjs";
 
-// Type for each special offer
 export interface SpecialOffer {
-  id: string;
+  _id?: string;
   title: string;
-  price: number;
-  tag: string;
-  image?: string;
-  rating: number;
   discount: number;
+  date: string;
+  description: string;
+  imageUrl?: string;
 }
 
-// Props for the modal form
 interface SpecialOfferFormProps {
   visible: boolean;
   onCancel: () => void;
-  onSubmit: (offer: SpecialOffer) => void;
+  onSubmit: (formData: FormData, id?: string) => void;
+  initialData?: SpecialOffer | null;
 }
 
 const SpecialOfferForm: React.FC<SpecialOfferFormProps> = ({
   visible,
   onCancel,
   onSubmit,
+  initialData,
 }) => {
   const [form] = Form.useForm();
+  const [fileList, setFileList] = useState<any[]>([]);
 
-  // Convert image file to Base64
-  const toBase64 = (file: File): Promise<string> =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
-    });
+  useEffect(() => {
+    if (initialData) {
+      form.setFieldsValue({
+        title: initialData.title,
+        discount: initialData.discount,
+        date: dayjs(initialData.date),
+        description: initialData.description,
+      });
 
-  // Fixed input styles for uniformity
-  const fixedInputStyle: React.CSSProperties = {
-    height: 40,
-    fontSize: 15,
-    borderRadius: 6,
-  };
-
-  // Submit handler
-  const handleFinish = async (values: any) => {
-    let imageBase64 = "";
-
-    if (values.image && values.image[0]?.originFileObj) {
-      imageBase64 = await toBase64(values.image[0].originFileObj);
+      setFileList(
+        initialData.imageUrl
+          ? [
+              {
+                uid: "-1",
+                name: "Existing Image",
+                status: "done",
+                url: initialData.imageUrl,
+              },
+            ]
+          : []
+      );
+    } else {
+      form.resetFields();
+      setFileList([]);
     }
+  }, [initialData, form]);
 
-    const newOffer: SpecialOffer = {
-      id: Date.now().toString(),
-      title: values.title,
-      price: values.price,
-      tag: values.tag,
-      image: imageBase64,
-      rating: values.rating || 0,
-      discount: values.discount,
-    };
+  const handleFinish = async (values: any) => {
+    try {
+      const formData = new FormData();
+      formData.append("title", values.title);
+      formData.append("discount", values.discount);
+      formData.append("date", values.date.format("YYYY-MM-DD"));
+      formData.append("description", values.description);
 
-    onSubmit(newOffer);
-    form.resetFields();
+      if (fileList.length > 0 && fileList[0].originFileObj) {
+        formData.append("image", fileList[0].originFileObj);
+      }
+
+      onSubmit(formData, initialData?._id);
+      form.resetFields();
+      setFileList([]);
+    } catch (error) {
+      message.error("Something went wrong while saving the offer");
+    }
   };
 
   return (
     <Modal
-      title="Add Special Offer"
+      title={initialData ? "Edit Offer" : "Add Offer"}
       open={visible}
       onCancel={onCancel}
       onOk={() => form.submit()}
+      okText={initialData ? "Update Offer" : "Add Offer"}
       destroyOnClose
     >
-      <Form
-        form={form}
-        layout="vertical"
-        onFinish={handleFinish}
-        initialValues={{
-          rating: 0,
-          discount: 0,
-        }}
-      >
-        {/* Title */}
+      <Form form={form} layout="vertical" onFinish={handleFinish}>
         <Form.Item
           label="Title"
           name="title"
           rules={[{ required: true, message: "Please enter title" }]}
         >
-          <Input placeholder="Enter title" style={fixedInputStyle} />
+          <Input placeholder="Enter offer title" />
         </Form.Item>
 
-        {/* Price */}
-        <Form.Item
-          label="Price (₹)"
-          name="price"
-          rules={[{ required: true, message: "Please enter price" }]}
-        >
-          <InputNumber
-            min={0}
-            placeholder="Enter price"
-            style={{ ...fixedInputStyle, width: "100%" }}
-          />
-        </Form.Item>
-
-        {/* Tag */}
-        <Form.Item
-          label="Tag"
-          name="tag"
-          rules={[{ required: true, message: "Please enter tag" }]}
-        >
-          <Input placeholder="Enter tag (e.g., Hot Deal, Limited Offer)" style={fixedInputStyle} />
-        </Form.Item>
-
-        {/* Rating */}
-        <Form.Item label="Rating" name="rating">
-          <Rate />
-        </Form.Item>
-
-        {/* Discount */}
         <Form.Item
           label="Discount (%)"
           name="discount"
-          rules={[{ required: true, message: "Please enter discount percentage" }]}
+          rules={[{ required: true, message: "Enter discount" }]}
         >
-          <InputNumber
-            min={0}
-            max={100}
-            placeholder="Enter discount (0-100)"
-            style={{ ...fixedInputStyle, width: "100%" }}
-          />
+          <InputNumber min={0} max={100} style={{ width: "100%" }} />
         </Form.Item>
 
-        {/* Image Upload */}
         <Form.Item
-          label="Offer Image"
-          name="image"
-          valuePropName="fileList"
-          getValueFromEvent={(e) => (Array.isArray(e) ? e : e?.fileList)}
-          rules={[{ required: true, message: "Please upload an image" }]}
+          label="Date"
+          name="date"
+          rules={[{ required: true, message: "Select date" }]}
         >
+          <DatePicker style={{ width: "100%" }} format="YYYY-MM-DD" />
+        </Form.Item>
+
+        <Form.Item
+          label="Description"
+          name="description"
+          rules={[{ required: true, message: "Enter description" }]}
+        >
+          <Input.TextArea rows={3} />
+        </Form.Item>
+
+        <Form.Item label="Offer Image">
           <Upload
             listType="picture"
             maxCount={1}
-            beforeUpload={(file) => {
-              const isImage = file.type.startsWith("image/");
-              if (!isImage) {
-                message.error("Only image files are allowed!");
-                return Upload.LIST_IGNORE;
-              }
-              return false;
-            }}
+            fileList={fileList}
+            onChange={({ fileList }) => setFileList(fileList)}
+            beforeUpload={() => false} // prevent auto upload
           >
-            <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            <Button icon={<UploadOutlined />}>Select Image</Button>
           </Upload>
         </Form.Item>
       </Form>

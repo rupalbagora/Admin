@@ -13,7 +13,7 @@ import { upload } from "../../mediaApi/services/multerConfig"; // multer config
 const router = express.Router();
 
 // Create home service with image
-router.post("/", protect, upload.single("image"), createHomeService);
+router.post("/upload", protect, upload.single("image"), createHomeService);
 
 // Update home service (image optional)
 router.put("/:id", protect, authorizeRole("admin", "superadmin"), upload.single("image"), updateHomeService);

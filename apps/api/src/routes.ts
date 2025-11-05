@@ -19,10 +19,10 @@ import cartRoutes from "./apis/cartApi/routes/cart.routes"
 //import  {login}  from "./apis/userApi/controllers/auth.controller";
 
 
-
 //app.use("/api/login",login)
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
+app.use('/api/users',usersRoutes );
 app.use("/api/youtube", youtubeRoutes);
 app.use("/api/certificates", certificateRoutes);
 app.use("/api/packages", packagesRoutes); //

@@ -20,7 +20,7 @@
     "turbo": "^2.5.4"
   },
   "dependencies": {
-    "antd": "^5.27.4",
+    "antd": "^5.28.0",
     "mongoose": "^8.19.0"
   }
 }

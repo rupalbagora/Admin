@@ -140,169 +140,214 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "/admin",
-    element: (
-      <Suspense fallback={Loader}>
-        <RoleBasedLayout allowedRoles={["admin"]} layout={AdminLayout} />
-      </Suspense>
-    ),
-    children: [
-      {
-        index: true,
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <AdminDeshboard />
-          </Suspense>
-        ),
-      },
-      {
-        path: "users",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <ManageUsers/>
-          </Suspense>
-        ),
-      },
-      {
-        path: "Upload-Certificate",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UploadCertificate />
-          </Suspense>
-        ),
-      },
-     
-       {
-        path: "ProductsDetails",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UploadProduct />
-          </Suspense>
-        ),
-      },
-      {
-        path: "ProductsCategories",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UploadCategories />
-          </Suspense>
-        ),
-      },
-       {
-        path: "youtube",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UploadYoutube />
-          </Suspense>
-        ),
-      },
-      {
-        path: "catalog",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UploadCatalog />
-          </Suspense>
-        ),
-      },
+  
+
+ {
+  path: "/admin",
+  element: (
+    <Suspense fallback={Loader}>
+      <RoleBasedLayout allowedRoles={["admin"]} layout={AdminLayout} />
+    </Suspense>
+  ),
+  children: [
+    // Default admin dashboard
+    {
+      index: true,
+      element: (
+        <Suspense fallback={Loader}>
+          <AdminDeshboard />
+        </Suspense>
+      ),
+    },
+
+    // 🔹 MALE ROUTES
+    {
+      path: "male",
+      children: [
         {
-        path: "Refer-Friend",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UploadReferFriend />
-          </Suspense>
-        ),
-      },
-      {
-        path: "About-Us",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UploadAboutUs />
-          </Suspense>
-        ),
-      },
-       {
-        path: "Privacy-Policy",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UploadPrivacyPolicy />
-          </Suspense>
-        ),
-      },
-       {
-        path: "Terms-Conditions",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UploadTermsConditions />
-          </Suspense>
-        ),
-      },
-       {
-        path: "Ourservice",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UploadOurservice />
-          </Suspense>
-        ),
-      },
-      {
-        path: "ourpackages",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <ManagePackages />
-          </Suspense>
-        ),
-      },
-      {
-        path: "ProductPackage",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <ManageProductPackages />
-          </Suspense>
-        ),
-      },
-       {
-        path: "Special-Offers",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UploadSpecialOffers/>
-          </Suspense>
-        ),
-      },
-      {
-        path: "profile",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UpdateProfile />
-          </Suspense>
-        ),
-      },
-      {
-        path: "Subscription-plan",
-        element: (
-          <Suspense fallback={Loader}>
-            <SubscriptionPlans />
-          </Suspense>
-        ),
-      },
-    ],
-  },
+          path: "special-offers",
+          element: (
+            <Suspense fallback={Loader}>
+              < UploadSpecialOffers/>
+            </Suspense>
+          ),
+        },
+        {
+          path: "our-service",
+          element: (
+            <Suspense fallback={Loader}>
+              <UploadOurservice />
+            </Suspense>
+          ),
+        },
+        {
+          path: "products/details",
+          element: (
+            <Suspense fallback={Loader}>
+              <UploadProduct />
+            </Suspense>
+          ),
+        },
+        {
+          path: "products/categories",
+          element: (
+            <Suspense fallback={Loader}>
+              <UploadCategories />
+            </Suspense>
+          ),
+        },
+        {
+          path: "our-package",
+          element: (
+            <Suspense fallback={Loader}>
+              <ManagePackages />
+            </Suspense>
+          ),
+        },
+        {
+          path: "product-package",
+          element: (
+            <Suspense fallback={Loader}>
+              <ManageProductPackages />
+            </Suspense>
+          ),
+        },
+      ],
+    },
+
+    // 🔹 FEMALE ROUTES
+    {
+      path: "female",
+      children: [
+        {
+          path: "special-offers",
+          element: (
+            <Suspense fallback={Loader}>
+              <UploadSpecialOffers />
+            </Suspense>
+          ),
+        },
+        {
+          path: "our-service",
+          element: (
+            <Suspense fallback={Loader}>
+              <UploadOurservice />
+            </Suspense>
+          ),
+        },
+        {
+          path: "products/details",
+          element: (
+            <Suspense fallback={Loader}>
+              <UploadProduct />
+            </Suspense>
+          ),
+        },
+        {
+          path: "products/categories",
+          element: (
+            <Suspense fallback={Loader}>
+              <UploadCategories />
+            </Suspense>
+          ),
+        },
+        {
+          path: "our-package",
+          element: (
+            <Suspense fallback={Loader}>
+              <ManagePackages />
+            </Suspense>
+          ),
+        },
+        {
+          path: "product-package",
+          element: (
+            <Suspense fallback={Loader}>
+              <ManageProductPackages />
+            </Suspense>
+          ),
+        },
+      ],
+    },
+
+    // 🔹 OTHER ADMIN ROUTES
+    {
+      path: "Upload-Certificate",
+      element: (
+        <Suspense fallback={Loader}>
+          <UploadCertificate />
+        </Suspense>
+      ),
+    },
+    {
+      path: "youtube",
+      element: (
+        <Suspense fallback={Loader}>
+          <UploadYoutube />
+        </Suspense>
+      ),
+    },
+    {
+      path: "catalog",
+      element: (
+        <Suspense fallback={Loader}>
+          <UploadCatalog />
+        </Suspense>
+      ),
+    },
+    {
+      path: "Refer-Friend",
+      element: (
+        <Suspense fallback={Loader}>
+          <UploadReferFriend />
+        </Suspense>
+      ),
+    },
+    {
+      path: "About-Us",
+      element: (
+        <Suspense fallback={Loader}>
+          <UploadAboutUs />
+        </Suspense>
+      ),
+    },
+    {
+      path: "Privacy-Policy",
+      element: (
+        <Suspense fallback={Loader}>
+          <UploadPrivacyPolicy />
+        </Suspense>
+      ),
+    },
+    {
+      path: "Terms-Conditions",
+      element: (
+        <Suspense fallback={Loader}>
+          <UploadTermsConditions />
+        </Suspense>
+      ),
+    },
+    {
+      path: "profile",
+      element: (
+        <Suspense fallback={Loader}>
+          <UpdateProfile />
+        </Suspense>
+      ),
+    },
+    {
+      path: "Subscription-plan",
+      element: (
+        <Suspense fallback={Loader}>
+          <SubscriptionPlans />
+        </Suspense>
+      ),
+    },
+  ],
+},
+
+   
+
   {
     path: "/user",
     element: (
