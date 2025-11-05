@@ -37,11 +37,23 @@ const ManageUsers: React.FC = () => {
     }
   }, [error, dispatch]);
 
-  const filteredUsers = users.filter((user) =>
+  // const filteredUsers = users
+  // .filter((user) =>  user.role ==== "admin")
+  // .filter((user)=>
+  //   user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //   user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  //   user.lastName.toLowerCase().includes(searchTerm.toLowerCase())
+  // );
+
+        const filteredUsers = users
+  .filter((user) => user.role === "admin") 
+  .filter((user) =>
     user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.lastName.toLowerCase().includes(searchTerm.toLowerCase())
   );
+   
+
 
   const paginatedUsers = filteredUsers.slice(
     (currentPage - 1) * pageSize,
@@ -163,8 +175,9 @@ const ManageUsers: React.FC = () => {
 
   return (
     <div className="p-6">
+    
       <Card
-        title="User Management"
+        title="Subadmin Management"
         extra={
           <Button
             className="bg-gray-700"
@@ -172,7 +185,7 @@ const ManageUsers: React.FC = () => {
             icon={<UserAddOutlined />}
             onClick={handleCreateUser}
           >
-            Add User
+            Add Subadmin
           </Button>
         }
       >
@@ -189,6 +202,7 @@ const ManageUsers: React.FC = () => {
         </div>
 
         <Table
+          // {JSON.stringify(fetchUsers)}
           columns={columns}
           dataSource={paginatedUsers}
           rowKey="_id"
@@ -208,7 +222,7 @@ const ManageUsers: React.FC = () => {
       </Card>
 
       <Modal
-        title={isEditMode ? "Edit User" : "Create Admin"}
+        title={isEditMode ? "Edit User" : "Create Subadmin"}
         visible={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null}

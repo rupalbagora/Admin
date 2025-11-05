@@ -40,4 +40,9 @@ app.use("/api/appointments", appointmentRoutes);
 app.use("/api/razorpay", razorpayRoutes);
 app.use("/api/cart",cartRoutes);
 
+// app.use("/api/subscription",subscriptionRoute)
+// app.use("/api/payments",paymentRoutes)
+// app.use("/api/subscription-plans",subscriptionPlansRoutes)
+// subscription-plans
+
 export default app;

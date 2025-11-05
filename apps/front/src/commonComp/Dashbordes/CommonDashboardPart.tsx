@@ -5,8 +5,8 @@ import { useAppSelector } from '../../redux/hooks'
 const  CommonDashboardPart:React.FC=()=> {
     const {user}=useAppSelector((state)=>state.auth)
   return (
-    <div>Super Admin Dashboard
-       <CopyReferralLink userId={user?._id as string}/> 
+    <div>
+      <CopyReferralLink userId={user?._id as string}/> 
     </div>
   )
 }

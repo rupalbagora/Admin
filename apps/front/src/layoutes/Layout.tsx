@@ -10,27 +10,28 @@ import RouteTracker from "../commonComp/RouteTracker/RouteTracker";
 
 
 const menuItems = [
+  // {
+  //   name: "Dashboard",
+  //   icon: <Home className="w-5 h-5" />,
+  //   path: "/dashboard",
+  // },
   {
-    name: "Dashboard",
-    icon: <Home className="w-5 h-5" />,
-    path: "/dashboard",
-  },
-  {
-    name: "Users",
+    name: "Subadmins",
     icon: <User className="w-5 h-5" />,
-    subItems: [
-      {
-        name: "All Users",
-        icon: <User className="w-4 h-4" />,
-        path: "/super-admin/users",
-      },
-      {
-        name: "Roles",
-        icon: <Settings className="w-4 h-4" />,
-        path: "/roles",
-        badge: 3,
-      },
-    ],
+     path: "/super-admin/users"
+    // subItems: [
+      // {
+      //   name: "",
+      //   icon: <User className="w-4 h-4" />,
+      //   path: "/super-admin/users",
+      // },
+      // {
+      //   name: "Roles",
+      //   icon: <Settings className="w-4 h-4" />,
+      //   path: "/roles",
+      //   badge: 3,
+      // },
+    // ],
   },
 ];
 

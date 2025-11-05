@@ -3,6 +3,7 @@ import { Menu, X, Search, Bell, User, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks";
 import { logout } from "../../redux/Slice/authSlice";
+import {useNavigate} from "react-router-dom";
 
 interface NavItem {
   label: string;
@@ -60,7 +61,7 @@ const Header: React.FC<HeaderProps> = ({
   const userMenuRef = useRef<HTMLDivElement>(null);
   const user = useAppSelector((state) => state.auth.user);
   const dispatch = useAppDispatch();
-
+const navigate = useNavigate();
   // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -277,7 +278,7 @@ const Header: React.FC<HeaderProps> = ({
                       >
                         Settings
                       </Link>
-                      <Link
+                      {/* <Link
                         to="/logout"
                         className="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 border-t border-gray-700"
                       >
@@ -288,7 +289,14 @@ const Header: React.FC<HeaderProps> = ({
                         >
                           Sign out
                         </span>
-                      </Link>
+                      </Link> */}
+                      <button
+  onClick={() => navigate("/login")}
+  className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 border-t border-gray-700"
+>
+  Sign out
+</button>
+
                     </div>
                   </div>
                 )}
@@ -378,13 +386,20 @@ const Header: React.FC<HeaderProps> = ({
                 >
                   Settings
                 </Link>
-                <Link
+                {/* <Link
                   onClick={() => {}}
                   to="/logout"
                   className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700 border-t border-gray-700"
                 >
                   Sign out
-                </Link>
+                </Link> */}
+                <button
+  onClick={() => navigate("/login")}
+  className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 border-t border-gray-700"
+>
+  Sign out
+</button>
+
               </div>
             </div>
           )}

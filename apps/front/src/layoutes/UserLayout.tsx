@@ -13,14 +13,14 @@ const navItems = [
     href: "/",
     icon: <Home size={16} />,
   },
-  {
-    label: "Products",
-    href: "/user/products",
-    subItems: [
-      { label: "All Products", href: "/products" },
-      { label: "Categories", href: "/categories" },
-    ],
-  },
+  // {
+  //   label: "Products",
+  //   href: "/user/products",
+  //   subItems: [
+  //     { label: "All Products", href: "/products" },
+  //     { label: "Categories", href: "/categories" },
+  //   ],
+  // },
   // {
   //   label: "Users",
   //   href: "/users",
@@ -37,7 +37,7 @@ const menuItems = [
   {
     name: "Dashboard",
     icon: <Home className="w-5 h-5" />,
-    path: "/dashboard",
+    path: "/",
   },
   // {
     // name: "Users",

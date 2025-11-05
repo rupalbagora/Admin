@@ -11,7 +11,7 @@ const menuItems = [
   {
     name: "Dashboard",
     icon: <Home className="w-5 h-5" />,
-    path: "/",
+    path: "AdminDeshboard",
   },
   // {
   //   name: "Users",
@@ -30,96 +30,8 @@ const menuItems = [
   //     },
   //   ],
   // },
-// {
-//   name: "Gender",
-//   icon: <User className="w-5 h-5" />,
-//   subItems: [
-//     {
-//       name: "Male",
-//       icon: <User className="w-5 h-5" />,
-//       subItems: [
-//         {
-//           name: "Special Offers",
-//           icon: <User className="w-4 h-4" />,
-//           path: "/admin/Special-Offers",
-//         },
-//         {
-//           name: "Our Service",
-//           icon: <User className="w-4 h-4" />,
-//           path: "/admin/Ourservice",
-//         },
-//         {
-//           name: "Product",
-//           icon: <User className="w-4 h-4" />,
-//           SubProduct:[
-//             {
-//             name: "ProductsDetails",
-//           icon: <User className="w-4 h-4" />,
-//           path: "/admin/ProductsDetails",
-//             },
-//             {
-//               name: "Categories",
-//           icon: <User className="w-4 h-4" />,
-//           path: "/admin/ProductsCategories",
-//             },
-//           ],
-//         },
-//         {
-//           name: "Our Package",
-//           icon: <User className="w-4 h-4" />,
-//           path: "/admin/ourpackages",
-//         },
-//         {
-//           name: "Product Package",
-//           icon: <User className="w-4 h-4" />,
-//          path: "/admin/ProductPackage",
-//         },
-//       ],
-//     },
-//     {
-//       name: "Female",
-//       icon: <User className="w-4 h-4" />,
-//       subItems: [
-//         {
-//           name: "Special Offers",
-//           icon: <User className="w-4 h-4" />,
-//           path: "/admin/Special-Offers",
-//         },
-//         {
-//           name: "Our Service",
-//           icon: <User className="w-4 h-4" />,
-//           path: "/admin/Ourservice",
-//         },
-//         {
-//           name: "Product",
-//           icon: <User className="w-4 h-4" />,
-//           SubProduct:[
-//             {
-//             name: "ProductsDetails",
-//           icon: <User className="w-4 h-4" />,
-//           path: "/admin/ProductsDetails",
-//             },
-//             {
-//               name: "Categories",
-//           icon: <User className="w-4 h-4" />,
-//           path: "/admin/ProductsCategories",
-//             },
-//           ],
-//         },
-//         {
-//           name: "Our Package",
-//           icon: <User className="w-4 h-4" />,
-//           path: "/admin/ourpackages",
-//         },
-//         {
-//           name: "Product Package",
-//           icon: <User className="w-4 h-4" />,
-//          path: "/admin/ProductPackage",
-//         },
-//       ],
-//     },
-//   ],
-// },
+
+
     
      {
   name: "Gender",

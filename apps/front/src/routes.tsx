@@ -91,7 +91,7 @@ export const router = createBrowserRouter([
       </Suspense>
     ),
   },
-
+  
   {
     path: "/super-admin",
     element: (
@@ -105,7 +105,8 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={Loader}>
             {" "}
-            <SuperUserDeshboard />
+                        <ManageUsers />
+            {/* <SuperUserDeshboard /> */}
           </Suspense>
         ),
       },
@@ -159,7 +160,17 @@ export const router = createBrowserRouter([
         </Suspense>
       ),
     },
+     {
+          path: "AdminDeshboard",
+          element: (
+            <Suspense fallback={Loader}>
+              < AdminDeshboard/>
+            </Suspense>
+          ),
+        },
 
+    
+      
     // 🔹 MALE ROUTES
     {
       path: "male",
@@ -376,5 +387,5 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  { path: "*", element: <>eroror</> },
+  { path: "*", element: <>error</> },
 ]);
