@@ -4,6 +4,13 @@ export interface IAppointment extends Document {
 	date?: string;
 	time?: string;
 	appointmentStatus?: "Pending" | "Accepted";
+	userId?: string;
+	appointmentCode?: string;
+	chairNo?: number;
+	fromDateTime?: Date;
+	toDateTime?: Date;
+	email?: string;
+	services?: string[];
 }
 
 const AppointmentSchema = new Schema<IAppointment>(
@@ -12,9 +19,16 @@ const AppointmentSchema = new Schema<IAppointment>(
 		time: { type: String, required: true },
 		appointmentStatus: {
 			type: String,
-			enum: ["Pending", "Accepted"],
+			enum: ["Pending", "Accepted", "Rescheduled", "Cancelled"],
 			default: "Pending",
 		},
+		userId: { type: String },
+		appointmentCode: { type: String },
+		chairNo: { type: Number },
+		fromDateTime: { type: Date },
+		toDateTime: { type: Date },
+		email: { type: String },
+		services: [{ type: String }],
 	},
 	{ timestamps: true }
 );

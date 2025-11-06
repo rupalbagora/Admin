@@ -18,6 +18,6 @@ export class CreateUserDto {
 	referralCode?: string;
 	avatar?: string;
 	otp?: number;
-
+	noOfChairs?: number;
 	gender?: Gender;
 }
