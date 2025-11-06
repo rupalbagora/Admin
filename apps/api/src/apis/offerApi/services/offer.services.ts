@@ -6,6 +6,7 @@ class OfferService {
     discount: string;
     date: string;
     description?: string;
+    gender: string;
     imageUrl: string;
     addedBy: string;
   }): Promise<IOffer> {

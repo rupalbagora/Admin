@@ -3,10 +3,10 @@ export interface CreateProductPackageDto {
   price: number;
   products: string[];
   tagline: string;
-  rating?: number;
-  description: string;
-  discount?: string;
+  review: string;
   items: string[];
-  usageInstructions: string;
-  stock: number;
+  offers: string;
+  usage: string;
+  image: string;
+  gender: string; // ✅ Gender field in DTO
 }

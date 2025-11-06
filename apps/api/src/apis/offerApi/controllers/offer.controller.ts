@@ -11,7 +11,7 @@ export const createOffer = async (req: Request, res: Response) => {
   };
   
   try {
-    const { title, discount, date, description }: CreateOfferDto = req.body;
+    const { title, discount, date, description, gender }: CreateOfferDto = req.body;
     const addedBy = customReq.user?._id;
 
     if (!addedBy)
@@ -22,13 +22,16 @@ export const createOffer = async (req: Request, res: Response) => {
         .status(400)
         .json({ success: false, message: "Image is required!" });
 
-    const imageUrl = `${req.protocol}://${req.get("host")}/uploads/images/${customReq.file.filename}`;
+    // ✅ UNIVERSAL IMAGE URL - Har platform pe work karega
+    const baseUrl = process.env.URL || `${req.protocol}://${req.get("host")}`;
+    const imageUrl = `${baseUrl}/uploads/images/${customReq.file.filename}`;
 
     const newOffer = await OfferService.create({
       title,
       discount,
       date,
       description, 
+      gender,
       imageUrl,
       addedBy,
     });
@@ -79,18 +82,23 @@ export const updateOffer = async (req: Request, res: Response) => {
 
     let imageUrl = existing.imageUrl;
     if (customReq.file) {
-      const oldFilePath = path.join(
-        __dirname,
-        "../../../../uploads/images",
-        path.basename(existing.imageUrl)
-      );
-      if (fs.existsSync(oldFilePath)) fs.unlinkSync(oldFilePath);
+      // Delete old image
+      if (existing.imageUrl) {
+        const oldFilePath = path.join(
+          __dirname,
+          "../../../../uploads/images",
+          path.basename(existing.imageUrl)
+        );
+        if (fs.existsSync(oldFilePath)) fs.unlinkSync(oldFilePath);
+      }
 
-      imageUrl = `${req.protocol}://${req.get("host")}/uploads/images/${customReq.file.filename}`;
+      // ✅ UNIVERSAL NEW IMAGE URL
+      const baseUrl = process.env.URL || `${req.protocol}://${req.get("host")}`;
+      imageUrl = `${baseUrl}/uploads/images/${customReq.file.filename}`;
     }
 
     const updated = await OfferService.updateById(id, {
-      ...req.body, // ✅ includes description if sent
+      ...req.body,
       imageUrl,
     });
 
@@ -109,22 +117,49 @@ export const updateOffer = async (req: Request, res: Response) => {
 export const deleteOffer = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
+    console.log("🔄 Deleting offer ID:", id);
+    
     const offer = await OfferService.getById(id);
-    if (!offer)
+    if (!offer) {
+      console.log("❌ Offer not found with ID:", id);
       return res.status(404).json({ success: false, message: "Offer not found" });
+    }
 
-    const imagePath = path.join(
-      __dirname,
-      "../../../../uploads/images",
-      path.basename(offer.imageUrl)
-    );
-    if (fs.existsSync(imagePath)) fs.unlinkSync(imagePath);
+    console.log("✅ Offer found:", offer.title);
+    
+    // Delete from database
+    const deletedOffer = await OfferService.deleteById(id);
+    console.log("✅ Database delete result:", deletedOffer ? "Success" : "Failed");
+    
+    if (!deletedOffer) {
+      return res.status(500).json({ success: false, message: "Failed to delete offer from database" });
+    }
 
-    await OfferService.deleteById(id);
-    res.status(200).json({ success: true, message: "Offer deleted successfully" });
+    // Delete image file
+    if (offer.imageUrl) {
+      const imagePath = path.join(
+        __dirname,
+        "../../../../uploads/images",
+        path.basename(offer.imageUrl)
+      );
+      if (fs.existsSync(imagePath)) {
+        fs.unlinkSync(imagePath);
+        console.log("✅ Image deleted:", imagePath);
+      }
+    }
+
+    console.log("✅ Offer deleted successfully");
+    res.status(200).json({ 
+      success: true, 
+      message: "Offer deleted successfully",
+      deletedId: id 
+    });
+    
   } catch (error) {
-    res
-      .status(500)
-      .json({ success: false, error: (error as Error).message });
+    console.error("❌ Delete Error:", error);
+    res.status(500).json({ 
+      success: false, 
+      error: (error as Error).message 
+    });
   }
 };

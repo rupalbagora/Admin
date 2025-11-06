@@ -6,8 +6,8 @@ export interface Offer {
   title: string;
   description: string;
   discount: number;
-  startDate: string;
-  endDate: string;
+  date: string;
+  gender: string;
   imageUrl?: string;
 }
 
@@ -66,6 +66,52 @@ export const deleteOffer = createAsyncThunk(
   }
 );
 
+// const offerSlice = createSlice({
+//   name: "offers",
+//   initialState,
+//   reducers: {},
+//   extraReducers: (builder) => {
+//     builder
+//       // 🔹 Fetch all
+//       .addCase(fetchOffers.pending, (state) => {
+//         state.loading = true;
+//         state.error = null;
+//       })
+//       .addCase(fetchOffers.fulfilled, (state, action) => {
+//         state.loading = false;
+//         state.offers = action.payload;
+//       })
+//       .addCase(fetchOffers.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.error.message || "Failed to fetch offers";
+//       })
+
+//       // 🔹 Add offer
+//       .addCase(addOffer.fulfilled, (state, action) => {
+//         state.offers.push(action.payload);
+//       })
+
+//       // 🔹 Update offer
+//       .addCase(updateOffer.fulfilled, (state, action) => {
+//         const index = state.offers.findIndex((o) => o._id === action.payload._id);
+//         if (index !== -1) state.offers[index] = action.payload;
+//       })
+
+//       // 🔹 Delete offer
+//       .addCase(deleteOffer.fulfilled, (state, action) => {
+//         console.log("🗑️ Offer removed from state:", action.payload);
+//         state.offers = state.offers.filter((o) => o._id !== action.payload);
+//       })
+//       .addCase(deleteOffer.rejected, (state, action) => {
+//         state.error =
+//           typeof action.payload === "string"
+//             ? action.payload
+//             : "Failed to delete offer";
+//         console.error("❌ Delete failed:", action.payload);
+//       });
+//   },
+// });
+
 const offerSlice = createSlice({
   name: "offers",
   initialState,
@@ -97,17 +143,15 @@ const offerSlice = createSlice({
         if (index !== -1) state.offers[index] = action.payload;
       })
 
-      // 🔹 Delete offer
+      // 🔹 Delete offer - SIMPLE & CLEAN
       .addCase(deleteOffer.fulfilled, (state, action) => {
-        console.log("🗑️ Offer removed from state:", action.payload);
+        // Directly remove from state
         state.offers = state.offers.filter((o) => o._id !== action.payload);
       })
+      
       .addCase(deleteOffer.rejected, (state, action) => {
-        state.error =
-          typeof action.payload === "string"
-            ? action.payload
-            : "Failed to delete offer";
-        console.error("❌ Delete failed:", action.payload);
+        state.error = action.payload as string;
+        console.error("Delete failed:", action.payload);
       });
   },
 });

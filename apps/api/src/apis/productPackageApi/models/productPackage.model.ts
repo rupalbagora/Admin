@@ -1,5 +1,20 @@
-import { Schema, model } from "mongoose";
-import { IProductPackage } from "../types/productPackage.types";
+import { Schema, model, Document, Types } from "mongoose";
+
+export interface IProductPackage extends Document {
+  name: string;
+  price: number;
+  products: string[];
+  tagline: string;
+  review: string;
+  items: string[];
+  offers: string;
+  usage: string;
+  image: string;
+  gender: string; 
+  addedBy: Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 const productPackageSchema = new Schema<IProductPackage>(
   {
@@ -7,13 +22,12 @@ const productPackageSchema = new Schema<IProductPackage>(
     price: { type: Number, required: true },
     products: [{ type: String, required: true }],
     tagline: { type: String, required: true },
-    rating: { type: Number, default: 0 },
-    description: { type: String, required: true },
-    discount: { type: String },
+    review: { type: String, required: true },
     items: [{ type: String, required: true }],
-    usageInstructions: { type: String, required: true },
-    stock: { type: Number, required: true },
-
+    offers: { type: String },
+    usage: { type: String, required: true },
+    image: { type: String },
+    gender: { type: String }, 
     addedBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   { timestamps: true }

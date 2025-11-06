@@ -1,10 +1,16 @@
-// redux/types/subadmintypes/package.types.ts
-
 export interface Package {
-  id: string;           
-  name: string;         
-  description: string;  
-  services: string;     
-  price: number;        
-  createdAt: string;   
+  _id?: string;
+  id?: string; 
+  title: string;
+  price: string;
+  services: string; 
+  about: string;
+  image?: string;
+  discount?: string;
+  review?: number;
+  rating?: number;
+  serviceList: string[]; 
+  gender?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }

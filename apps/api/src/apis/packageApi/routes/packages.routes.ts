@@ -22,7 +22,7 @@ router.get("/:id", getPackageById);
 // Update a package
 router.put("/:id", upload.single("image"), updatePackage);
 
-// Delete a package
+// Delete a packagez
 router.delete("/:id", deletePackage);
 
 export default router;
