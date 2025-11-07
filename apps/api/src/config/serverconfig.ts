@@ -27,6 +27,7 @@ app.use(morgan("dev")); // HTTP request logger
 //     crossOriginResourcePolicy: { policy: "cross-origin" }, // Allow cross-origin media access
 //   })
 // );
+
 app.use(express.json()); // Parse JSON body
 app.use(cookieParser()); // ✅ must come before routes using req.cookies
 

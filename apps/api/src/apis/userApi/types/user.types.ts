@@ -109,6 +109,7 @@ export interface IUser extends Document {
 	loginCount: number;
 	lastLogin?: Date;
 	devices: IDeviceInfo[];
+	noOfChairs?: number;
 	createdAt: Date;
 	updatedAt: Date;
 

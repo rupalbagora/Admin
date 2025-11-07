@@ -165,6 +165,10 @@ const userSchema: Schema<IUser> = new Schema(
 		// ✅ Keep fullName required but auto-generate it if missing
 		fullName: { type: String, required: true, trim: true, maxlength: 100 },
 
+		noOfChairs: {
+			type: Number,
+		},
+
 		email: {
 			type: String,
 			required: true,
@@ -225,7 +229,8 @@ const userSchema: Schema<IUser> = new Schema(
 			postalCode: String,
 		},
 
-		avatar: { type: Types.ObjectId, ref: "UploadedFile" },
+		// avatar: { type: Types.ObjectId, ref: "UploadedFile" },
+		avatar: { type: String },
 		bio: { type: String, maxlength: 500 },
 		dateOfBirth: Date,
 		gender: { type: String, enum: Object.values(Gender) },
@@ -267,16 +272,16 @@ const userSchema: Schema<IUser> = new Schema(
 );
 
 // ✅ Auto-generate missing name fields
-userSchema.pre<IUser>("save", function (next) {
-	if (!this.fullName && this.firstName && this.lastName) {
-		this.fullName = `${this.firstName} ${this.lastName}`;
-	} else if (!this.firstName && this.fullName) {
-		const parts = this.fullName.split(" ");
-		this.firstName = parts[0];
-		this.lastName = parts.slice(1).join(" ");
-	}
-	next();
-});
+// userSchema.pre<IUser>("save", function (next) {
+// 	if (!this.fullName && this.firstName && this.lastName) {
+// 		this.fullName = `${this.firstName} ${this.lastName}`;
+// 	} else if (!this.firstName && this.fullName) {
+// 		const parts = this.fullName.split(" ");
+// 		this.firstName = parts[0];
+// 		this.lastName = parts.slice(1).join(" ");
+// 	}
+// 	next();
+// });
 
 // Password hash
 userSchema.pre<IUser>("save", async function (next) {
