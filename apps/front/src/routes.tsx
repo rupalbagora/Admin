@@ -35,6 +35,8 @@ const SubscriptionManagement = lazy(
   () => import("./commonComp/SubscriptionManagement/SubscriptionManagement")
 );
 
+
+
 // SUB-ADMIN
 const UploadCategories = lazy (()=> import("../src/subadminComponents/products/AllCategories/UploadCategories"));
 const UploadProduct = lazy (()=> import("../src/subadminComponents/products/ProductsDetails/UploadProduct"));
@@ -49,6 +51,9 @@ const UploadOurservice = lazy (()=> import("../src/subadminComponents/ourservice
 const UploadCertificate = lazy(() => import("./subadminComponents/certificate/UploadCertificate"));
 const ManagePackages = lazy (() => import("./subadminComponents/ourpackages/ManagePackages"));  
 const ManageProductPackages = lazy(()=> import("./subadminComponents/productpackages/ManageProductPackages"));
+const AppointmentForm = lazy(
+  () => import("../src/subadminComponents/AppointmentForm/appointmentForm")
+);
 
 export const router = createBrowserRouter([
   {
@@ -169,7 +174,15 @@ export const router = createBrowserRouter([
           ),
         },
 
-    
+    {
+          path: "Appointment",
+          element: (
+            <Suspense fallback={Loader}>
+              < AppointmentForm/>
+            </Suspense>
+          ),
+        },
+
       
     // 🔹 MALE ROUTES
     {

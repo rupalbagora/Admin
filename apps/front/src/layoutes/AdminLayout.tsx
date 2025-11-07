@@ -31,7 +31,11 @@ const menuItems = [
   //   ],
   // },
 
-
+ {
+    name: "Appointment",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/Appointment",
+  },
     
      {
   name: "Gender",

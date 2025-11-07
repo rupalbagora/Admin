@@ -51,13 +51,14 @@ export const updateOffer = createAsyncThunk(
   }
 );
 
-// 🔹 Delete offer (with error handling)
+// 🔹 Delete offer (with detailed debug logging)
 export const deleteOffer = createAsyncThunk(
   "offers/delete",
   async (id: string, { rejectWithValue }) => {
+    console.log("🚀 deleteOffer thunk triggered with id:", id);
     try {
       const { data } = await API.delete(`/offers/${id}`);
-      console.log("✅ Offer deleted:", data);
+      console.log("✅ Offer deleted successfully:", data);
       return id;
     } catch (error: any) {
       console.error("❌ Delete API error:", error.response?.data || error.message);
@@ -65,6 +66,8 @@ export const deleteOffer = createAsyncThunk(
     }
   }
 );
+
+
 
 // const offerSlice = createSlice({
 //   name: "offers",
@@ -131,7 +134,7 @@ const offerSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || "Failed to fetch offers";
       })
-
+      
       // 🔹 Add offer
       .addCase(addOffer.fulfilled, (state, action) => {
         state.offers.push(action.payload);
@@ -144,14 +147,16 @@ const offerSlice = createSlice({
       })
 
       // 🔹 Delete offer - SIMPLE & CLEAN
-      .addCase(deleteOffer.fulfilled, (state, action) => {
-        // Directly remove from state
-        state.offers = state.offers.filter((o) => o._id !== action.payload);
+     .addCase(deleteOffer.pending, (state) => {
+        state.loading = true;
       })
-      
+      .addCase(deleteOffer.fulfilled, (state, action) => {
+        state.loading = false;
+        state.offers = state.offers.filter((o: any) => o._id !== action.payload);
+      })
       .addCase(deleteOffer.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.payload as string;
-        console.error("Delete failed:", action.payload);
       });
   },
 });

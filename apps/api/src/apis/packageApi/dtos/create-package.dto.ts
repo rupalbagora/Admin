@@ -7,5 +7,5 @@ export interface CreatePackageDto {
   discount?: string;
   review?: number;
   rating?: number;
-  serviceList: string[];
+  gender: string; 
 }

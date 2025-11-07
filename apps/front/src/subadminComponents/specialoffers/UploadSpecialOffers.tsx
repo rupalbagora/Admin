@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Card, Table, Input, Button, Modal, Tag, Space, Spin } from "antd";
 import { PlusOutlined, DeleteOutlined, EditOutlined, ReloadOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/store";
+import { AppDispatch, RootState } from "../../redux/hooks";
 import {
   fetchOffers,
   addOffer,
   updateOffer,
   deleteOffer,
 } from "../../redux/Slice/specialOffer/offerSlice";
-import SpecialOfferForm, { SpecialOffer } from "./SpecialOffersForm";
+import SpecialOfferForm from "./SpecialOffersForm";
+import type {SpecialOffer} from "./SpecialOffersForm"
 
 const UploadSpecialOffers: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -18,7 +19,7 @@ const UploadSpecialOffers: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [editingOffer, setEditingOffer] = useState<SpecialOffer | null>(null);
   const [searchText, setSearchText] = useState("");
-
+  
   // ✅ Fetch all offers on mount
   useEffect(() => {
     dispatch(fetchOffers());
