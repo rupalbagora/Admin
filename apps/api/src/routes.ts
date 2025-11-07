@@ -15,14 +15,14 @@ import offerRoutes from "./apis/offerApi/routes/offer.routes";
 import productRoutes from "./apis/productApi/routes/product.routes";
 import appointmentRoutes from "./apis/appointmentApi/routes/appointment.routes";
 import razorpayRoutes from "./apis/razorpay/routes/razorpay.routes";
-import cartRoutes from "./apis/cartApi/routes/cart.routes"
+import cartRoutes from "./apis/cartApi/routes/cart.routes";
+import notificationRoutes from "./apis/inAppNotification/routes/notification.routes";
 //import  {login}  from "./apis/userApi/controllers/auth.controller";
-
 
 //app.use("/api/login",login)
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
-app.use('/api/users',usersRoutes );
+app.use("/api/users", usersRoutes);
 app.use("/api/youtube", youtubeRoutes);
 app.use("/api/certificates", certificateRoutes);
 app.use("/api/packages", packagesRoutes); //
@@ -38,8 +38,10 @@ app.use("/api/products", productRoutes);
 app.use("/api/appointments", appointmentRoutes);
 // razorpay routes
 app.use("/api/razorpay", razorpayRoutes);
-app.use("/api/cart",cartRoutes);
+app.use("/api/cart", cartRoutes);
 
+// notifications
+app.use("/api/notification", notificationRoutes);
 // app.use("/api/subscription",subscriptionRoute)
 // app.use("/api/payments",paymentRoutes)
 // app.use("/api/subscription-plans",subscriptionPlansRoutes)

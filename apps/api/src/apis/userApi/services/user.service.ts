@@ -17,6 +17,7 @@ class UserService {
 		admin?: Types.ObjectId;
 		noOfChairs?: number;
 		role?: UserRole;
+		registrationCode?: string;
 	}): Promise<IUser> {
 		const user = new User({
 			...createUserDto,

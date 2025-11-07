@@ -15,7 +15,7 @@ const router = express.Router();
 router.post(
 	"/upload",
 	protect,
-	authorizeRole("sub-admin", "superadmin"),
+	authorizeRole("admin", "superadmin"),
 	upload.single("imageUrl"),
 	createOurService
 );

@@ -22,7 +22,7 @@ router.delete("/:id", deleteAppointment);
 router.post(
 	"/verify-appointment",
 	protect,
-	authorizeRole("sub-admin"),
+	authorizeRole("admin"),
 	verifyAppointmentCode
 );
 

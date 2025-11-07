@@ -3,7 +3,7 @@ import { IUploadedFile } from "../../mediaApi/models/uploadedFile";
 
 export enum UserRole {
 	SUPERADMIN = "superadmin",
-	ADMIN = "sub-admin",
+	ADMIN = "admin",
 	STAFF = "staff",
 	STUDENT = "student",
 	USER = "user",

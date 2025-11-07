@@ -24,6 +24,7 @@ export const createUser = async (req: Request, res: Response) => {
 		if (req.file) {
 			imageUrl = (await saveUploadedFile(req.file)).url;
 		}
+
 		const newUser = await UserService.createUser({
 			email,
 			fullName,

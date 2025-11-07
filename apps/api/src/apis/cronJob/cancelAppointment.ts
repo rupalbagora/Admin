@@ -4,7 +4,7 @@ import appointmentModel from "../appointmentApi/models/appointment.model";
 import { InAppNotifications } from "../inAppNotification/models/inAppNotification.model";
 
 export const cancelAppointmentAfter10Minutes = () => {
-	cron.schedule("* * * * *", async () => {
+	cron.schedule("0 0 * * *", async () => {
 		try {
 			const now = dayjs();
 			const threshold = now.subtract(10, "minute").toISOString();
