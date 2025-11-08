@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Card, Table, Button, Input, Modal, message, Spin, Space } from "antd";
-import { PlusOutlined, DeleteOutlined, EditOutlined, ReloadOutlined } from "@ant-design/icons";
+import {
+  PlusOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  ReloadOutlined,
+} from "@ant-design/icons";
 import PackageForm from "./PackageForm";
 import API from "../../api/axios";
 
@@ -81,6 +86,7 @@ const ManagePackages: React.FC = () => {
     { title: "Discount", dataIndex: "discount", key: "discount" },
     { title: "Review", dataIndex: "review", key: "review" },
     { title: "Rating", dataIndex: "rating", key: "rating" },
+   // { title: "Gender", dataIndex: "gender", key: "gender" },
     {
       title: "Image",
       dataIndex: "image",
@@ -102,7 +108,11 @@ const ManagePackages: React.FC = () => {
           <Button icon={<EditOutlined />} onClick={() => handleEdit(record)}>
             Edit
           </Button>
-          <Button danger icon={<DeleteOutlined />} onClick={() => handleDelete(record._id)}>
+          <Button
+            danger
+            icon={<DeleteOutlined />}
+            onClick={() => handleDelete(record._id)}
+          >
             Delete
           </Button>
         </Space>
@@ -116,13 +126,20 @@ const ManagePackages: React.FC = () => {
         title="Manage Packages"
         extra={
           <Space>
-            <Button icon={<ReloadOutlined />} onClick={fetchPackages} loading={loading}>
+            <Button
+              icon={<ReloadOutlined />}
+              onClick={fetchPackages}
+              loading={loading}
+            >
               Refresh
             </Button>
             <Button
               type="primary"
               icon={<PlusOutlined />}
-              onClick={() => { setEditingPackage(null); setIsModalOpen(true); }}
+              onClick={() => {
+                setEditingPackage(null);
+                setIsModalOpen(true);
+              }}
             >
               Add Package
             </Button>
@@ -145,7 +162,12 @@ const ManagePackages: React.FC = () => {
             <Spin size="large" />
           </div>
         ) : (
-          <Table columns={columns} dataSource={filtered} rowKey={(r) => r._id} pagination={{ pageSize: 10 }} />
+          <Table
+            columns={columns}
+            dataSource={filtered}
+            rowKey={(r) => r._id}
+            pagination={{ pageSize: 10 }}
+          />
         )}
       </Card>
 
@@ -153,7 +175,10 @@ const ManagePackages: React.FC = () => {
         title={editingPackage ? "Edit Package" : "Add Package"}
         open={isModalOpen}
         footer={null}
-        onCancel={() => { setIsModalOpen(false); setEditingPackage(null); }}
+        onCancel={() => {
+          setIsModalOpen(false);
+          setEditingPackage(null);
+        }}
         destroyOnClose
       >
         <PackageForm

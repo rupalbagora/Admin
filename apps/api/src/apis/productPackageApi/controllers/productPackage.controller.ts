@@ -5,6 +5,7 @@ export const createProductPackage = async (req: Request, res: Response) => {
   try {
     const addedBy = (req as any).user._id;
     const file = req.file as Express.Multer.File;
+
     const { name, price, review, description, items, offers, usage, gender } = req.body;
 
     let imageUrl = "";
@@ -18,11 +19,11 @@ export const createProductPackage = async (req: Request, res: Response) => {
       price: Number(price),
       review,
       description,
-      items: Array.isArray(items) ? items : [items],
-      offers: offers || "",
+      offers,
       usage,
       image: imageUrl,
       gender,
+      items: Array.isArray(items) ? items : [items],
       addedBy,
     });
 
@@ -74,8 +75,6 @@ export const updateProductPackage = async (req: Request, res: Response) => {
       updateData.items =
         typeof req.body.items === "string" ? [req.body.items] : req.body.items;
     }
-
-    if (req.body.gender) updateData.gender = req.body.gender;
 
     const updated = await ProductPackageService.updateById(id, updateData);
     if (!updated)

@@ -14,10 +14,7 @@ const getById = async (id: string): Promise<IProductPackage | null> => {
   return await ProductPackage.findById(id);
 };
 
-const updateById = async (
-  id: string,
-  data: UpdateProductPackageDto
-): Promise<IProductPackage | null> => {
+const updateById = async (id: string, data: UpdateProductPackageDto): Promise<IProductPackage | null> => {
   return await ProductPackage.findByIdAndUpdate(id, data, { new: true });
 };
 

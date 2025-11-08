@@ -9,14 +9,18 @@ interface PackageFormProps {
   onCancel: () => void;
 }
 
-const PackageForm: React.FC<PackageFormProps> = ({ packageData, onSuccess, onCancel }) => {
+const PackageForm: React.FC<PackageFormProps> = ({
+  packageData,
+  onSuccess,
+  onCancel,
+}) => {
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (packageData) {
       form.setFieldsValue(packageData);
-
       if (packageData.image) {
         setFileList([
           {
@@ -34,21 +38,29 @@ const PackageForm: React.FC<PackageFormProps> = ({ packageData, onSuccess, onCan
   }, [packageData]);
 
   const handleSubmit = async (values: any) => {
+    const formData = new FormData();
+
+    // Convert numeric fields to numbers
+    const fixedValues = {
+      ...values,
+      price: Number(values.price),
+      discount: Number(values.discount),
+      review: Number(values.review),
+      rating: Number(values.rating),
+      gender: "male",
+    };
+
+    Object.entries(fixedValues).forEach(([key, value]) => {
+      if (value !== undefined && value !== null)
+        formData.append(key, String(value));
+    });
+
+    if (fileList.length > 0 && fileList[0].originFileObj) {
+      formData.append("image", fileList[0].originFileObj);
+    }
+
     try {
-      const formData = new FormData();
-      formData.append("title", values.title);
-      formData.append("price", String(values.price));
-      formData.append("services", values.services); // string
-      formData.append("about", values.about);
-      formData.append("discount", values.discount || "");
-      formData.append("review", String(values.review || 0));
-      formData.append("rating", String(values.rating || 0));
-      formData.append("gender", "male"); // fixed gender
-
-      if (fileList.length > 0 && fileList[0].originFileObj) {
-        formData.append("image", fileList[0].originFileObj);
-      }
-
+      setLoading(true);
       let res;
       if (packageData?._id) {
         res = await API.put(`/packages/${packageData._id}`, formData, {
@@ -61,21 +73,32 @@ const PackageForm: React.FC<PackageFormProps> = ({ packageData, onSuccess, onCan
       }
 
       onSuccess(res.data.data);
+      message.success("Package saved successfully");
       form.resetFields();
       setFileList([]);
     } catch (err) {
       console.error(err);
       message.error("Failed to save package");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <Form form={form} layout="vertical" onFinish={handleSubmit}>
-      <Form.Item name="title" label="Title" rules={[{ required: true, message: "Title is required" }]}>
+      <Form.Item
+        name="title"
+        label="Title"
+        rules={[{ required: true, message: "Title is required" }]}
+      >
         <Input />
       </Form.Item>
 
-      <Form.Item name="price" label="Price" rules={[{ required: true, message: "Price is required" }]}>
+      <Form.Item
+        name="price"
+        label="Price"
+        rules={[{ required: true, message: "Price is required" }]}
+      >
         <InputNumber min={0} style={{ width: "100%" }} />
       </Form.Item>
 
@@ -87,12 +110,16 @@ const PackageForm: React.FC<PackageFormProps> = ({ packageData, onSuccess, onCan
         <Input placeholder="Enter services as comma separated text" />
       </Form.Item>
 
-      <Form.Item name="about" label="About" rules={[{ required: true, message: "About is required" }]}>
+      <Form.Item
+        name="about"
+        label="About"
+        rules={[{ required: true, message: "About is required" }]}
+      >
         <Input.TextArea rows={3} />
       </Form.Item>
 
       <Form.Item name="discount" label="Discount">
-        <Input />
+        <InputNumber min={0} style={{ width: "100%" }} />
       </Form.Item>
 
       <Form.Item name="review" label="Review">
@@ -117,7 +144,7 @@ const PackageForm: React.FC<PackageFormProps> = ({ packageData, onSuccess, onCan
 
       <Form.Item>
         <Space>
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" loading={loading}>
             {packageData ? "Update" : "Add"} Package
           </Button>
           <Button onClick={onCancel}>Cancel</Button>
@@ -128,4 +155,3 @@ const PackageForm: React.FC<PackageFormProps> = ({ packageData, onSuccess, onCan
 };
 
 export default PackageForm;
-

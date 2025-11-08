@@ -9,6 +9,8 @@ import offerReducer from "./Slice/specialOffer/offerSlice";
 import packageReducer from "./Slice/package/packageSlice";
 import productPackagesReducer from "./Slice/productPackage/productPackageSlice";
 import appointmentReducer from "./Slice/productPackage/productPackageSlice";
+import productReducer from "./Slice/product/productSlice";
+
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +24,7 @@ export const store = configureStore({
     package:packageReducer,
     productPackages: productPackagesReducer ,
     appointment: appointmentReducer,
+      products: productReducer,
   },
 });
 

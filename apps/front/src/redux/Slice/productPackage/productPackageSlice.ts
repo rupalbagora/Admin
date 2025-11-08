@@ -21,7 +21,7 @@ export const fetchProductPackages = createAsyncThunk(
       const { data } = await API.get("/product-packages");
       return data.data;
     } catch (err: any) {
-      return rejectWithValue(err.response?.data?.error || "Failed to fetch");
+      return rejectWithValue(err.response?.data?.error || "Failed to fetch packages");
     }
   }
 );
@@ -34,7 +34,7 @@ export const deleteProductPackage = createAsyncThunk(
       await API.delete(`/product-packages/${id}`);
       return id;
     } catch (err: any) {
-      return rejectWithValue(err.response?.data?.error || "Failed to delete");
+      return rejectWithValue(err.response?.data?.error || "Failed to delete package");
     }
   }
 );

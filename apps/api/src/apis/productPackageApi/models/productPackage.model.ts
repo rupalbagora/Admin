@@ -9,7 +9,7 @@ export interface IProductPackage extends Document {
   items: string[];
   usage?: string;
   image?: string;
-  gender?: string; 
+  gender?: string;
   addedBy: mongoose.Types.ObjectId;
 }
 
@@ -23,10 +23,13 @@ const productPackageSchema = new Schema<IProductPackage>(
     items: [{ type: String, required: true }],
     usage: { type: String },
     image: { type: String },
-    gender: { type: String, enum: ["male", "female", "unisex"], required: false },
+    gender: { type: String }, 
     addedBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   { timestamps: true }
 );
 
-export default mongoose.model<IProductPackage>("ProductPackage", productPackageSchema);
+export default mongoose.model<IProductPackage>(
+  "ProductPackage",
+  productPackageSchema
+);

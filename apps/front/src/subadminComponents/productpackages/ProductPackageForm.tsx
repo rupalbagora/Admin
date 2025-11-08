@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Form, Input, Button, InputNumber, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { IProductPackage } from "../../redux/types/subadmintypes/ProductPackage.types";
 import API from "../../api/axios";
 
 interface ProductPackageFormProps {
   onSuccess: () => void;
-  packageToEdit?: IProductPackage;
+  packageToEdit?: any;
 }
 
 const { TextArea } = Input;
@@ -35,13 +34,12 @@ const ProductPackageForm: React.FC<ProductPackageFormProps> = ({ onSuccess, pack
     try {
       const formData = new FormData();
       formData.append("name", values.name);
-      formData.append("tagline", values.tagline);
       formData.append("price", values.price);
-      formData.append("review", values.review || "No review yet");
-      formData.append("description", values.description);
+      formData.append("review", values.review || "");
+      formData.append("description", values.description || "");
       formData.append("items", values.items.split(",").map((i: string) => i.trim()));
       formData.append("offers", values.offers || "");
-      formData.append("usage", values.usage);
+      formData.append("usage", values.usage || "");
       formData.append("gender", "male");
 
       if (fileList.length > 0 && fileList[0].originFileObj) {
@@ -76,10 +74,6 @@ const ProductPackageForm: React.FC<ProductPackageFormProps> = ({ onSuccess, pack
         <Input placeholder="Enter package name" />
       </Form.Item>
 
-      <Form.Item label="Tagline" name="tagline" rules={[{ required: true }]}>
-        <Input placeholder="Enter tagline" />
-      </Form.Item>
-
       <Form.Item label="Review" name="review">
         <TextArea placeholder="Enter review" />
       </Form.Item>
@@ -92,7 +86,7 @@ const ProductPackageForm: React.FC<ProductPackageFormProps> = ({ onSuccess, pack
         <Input placeholder="Enter items separated by comma" />
       </Form.Item>
 
-      <Form.Item label="Usage Instructions" name="usage" rules={[{ required: true }]}>
+      <Form.Item label="Usage Instructions" name="usage">
         <TextArea placeholder="Describe usage" />
       </Form.Item>
 
@@ -111,7 +105,11 @@ const ProductPackageForm: React.FC<ProductPackageFormProps> = ({ onSuccess, pack
           beforeUpload={() => false}
           onChange={(info) => setFileList(info.fileList)}
         >
-          {fileList.length === 0 && <div><UploadOutlined /> Upload</div>}
+          {fileList.length === 0 && (
+            <div>
+              <UploadOutlined /> Upload
+            </div>
+          )}
         </Upload>
         {previewImage && <img src={previewImage} alt="Preview" className="w-full h-32 object-cover mt-2" />}
       </Form.Item>
