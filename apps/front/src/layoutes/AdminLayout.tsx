@@ -31,107 +31,139 @@ const menuItems = [
 	//   ],
 	// },
 
-	{
-		name: "Gender",
-		icon: <User className="w-5 h-5" />,
-		subItems: [
-			{
-				name: "Male",
-				icon: <User className="w-5 h-5" />,
-				subItems: [
-					{
-						name: "Special Offers",
-						icon: <User className="w-4 h-4" />,
-						path: "/admin/male/special-offers",
-					},
-					{
-						name: "Our Service",
-						icon: <User className="w-4 h-4" />,
-						path: "/admin/male/our-service",
-					},
-					{
-						name: "Product",
-						icon: <User className="w-4 h-4" />,
-						subItems: [
-							{
-								name: "Products Details",
-								icon: <User className="w-4 h-4" />,
-								path: "/admin/male/products/details",
-							},
-							{
-								name: "Categories",
-								icon: <User className="w-4 h-4" />,
-								path: "/admin/male/products/categories",
-							},
-						],
-					},
-					{
-						name: "Our Package",
-						icon: <User className="w-4 h-4" />,
-						path: "/admin/male/our-package",
-					},
-					{
-						name: "Product Package",
-						icon: <User className="w-4 h-4" />,
-						path: "/admin/male/product-package",
-					},
-				],
-			},
-			{
-				name: "Female",
-				icon: <User className="w-4 h-4" />,
-				subItems: [
-					{
-						name: "Special Offers",
-						icon: <User className="w-4 h-4" />,
-						path: "/admin/female/special-offers",
-					},
-					{
-						name: "Our Service",
-						icon: <User className="w-4 h-4" />,
-						path: "/admin/female/our-service",
-					},
-					{
-						name: "Product",
-						icon: <User className="w-4 h-4" />,
-						subItems: [
-							{
-								name: "Products Details",
-								icon: <User className="w-4 h-4" />,
-								path: "/admin/female/products/details",
-							},
-							{
-								name: "Categories",
-								icon: <User className="w-4 h-4" />,
-								path: "/admin/female/products/categories",
-							},
-						],
-					},
-					{
-						name: "Our Package",
-						icon: <User className="w-4 h-4" />,
-						path: "/admin/female/our-package",
-					},
-					{
-						name: "Product Package",
-						icon: <User className="w-4 h-4" />,
-						path: "/admin/female/product-package",
-					},
-				],
-			},
-		],
-	},
+ {
+    name: "Appointment",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/Appointment",
+  },
+    
+     {
+  name: "Gender",
+  icon: <User className="w-5 h-5" />,
+  subItems: [
+    {
+      name: "Male",
+      icon: <User className="w-5 h-5" />,
+      subItems: [
+        {
+          name: "Special Offers",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/male/special-offers",
+        },
+        {
+          name: "Our Service",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/male/our-service",
+        },
+        {
+          name: "Product",
+          icon: <User className="w-4 h-4" />,
+          subItems: [
+            {
+              name: "Products Details",
+              icon: <User className="w-4 h-4" />,
+              path: "/admin/male/products/details",
+            },
+            {
+              name: "Categories",
+              icon: <User className="w-4 h-4" />,
+              path: "/admin/male/products/categories",
+            },
+          ],
+        },
+        {
+          name: "Our Package",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/male/our-package",
+        },
+        {
+          name: "Product Package",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/male/product-package",
+        },
+      ],
+    },
+    {
+      name: "Female",
+      icon: <User className="w-4 h-4" />,
+      subItems: [
+        {
+          name: "Special Offers",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/female/special-offers",
+        },
+        {
+          name: "Our Service",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/female/our-service",
+        },
+        {
+          name: "Product",
+          icon: <User className="w-4 h-4" />,
+          subItems: [
+            {
+              name: "Products Details",
+              icon: <User className="w-4 h-4" />,
+              path: "/admin/female/products/details",
+            },
+            {
+              name: "Categories",
+              icon: <User className="w-4 h-4" />,
+              path: "/admin/female/products/categories",
+            },
+          ],
+        },
+        {
+          name: "Our Package",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/female/our-package",
+        },
+        {
+          name: "Product Package",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/female/product-package",
+        },
+      ],
+    },
+  ],
+},
 
-	{
-		name: "Upload Certificate",
-		icon: <Upload className="w-5 h-5" />,
-		path: "/admin/Upload-Certificate",
-	},
-	{
-		name: "Youtube",
-		icon: <Home className="w-5 h-5" />,
-		path: "/admin/youtube",
-	},
+
+
+
+  {
+    name: "Upload Certificate",
+    icon: <Upload className="w-5 h-5" />,
+    path: "/admin/Upload-Certificate",
+  }, 
+   {
+    name: "Youtube",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/youtube",
+  },
+ 
+  
+  {
+      name: "Documents",
+      icon: <User className="w-4 h-4" />,
+      subItems: [
+        {
+    name: "About Us",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/About-Us",
+  },
+  {
+    name: "Privacy Policy",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/Privacy-Policy",
+  },
+  {
+    name: "Terms & Conditions",
+    icon: <Home className="w-5 h-5" />,
+    path: "/admin/Terms-Conditions",
+  },
+      ],
+    },
 
 	{
 		name: "Documents",

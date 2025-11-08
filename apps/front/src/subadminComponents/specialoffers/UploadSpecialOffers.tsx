@@ -14,15 +14,21 @@ import {
 	updateOffer,
 	deleteOffer,
 } from "../../redux/Slice/specialOffer/offerSlice";
-import SpecialOfferForm, { type SpecialOffer } from "./SpecialOffersForm";
+import SpecialOfferForm from "./SpecialOffersForm";
+import type {SpecialOffer} from "./SpecialOffersForm"
 
 const UploadSpecialOffers: React.FC = () => {
-	const dispatch = useDispatch<AppDispatch>();
-	const { offers, loading } = useSelector((state: RootState) => state.offers);
+  const dispatch = useDispatch<AppDispatch>();
+  const { offers, loading } = useSelector((state: RootState) => state.offers);
 
-	const [modalVisible, setModalVisible] = useState(false);
-	const [editingOffer, setEditingOffer] = useState<SpecialOffer | null>(null);
-	const [searchText, setSearchText] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
+  const [editingOffer, setEditingOffer] = useState<SpecialOffer | null>(null);
+  const [searchText, setSearchText] = useState("");
+  
+  // ✅ Fetch all offers on mount
+  useEffect(() => {
+    dispatch(fetchOffers());
+  }, [dispatch]);
 
 	// ✅ Fetch all offers on mount
 	useEffect(() => {

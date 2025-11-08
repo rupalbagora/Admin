@@ -5,7 +5,13 @@ import userReducer from "./Slice/useSliceForAdmin/userSlice";
 import activeStatusReducer from "./Slice/activeStatus/activeStatusSlice";
 import subscriptionPlansReducer from "./Slice/SubscriptionPlansSlice/subscriptionPlansSlice";
 import certificateReducer from "./Slice/Uploadcertificate/certificateSlice";
-import offerReducer from "./Slice/specialOffer/offerSlice"
+import offerReducer from "./Slice/specialOffer/offerSlice";
+import packageReducer from "./Slice/package/packageSlice";
+import productPackagesReducer from "./Slice/productPackage/productPackageSlice";
+import appointmentReducer from "./Slice/productPackage/productPackageSlice";
+import productReducer from "./Slice/product/productSlice";
+
+
 export const store = configureStore({
   reducer: {
     youtube: youtubeReducer,
@@ -15,7 +21,10 @@ export const store = configureStore({
     subscriptionPlans: subscriptionPlansReducer,
     certificates: certificateReducer, 
     offers: offerReducer,
-    
+    package:packageReducer,
+    productPackages: productPackagesReducer ,
+    appointment: appointmentReducer,
+      products: productReducer,
   },
 });
 

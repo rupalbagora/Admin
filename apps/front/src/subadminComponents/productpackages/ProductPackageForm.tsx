@@ -1,134 +1,122 @@
-import React from "react";
-import { Form, Input, Button, Select, InputNumber } from "antd";
-import { type IProductPackage } from "../../redux/types/subadmintypes/ProductPackage.types";
+import React, { useEffect, useState } from "react";
+import { Form, Input, Button, InputNumber, Upload, message } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import API from "../../api/axios";
 
 interface ProductPackageFormProps {
-  onAddPackage: (pkg: IProductPackage) => void;
+  onSuccess: () => void;
+  packageToEdit?: any;
 }
 
-const { Option } = Select;
 const { TextArea } = Input;
 
-const ProductPackageForm: React.FC<ProductPackageFormProps> = ({ onAddPackage }) => {
+const ProductPackageForm: React.FC<ProductPackageFormProps> = ({ onSuccess, packageToEdit }) => {
   const [form] = Form.useForm();
+  const [fileList, setFileList] = useState<any[]>([]);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
 
-  const predefinedProducts = [
-    "Facewash",
-    "Bleach",
-    "Shampoo",
-    "Conditioner",
-    "Hairmask",
-    "Serum",
-  ];
+  useEffect(() => {
+    if (packageToEdit) {
+      form.setFieldsValue({
+        ...packageToEdit,
+        items: packageToEdit.items.join(", "),
+        price: packageToEdit.price,
+      });
 
-  const handleFinish = (values: any) => {
-    const newPackage: IProductPackage = {
-      name: values.name,
-      price: Number(values.price),
-      tagline: values.tagline,
-      products: values.products || [],
-      rating: values.rating ? Number(values.rating) : undefined,
-      description: values.description,
-      discount: values.discount,
-      items: values.items || [],
-      usageInstructions: values.usageInstructions,
-      stock: Number(values.stock),
-      addedBy: "000000000000000000000000" as any, // placeholder ObjectId
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
+      if (packageToEdit.image) {
+        setFileList([{ url: packageToEdit.image, name: "image.jpg" }]);
+        setPreviewImage(packageToEdit.image);
+      }
+    }
+  }, [packageToEdit]);
 
-    onAddPackage(newPackage);
-    form.resetFields();
+  const handleFinish = async (values: any) => {
+    try {
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("price", values.price);
+      formData.append("review", values.review || "");
+      formData.append("description", values.description || "");
+      formData.append("items", values.items.split(",").map((i: string) => i.trim()));
+      formData.append("offers", values.offers || "");
+      formData.append("usage", values.usage || "");
+      formData.append("gender", "male");
+
+      if (fileList.length > 0 && fileList[0].originFileObj) {
+        formData.append("image", fileList[0].originFileObj);
+      }
+
+      if (packageToEdit?._id) {
+        await API.put(`/product-packages/${packageToEdit._id}`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        message.success("Package updated successfully");
+      } else {
+        await API.post("/product-packages", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+        message.success("Package added successfully");
+      }
+
+      form.resetFields();
+      setFileList([]);
+      setPreviewImage(null);
+      onSuccess();
+    } catch (err: any) {
+      console.error(err);
+      message.error(err.response?.data?.error || "Something went wrong");
+    }
   };
 
   return (
     <Form layout="vertical" form={form} onFinish={handleFinish}>
-      <Form.Item
-        label="Package Name"
-        name="name"
-        rules={[{ required: true, message: "Please enter package name" }]}
-      >
+      <Form.Item label="Package Name" name="name" rules={[{ required: true }]}>
         <Input placeholder="Enter package name" />
       </Form.Item>
 
-      <Form.Item
-        label="Tagline"
-        name="tagline"
-        rules={[{ required: true, message: "Please enter tagline" }]}
-      >
-        <Input placeholder="Enter tagline" />
+      <Form.Item label="Review" name="review">
+        <TextArea placeholder="Enter review" />
       </Form.Item>
 
-      <Form.Item
-        label="Description"
-        name="description"
-        rules={[{ required: true, message: "Please enter description" }]}
-      >
-        <TextArea placeholder="Enter package description" />
+      <Form.Item label="Description" name="description" rules={[{ required: true }]}>
+        <TextArea placeholder="Enter description" />
       </Form.Item>
 
-      <Form.Item
-        label="Products"
-        name="products"
-        rules={[{ required: true, message: "Select at least one product" }]}
-      >
-        <Select mode="multiple" allowClear placeholder="Select products">
-          {predefinedProducts.map((p) => (
-            <Option key={p} value={p}>
-              {p}
-            </Option>
-          ))}
-        </Select>
+      <Form.Item label="Items" name="items" rules={[{ required: true }]}>
+        <Input placeholder="Enter items separated by comma" />
       </Form.Item>
 
-      <Form.Item
-        label="Items"
-        name="items"
-        rules={[{ required: true, message: "Enter item list" }]}
-      >
-        <Select
-          mode="tags"
-          tokenSeparators={[","]}
-          placeholder="Enter items (e.g. Shampoo 250ml)"
-        />
+      <Form.Item label="Usage Instructions" name="usage">
+        <TextArea placeholder="Describe usage" />
       </Form.Item>
 
-      <Form.Item
-        label="Usage Instructions"
-        name="usageInstructions"
-        rules={[{ required: true, message: "Enter usage instructions" }]}
-      >
-        <TextArea placeholder="Describe how to use the products" />
+      <Form.Item label="Offers" name="offers">
+        <Input placeholder="e.g., Save ₹200 on combo" />
       </Form.Item>
 
-      <Form.Item label="Discount" name="discount">
-        <Input placeholder="e.g. Save ₹200 on combo" />
-      </Form.Item>
-
-      <Form.Item
-        label="Price"
-        name="price"
-        rules={[{ required: true, message: "Enter price" }]}
-      >
+      <Form.Item label="Price" name="price" rules={[{ required: true }]}>
         <InputNumber min={0} className="w-full" placeholder="Enter price (₹)" />
       </Form.Item>
 
-      <Form.Item label="Rating" name="rating">
-        <InputNumber min={0} max={5} step={0.1} className="w-full" placeholder="Rating (0–5)" />
-      </Form.Item>
-
-      <Form.Item
-        label="Stock"
-        name="stock"
-        rules={[{ required: true, message: "Enter stock quantity" }]}
-      >
-        <InputNumber min={0} className="w-full" placeholder="Enter stock count" />
+      <Form.Item label="Image">
+        <Upload
+          listType="picture-card"
+          fileList={fileList}
+          beforeUpload={() => false}
+          onChange={(info) => setFileList(info.fileList)}
+        >
+          {fileList.length === 0 && (
+            <div>
+              <UploadOutlined /> Upload
+            </div>
+          )}
+        </Upload>
+        {previewImage && <img src={previewImage} alt="Preview" className="w-full h-32 object-cover mt-2" />}
       </Form.Item>
 
       <Form.Item>
         <Button type="primary" htmlType="submit" className="bg-gray-700">
-          Add Product Package
+          {packageToEdit ? "Update Package" : "Add Product Package"}
         </Button>
       </Form.Item>
     </Form>

@@ -5,4 +5,4 @@ export interface ICertificate {
   addedBy?: string;
   createdAt?: Date;
   updatedAt?: Date;
-}
+};

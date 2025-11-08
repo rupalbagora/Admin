@@ -149,4 +149,4 @@ const UploadServices: React.FC = () => {
 	);
 };
 
-export default UploadServices;
+// export default UploadServices;

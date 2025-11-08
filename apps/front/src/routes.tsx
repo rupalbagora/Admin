@@ -35,47 +35,24 @@ const SubscriptionManagement = lazy(
 	() => import("./commonComp/SubscriptionManagement/SubscriptionManagement")
 );
 
+
+
 // SUB-ADMIN
-const UploadCategories = lazy(
-	() =>
-		import("../src/subadminComponents/products/AllCategories/UploadCategories")
-);
-const UploadProduct = lazy(
-	() =>
-		import("../src/subadminComponents/products/ProductsDetails/UploadProduct")
-);
-const UploadSpecialOffers = lazy(
-	() => import("../src/subadminComponents/specialoffers/UploadSpecialOffers")
-);
-const UploadYoutube = lazy(
-	() => import("../src/subadminComponents/youtube/UploadYoutube")
-);
-const UploadCatalog = lazy(
-	() => import("./subadminComponents/catalog/UploadCatalog")
-);
-const UploadReferFriend = lazy(
-	() => import("./subadminComponents/referfriend/UploadReferFriend")
-);
-const UploadAboutUs = lazy(
-	() => import("./subadminComponents/aboutus/UploadAboutUs")
-);
-const UploadPrivacyPolicy = lazy(
-	() => import("./subadminComponents/privacypolicy/UploadPrivacyPolicy")
-);
-const UploadTermsConditions = lazy(
-	() => import("./subadminComponents/terms&conditions/UploadTermsConditions")
-);
-const UploadOurservice = lazy(
-	() => import("../src/subadminComponents/ourservice/UploadOurservice")
-);
-const UploadCertificate = lazy(
-	() => import("./subadminComponents/certificate/UploadCertificate")
-);
-const ManagePackages = lazy(
-	() => import("./subadminComponents/ourpackages/ManagePackages")
-);
-const ManageProductPackages = lazy(
-	() => import("./subadminComponents/productpackages/ManageProductPackages")
+const UploadCategories = lazy (()=> import("../src/subadminComponents/products/AllCategories/UploadCategories"));
+const UploadProduct = lazy (()=> import("../src/subadminComponents/products/ProductsDetails/UploadProduct"));
+const UploadSpecialOffers = lazy (()=> import("../src/subadminComponents/specialoffers/UploadSpecialOffers"));
+const UploadYoutube = lazy (()=> import("../src/subadminComponents/youtube/UploadYoutube"));
+const UploadCatalog= lazy (()=> import("./subadminComponents/catalog/UploadCatalog"));
+const UploadReferFriend= lazy (()=> import("./subadminComponents/referfriend/UploadReferFriend"));
+const UploadAboutUs= lazy (()=> import("./subadminComponents/aboutus/UploadAboutUs"));
+const UploadPrivacyPolicy= lazy (()=> import("./subadminComponents/privacypolicy/UploadPrivacyPolicy"));
+const UploadTermsConditions= lazy (()=> import("./subadminComponents/terms&conditions/UploadTermsConditions"));
+const UploadOurservice = lazy (()=> import("../src/subadminComponents/ourservice/UploadOurservice"));
+const UploadCertificate = lazy(() => import("./subadminComponents/certificate/UploadCertificate"));
+const ManagePackages = lazy (() => import("./subadminComponents/ourpackages/ManagePackages"));  
+const ManageProductPackages = lazy(()=> import("./subadminComponents/productpackages/ManageProductPackages"));
+const AppointmentForm = lazy(
+  () => import("../src/subadminComponents/AppointmentForm/appointmentForm")
 );
 
 export const router = createBrowserRouter([
@@ -170,31 +147,70 @@ export const router = createBrowserRouter([
 		],
 	},
 
-	{
-		path: "/admin",
-		element: (
-			<Suspense fallback={Loader}>
-				<RoleBasedLayout allowedRoles={["admin"]} layout={AdminLayout} />
-			</Suspense>
-		),
-		children: [
-			// Default admin dashboard
-			{
-				index: true,
-				element: (
-					<Suspense fallback={Loader}>
-						<AdminDeshboard />
-					</Suspense>
-				),
-			},
-			{
-				path: "AdminDeshboard",
-				element: (
-					<Suspense fallback={Loader}>
-						<AdminDeshboard />
-					</Suspense>
-				),
-			},
+    {
+          path: "Appointment",
+          element: (
+            <Suspense fallback={Loader}>
+              < AppointmentForm/>
+            </Suspense>
+          ),
+        },
+
+      
+    // 🔹 MALE ROUTES
+    {
+      path: "male",
+      children: [
+        {
+          path: "special-offers",
+          element: (
+            <Suspense fallback={Loader}>
+              < UploadSpecialOffers/>
+            </Suspense>
+          ),
+        },
+        {
+          path: "our-service",
+          element: (
+            <Suspense fallback={Loader}>
+              <UploadOurservice />
+            </Suspense>
+          ),
+        },
+        {
+          path: "products/details",
+          element: (
+            <Suspense fallback={Loader}>
+              <UploadProduct />
+            </Suspense>
+          ),
+        },
+        {
+          path: "products/categories",
+          element: (
+            <Suspense fallback={Loader}>
+              <UploadCategories />
+            </Suspense>
+          ),
+        },
+        {
+          path: "our-package",
+          element: (
+            <Suspense fallback={Loader}>
+              <ManagePackages />
+            </Suspense>
+          ),
+        },
+        {
+          path: "product-package",
+          element: (
+            <Suspense fallback={Loader}>
+              <ManageProductPackages />
+            </Suspense>
+          ),
+        },
+      ],
+    },
 
 			// 🔹 MALE ROUTES
 			{

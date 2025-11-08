@@ -8,8 +8,10 @@ import {
   updateProduct,
   deleteProduct,
 } from "../controllers/product.controller";
+
 const router = Router();
-// ✅ Store files in appropriate folders
+
+// ✅ Multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const folder =
@@ -25,12 +27,12 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-// ✅ Multiple uploads
+// ✅ Routes
 router.post(
   "/upload",
   upload.fields([
-    { name: "image", maxCount: 1 },
-    { name: "icons", maxCount: 5 },
+    { name: "image" },
+    { name: "icons"},
   ]),
   createProduct
 );
