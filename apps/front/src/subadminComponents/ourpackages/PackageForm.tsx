@@ -4,154 +4,94 @@ import { UploadOutlined } from "@ant-design/icons";
 import API from "../../api/axios";
 
 interface PackageFormProps {
-  packageData?: any;
-  onSuccess: (pkg: any) => void;
-  onCancel: () => void;
+  onAddPackage: (pkg: Package) => void;
 }
 
-const PackageForm: React.FC<PackageFormProps> = ({
-  packageData,
-  onSuccess,
-  onCancel,
-}) => {
+const { Option } = Select;
+
+const PackageForm: React.FC<PackageFormProps> = ({ onAddPackage }) => {
   const [form] = Form.useForm();
-  const [fileList, setFileList] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (packageData) {
-      form.setFieldsValue(packageData);
-      if (packageData.image) {
-        setFileList([
-          {
-            uid: "-1",
-            name: "Current Image",
-            status: "done",
-            url: packageData.image,
-          },
-        ]);
-      }
-    } else {
-      form.resetFields();
-      setFileList([]);
-    }
-  }, [packageData]);
+  // Predefined service options
+  const serviceOptions = [
+    "Cleansing and Scrubbing",
+    "Steam and Blackhead Removal",
+    "Relaxing Massage",
+    "Hydrating Mask",
+    "Skin Brightening Serum",
+  ];
 
-  const handleSubmit = async (values: any) => {
-    const formData = new FormData();
-
-    // Convert numeric fields to numbers
-    const fixedValues = {
-      ...values,
+  const handleFinish = (values: any) => {
+    const newPackage: Package = {
+      id: Date.now().toString(),
+      name: values.name,
+      description: values.description,
+      services: values.services || [],
       price: Number(values.price),
-      discount: Number(values.discount),
-      review: Number(values.review),
-      rating: Number(values.rating),
-      gender: "male",
+      createdAt: new Date().toISOString(),
     };
 
-    Object.entries(fixedValues).forEach(([key, value]) => {
-      if (value !== undefined && value !== null)
-        formData.append(key, String(value));
-    });
-
-    if (fileList.length > 0 && fileList[0].originFileObj) {
-      formData.append("image", fileList[0].originFileObj);
-    }
-
-    try {
-      setLoading(true);
-      let res;
-      if (packageData?._id) {
-        res = await API.put(`/packages/${packageData._id}`, formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-      } else {
-        res = await API.post("/packages/upload", formData, {
-          headers: { "Content-Type": "multipart/form-data" },
-        });
-      }
-
-      onSuccess(res.data.data);
-      message.success("Package saved successfully");
-      form.resetFields();
-      setFileList([]);
-    } catch (err) {
-      console.error(err);
-      message.error("Failed to save package");
-    } finally {
-      setLoading(false);
-    }
+    onAddPackage(newPackage);
+    form.resetFields();
   };
 
   return (
-    <Form form={form} layout="vertical" onFinish={handleSubmit}>
+    <Form form={form} layout="vertical" onFinish={handleFinish}>
+      {/* === Package Name === */}
       <Form.Item
-        name="title"
-        label="Title"
-        rules={[{ required: true, message: "Title is required" }]}
+        label="Package Name"
+        name="name"
+        rules={[{ required: true, message: "Please enter package name" }]}
       >
-        <Input />
+        <Input placeholder="Enter package name" />
       </Form.Item>
 
+      {/* === Description === */}
       <Form.Item
-        name="price"
-        label="Price"
-        rules={[{ required: true, message: "Price is required" }]}
+        label="Description"
+        name="description"
+        rules={[{ required: true, message: "Please enter description" }]}
       >
-        <InputNumber min={0} style={{ width: "100%" }} />
+        <Input.TextArea placeholder="Enter description" />
       </Form.Item>
 
+      {/* === Services Dropdown === */}
       <Form.Item
+        label="Services List"
         name="services"
-        label="Services"
-        rules={[{ required: true, message: "Services is required" }]}
+        rules={[{ required: true, message: "Please select at least one service" }]}
       >
-        <Input placeholder="Enter services as comma separated text" />
-      </Form.Item>
-
-      <Form.Item
-        name="about"
-        label="About"
-        rules={[{ required: true, message: "About is required" }]}
-      >
-        <Input.TextArea rows={3} />
-      </Form.Item>
-
-      <Form.Item name="discount" label="Discount">
-        <InputNumber min={0} style={{ width: "100%" }} />
-      </Form.Item>
-
-      <Form.Item name="review" label="Review">
-        <InputNumber min={0} max={5} style={{ width: "100%" }} />
-      </Form.Item>
-
-      <Form.Item name="rating" label="Rating">
-        <InputNumber min={0} max={5} style={{ width: "100%" }} />
-      </Form.Item>
-
-      <Form.Item label="Image">
-        <Upload
-          listType="picture"
-          maxCount={1}
-          fileList={fileList}
-          onChange={({ fileList }) => setFileList(fileList)}
-          beforeUpload={() => false} // prevent auto upload
+        <Select
+          mode="multiple"
+          allowClear
+          placeholder="Select services"
         >
-          <Button icon={<UploadOutlined />}>Upload Image</Button>
-        </Upload>
+          {serviceOptions.map((service) => (
+            <Option key={service} value={service}>
+              {service}
+            </Option>
+          ))}
+        </Select>
       </Form.Item>
 
+      {/* === Price === */}
+      <Form.Item
+        label="Price"
+        name="price"
+        rules={[{ required: true, message: "Please enter price" }]}
+      >
+        <Input type="number" placeholder="Enter price" />
+      </Form.Item>
+
+      {/* === Submit === */}
       <Form.Item>
-        <Space>
-          <Button type="primary" htmlType="submit" loading={loading}>
-            {packageData ? "Update" : "Add"} Package
-          </Button>
-          <Button onClick={onCancel}>Cancel</Button>
-        </Space>
+        <Button type="primary" htmlType="submit" className="bg-gray-700">
+          Add Package
+        </Button>
       </Form.Item>
     </Form>
   );
 };
 
 export default PackageForm;
+  
