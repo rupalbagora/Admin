@@ -133,4 +133,4 @@ const UploadAboutUs: React.FC = () => {
 	);
 };
 
-// export default UploadAboutUs;
+export default UploadAboutUs;

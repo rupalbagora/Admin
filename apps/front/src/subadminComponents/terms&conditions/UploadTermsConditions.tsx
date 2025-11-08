@@ -126,4 +126,4 @@ const UploadTermConditions: React.FC = () => {
 	);
 };
 
-// export default UploadTermConditions;
+export default UploadTermConditions;

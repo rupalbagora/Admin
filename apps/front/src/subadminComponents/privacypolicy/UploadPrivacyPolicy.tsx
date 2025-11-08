@@ -133,4 +133,4 @@ const UploadPrivacyPolicy: React.FC = () => {
 	);
 };
 
-// export default UploadPrivacyPolicy;
+export default UploadPrivacyPolicy;
