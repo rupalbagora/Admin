@@ -6,6 +6,9 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { InAppNotifications } from "../../inAppNotification/models/inAppNotification.model";
+import customParseFormat from "dayjs/plugin/customParseFormat.js";
+
+dayjs.extend(customParseFormat);
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -13,6 +16,28 @@ export const createAppointment = async (req: Request, res: Response) => {
 	try {
 		const userId = String(req.user._id);
 		const email = (await User.findById(userId))?.email;
+
+		const rawTime = String(req.body.time).trim();
+
+		if (rawTime === "24:00" || rawTime.startsWith("24")) {
+			return res.status(403).json({
+				success: false,
+				message: "You can't book an appointment at this time",
+			});
+		}
+		let time = dayjs(rawTime, "HH:mm", true);
+		console.log("🚀 ~ createAppointment ~ time:", time);
+
+		const start = dayjs("08:00", "HH:mm");
+		const end = dayjs("23:00", "HH:mm");
+
+		if (time.isBefore(start) || time.isAfter(end)) {
+			return res.status(403).json({
+				success: false,
+				message: "You can't book an appointment at this time",
+			});
+		}
+
 		const data = await appointmentService.create(req.body, userId, email!);
 		res.status(201).json({
 			success: true,
@@ -136,6 +161,7 @@ export const verifyAppointmentCode = async (req: Request, res: Response) => {
 			{
 				appointmentCode,
 				email,
+				appointmentStatus: { $ne: "Accepted" },
 			},
 			{ appointmentStatus: "Accepted" }
 		);
@@ -152,11 +178,17 @@ export const verifyAppointmentCode = async (req: Request, res: Response) => {
 			return res
 				.status(200)
 				.json({ success: true, message: "Appointment Confirmed!!" });
-		} else {
-			return res
-				.status(403)
-				.json({ success: false, message: "Incorrect Credentials" });
 		}
+		const existing = await appointmentModel.findOne({ appointmentCode, email });
+		if (existing?.appointmentStatus === "Accepted") {
+			return res
+				.status(409)
+				.json({ success: false, message: "Appointment already approved" });
+		}
+
+		return res
+			.status(403)
+			.json({ success: false, message: "Incorrect Credentials" });
 	} catch (error) {
 		return res
 			.status(500)
