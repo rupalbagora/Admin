@@ -3,7 +3,7 @@ import { Form, Input, Upload, Button, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useAppDispatch } from "../../redux/hooks";
 import { uploadCertificate, updateCertificate } from "../../redux/Slice/Uploadcertificate/certificateSlice";
-import { ICertificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
+import type { ICertificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
 
 interface CertificateFormProps {
   editingCertificate?: ICertificate | null;

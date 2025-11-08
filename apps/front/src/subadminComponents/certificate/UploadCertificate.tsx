@@ -4,7 +4,7 @@ import { PlusOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import CertificateForm from "./CertificateForm";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchCertificates, deleteCertificate } from "../../redux/Slice/Uploadcertificate/certificateSlice";
-import { ICertificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
+import type { ICertificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
 
 const { Search } = Input;
 

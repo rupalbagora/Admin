@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Card, Table, Input, Button, Modal, Tag, Space, Spin } from "antd";
 import { PlusOutlined, DeleteOutlined, EditOutlined, ReloadOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../redux/hooks";
+import type { AppDispatch, RootState } from "../../redux/store";
 import {
   fetchOffers,
   addOffer,
