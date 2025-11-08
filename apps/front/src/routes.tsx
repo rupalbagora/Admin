@@ -9,7 +9,7 @@ const SubscriptionPlans = lazy(
 );
 const DashboardRedirect = lazy(() => import("./pages/Dashboard/Deshboard"));
 const Layout = lazy(() => import("./layoutes/Layout"));
-// const AdminLayout = lazy(() => import("./layoutes/AdminLayout"));
+const AdminLayout = lazy(() => import("./layoutes/AdminLayout"));
 const UserLayout = lazy(() => import("./layoutes/UserLayout"));
 const LoginPage = lazy(() => import("./commonComp/AuthPages/Login"));
 const RegisterPage = lazy(() => import("./commonComp/AuthPages/Register"));
