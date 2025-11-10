@@ -1,91 +1,96 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import API from "../../../api/axios"; 
-import type { IYoutubeVideo, YoutubeState } from "../../types/subadmintypes/youtubelinks.types";
+import API from "../../../api/axios";
 
-// Fetch all video
-export const fetchYoutubeVideos = createAsyncThunk<
-  IYoutubeVideo[],
-  void,
-  { rejectValue: string }
->("youtube/fetchAll", async (_, { rejectWithValue }) => {
-  try {
-    const res = await API.get("/youtube");
-    return res.data.data as IYoutubeVideo[];
-  } catch (err: any) {
-    return rejectWithValue(
-      err.response?.data?.message || err.message || "Failed to fetch videos"
-    );
-  }
-});
+export interface YoutubeVideo {
+  _id: string;
+  title: string;
+  videoUrl?: string;
+  videoPath?: string;
+  uploadedAt: string;
+  addedBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
-// Create video (file or URL)
-export const createYoutubeVideo = createAsyncThunk<
-  IYoutubeVideo,
-  FormData,
-  { rejectValue: string }
->("youtube/create", async (formData, { rejectWithValue }) => {
-  try {
-    const res = await API.post("/youtube", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    return res.data.data as IYoutubeVideo;
-  } catch (err: any) {
-    return rejectWithValue(
-      err.response?.data?.message || err.message || "Failed to create video"
-    );
-  }
-});
+interface YoutubeVideoState {
+  videos: YoutubeVideo[];
+  loading: boolean;
+  error: string | null;
+}
 
-// Update video
-export const updateYoutubeVideo = createAsyncThunk<
-  IYoutubeVideo,
-  { id: string; data: FormData },
-  { rejectValue: string }
->("youtube/update", async ({ id, data }, { rejectWithValue }) => {
-  try {
-    const res = await API.patch(`/youtube/${id}`, data, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
-    return res.data.data as IYoutubeVideo;
-  } catch (err: any) {
-    return rejectWithValue(
-      err.response?.data?.message || err.message || "Failed to update video"
-    );
-  }
-});
-
-// Delete video
-export const deleteYoutubeVideo = createAsyncThunk<
-  string,
-  string,
-  { rejectValue: string }
->("youtube/delete", async (id, { rejectWithValue }) => {
-  console.log("hellloooo",id)
-  try {
-    await API.delete(`/youtube/${id}`);
-    console.log(id)
-    return id;
-  } catch (err: any) {
-    return rejectWithValue(
-      err.response?.data?.message || err.message || "Failed to delete video"
-    );
-  }
-});
-
-const initialState: YoutubeState = {
+const initialState: YoutubeVideoState = {
   videos: [],
-  video: null,
   loading: false,
   error: null,
 };
 
+// 🔹 Get all YouTube videos
+export const fetchYoutubeVideos = createAsyncThunk(
+  "youtubeVideos/fetchAll",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await API.get("/youtube");
+      return data.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.error || error.message);
+    }
+  }
+);
+
+// 🔹 Add new YouTube video
+export const addYoutubeVideo = createAsyncThunk(
+  "youtubeVideos/add",
+  async (formData: FormData, { rejectWithValue }) => {
+    try {
+      const { data } = await API.post("/youtube", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      return data.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || "Failed to add video");
+    }
+  }
+);
+
+// 🔹 Edit YouTube video
+export const updateYoutubeVideo = createAsyncThunk(
+  "youtubeVideos/update",
+  async ({ id, formData }: { id: string; formData: FormData }, { rejectWithValue }) => {
+    try {
+      const { data } = await API.patch(`/youtube/${id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      return data.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || "Failed to update video");
+    }
+  }
+);
+
+// 🔹 Delete YouTube video
+export const deleteYoutubeVideo = createAsyncThunk(
+  "youtubeVideos/delete",
+  async (id: string, { rejectWithValue }) => {
+    try {
+      await API.delete(`/youtube/${id}`);
+      return id;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || "Failed to delete video");
+    }
+  }
+);
+
 const youtubeSlice = createSlice({
-  name: "youtube",
+  name: "youtubeVideos",
   initialState,
-  reducers: {},
+  reducers: {
+    clearError: (state) => {
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
-      // fetch
+      // 🔹 Fetch all videos
       .addCase(fetchYoutubeVideos.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -96,42 +101,41 @@ const youtubeSlice = createSlice({
       })
       .addCase(fetchYoutubeVideos.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload ?? "Failed to fetch videos";
+        state.error = action.payload as string;
       })
-
-      // create
-      .addCase(createYoutubeVideo.pending, (state) => {
+      
+      // 🔹 Add video
+      .addCase(addYoutubeVideo.pending, (state) => {
         state.loading = true;
-        state.error = null;
       })
-      .addCase(createYoutubeVideo.fulfilled, (state, action) => {
+      .addCase(addYoutubeVideo.fulfilled, (state, action) => {
         state.loading = false;
         state.videos.unshift(action.payload);
       })
-      .addCase(createYoutubeVideo.rejected, (state, action) => {
+      .addCase(addYoutubeVideo.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload ?? "Failed to create video";
+        state.error = action.payload as string;
       })
 
-      // update
+      // 🔹 Update video
       .addCase(updateYoutubeVideo.pending, (state) => {
         state.loading = true;
-        state.error = null;
       })
       .addCase(updateYoutubeVideo.fulfilled, (state, action) => {
         state.loading = false;
-        const idx = state.videos.findIndex((v) => v._id === action.payload._id);
-        if (idx !== -1) state.videos[idx] = action.payload;
+        const index = state.videos.findIndex((v) => v._id === action.payload._id);
+        if (index !== -1) {
+          state.videos[index] = action.payload;
+        }
       })
       .addCase(updateYoutubeVideo.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload ?? "Failed to update video";
+        state.error = action.payload as string;
       })
 
-      // delete
+      // 🔹 Delete video
       .addCase(deleteYoutubeVideo.pending, (state) => {
         state.loading = true;
-        state.error = null;
       })
       .addCase(deleteYoutubeVideo.fulfilled, (state, action) => {
         state.loading = false;
@@ -139,9 +143,10 @@ const youtubeSlice = createSlice({
       })
       .addCase(deleteYoutubeVideo.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload ?? "Failed to delete video";
+        state.error = action.payload as string;
       });
   },
 });
 
+export const { clearError } = youtubeSlice.actions;
 export default youtubeSlice.reducer;

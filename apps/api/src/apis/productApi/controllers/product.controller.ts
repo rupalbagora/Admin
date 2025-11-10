@@ -3,8 +3,9 @@ import ProductService from "../services/product.services";
 import { CreateProductDto } from "../dtos/product.dto";
 import fs from "fs";
 import path from "path";
+import mongoose from "mongoose";
 
-// ✅ Create Product (with image + icons + reviews)
+// ✅ Create Product
 export const createProduct = async (req: Request, res: Response) => {
   const customReq = req as unknown as {
     files?: {
@@ -15,24 +16,21 @@ export const createProduct = async (req: Request, res: Response) => {
   };
 
   try {
-    const { name, price, offer, rating, tag, description, reviews }: CreateProductDto = req.body;
-    const addedBy = customReq.user?._id;
+    const { name, price, offer, rating, tag, description, reviews, gender }: CreateProductDto = req.body;
 
-    // ✅ Check if main image is uploaded
+    // ✅ Convert addedBy to ObjectId if user exists
+    const addedBy = customReq.user?._id ? new mongoose.Types.ObjectId(customReq.user._id) : undefined;
+
     if (!customReq.files?.image?.[0]) {
       return res.status(400).json({ success: false, message: "Main image is required!" });
     }
 
-    // ✅ Get main image URL
     const image = `${req.protocol}://${req.get("host")}/uploads/images/${customReq.files.image[0].filename}`;
-
-    // ✅ Get icons URLs if provided
     const icons =
       customReq.files?.icons?.map(
         (file) => `${req.protocol}://${req.get("host")}/uploads/icons/${file.filename}`
       ) || [];
 
-    // ✅ Create product
     const product = await ProductService.create({
       name,
       price,
@@ -43,7 +41,8 @@ export const createProduct = async (req: Request, res: Response) => {
       image,
       icons,
       reviews,
-      
+      gender,
+      addedBy, // ✅ Properly typed
     });
 
     res.status(201).json({
@@ -80,7 +79,7 @@ export const getProductById = async (req: Request, res: Response) => {
   }
 };
 
-// ✅ Update Product (only main image)
+// ✅ Update Product
 export const updateProduct = async (req: Request, res: Response) => {
   const customReq = req as unknown as { file?: Express.Multer.File };
 
@@ -92,7 +91,6 @@ export const updateProduct = async (req: Request, res: Response) => {
 
     let image = existing.image;
 
-    // ✅ If new image uploaded, replace old one
     if (customReq.file) {
       const oldPath = path.join(__dirname, "../../../../uploads/images", path.basename(existing.image));
       if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
@@ -100,9 +98,13 @@ export const updateProduct = async (req: Request, res: Response) => {
       image = `${req.protocol}://${req.get("host")}/uploads/images/${customReq.file.filename}`;
     }
 
+    // ✅ Destructure gender from body and keep existing if not provided
+    const { gender, ...rest } = req.body;
+
     const updated = await ProductService.updateById(id, {
-      ...req.body,
+      ...rest,
       image,
+      gender: gender ?? existing.gender,
     });
 
     res.status(200).json({

@@ -10,7 +10,7 @@ const packageSchema = new Schema(
     discount: { type: String },
     review: { type: Number, default: 0 },
     rating: { type: Number, default: 0 },
-    serviceList: { type: String, required: true },
+    gender: { type: String, required: true }, 
   },
   { timestamps: true }
 );

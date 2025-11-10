@@ -5,7 +5,7 @@ import { RoleBasedLayout } from "./layoutes/RoleBasedLayout";
 
 // Lazy load layouts and pages
 const SubscriptionPlans = lazy(
-  () => import("./commonComp/SubscriptionManagement/SubscriptionPlans")
+	() => import("./commonComp/SubscriptionManagement/SubscriptionPlans")
 );
 const DashboardRedirect = lazy(() => import("./pages/Dashboard/Deshboard"));
 const Layout = lazy(() => import("./layoutes/Layout"));
@@ -15,40 +15,43 @@ const LoginPage = lazy(() => import("./commonComp/AuthPages/Login"));
 const RegisterPage = lazy(() => import("./commonComp/AuthPages/Register"));
 const RegisterReff = lazy(() => import("./commonComp/AuthPages/RegisterReff"));
 const UnauthorizedPage = lazy(
-  () => import("./commonComp/UnauthorizedPage/UnauthorizedPage")
+	() => import("./commonComp/UnauthorizedPage/UnauthorizedPage")
 );
 const Loader = <div className="text-center py-10">Loading...</div>;
 const ManageUsers = lazy(() => import("./components/userComponents/Users"));
 const UpdateProfile = lazy(
-  () => import("./commonComp/AuthPages/UpdateProfile")
+	() => import("./commonComp/AuthPages/UpdateProfile")
 );
-const SuperUserDeshboard = lazy(
-  () => import("./commonComp/Dashbordes/SuperUserDeshboard")
-);
-const AdminDeshboard = lazy(
-  () => import("./commonComp/Dashbordes/AdminDeshboard")
-);
-const UserDeshboard = lazy(
-  () => import("./commonComp/Dashbordes/UserDeshboard")
-);
-const SubscriptionManagement = lazy(
-  () => import("./commonComp/SubscriptionManagement/SubscriptionManagement")
-);
+// const SuperUserDeshboard = lazy(
+//   () => import("./commonComp/Dashbordes/SuperUserDeshboard")
+// );
+const AdminDeshboard = lazy(() => import("./commonComp/Dashbordes/AdminDeshboard"));
+const UserDeshboard = lazy(() => import("./commonComp/Dashbordes/UserDeshboard"));
+const SubscriptionManagement = lazy(() => import("./commonComp/SubscriptionManagement/SubscriptionManagement"));
+
+
 
 // SUB-ADMIN
-const UploadCategories = lazy (()=> import("../src/subadminComponents/products/AllCategories/UploadCategories"));
-const UploadProduct = lazy (()=> import("../src/subadminComponents/products/ProductsDetails/UploadProduct"));
-const UploadSpecialOffers = lazy (()=> import("../src/subadminComponents/specialoffers/UploadSpecialOffers"));
+//const UploadCatalog= lazy (()=> import("./subadminComponents/catalog/UploadCatalog"));
+//const UploadReferFriend= lazy (()=> import("./subadminComponents/referfriend/UploadReferFriend"));
 const UploadYoutube = lazy (()=> import("../src/subadminComponents/youtube/UploadYoutube"));
-const UploadCatalog= lazy (()=> import("./subadminComponents/catalog/UploadCatalog"));
-const UploadReferFriend= lazy (()=> import("./subadminComponents/referfriend/UploadReferFriend"));
-const UploadAboutUs= lazy (()=> import("./subadminComponents/aboutus/UploadAboutUs"));
-const UploadPrivacyPolicy= lazy (()=> import("./subadminComponents/privacypolicy/UploadPrivacyPolicy"));
-const UploadTermsConditions= lazy (()=> import("./subadminComponents/terms&conditions/UploadTermsConditions"));
-const UploadOurservice = lazy (()=> import("../src/subadminComponents/ourservice/UploadOurservice"));
-const UploadCertificate = lazy(() => import("./subadminComponents/certificate/UploadCertificate"));
-const ManagePackages = lazy (() => import("./subadminComponents/ourpackages/ManagePackages"));  
-const ManageProductPackages = lazy(()=> import("./subadminComponents/productpackages/ManageProductPackages"));
+const UploadCertificate = lazy(() => import("../src/subadminComponents/certificate/ManageCertificates"));
+const AppointmentForm = lazy(() => import("../src/subadminComponents/AppointmentForm/AppointmentForm"));
+//Male Components
+const MaleSpecialOffers = lazy(()=>import("./subadminComponents/Male/specialoffers/MaleSpecialOffers"));
+const ManageMalePackages = lazy(()=>import("./subadminComponents/Male/ourpackages/ManageMalePackages"));
+const MaleProducts = lazy(()=>import("./subadminComponents/Male/products/MaleProducts"));
+const MaleProductPackages = lazy(()=>import("./subadminComponents/Male/productpackages/MaleProductPackages"));
+//Female Components
+const FemaleSpecialOffers = lazy(()=>import("./subadminComponents/female/specialoffers/FemaleSpecialOffers"));
+const ManageFemalePackages = lazy(()=>import("./subadminComponents/female/ourpackages/FemalePackages"));
+const FemaleProducts = lazy(()=>import("./subadminComponents/female/products/FemaleProducts"));
+const FemaleProductPackages = lazy(()=>import("./subadminComponents/female/productpackages/FemaleProductPackages"));
+const ManageAboutSalon = lazy(()=>import("./subadminComponents/AboutOurSalon/ManageAboutSalon"));
+//Documents
+const ManageAboutUs = lazy(()=>import("./subadminComponents/documents/AboutUs/ManageAboutUs"));
+const ManagePrivacyPolicy = lazy(()=>import("./subadminComponents/documents/PrivacyPolicy/ManagePrivacyPolicy"));
+const ManageTermsCondition = lazy(()=>import("./subadminComponents/documents/TermsAndConditions/ManageTermsCondition"));
 
 export const router = createBrowserRouter([
   {
@@ -169,7 +172,15 @@ export const router = createBrowserRouter([
           ),
         },
 
-    
+    {
+          path: "Appointment",
+          element: (
+            <Suspense fallback={Loader}>
+              < AppointmentForm/>
+            </Suspense>
+          ),
+        },
+
       
     // 🔹 MALE ROUTES
     {
@@ -179,7 +190,7 @@ export const router = createBrowserRouter([
           path: "special-offers",
           element: (
             <Suspense fallback={Loader}>
-              < UploadSpecialOffers/>
+              < MaleSpecialOffers/>
             </Suspense>
           ),
         },
@@ -187,31 +198,31 @@ export const router = createBrowserRouter([
           path: "our-service",
           element: (
             <Suspense fallback={Loader}>
-              <UploadOurservice />
+              {/* <UploadOurservice /> */}
             </Suspense>
           ),
         },
         {
-          path: "products/details",
+          path: "products",
           element: (
             <Suspense fallback={Loader}>
-              <UploadProduct />
+              <MaleProducts  />
             </Suspense>
           ),
         },
-        {
-          path: "products/categories",
-          element: (
-            <Suspense fallback={Loader}>
-              <UploadCategories />
-            </Suspense>
-          ),
-        },
+        // {
+        //   path: "products/categories",
+        //   element: (
+        //     <Suspense fallback={Loader}>
+        //       <UploadCategories />
+        //     </Suspense>
+        //   ),
+        // },
         {
           path: "our-package",
           element: (
             <Suspense fallback={Loader}>
-              <ManagePackages />
+              <ManageMalePackages />
             </Suspense>
           ),
         },
@@ -219,7 +230,7 @@ export const router = createBrowserRouter([
           path: "product-package",
           element: (
             <Suspense fallback={Loader}>
-              <ManageProductPackages />
+              <MaleProductPackages />
             </Suspense>
           ),
         },
@@ -234,7 +245,7 @@ export const router = createBrowserRouter([
           path: "special-offers",
           element: (
             <Suspense fallback={Loader}>
-              <UploadSpecialOffers />
+              <FemaleSpecialOffers />
             </Suspense>
           ),
         },
@@ -242,31 +253,39 @@ export const router = createBrowserRouter([
           path: "our-service",
           element: (
             <Suspense fallback={Loader}>
-              <UploadOurservice />
+              {/* <UploadOurservice /> */}
             </Suspense>
           ),
         },
-        {
-          path: "products/details",
+         {
+          path: "products",
           element: (
             <Suspense fallback={Loader}>
-              <UploadProduct />
+              <FemaleProducts  />
             </Suspense>
           ),
         },
-        {
-          path: "products/categories",
-          element: (
-            <Suspense fallback={Loader}>
-              <UploadCategories />
-            </Suspense>
-          ),
-        },
+        // {
+        //   path: "products/details",
+        //   element: (
+        //     <Suspense fallback={Loader}>
+        //       <UploadProduct />
+        //     </Suspense>
+        //   ),
+        // },
+        // {
+        //   path: "products/categories",
+        //   element: (
+        //     <Suspense fallback={Loader}>
+        //       <UploadCategories />
+        //     </Suspense>
+        //   ),
+        // },
         {
           path: "our-package",
           element: (
             <Suspense fallback={Loader}>
-              <ManagePackages />
+              <ManageFemalePackages />
             </Suspense>
           ),
         },
@@ -274,7 +293,7 @@ export const router = createBrowserRouter([
           path: "product-package",
           element: (
             <Suspense fallback={Loader}>
-              <ManageProductPackages />
+              <FemaleProductPackages  />
             </Suspense>
           ),
         },
@@ -286,7 +305,7 @@ export const router = createBrowserRouter([
       path: "Upload-Certificate",
       element: (
         <Suspense fallback={Loader}>
-          <UploadCertificate />
+          <UploadCertificate  />
         </Suspense>
       ),
     },
@@ -299,26 +318,34 @@ export const router = createBrowserRouter([
       ),
     },
     {
-      path: "catalog",
-      element: (
-        <Suspense fallback={Loader}>
-          <UploadCatalog />
-        </Suspense>
-      ),
-    },
-    {
-      path: "Refer-Friend",
-      element: (
-        <Suspense fallback={Loader}>
-          <UploadReferFriend />
-        </Suspense>
-      ),
-    },
+  path: "about-salon",
+  element: (
+    <Suspense fallback={Loader}>
+      <ManageAboutSalon />
+    </Suspense>
+  ),
+},
+    // {
+    //   path: "catalog",
+    //   element: (
+    //     <Suspense fallback={Loader}>
+    //       <UploadCatalog />
+    //     </Suspense>
+    //   ),
+    // },
+    // {
+    //   path: "Refer-Friend",
+    //   element: (
+    //     <Suspense fallback={Loader}>
+    //       <UploadReferFriend />
+    //     </Suspense>
+    //   ),
+    // },
     {
       path: "About-Us",
       element: (
         <Suspense fallback={Loader}>
-          <UploadAboutUs />
+          <ManageAboutUs />
         </Suspense>
       ),
     },
@@ -326,7 +353,7 @@ export const router = createBrowserRouter([
       path: "Privacy-Policy",
       element: (
         <Suspense fallback={Loader}>
-          <UploadPrivacyPolicy />
+          <ManagePrivacyPolicy  />
         </Suspense>
       ),
     },
@@ -334,7 +361,7 @@ export const router = createBrowserRouter([
       path: "Terms-Conditions",
       element: (
         <Suspense fallback={Loader}>
-          <UploadTermsConditions />
+          <ManageTermsCondition />
         </Suspense>
       ),
     },
@@ -359,33 +386,33 @@ export const router = createBrowserRouter([
 
    
 
-  {
-    path: "/user",
-    element: (
-      <Suspense fallback={Loader}>
-        <RoleBasedLayout allowedRoles={["user"]} layout={UserLayout} />
-      </Suspense>
-    ),
-    children: [
-      {
-        index: true,
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UserDeshboard />
-          </Suspense>
-        ),
-      },
-      {
-        path: "profile",
-        element: (
-          <Suspense fallback={Loader}>
-            {" "}
-            <UpdateProfile />
-          </Suspense>
-        ),
-      },
-    ],
-  },
-  { path: "*", element: <>error</> },
+	{
+		path: "/user",
+		element: (
+			<Suspense fallback={Loader}>
+				<RoleBasedLayout allowedRoles={["user"]} layout={UserLayout} />
+			</Suspense>
+		),
+		children: [
+			{
+				index: true,
+				element: (
+					<Suspense fallback={Loader}>
+						{" "}
+						<UserDeshboard />
+					</Suspense>
+				),
+			},
+			{
+				path: "profile",
+				element: (
+					<Suspense fallback={Loader}>
+						{" "}
+						<UpdateProfile />
+					</Suspense>
+				),
+			},
+		],
+	},
+	{ path: "*", element: <>error</> },
 ]);
