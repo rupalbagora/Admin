@@ -5,6 +5,8 @@ import { nanoid } from "nanoid";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import User from "../../userApi/models/User.model";
+import { ChairsModel } from "../../salonCharisApi/model/chairs.model";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -16,7 +18,7 @@ class AppointmentService {
 		email: string
 	): Promise<IAppointment> {
 		const appointmentCode = `NAU${nanoid(4).toUpperCase()}`;
-
+		const user = await User.findById(userId);
 		const servicesArray = data.services
 			? Array.isArray(data.services)
 				? data.services
@@ -42,6 +44,7 @@ class AppointmentService {
 		const existingAppointment = await Appointment.findOne({
 			appointmentStatus: "Pending",
 			chairNo: data.chairNo,
+			subAdminId: user?.subAdminId,
 			$and: [
 				{ fromDateTime: { $lte: to } }, // existing starts before new ends
 				{ toDateTime: { $gte: from } }, // existing ends after new starts
@@ -59,7 +62,15 @@ class AppointmentService {
 			email,
 			userId,
 			appointmentCode,
+			subAdminId: user?.subAdminId,
 		});
+		await ChairsModel.findOneAndUpdate(
+			{
+				$and: [{ subAdminId: user?.subAdminId }, { chairNumber: data.chairNo }],
+			},
+			{ isChairAvailable: false },
+			{ new: true }
+		);
 
 		await InAppNotifications.create({
 			message: `Your appointment has been booked for ${dayjs(

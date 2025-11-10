@@ -26,7 +26,6 @@ export const createAppointment = async (req: Request, res: Response) => {
 			});
 		}
 		let time = dayjs(rawTime, "HH:mm", true);
-		console.log("🚀 ~ createAppointment ~ time:", time);
 
 		const start = dayjs("08:00", "HH:mm");
 		const end = dayjs("23:00", "HH:mm");
