@@ -66,12 +66,12 @@ export const updateOffer = createAsyncThunk(
   }
 );
 
-// 🔹 Delete offer
+// 🔹 Delete offer - FIXED: Removed unused data destructuring
 export const deleteOffer = createAsyncThunk(
   "offers/delete",
   async (id: string, { rejectWithValue }) => {
     try {
-      const { data } = await API.delete(`/offers/${id}`);
+      await API.delete(`/offers/${id}`);
       return id;
     } catch (error: any) {
       return rejectWithValue(error.response?.data?.message || "Failed to delete offer");

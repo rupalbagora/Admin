@@ -21,7 +21,7 @@ interface YoutubeVideoFormProps {
 
 const YoutubeVideoForm: React.FC<YoutubeVideoFormProps> = ({
   visible,
-  onCancel,
+  //onCancel,
   onSubmit,
   initialData,
   //loading = false,

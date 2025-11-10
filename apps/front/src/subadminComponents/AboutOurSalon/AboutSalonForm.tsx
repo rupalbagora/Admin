@@ -31,10 +31,10 @@ interface AboutSalonFormProps {
 
 const AboutSalonForm: React.FC<AboutSalonFormProps> = ({
   visible,
-  onCancel,
+ // onCancel,
   onSubmit,
   initialData,
-  loading = false,
+  //loading = false,
 }) => {
   const [form] = Form.useForm();
   const [fileList, setFileList] = useState<any[]>([]);
@@ -86,11 +86,11 @@ const AboutSalonForm: React.FC<AboutSalonFormProps> = ({
     }
   };
 
-  const handleCancel = () => {
-    form.resetFields();
-    setFileList([]);
-    onCancel();
-  };
+//   const handleCancel = () => {
+//     form.resetFields();
+//     setFileList([]);
+//     onCancel();
+//   };
 
   return (
     <Form 
