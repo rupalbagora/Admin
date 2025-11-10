@@ -31,7 +31,11 @@ class YoutubeService {
     id: string,
     data: Partial<IYoutubeVideo>
   ): Promise<IYoutubeVideo | null> {
-    return YoutubeVideo.findByIdAndUpdate(id, data, { new: true });
+    return YoutubeVideo.findByIdAndUpdate(
+      id, 
+      { $set: data }, 
+      { new: true, runValidators: true }
+    );
   }
 
   async deleteById(id: string): Promise<IYoutubeVideo | null> {

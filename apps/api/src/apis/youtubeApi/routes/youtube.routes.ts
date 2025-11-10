@@ -18,7 +18,7 @@ router.post(
   "/",
   protect,
   authorizeRole("admin", "superadmin"),
-  upload.single("video"), // added for file upload
+  upload.single("video"),
   createYoutubeVideo
 );
 
@@ -28,18 +28,18 @@ router.get(
   authorizeRole("admin", "superadmin"),
   getAllYoutubeVideos
 );
+
 router.get("/:id", getYoutubeVideoById);
 router.get("/date/:date", getYoutubeVideosByDate);
 
 router.patch(
-  "/:id",(req, res, next) => {
-  console.log(">>> Route matched");
-  next();},
+  "/:id",
   protect,
   authorizeRole("admin", "superadmin"),
   upload.single("video"),
   updateYoutubeVideo
 );
+
 router.delete(
   "/:id",
   protect,

@@ -1,160 +1,150 @@
-// src/redux/Slice/Uploadcertificate/certificateSlice.ts
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import API from "../../../api/axios";
-import { type ICertificate } from "../../types/subadmintypes/uploadcertificate.types";
 
-// ====================
-// Thunks / Async actions
-// ====================
+export interface Certificate {
+  _id: string;
+  title: string;
+  imageUrl: string;
+  addedBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
 
-// Fetch all certificates
-export const fetchCertificates = createAsyncThunk<
-	ICertificate[],
-	void,
-	{ rejectValue: string }
->("certificates/fetchAll", async (_, { rejectWithValue }) => {
-	try {
-		const res = await API.get("/certificates");
-		return res.data.data as ICertificate[];
-	} catch (err: any) {
-		return rejectWithValue(
-			err.response?.data?.message || "Error fetching certificates"
-		);
-	}
-});
-
-// Upload certificate
-export const uploadCertificate = createAsyncThunk<
-	ICertificate,
-	FormData,
-	{ rejectValue: string }
->("certificates/upload", async (formData, { rejectWithValue }) => {
-	try {
-		const res = await API.post("/certificates/upload", formData, {
-			headers: { "Content-Type": "multipart/form-data" },
-		});
-		return res.data.data as ICertificate;
-	} catch (err: any) {
-		return rejectWithValue(
-			err.response?.data?.message || "Error uploading certificate"
-		);
-	}
-});
-
-// Update certificate
-export const updateCertificate = createAsyncThunk<
-	ICertificate,
-	{ id: string; formData: FormData },
-	{ rejectValue: string }
->("certificates/update", async ({ id, formData }, { rejectWithValue }) => {
-	try {
-		const res = await API.put(`/certificates/${id}`, formData, {
-			headers: { "Content-Type": "multipart/form-data" },
-		});
-		return res.data.data as ICertificate;
-	} catch (err: any) {
-		return rejectWithValue(
-			err.response?.data?.message || "Error updating certificate"
-		);
-	}
-});
-
-// Delete certificate
-export const deleteCertificate = createAsyncThunk<
-	string,
-	string,
-	{ rejectValue: string }
->("certificates/delete", async (id, { rejectWithValue }) => {
-	try {
-		const res = await API.delete(`/certificates/${id}`);
-		console.log("Delete response:", res.data);
-		return id;
-	} catch (err: any) {
-		return rejectWithValue(
-			err.response?.data?.message || "Error deleting certificate"
-		);
-	}
-});
-
-// ====================
-// Slice
-// ====================
 interface CertificateState {
-	items: ICertificate[];
-	loading: boolean;
-	error: string | null;
+  certificates: Certificate[];
+  loading: boolean;
+  error: string | null;
 }
 
 const initialState: CertificateState = {
-	items: [],
-	loading: false,
-	error: null,
+  certificates: [],
+  loading: false,
+  error: null,
 };
 
+// 🔹 Get all certificates
+export const fetchCertificates = createAsyncThunk(
+  "certificates/fetchAll",
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await API.get("/certificates");
+      return data.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.error || error.message);
+    }
+  }
+);
+
+// 🔹 Add new certificate
+export const addCertificate = createAsyncThunk(
+  "certificates/add",
+  async (formData: FormData, { rejectWithValue }) => {
+    try {
+      const { data } = await API.post("/certificates/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      return data.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || "Failed to add certificate");
+    }
+  }
+);
+
+// 🔹 Edit certificate
+export const updateCertificate = createAsyncThunk(
+  "certificates/update",
+  async ({ id, formData }: { id: string; formData: FormData }, { rejectWithValue }) => {
+    try {
+      const { data } = await API.put(`/certificates/${id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      return data.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || "Failed to update certificate");
+    }
+  }
+);
+
+// 🔹 Delete certificate
+export const deleteCertificate = createAsyncThunk(
+  "certificates/delete",
+  async (id: string, { rejectWithValue }) => {
+    try {
+      await API.delete(`/certificates/${id}`);
+      return id;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || "Failed to delete certificate");
+    }
+  }
+);
+
 const certificateSlice = createSlice({
-	name: "certificates",
-	initialState,
-	reducers: {},
-	extraReducers: (builder) => {
-		builder
-			// Fetch
-			.addCase(fetchCertificates.pending, (state) => {
-				state.loading = true;
-				state.error = null;
-			})
-			.addCase(fetchCertificates.fulfilled, (state, action) => {
-				state.loading = false;
-				state.items = action.payload;
-			})
-			.addCase(fetchCertificates.rejected, (state, action) => {
-				state.loading = false;
-				state.error = action.payload ?? "Failed to fetch certificates";
-			})
+  name: "certificates",
+  initialState,
+  reducers: {
+    clearError: (state) => {
+      state.error = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      // 🔹 Fetch all certificates
+      .addCase(fetchCertificates.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchCertificates.fulfilled, (state, action) => {
+        state.loading = false;
+        state.certificates = action.payload;
+      })
+      .addCase(fetchCertificates.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      
+      // 🔹 Add certificate
+      .addCase(addCertificate.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addCertificate.fulfilled, (state, action) => {
+        state.loading = false;
+        state.certificates.unshift(action.payload);
+      })
+      .addCase(addCertificate.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
 
-			// Upload
-			.addCase(uploadCertificate.pending, (state) => {
-				state.loading = true;
-				state.error = null;
-			})
-			.addCase(uploadCertificate.fulfilled, (state, action) => {
-				state.loading = false;
-				state.items.unshift(action.payload);
-			})
-			.addCase(uploadCertificate.rejected, (state, action) => {
-				state.loading = false;
-				state.error = action.payload ?? "Failed to upload certificate";
-			})
+      // 🔹 Update certificate
+      .addCase(updateCertificate.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateCertificate.fulfilled, (state, action) => {
+        state.loading = false;
+        const index = state.certificates.findIndex((c) => c._id === action.payload._id);
+        if (index !== -1) {
+          state.certificates[index] = action.payload;
+        }
+      })
+      .addCase(updateCertificate.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
 
-			// Update
-			.addCase(updateCertificate.pending, (state) => {
-				state.loading = true;
-				state.error = null;
-			})
-			.addCase(updateCertificate.fulfilled, (state, action) => {
-				state.loading = false;
-				state.items = state.items.map((item) =>
-					item._id === action.payload._id ? action.payload : item
-				);
-			})
-			.addCase(updateCertificate.rejected, (state, action) => {
-				state.loading = false;
-				state.error = action.payload ?? "Failed to update certificate";
-			})
-
-			// Delete
-			.addCase(deleteCertificate.pending, (state) => {
-				state.loading = true;
-				state.error = null;
-			})
-			.addCase(deleteCertificate.fulfilled, (state, action) => {
-				state.loading = false;
-				state.items = state.items.filter((item) => item._id !== action.payload);
-			})
-			.addCase(deleteCertificate.rejected, (state, action) => {
-				state.loading = false;
-				state.error = action.payload ?? "Failed to delete certificate";
-			});
-	},
+      // 🔹 Delete certificate
+      .addCase(deleteCertificate.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(deleteCertificate.fulfilled, (state, action) => {
+        state.loading = false;
+        state.certificates = state.certificates.filter((c) => c._id !== action.payload);
+      })
+      .addCase(deleteCertificate.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
+  },
 });
 
+export const { clearError } = certificateSlice.actions;
 export default certificateSlice.reducer;

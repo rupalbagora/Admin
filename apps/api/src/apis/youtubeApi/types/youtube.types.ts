@@ -2,8 +2,8 @@ import { Document, Types } from "mongoose";
 
 export interface IYoutubeVideo extends Document {
   title: string;
-  videoUrl?: string; // Optional if we upload file
-  videoPath?: string; // Path to uploaded file
+  videoUrl?: string; 
+  videoPath?: string; 
   uploadedAt: Date;
   addedBy: Types.ObjectId;
   createdAt: Date;

@@ -16,7 +16,7 @@ const offerSchema = new Schema<IOffer>(
     discount: { type: String, required: true },
     date: { type: String, required: true },
     description: { type: String },
-    gender: { type: String, required: true, default: "male" },
+    gender: { type: String, required: true },
     imageUrl: { type: String, required: true },
     addedBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },

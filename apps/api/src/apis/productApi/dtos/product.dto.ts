@@ -7,4 +7,6 @@ export interface CreateProductDto {
   description?: string;
   icons?: string[];   
   reviews?: string[]; 
+    gender?: string; 
+
 }

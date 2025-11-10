@@ -12,36 +12,10 @@ import {
 
 const router = express.Router();
 
-// CREATE product package with image upload
-router.post(
-  "/",
-  protect,
-  authorizeRole("admin", "superadmin"),
-  upload.single("image"),
-  createProductPackage
-);
-
-// GET all packages for logged-in admin
+router.post("/", protect, authorizeRole("admin", "superadmin"), upload.single("image"), createProductPackage);
 router.get("/", protect, getProductPackages);
-
-// GET package by ID
 router.get("/:id", protect, getProductPackageById);
-
-// UPDATE product package
-router.put(
-  "/:id",
-  protect,
-  authorizeRole("admin", "superadmin"),
-  upload.single("image"),
-  updateProductPackage
-);
-
-// DELETE product package
-router.delete(
-  "/:id",
-  protect,
-  authorizeRole("admin", "superadmin"),
-  deleteProductPackage
-);
+router.put("/:id", protect, authorizeRole("admin", "superadmin"), upload.single("image"), updateProductPackage);
+router.delete("/:id", protect, authorizeRole("admin", "superadmin"), deleteProductPackage);
 
 export default router;
