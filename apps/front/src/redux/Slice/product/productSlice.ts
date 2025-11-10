@@ -48,7 +48,7 @@ export const addProduct = createAsyncThunk(
       const { data } = await API.post("/products/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      return data.product;
+      return data.data; // ✅ Fixed: should be data.data instead of data.product
     } catch (error: any) {
       console.error("❌ Product upload error:", error.response?.data);
       return rejectWithValue(
@@ -89,12 +89,17 @@ export const deleteProduct = createAsyncThunk(
 const productSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+    clearError: (state) => {
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       // Fetch
       .addCase(fetchProducts.pending, (state) => {
         state.loading = true;
+        state.error = null;
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.loading = false;
@@ -119,16 +124,33 @@ const productSlice = createSlice({
       })
 
       // Update
+      .addCase(updateProduct.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(updateProduct.fulfilled, (state, action) => {
+        state.loading = false;
         const index = state.products.findIndex((p) => p._id === action.payload._id);
         if (index !== -1) state.products[index] = action.payload;
       })
+      .addCase(updateProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
 
       // Delete
+      .addCase(deleteProduct.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(deleteProduct.fulfilled, (state, action) => {
+        state.loading = false;
         state.products = state.products.filter((p) => p._id !== action.payload);
+      })
+      .addCase(deleteProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
       });
   },
 });
 
+export const { clearError } = productSlice.actions;
 export default productSlice.reducer;

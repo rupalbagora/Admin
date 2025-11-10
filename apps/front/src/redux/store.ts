@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import youtubeReducer from "./Slice/Youtube/youtube.slice";
 import authReducer from "./Slice/authSlice";
 import userReducer from "./Slice/useSliceForAdmin/userSlice";
 import activeStatusReducer from "./Slice/activeStatus/activeStatusSlice";
@@ -8,9 +7,13 @@ import certificateReducer from "./Slice/Uploadcertificate/certificateSlice";
 import offerReducer from "./Slice/specialOffer/offerSlice";
 import packageReducer from "./Slice/package/packageSlice";
 import productPackagesReducer from "./Slice/productPackage/productPackageSlice";
-import appointmentReducer from "./Slice/productPackage/productPackageSlice";
+import appointmentReducer from "./Slice/appointment/appointmentSlice";
 import productReducer from "./Slice/product/productSlice";
-
+import youtubeReducer from "./Slice/Youtube/youtube.slice"; 
+import aboutSalonReducer from "./Slice/AboutOurSaloon/aboutSalonSlice";
+import aboutUsReducer  from "./Slice/documents/aboutUsSlice";
+import privacyPolicyReducer from "./Slice/documents/privacyPolicySlice";
+import termsConditionReducer from "./Slice/documents/termsConditionSlice";
 
 export const store = configureStore({
   reducer: {
@@ -21,10 +24,16 @@ export const store = configureStore({
     subscriptionPlans: subscriptionPlansReducer,
     certificates: certificateReducer, 
     offers: offerReducer,
-    package:packageReducer,
+    packages:packageReducer,
     productPackages: productPackagesReducer ,
     appointment: appointmentReducer,
-      products: productReducer,
+    products: productReducer,
+    youtubeVideos: youtubeReducer, 
+    aboutSalons: aboutSalonReducer, 
+    aboutUs: aboutUsReducer,
+    privacyPolicy: privacyPolicyReducer,
+    termsCondition: termsConditionReducer, 
+
   },
 });
 

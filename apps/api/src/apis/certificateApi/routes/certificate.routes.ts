@@ -7,6 +7,7 @@ import {
   uploadCertificate,
   getAllCertificates,
   deleteCertificate,
+  updateCertificate, // ✅ Add this import
 } from "../controllers/certificate.controllers";
 
 const router = express.Router();
@@ -18,20 +19,23 @@ router.post(
   upload.single("certificateImage"),
   uploadCertificate
 );
+
 router.get("/", protect, getAllCertificates);
+
+// ✅ Add the update route
+router.put(
+  "/:id",
+  protect,
+  authorizeRole("admin", "superadmin"),
+  upload.single("certificateImage"), // Use same field name
+  updateCertificate
+);
+
 router.delete(
   "/:id",
   protect,
   authorizeRole("admin", "superadmin"),
   deleteCertificate
 );
-
-// router.put(
-//   "/update/:id",
-//   protect,
-//   authorizeRole("admin,superadmin"),
-//   upload.single("certificateImages"),
-//   updateCertificate
-// )
 
 export default router;

@@ -1,76 +1,138 @@
-import React, { useEffect } from "react";
-import { Form, Input, Upload, Button, message } from "antd";
+import React, { useEffect, useState } from "react";
+import { Form, Input, Button, Upload, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { useAppDispatch } from "../../redux/hooks";
-import { uploadCertificate, updateCertificate } from "../../redux/Slice/Uploadcertificate/certificateSlice";
-import type { ICertificate } from "../../redux/types/subadmintypes/uploadcertificate.types";
 
-interface CertificateFormProps {
-  editingCertificate?: ICertificate | null;
-  onSubmit?: () => void;
+export interface Certificate {
+  _id?: string;
+  title: string;
+  imageUrl: string;
+  addedBy: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
-const CertificateForm: React.FC<CertificateFormProps> = ({ editingCertificate, onSubmit }) => {
+interface CertificateFormProps {
+  visible: boolean;
+  onCancel: () => void;
+  onSubmit: (formData: FormData, id?: string) => void;
+  initialData?: Certificate | null;
+  loading?: boolean;
+}
+
+const CertificateForm: React.FC<CertificateFormProps> = ({
+  visible,
+  //onCancel,
+  onSubmit,
+  initialData,
+  //loading = false,
+}) => {
   const [form] = Form.useForm();
-  const dispatch = useAppDispatch();
+  const [fileList, setFileList] = useState<any[]>([]);
 
   useEffect(() => {
-    if (editingCertificate) {
-      form.setFieldsValue({ title: editingCertificate.title });
+    if (initialData && visible) {
+      form.setFieldsValue({
+        title: initialData.title,
+      });
+
+      // Set existing image for edit mode
+      setFileList(
+        initialData.imageUrl
+          ? [
+              {
+                uid: "-1",
+                name: "Existing Certificate",
+                status: "done",
+                url: initialData.imageUrl,
+              },
+            ]
+          : []
+      );
     } else {
       form.resetFields();
+      setFileList([]);
     }
-  }, [editingCertificate, form]);
+  }, [initialData, form, visible]);
 
   const handleFinish = async (values: any) => {
-    const formData = new FormData();
-    formData.append("title", values.title);
-    if (values.file?.[0]?.originFileObj) {
-      formData.append("certificateImage", values.file[0].originFileObj);
-    }
-
     try {
-      if (editingCertificate) {
-        await dispatch(updateCertificate({ id: editingCertificate._id!, formData })).unwrap();
-        message.success("Certificate updated successfully!");
-      } else {
-        await dispatch(uploadCertificate(formData)).unwrap();
-        message.success("Certificate uploaded successfully!");
+      const formData = new FormData();
+      
+      // Append title field
+      formData.append("title", values.title);
+
+      //  Append certificate image - use correct field name "certificateImage"
+      if (fileList.length > 0 && fileList[0].originFileObj) {
+        formData.append("certificateImage", fileList[0].originFileObj);
+      } else if (!initialData && fileList.length === 0) {
+        // For new certificates, image is required
+        message.error("Please upload a certificate image");
+        return;
       }
-      form.resetFields();
-      onSubmit?.();
-    } catch (err: any) {
-      console.error("Form submit error:", err);
-      message.error(err?.message || "Operation failed");
+
+      await onSubmit(formData, initialData?._id);
+    } catch (error) {
+      console.error("Form submission error:", error);
+      message.error("Something went wrong while saving the certificate");
     }
   };
 
+  // const handleCancel = () => {
+  //   form.resetFields();
+  //   setFileList([]);
+  //   onCancel();
+  // };
+
   return (
-    <Form form={form} layout="vertical" onFinish={handleFinish}>
+    <Form 
+      form={form} 
+      layout="vertical" 
+      onFinish={handleFinish}
+      className="certificate-form"
+    >
       <Form.Item
         label="Certificate Title"
         name="title"
-        rules={[{ required: true, message: "Please enter a title" }]}
+        rules={[{ required: true, message: "Please enter certificate title" }]}
       >
         <Input placeholder="Enter certificate title" />
       </Form.Item>
 
-      <Form.Item
-        label="Certificate File"
-        name="file"
-        valuePropName="fileList"
-        getValueFromEvent={(e: any) => e?.fileList || []}
+      <Form.Item 
+        label="Certificate Image"
+        required={!initialData}
+        rules={!initialData ? [{ required: true, message: "Please upload certificate image" }] : []}
       >
-        <Upload beforeUpload={() => false} maxCount={1}>
-          <Button icon={<UploadOutlined />}>Click to Upload</Button>
+        <Upload
+          listType="picture"
+          maxCount={1}
+          fileList={fileList}
+          onChange={({ fileList }) => setFileList(fileList)}
+          beforeUpload={() => false}
+          accept="image/*"
+        >
+          <Button icon={<UploadOutlined />}>
+            {initialData ? "Change Certificate Image" : "Upload Certificate Image"}
+          </Button>
         </Upload>
+        {!initialData && (
+          <div style={{ color: '#999', fontSize: '12px', marginTop: '4px' }}>
+            Certificate image is required for new certificates
+          </div>
+        )}
+        {initialData && (
+          <div style={{ color: '#999', fontSize: '12px', marginTop: '4px' }}>
+            Leave empty to keep existing image
+          </div>
+        )}
       </Form.Item>
 
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          {editingCertificate ? "Update Certificate" : "Upload Certificate"}
-        </Button>
-      </Form.Item>
+      {/* Hidden submit button for modal to trigger */}
+      <button 
+        type="submit" 
+        style={{ display: 'none' }}
+        className="certificate-form-submit-button"
+      />
     </Form>
   );
 };

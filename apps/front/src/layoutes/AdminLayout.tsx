@@ -55,21 +55,10 @@ const menuItems = [
           icon: <User className="w-4 h-4" />,
           path: "/admin/male/our-service",
         },
-        {
-          name: "Product",
+          {
+          name: "Products",
           icon: <User className="w-4 h-4" />,
-          subItems: [
-            {
-              name: "Products Details",
-              icon: <User className="w-4 h-4" />,
-              path: "/admin/male/products/details",
-            },
-            {
-              name: "Categories",
-              icon: <User className="w-4 h-4" />,
-              path: "/admin/male/products/categories",
-            },
-          ],
+          path: "/admin/male/products",
         },
         {
           name: "Our Package",
@@ -97,21 +86,26 @@ const menuItems = [
           icon: <User className="w-4 h-4" />,
           path: "/admin/female/our-service",
         },
+        // {
+        //   name: "Product",
+        //   icon: <User className="w-4 h-4" />,
+        //   subItems: [
+        //     {
+        //       name: "Products Details",
+        //       icon: <User className="w-4 h-4" />,
+        //       path: "/admin/female/products/details",
+        //     },
+        //     {
+        //       name: "Categories",
+        //       icon: <User className="w-4 h-4" />,
+        //       path: "/admin/female/products/categories",
+        //     },
+        //   ],
+        // },
         {
-          name: "Product",
+          name: "Products",
           icon: <User className="w-4 h-4" />,
-          subItems: [
-            {
-              name: "Products Details",
-              icon: <User className="w-4 h-4" />,
-              path: "/admin/female/products/details",
-            },
-            {
-              name: "Categories",
-              icon: <User className="w-4 h-4" />,
-              path: "/admin/female/products/categories",
-            },
-          ],
+          path: "/admin/female/products",
         },
         {
           name: "Our Package",
@@ -141,7 +135,11 @@ const menuItems = [
     icon: <Home className="w-5 h-5" />,
     path: "/admin/youtube",
   },
- 
+ {
+  name: "About Our Salon",
+  icon: <Home className="w-5 h-5" />,
+  path: "/admin/about-salon",
+},
   
   {
       name: "Documents",
