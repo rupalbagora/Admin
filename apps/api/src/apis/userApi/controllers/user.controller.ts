@@ -5,7 +5,11 @@ import { IUser, UserRole } from "../types/user.types";
 import { Types } from "mongoose";
 import User from "../models/User.model";
 import { saveUploadedFile } from "../../mediaApi/services/saveFile";
+import { nanoid } from "nanoid";
+import uploadedFile from "../../mediaApi/models/uploadedFile";
+import { updateUploadedFile } from "../../mediaApi/services/updateUploadedFile";
 
+// create subAdmin
 export const createUser = async (req: Request, res: Response) => {
 	try {
 		const {
@@ -25,6 +29,16 @@ export const createUser = async (req: Request, res: Response) => {
 			imageUrl = (await saveUploadedFile(req.file)).url;
 		}
 
+		const count = await User.countDocuments();
+		const appName = `app${count + 1}.apk`;
+
+		const appRegistrationCode = `NAU${nanoid(7).toUpperCase()}`;
+
+		if (noOfChairs === 0) {
+			return res
+				.status(400)
+				.json({ success: false, message: "Number of Chairs Can't be 0." });
+		}
 		const newUser = await UserService.createUser({
 			email,
 			fullName,
@@ -38,6 +52,8 @@ export const createUser = async (req: Request, res: Response) => {
 			avatar: imageUrl || undefined,
 			noOfChairs: Number(noOfChairs),
 			role: UserRole.ADMIN,
+			appName,
+			appRegistrationCode,
 			// admin: req.user?._id
 		});
 
@@ -89,6 +105,7 @@ export const getUserByEmail = async (req: Request, res: Response) => {
 	}
 };
 
+// update SubAdmin
 export const updateUser = async (req: Request, res: Response) => {
 	try {
 		const user = await User.find({ _id: req.params.id, admin: req.user?._id });
@@ -96,6 +113,12 @@ export const updateUser = async (req: Request, res: Response) => {
 			res.status(401).json({ error: "Not authorized" });
 			return;
 		}
+
+		// image not working fix it later
+		// let imageUrl;
+		// if (req.file) {
+		// 	imageUrl = (await updateUploadedFile(user)).url;
+		// }
 		const updated = await UserService.updateUser(req.params.id, req.body);
 		if (!updated) {
 			res.status(404).json({ error: "User not found" });

@@ -143,20 +143,21 @@ import validator from "validator";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import {
-  IUser,
-  UserRole,
-  SubscriptionType,
-  SubscriptionStatus,
-  PaymentMethod,
-  Gender,
-  ThemePreference
-} from '../types/user.types';
-import { jwtConfig } from '../../../config/jwt';
+	IUser,
+	UserRole,
+	SubscriptionType,
+	SubscriptionStatus,
+	PaymentMethod,
+	Gender,
+	ThemePreference,
+} from "../types/user.types";
+import { jwtConfig } from "../../../config/jwt";
 import { nanoid } from "nanoid";
 
-const userSchema: Schema<IUser> = new Schema({
-  refLink: { type: String, unique:true, default: null },
-  admin: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+const userSchema: Schema<IUser> = new Schema(
+	{
+		refLink: { type: String, unique: true, default: null },
+		admin: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 
 		// ✅ Make firstName & lastName optional (they’ll be auto-filled from fullName)
 		firstName: { type: String, trim: true, maxlength: 50 },
@@ -229,8 +230,20 @@ const userSchema: Schema<IUser> = new Schema({
 			postalCode: String,
 		},
 
-		// avatar: { type: Types.ObjectId, ref: "UploadedFile" },
-		avatar: { type: String },
+		avatar: { type: Types.ObjectId, ref: "UploadedFile" },
+		// avatar: { type: String },
+		appName: {
+			type: String,
+		},
+		appRegistrationCode: {
+			type: String,
+
+			unique: true,
+		},
+		subAdminId: {
+			type: mongoose.Schema.Types.ObjectId,
+		},
+		subAdminEmail: { type: String },
 		bio: { type: String, maxlength: 500 },
 		dateOfBirth: Date,
 		gender: { type: String, enum: Object.values(Gender) },
@@ -343,14 +356,12 @@ userSchema.methods.createPasswordResetToken = function (this: IUser): string {
 	return resetToken;
 };
 
-userSchema.pre<IUser>("save", function(next){
-
-  if(!this.refLink){
-     this.refLink = nanoid(10); 
-  }
-  next();
+userSchema.pre<IUser>("save", function (next) {
+	if (!this.refLink) {
+		this.refLink = nanoid(10);
+	}
+	next();
 });
 
-
-const User: Model<IUser> = model<IUser>('User', userSchema);
+const User: Model<IUser> = model<IUser>("User", userSchema);
 export default User;

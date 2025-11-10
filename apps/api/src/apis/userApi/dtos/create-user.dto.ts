@@ -1,6 +1,7 @@
-import type { Types } from "mongoose";
+import type { mongo, Types } from "mongoose";
 // dtos/create-user.dto.ts
 import { UserRole, SubscriptionType, Gender } from "../types/user.types";
+import mongoose from "mongoose";
 
 export class CreateUserDto {
 	admin?: Types.ObjectId; // Optional, will be set by the controller
@@ -20,4 +21,7 @@ export class CreateUserDto {
 	otp?: number;
 	noOfChairs?: number;
 	gender?: Gender;
+	appRegistrationCode?: string;
+	subAdminEmail?: string;
+	subAdminId?: Types.ObjectId;
 }
