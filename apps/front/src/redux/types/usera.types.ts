@@ -80,7 +80,16 @@ export interface IUser {
   updatedAt: Date;
   fullName?: string;
   isSubscriptionActive?: boolean;
+
+
+//  appName?: string;
+//   appRegistrationCode?: string;
+//   noOfChairs?: number;
+//   subscriptionPeriod?: string;
+//   address?: string;
+
 }
+
 export interface UserState {
   user: IUser | null;
   users: IUser[];

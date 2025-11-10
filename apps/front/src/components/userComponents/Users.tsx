@@ -13,7 +13,6 @@ import { SearchOutlined, EditOutlined, DeleteOutlined, UserAddOutlined } from "@
 import UserForm from "./UserForm";
 
 const { Search } = Input;
-
 const ManageUsers: React.FC = () => {
   const dispatch = useAppDispatch();
   const { users, loading, error } = useAppSelector((state) => state.users);
@@ -151,6 +150,18 @@ const ManageUsers: React.FC = () => {
       key: "expireDate",
       render: (date: string) => (date ? new Date(date).toLocaleDateString() : "-"),
     },
+     {
+    title: "App Name",
+    dataIndex: "appName",
+    key: "appName",
+    render: (appName: string) => appName || "N/A",
+  },
+     {
+    title: "Registration Code",
+    dataIndex: "appRegistrationCode", 
+    key: "appRegistrationCode",
+    render: (code: string) => code || "N/A",
+  },
     {
       title: "Actions",
       key: "actions",

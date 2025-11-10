@@ -1,19 +1,3 @@
-// import React from 'react'
-// //import CommonDashboardPart from './CommonDashboardPart'
-// // import { useAppSelector } from '../../redux/hooks'
-
-// const  AdminDeshboard:React.FC=()=> {
-//     // const {user}=useAppSelector((state)=>state.auth)
-//   return (
-//     <div>
-//         {/* <CommonDashboardPart/> */}
-
-//     </div>
-//   )
-// }
-
-// export default AdminDeshboard
-
 import React, { useEffect } from "react";
 import { Card, Row, Col, Statistic, message } from "antd";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -39,7 +23,6 @@ const AdminDashboard: React.FC = () => {
 		}
 	}, [error, dispatch]);
 
-	// ✅ Counts
 	const totalUsers = users.length;
 	const totalAdmins = users.filter((u) => u.role === "admin").length;
 	const totalSubAdmins = users.filter(
@@ -72,7 +55,6 @@ const AdminDashboard: React.FC = () => {
 						/>
 					</Card>
 				</Col>
-
 				<Col xs={24} sm={12} md={8}>
 					<Card bordered={false}>
 						<Statistic

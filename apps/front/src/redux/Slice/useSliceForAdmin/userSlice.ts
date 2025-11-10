@@ -31,7 +31,6 @@ export const fetchUsers = createAsyncThunk<IUser[]>(
     }
   }
 );
-
 // GET user by ID
 export const fetchUserById = createAsyncThunk<IUser, string, { rejectValue: string }>(
   "user/fetchById",
@@ -44,7 +43,6 @@ export const fetchUserById = createAsyncThunk<IUser, string, { rejectValue: stri
     }
   }
 );
-
 
 // GET user by email
 export const fetchUserByEmail = createAsyncThunk(
