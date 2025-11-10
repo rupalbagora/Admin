@@ -41,14 +41,10 @@ class AppointmentService {
 		const formattedFromDateTime = from.toISOString();
 		const formattedToDateTime = to.toISOString();
 
-		const existingAppointment = await Appointment.findOne({
-			appointmentStatus: "Pending",
-			chairNo: data.chairNo,
+		const existingAppointment = await ChairsModel.findOne({
+			chairNumber: data.chairNo,
 			subAdminId: user?.subAdminId,
-			$and: [
-				{ fromDateTime: { $lte: to } }, // existing starts before new ends
-				{ toDateTime: { $gte: from } }, // existing ends after new starts
-			],
+			isChairAvailable: false,
 		});
 
 		if (existingAppointment) {

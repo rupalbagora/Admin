@@ -7,6 +7,7 @@ import {
 	deleteAppointment,
 	getAppointmentsByUserId,
 	verifyAppointmentCode,
+	getChairsBySubAdminId,
 } from "../controllers/appointment.controller";
 import { protect } from "../../userApi/middlewares/auth.middleware";
 import { authorizeRole } from "../../userApi/middlewares/authorizeRole";
@@ -16,6 +17,7 @@ const router = Router();
 router.post("/", protect, createAppointment);
 router.get("/", getAppointments);
 router.get("/fetch-by-userId/:userId", protect, getAppointmentsByUserId);
+router.get("/get-chairs", protect, getChairsBySubAdminId);
 router.get("/:id", getAppointmentById);
 router.put("/:id", updateAppointment);
 router.delete("/:id", deleteAppointment);
