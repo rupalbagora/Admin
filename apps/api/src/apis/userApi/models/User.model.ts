@@ -167,6 +167,7 @@ const userSchema: Schema<IUser> = new Schema({
 
 		noOfChairs: {
 			type: Number,
+			default:0
 		},
 
 		email: {

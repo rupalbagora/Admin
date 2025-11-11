@@ -27,7 +27,6 @@ const UserForm: React.FC<UserFormProps> = ({
 	};
 
 	const handleFinish = (values: any) => {
-		// ✅ Prepare form data for submission
 		const payload = {
 			...values,
 			isActive: values.status === "active",
@@ -56,7 +55,7 @@ const UserForm: React.FC<UserFormProps> = ({
 				{/* Name */}
 				<Form.Item
 					label="Name"
-					name="firstName"
+					name="fullName"
 					rules={[{ required: true, message: "Please enter name" }]}
 				>
 					<Input placeholder="Enter name" size="large" />

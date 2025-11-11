@@ -18,7 +18,6 @@ import razorpayRoutes from "./apis/razorpay/routes/razorpay.routes";
 import cartRoutes from "./apis/cartApi/routes/cart.routes";
 import notificationRoutes from "./apis/inAppNotification/routes/notification.routes";
 //import  {login}  from "./apis/userApi/controllers/auth.controller";
-
 //app.use("/api/login",login)
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);

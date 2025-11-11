@@ -36,7 +36,9 @@ export const createUser = async (req: Request, res: Response) => {
 			expireDate:
 				subscriptionPeriod === "custom" && customDate ? customDate : undefined,
 			avatar: imageUrl || undefined,
-			noOfChairs: Number(noOfChairs),
+			// noOfChairs: Number(noOfChairs)||0,
+			noOfChairs: noOfChairs ? Number(noOfChairs) : 0, // 👈 Safest approach
+
 			role: UserRole.ADMIN,
 			// admin: req.user?._id
 		});
