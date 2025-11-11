@@ -211,7 +211,7 @@ const ManageUsers: React.FC = () => {
             className="w-full md:w-1/2 bg-[#2523232c]"
           />
         </div>
-
+        
         <Table
           // {JSON.stringify(fetchUsers)}
           columns={columns}

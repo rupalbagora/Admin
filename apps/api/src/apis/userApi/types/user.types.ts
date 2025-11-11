@@ -1,5 +1,6 @@
-import { Document, Types } from "mongoose";
+import mongoose, { Document, mongo, Types } from "mongoose";
 import { IUploadedFile } from "../../mediaApi/models/uploadedFile";
+import { IChairs } from "../../salonCharisApi/model/chairs.model";
 
 export enum UserRole {
 	SUPERADMIN = "superadmin",
@@ -112,6 +113,10 @@ export interface IUser extends Document {
 	noOfChairs?: number;
 	createdAt: Date;
 	updatedAt: Date;
+	appName: string;
+	appRegistrationCode: string;
+	subAdminEmail: string;
+	subAdminId: string | mongoose.Types.ObjectId;
 
 	address?: string;
 

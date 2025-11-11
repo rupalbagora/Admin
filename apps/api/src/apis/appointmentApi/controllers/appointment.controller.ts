@@ -7,6 +7,7 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { InAppNotifications } from "../../inAppNotification/models/inAppNotification.model";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
+import { ChairsModel } from "../../salonCharisApi/model/chairs.model";
 
 dayjs.extend(customParseFormat);
 
@@ -26,7 +27,6 @@ export const createAppointment = async (req: Request, res: Response) => {
 			});
 		}
 		let time = dayjs(rawTime, "HH:mm", true);
-		console.log("🚀 ~ createAppointment ~ time:", time);
 
 		const start = dayjs("08:00", "HH:mm");
 		const end = dayjs("23:00", "HH:mm");
@@ -189,6 +189,22 @@ export const verifyAppointmentCode = async (req: Request, res: Response) => {
 		return res
 			.status(403)
 			.json({ success: false, message: "Incorrect Credentials" });
+	} catch (error) {
+		return res
+			.status(500)
+			.json({ success: false, error: (error as Error).message });
+	}
+};
+
+export const getChairsBySubAdminId = async (req: Request, res: Response) => {
+	try {
+		const user = req.user;
+		const chairs = await ChairsModel.find({ subAdminId: user.subAdminId });
+		return res.status(200).json({
+			success: true,
+			message: "Chairs Fetched Successfully",
+			data: chairs,
+		});
 	} catch (error) {
 		return res
 			.status(500)

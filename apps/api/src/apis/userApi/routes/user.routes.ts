@@ -29,6 +29,7 @@ router.put(
 	protect,
 	authorizeRole("admin", "superadmin"),
 	validate(updateUserSchema),
+	upload.single("avatar"),
 	UserController.updateUser
 );
 router.delete("/:id", protect, UserController.deleteUser);

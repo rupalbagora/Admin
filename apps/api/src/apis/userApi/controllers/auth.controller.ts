@@ -11,12 +11,17 @@ import { updateUploadedFile } from "../../mediaApi/services/updateUploadedFile";
 import { updateUserSchema } from "../validators/user.validator"; // Your Zod schema
 import { sendOTP } from "../../../config/mailconfig";
 import { EmailOTP } from "../models/UserOTP.model";
-import { StringifyOptions } from "querystring";
 import { nanoid } from "nanoid";
 export const register = async (req: Request, res: Response) => {
 	try {
 		const { ref } = req.query;
 		const userData: CreateUserDto = req.body;
+
+		if (!userData.appRegistrationCode) {
+			return res
+				.status(400)
+				.json({ success: false, message: "App Registration Code is required" });
+		}
 
 		// If fullName provided, split automatically
 		if (userData.fullName && (!userData.firstName || !userData.lastName)) {
@@ -48,16 +53,36 @@ export const register = async (req: Request, res: Response) => {
 
 		// if (Number(userData.otp) === storedOTP?.otp) {
 		// Normal registration
-		const user = new User(userData);
-		user.isActive = false;
+
+		const userDetails = await User.findOne({
+			appRegistrationCode: userData.appRegistrationCode,
+		});
+		if (!userDetails?._id || !userDetails.email) {
+			return res.status(401).json({
+				success: false,
+				message: "App Registration Code is incorrect",
+			});
+		}
+
+		const user = new User({
+			...userData,
+			subAdminEmail: userDetails.email,
+			subAdminId: userDetails._id,
+		});
+		console.log("🚀 ~ register ~ user:", user);
+
+		console.log(userDetails._id);
+		console.log(userDetails.email);
+
+		user.isActive = true;
 		await user.save();
 
 		await EmailOTP.findOneAndDelete({ email: userData.email });
 
-		let refCode : string;
-		do{
-			 refCode = "NAU" + nanoid(7).toUpperCase(); //generates 8 character code 
-		} while (await User.findOne({refLink: refCode}));
+		let refCode: string;
+		do {
+			refCode = "NAU" + nanoid(7).toUpperCase(); //generates 8 character code
+		} while (await User.findOne({ refLink: refCode }));
 		user.refLink = refCode;
 		await user.save();
 
@@ -70,11 +95,11 @@ export const register = async (req: Request, res: Response) => {
 
 		return res.status(201).json({
 			success: true,
-			user:{
+			user: {
 				...formatUserResponse(user),
-				refLink: user.refLink 
+				refLink: user.refLink,
 			},
-		   //
+			//
 			token,
 		});
 		// } else {
