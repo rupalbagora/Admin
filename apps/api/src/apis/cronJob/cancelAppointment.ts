@@ -2,6 +2,7 @@ import cron from "node-cron";
 import dayjs from "dayjs";
 import appointmentModel from "../appointmentApi/models/appointment.model";
 import { InAppNotifications } from "../inAppNotification/models/inAppNotification.model";
+import { ChairsModel } from "../salonCharisApi/model/chairs.model";
 
 export const cancelAppointmentAfter10Minutes = () => {
 	cron.schedule("0 0 * * *", async () => {
@@ -27,6 +28,14 @@ export const cancelAppointmentAfter10Minutes = () => {
 					userId: appointment.userId,
 				});
 
+				await ChairsModel.findOneAndUpdate(
+					{
+						subAdminId: appointment.subAdminId,
+						chairNumber: appointment.chairNo,
+					},
+					{ isChairAvailable: true },
+					{ new: true }
+				);
 				// delete or update status
 				await appointmentModel.findByIdAndDelete(appointment._id);
 			}

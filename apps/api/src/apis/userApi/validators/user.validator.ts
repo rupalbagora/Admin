@@ -42,6 +42,8 @@ export const createUserSchema = z.object({
 		// optional support for first/last names (auto handled later)
 		firstName: z.string().optional(),
 		lastName: z.string().optional(),
+		subAdminId: z.string().optional(),
+		subAdminEmail: z.string().optional(),
 
 		email: z.string().email(),
 		password: z.string().min(4, "Password must be at least 4 characters"),

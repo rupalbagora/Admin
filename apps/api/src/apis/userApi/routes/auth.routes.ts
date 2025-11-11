@@ -25,7 +25,7 @@ router.post("/", protect, updateToken);
 router.post(
 	"/register",
 	upload.single("avatar"), // ✅ handle avatar upload
-	validate(createUserSchema),
+	// validate(createUserSchema),
 	register
 );
 //router.post('/register', validate(createUserSchema), register);

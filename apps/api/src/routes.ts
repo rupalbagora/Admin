@@ -21,7 +21,6 @@ import notificationRoutes from "./apis/inAppNotification/routes/notification.rou
 //app.use("/api/login",login)
 app.use("/api/auth", authRoutes);
 app.use("/api/users", usersRoutes);
-app.use("/api/users", usersRoutes);
 app.use("/api/youtube", youtubeRoutes);
 app.use("/api/certificates", certificateRoutes);
 app.use("/api/packages", packagesRoutes); //
