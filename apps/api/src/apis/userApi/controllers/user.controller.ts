@@ -24,9 +24,9 @@ export const createUser = async (req: Request, res: Response) => {
 			email,
 		} = req.body;
 
-		let imageUrl;
+		let imageId;
 		if (req.file) {
-			imageUrl = (await saveUploadedFile(req.file)).url;
+			imageId = await saveUploadedFile(req.file);
 		}
 
 		const count = await User.countDocuments();
@@ -49,7 +49,7 @@ export const createUser = async (req: Request, res: Response) => {
 			subscriptionPeriod,
 			expireDate:
 				subscriptionPeriod === "custom" && customDate ? customDate : undefined,
-			avatar: imageUrl || undefined,
+			avatar: imageId || undefined,
 			// noOfChairs: Number(noOfChairs)||0,
 			noOfChairs: noOfChairs ? Number(noOfChairs) : 0,
 
@@ -121,7 +121,11 @@ export const updateUser = async (req: Request, res: Response) => {
 		// if (req.file) {
 		// 	imageUrl = (await updateUploadedFile(user)).url;
 		// }
-		const updated = await UserService.updateUser(req.params.id, req.body);
+		const updated = await UserService.updateUser(
+			req.params.id,
+			req.body,
+			req.file
+		);
 		if (!updated) {
 			res.status(404).json({ error: "User not found" });
 			return;

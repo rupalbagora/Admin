@@ -28,8 +28,8 @@ router.put(
 	"/:id",
 	protect,
 	authorizeRole("admin", "superadmin"),
-	validate(updateUserSchema),
 	upload.single("avatar"),
+	// validate(updateUserSchema),
 	UserController.updateUser
 );
 router.delete("/:id", protect, UserController.deleteUser);

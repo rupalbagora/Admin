@@ -1,3 +1,6 @@
+import { deleteUploadedFileById } from "../../mediaApi/services/deleteUploadedFile";
+import { saveUploadedFile } from "../../mediaApi/services/saveFile";
+import { updateUploadedFile } from "../../mediaApi/services/updateUploadedFile";
 import { ChairsModel } from "../../salonCharisApi/model/chairs.model";
 import User from "../models/User.model";
 import type { IUser } from "../types/user.types";
@@ -14,7 +17,7 @@ class UserService {
 		isActive: boolean;
 		subscriptionPeriod: string;
 		expireDate?: Date;
-		avatar?: string;
+		avatar?: Types.ObjectId;
 		admin?: Types.ObjectId;
 		noOfChairs?: number;
 		role?: UserRole;
@@ -28,6 +31,8 @@ class UserService {
 		});
 
 		await user.save();
+
+		await user.populate("avatar", "url");
 
 		const chairs = [];
 
@@ -45,15 +50,40 @@ class UserService {
 	}
 
 	async getUserById(id: string): Promise<IUser | null> {
-		return User.findById(id);
+		return User.findById(id).populate("avatar", "url");
 	}
 
 	async getUserByEmail(email: string): Promise<IUser | null> {
-		return User.findOne({ email }).select("+password");
+		return User.findOne({ email })
+			.select("+password")
+			.populate("avatar", "url");
 	}
 
-	async updateUser(id: string, updateData: Partial<IUser>) {
-		const user = await User.findByIdAndUpdate(id, updateData, { new: true });
+	async updateUser(
+		id: string,
+		updateData: Partial<IUser>,
+		file?: Express.Multer.File
+	) {
+		const user = await User.findById(id);
+		if (!user) throw new Error("User not found");
+		console.log(user);
+		console.log(file);
+
+		if (file) {
+			if (user.avatar) {
+				await updateUploadedFile(user.avatar as Types.ObjectId, file);
+				console.log("ran avatar block");
+			} else {
+				const newFile = await saveUploadedFile(file);
+				user.avatar = newFile._id;
+			}
+		}
+
+		Object.assign(user, updateData);
+
+		await user.save();
+
+		await user.populate("avatar", "url");
 
 		let chairData;
 		if (updateData.noOfChairs !== undefined) {
@@ -88,6 +118,20 @@ class UserService {
 	}
 
 	async deleteUser(id: string): Promise<void> {
+		const user = await User.findById(id);
+
+		if (!user) throw new Error("User not found");
+
+		// ✅ Delete avatar if it exists
+		if (user.avatar) {
+			try {
+				await deleteUploadedFileById(user.avatar.toString());
+			} catch (err) {
+				console.error("Failed to delete avatar file:", err);
+			}
+		}
+
+		// ✅ Now delete the user itself
 		await User.findByIdAndDelete(id);
 	}
 
@@ -109,7 +153,7 @@ class UserService {
 	async getAllUsers(): Promise<IUser[] | null> {
 		return User.find({
 			role: { $nin: ["superadmin"] }, // exclude superadmins
-		});
+		}).populate("avatar", "url");
 	}
 
 	async getAllUsersForAdmin(id: Types.ObjectId): Promise<IUser[] | null> {
@@ -119,7 +163,7 @@ class UserService {
 		return User.find({
 			admin: id,
 			role: { $nin: ["superadmin"] }, // exclude superadmins
-		});
+		}).populate("avatar", "url");
 	}
 }
 

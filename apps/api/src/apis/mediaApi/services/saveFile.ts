@@ -1,11 +1,12 @@
 import { config } from "dotenv";
 import UploadedFileModel, { IUploadedFile } from "../models/uploadedFile";
 import { Request } from "express";
+import mongoose from "mongoose";
 config();
 
 export const saveUploadedFile = async (
 	file: Express.Multer.File
-): Promise<IUploadedFile> => {
+): Promise<mongoose.Types.ObjectId> => {
 	if (!file) {
 		throw new Error("No file provided");
 	}
@@ -23,5 +24,6 @@ export const saveUploadedFile = async (
 		url: `${process.env.URL}/uploads/images/${file.filename}`, // Adjust this based on your file server logic
 	});
 
-	return await newFile.save();
+	const savedFile = await newFile.save();
+	return savedFile._id;
 };

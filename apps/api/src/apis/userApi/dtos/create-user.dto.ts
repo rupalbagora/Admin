@@ -2,6 +2,7 @@ import type { mongo, Types } from "mongoose";
 // dtos/create-user.dto.ts
 import { UserRole, SubscriptionType, Gender } from "../types/user.types";
 import mongoose from "mongoose";
+import { IUploadedFile } from "../../mediaApi/models/uploadedFile";
 
 export class CreateUserDto {
 	admin?: Types.ObjectId; // Optional, will be set by the controller
@@ -17,7 +18,7 @@ export class CreateUserDto {
 	subscriptionType?: SubscriptionType;
 	dateOfBirth?: Date;
 	referralCode?: string;
-	avatar?: string;
+	avatar?: mongoose.Types.ObjectId | IUploadedFile;
 	otp?: number;
 	noOfChairs?: number;
 	gender?: Gender;
