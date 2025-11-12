@@ -262,7 +262,7 @@ export const updateProfile = async (
 			return;
 		}
 
-		let avatar: IUploadedFile;
+		let avatar: IUploadedFile | Types.ObjectId | any;
 
 		const existingAvatarId =
 			(req.user?.avatar as Types.ObjectId) || req.user?.avatar?._id;
