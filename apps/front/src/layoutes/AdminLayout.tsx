@@ -70,6 +70,11 @@ const menuItems = [
           icon: <User className="w-4 h-4" />,
           path: "/admin/male/product-package",
         },
+		{
+          name: "Home Service",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/male/home-service",
+        },
       ],
     },
     {
@@ -116,6 +121,11 @@ const menuItems = [
           name: "Product Package",
           icon: <User className="w-4 h-4" />,
           path: "/admin/female/product-package",
+        },
+		{
+          name: "Home service",
+          icon: <User className="w-4 h-4" />,
+          path: "/admin/female/home-service",
         },
       ],
     },

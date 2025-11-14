@@ -206,7 +206,7 @@ const MaleSpecialOffers: React.FC = () => {
         pagination={{ pageSize: 5 }}
         locale={{ emptyText: "No male offers found" }}
       />
-
+      
       <MaleSpecialOfferForm
         visible={modalVisible}
         onCancel={() => {
